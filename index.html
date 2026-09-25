@@ -259,7 +259,7 @@ button,a,input,textarea{touch-action:manipulation}button,a{ -webkit-tap-highligh
 <div id="app"></div>
 <div id="modal-root"></div>
 
-<!-- サイトデータ：admin.html（管理ページ）から公開すると、ここが自動で更新されます -->
+<!-- サイトデータの予備（本体は data.json）。admin.html から公開すると自動で更新されます -->
 <script id="site-data" type="application/json">null</script>
 
 <script>
@@ -1004,9 +1004,32 @@ window.addEventListener('hashchange', onRoute);
 /* =========================================================
    boot
    ========================================================= */
-S.route = parseRoute(window.RS_PREVIEW ? window.RS_ROUTE : '');
-render();
-if (S.route.page === 'characters' && S.route.id) openChar(S.route.id);
+/* 設定は data.json から読む（index.html を差し替えても設定が消えないように） */
+const hasEmbedded = (() => { try { return !!JSON.parse($('#site-data').textContent || 'null'); } catch (e) { return false; } })();
+async function fetchLatestData() {
+  if (window.RS_PREVIEW || !/^https?:$/.test(location.protocol)) return null;
+  try {
+    const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), 5000);
+    const r = await fetch('data.json?t=' + Date.now(), {cache:'no-store', signal:ctl.signal});
+    clearTimeout(tm);
+    return r.ok ? await r.json() : null;
+  } catch (e) { return null; }
+}
+function firstRender() {
+  S.route = parseRoute(window.RS_PREVIEW ? window.RS_ROUTE : '');
+  render();
+  if (S.route.page === 'characters' && S.route.id) openChar(S.route.id);
+}
+if (hasEmbedded || window.RS_PREVIEW) {
+  firstRender();
+  fetchLatestData().then(d => {
+    if (!d || !d.publishedAt || d.publishedAt === S.data.publishedAt) return;
+    S.data = mergeData(d);
+    const y = window.scrollY; render(); window.scrollTo(0, y);
+  });
+} else {
+  fetchLatestData().then(d => { if (d) S.data = mergeData(d); firstRender(); });
+}
 
 /* 管理ページ（admin.html）のプレビューとして表示されている時だけ動く */
 if (window.RS_PREVIEW) {

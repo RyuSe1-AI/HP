@@ -294,6 +294,16 @@ body{overflow:hidden;font-size:14px}
 .bg-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 18px 16px;border-top:1px solid var(--line);margin-top:8px}
 @media (max-width:760px){.bg-body,.bg-ctrl{grid-template-columns:1fr}.bg-view{height:min(40vh,360px)}}
 
+/* ---------- 履歴から復元 ---------- */
+.hist-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:9px 12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:6px}
+.hist-main{min-width:0}
+.hist-main b{display:flex;align-items:center;gap:6px;font-size:13px}
+.hist-main small{display:block;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hist-now{font-size:10px;font-weight:700;padding:1px 7px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.hist-tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.hist-tag.ok{background:rgba(57,181,151,.12);color:#1f8a6f}
+@media (max-width:760px){.hist-row{grid-template-columns:minmax(0,1fr) auto}.hist-tag{grid-column:1;justify-self:start}}
+
 </style>
 </head>
 <body>
@@ -1176,16 +1186,6 @@ function utf8ToB64(str) {
   for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
   return btoa(bin);
 }
-function exportZip() {
-  extractEmbedded(D());
-  D().publishedAt = new Date().toISOString();
-  const files = pendingAssets().map(p => ({name:p, data:b64ToU8(ASSETS.get(p).split(',')[1])}));
-  if (!S.template) { toast('index.html が読み込まれていません'); return; }
-  files.unshift({name:'index.html', data:new TextEncoder().encode(buildFromTemplate(S.template))});
-  downloadBlob(makeZip(files), `ryuse1-studio-update-${today()}.zip`);
-  S.loadedStamp = D().publishedAt;
-  toast(`ZIPを書き出しました（index.html＋画像${files.length - 1}枚）`);
-}
 
 /* ---------- GitHub 公開 ---------- */
 const GH_KEY = 'ryuse1-studio-github';
@@ -1246,72 +1246,6 @@ function setPubStatus(msg, kind = '', action = null) {
     if (action) el.append(h('div', {}, h('button', {class:'ed-btn', type:'button', onclick:action.fn}, action.label)));
   });
 }
-async function readRemote(branch) {
-  try {
-    const html = await ghApi(`/contents/${ghJoin('index.html').split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(branch)}`, {raw:true});
-    let stamp = null;
-    const m = /<script id="site-data" type="application\/json">([\s\S]*?)<\/script>/.exec(html);
-    if (m) { try { const d = JSON.parse(m[1]); stamp = (d && d.publishedAt) || null; } catch (e) {} }
-    return {exists:true, stamp, html};
-  } catch (e) {
-    if (e.status === 404) return {exists:false, stamp:null, html:''};
-    throw e;
-  }
-}
-async function publish(force) {
-  if (ED.busy) return;
-  if (!ghReady()) { ED.tab = 'github'; drawAll(); setPubStatus('最初に「公開設定」でGitHubと接続してください。', 'warn'); return; }
-  const btn = $('#edPubBtn');
-  ED.busy = true; if (btn) btn.disabled = true;
-  const prevStamp = D().publishedAt;
-  try {
-    const branch = (GH.branch || 'main').trim();
-    setPubStatus('GitHubを確認しています…');
-    const ref = await ghApi(`/git/ref/heads/${encodeURIComponent(branch)}`);
-    const baseSha = ref.object.sha;
-    const baseCommit = await ghApi(`/git/commits/${baseSha}`);
-    const remote = await readRemote(branch);
-    {
-      if (!force && remote.exists && remote.stamp && remote.stamp !== S.loadedStamp) {
-        setPubStatus('GitHub上に、このページを開いた後に公開された新しい版があります。\nこのまま公開すると、その内容を上書きします。\n（別のPCで編集した場合などは、ページを再読み込みしてから編集し直すのが安全です）', 'warn',
-          {label:'上書きして公開する', fn:() => publish(true)});
-        return;
-      }
-    }
-    const tpl = remote.exists && remote.html.includes('rs-preview') ? remote.html : S.template;
-    if (!tpl) throw new Error('index.html が読み込まれていません');
-    const moved = extractEmbedded(D());
-    const stamp = new Date().toISOString();
-    D().publishedAt = stamp;
-    const assets = pendingAssets();
-    const files = assets.map(p => ({path:ghJoin(p), b64:ASSETS.get(p).split(',')[1], asset:p}));
-    const built = buildFromTemplate(tpl);
-    files.push({path:ghJoin('index.html'), b64:utf8ToB64(built)});
-    const tree = [];
-    for (let i = 0; i < files.length; i++) {
-      setPubStatus(`アップロード中… ${i + 1} / ${files.length}`);
-      const b = await ghApi('/git/blobs', {method:'POST', body:{content:files[i].b64, encoding:'base64'}});
-      tree.push({path:files[i].path, mode:'100644', type:'blob', sha:b.sha});
-    }
-    setPubStatus('保存しています…');
-    const t = await ghApi('/git/trees', {method:'POST', body:{base_tree:baseCommit.tree.sha, tree}});
-    const c = await ghApi('/git/commits', {method:'POST', body:{message:`サイト更新（画像${assets.length}枚）`, tree:t.sha, parents:[baseSha]}});
-    await ghApi(`/git/refs/heads/${encodeURIComponent(branch)}`, {method:'PATCH', body:{sha:c.sha}});
-    assets.forEach(p => UPLOADED.add(p));
-    S.loadedStamp = stamp; S.template = built; S.oldTemplate = false;
-    ED.dirty = false; updateDirty(); updateSize();
-    if (ED.tab === 'images') drawMain();
-    $$('.ed-badge').forEach(b => { b.style.display = 'none'; });
-    const url = ghSiteUrl();
-    setPubStatus(`公開しました（index.html＋画像${assets.length}枚${moved ? `・埋め込み画像${moved}枚をファイル化` : ''}）。\nサイトへの反映まで1〜2分かかります。${url ? '\n' + url : ''}`, 'ok');
-    toast('GitHubに公開しました');
-  } catch (e) {
-    D().publishedAt = prevStamp;
-    setPubStatus(e instanceof GhError ? ghErrorText(e) : `エラー：${e.message}`, 'err');
-  } finally {
-    ED.busy = false; if (btn) btn.disabled = false;
-  }
-}
 async function ghTest() {
   if (!ghReady()) { setPubStatus('ユーザー名・リポジトリ名・トークンを入力してください。', 'warn'); return; }
   setPubStatus('接続を確認しています…');
@@ -1340,7 +1274,8 @@ function tabGithub() {
       '<li>リポジトリの <code>Settings → Pages</code> で Branch を <code>main</code> / <code>(root)</code> にして Save</li>' +
       '<li>右上アイコン → <code>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</code><br>・Repository access：<b>Only select repositories</b> でこのリポジトリだけ選ぶ<br>・Permissions：<b>Contents を Read and write</b></li>' +
       '<li><b>index.html</b> と <b>admin.html</b> をリポジトリにアップロード（Add file → Upload files）</li>' +
-      '<li>できたトークンを下に貼って「接続テスト」→「GitHubから読み込む」</li></ol>'}),
+      '<li>できたトークンを下に貼って「接続テスト」→「GitHubから読み込む」</li></ol>' +
+      '<p style="margin:8px 0 0">※ 設定は <b>data.json</b> に保存されるので、今後 index.html / admin.html を差し替えても消えません。</p>'}),
     sec('GitHub リポジトリ', 'globe',
       h('div', {class:'ed-grid2'}, inp('ユーザー名', 'owner', {ph:'your-name'}), inp('リポジトリ名', 'repo', {ph:'ryuse1-studio'})),
       h('div', {class:'ed-grid2'}, inp('ブランチ', 'branch', {ph:'main'}), inp('フォルダ（通常は空欄）', 'dir', {ph:'空欄＝ルート'})),
@@ -1350,6 +1285,7 @@ function tabGithub() {
         h('button', {class:'ed-btn', type:'button', html:icon('check') + '接続テスト', onclick:ghTest}),
         h('button', {class:'ed-btn ghost', type:'button', html:icon('download') + 'GitHubから読み込む', onclick:loadFromGitHub})),
       h('div', {class:'ed-status', id:'ghStatus'})),
+    historySection(),
     sec('管理ページのURL', 'link',
       urlEl,
       h('p', {class:'ed-hint'}, '次回からはこのURLを開けば、どのPCからでも編集→公開できます（ブックマーク推奨）。管理ページ自体は誰でも開けますが、トークンがないと何も変更できません。'))
@@ -1374,6 +1310,148 @@ function importJSON(e) {
 }
 
 
+
+/* =========================================================
+   設定データ（data.json）の保存・読み込み・履歴からの復元
+   ・設定は data.json に保存するので、index.html / admin.html を差し替えても消えない
+   ・index.html にも同じ内容を埋め込む（data.json が読めない時の予備）
+   ========================================================= */
+async function readRemoteFile(path, ref) {
+  try {
+    const text = await ghApi(`/contents/${ghJoin(path).split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(ref)}`, {raw:true});
+    return {exists:true, text};
+  } catch (e) {
+    if (e.status === 404) return {exists:false, text:''};
+    throw e;
+  }
+}
+const parseJSONSafe = t => { try { return JSON.parse(t); } catch (e) { return null; } };
+const embeddedOf = html => { try { return parseSiteData(html); } catch (e) { return null; } };
+async function readRemoteState(ref) {
+  const [idx, dj] = await Promise.all([readRemoteFile('index.html', ref), readRemoteFile('data.json', ref)]);
+  const json = dj.exists ? parseJSONSafe(dj.text) : null;
+  const emb = idx.exists ? embeddedOf(idx.text) : null;
+  const data = json || emb;
+  return {idx, hasJson:!!json, data, stamp:(data && data.publishedAt) || null};
+}
+async function publish(force) {
+  if (ED.busy) return;
+  if (!ghReady()) { ED.tab = 'github'; drawAll(); setPubStatus('最初に「公開設定」でGitHubと接続してください。', 'warn'); return; }
+  const btn = $('#edPubBtn');
+  ED.busy = true; if (btn) btn.disabled = true;
+  const prevStamp = D().publishedAt;
+  try {
+    const branch = (GH.branch || 'main').trim();
+    setPubStatus('GitHubを確認しています…');
+    const ref = await ghApi(`/git/ref/heads/${encodeURIComponent(branch)}`);
+    const baseSha = ref.object.sha;
+    const baseCommit = await ghApi(`/git/commits/${baseSha}`);
+    const remote = await readRemoteState(branch);
+    if (!force && remote.stamp && remote.stamp !== S.loadedStamp) {
+      setPubStatus('GitHub上に、このページを開いた後に公開された新しい版があります。\nこのまま公開すると、その内容を上書きします。\n（別のPCで編集した場合などは、「読み込み直す」を押してから編集し直すのが安全です）', 'warn',
+        {label:'上書きして公開する', fn:() => publish(true)});
+      return;
+    }
+    const tpl = remote.idx.exists && remote.idx.text.includes('rs-preview') ? remote.idx.text : S.template;
+    if (!tpl) throw new Error('index.html が読み込まれていません');
+    const moved = extractEmbedded(D());
+    const stamp = new Date().toISOString();
+    D().publishedAt = stamp;
+    const assets = pendingAssets();
+    const files = assets.map(p => ({path:ghJoin(p), b64:ASSETS.get(p).split(',')[1], asset:p}));
+    files.push({path:ghJoin('data.json'), b64:utf8ToB64(JSON.stringify(D(), null, 1))});
+    const built = buildFromTemplate(tpl);
+    files.push({path:ghJoin('index.html'), b64:utf8ToB64(built)});
+    const tree = [];
+    for (let i = 0; i < files.length; i++) {
+      setPubStatus(`アップロード中… ${i + 1} / ${files.length}`);
+      const b = await ghApi('/git/blobs', {method:'POST', body:{content:files[i].b64, encoding:'base64'}});
+      tree.push({path:files[i].path, mode:'100644', type:'blob', sha:b.sha});
+    }
+    setPubStatus('保存しています…');
+    const t = await ghApi('/git/trees', {method:'POST', body:{base_tree:baseCommit.tree.sha, tree}});
+    const c = await ghApi('/git/commits', {method:'POST', body:{message:`サイト更新（画像${assets.length}枚）`, tree:t.sha, parents:[baseSha]}});
+    await ghApi(`/git/refs/heads/${encodeURIComponent(branch)}`, {method:'PATCH', body:{sha:c.sha}});
+    assets.forEach(p => UPLOADED.add(p));
+    S.loadedStamp = stamp; S.template = built; S.oldTemplate = false;
+    ED.dirty = false; updateDirty(); updateSize();
+    if (ED.tab === 'images') drawMain();
+    const url = ghSiteUrl();
+    setPubStatus(`公開しました（設定データ＋画像${assets.length}枚${moved ? `・埋め込み画像${moved}枚をファイル化` : ''}）。\nサイトへの反映まで1〜2分かかります。${url ? '\n' + url : ''}`, 'ok');
+    toast('GitHubに公開しました');
+  } catch (e) {
+    D().publishedAt = prevStamp;
+    setPubStatus(e instanceof GhError ? ghErrorText(e) : `エラー：${e.message}`, 'err');
+  } finally {
+    ED.busy = false; if (btn) btn.disabled = false;
+  }
+}
+function exportZip() {
+  if (!S.template) { toast('index.html が読み込まれていません'); return; }
+  extractEmbedded(D());
+  D().publishedAt = new Date().toISOString();
+  const enc = new TextEncoder();
+  const files = pendingAssets().map(p => ({name:p, data:b64ToU8(ASSETS.get(p).split(',')[1])}));
+  files.unshift({name:'data.json', data:enc.encode(JSON.stringify(D(), null, 1))});
+  files.unshift({name:'index.html', data:enc.encode(buildFromTemplate(S.template))});
+  downloadBlob(makeZip(files), `ryuse1-studio-update-${today()}.zip`);
+  S.loadedStamp = D().publishedAt;
+  toast(`ZIPを書き出しました（index.html・data.json＋画像${files.length - 2}枚）`);
+}
+
+/* ---------- 履歴から復元 ---------- */
+const fmtDT = d => { try { return new Date(d).toLocaleString('ja-JP', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit'}); } catch (e) { return String(d); } };
+function historySection() {
+  const box = h('div', {class:'hist'});
+  return sec('過去の公開から復元', 'book',
+    h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, 'GitHubに残っている過去の版から、設定（画像・リンク・文章など）を読み込めます。読み込んだあと「GitHubに公開」を押すと、その内容に戻ります。「管理ページから公開」と書かれた版に設定が入っています。'),
+    h('div', {class:'ed-row', style:'margin-bottom:10px'},
+      h('button', {class:'ed-btn', type:'button', html:icon('book') + '履歴を表示', onclick:() => loadHistory(box)})),
+    box);
+}
+async function loadHistory(box) {
+  if (!ghReady()) { setPubStatus('先にGitHubと接続してください（ユーザー名・リポジトリ名・トークン）。', 'warn'); return; }
+  box.replaceChildren(h('p', {class:'ed-hint'}, '履歴を読み込んでいます…'));
+  const branch = (GH.branch || 'main').trim();
+  const q = p => ghApi(`/commits?path=${encodeURIComponent(ghJoin(p))}&sha=${encodeURIComponent(branch)}&per_page=40`).catch(e => { if (e.status === 404) return []; throw e; });
+  try {
+    const [dj, idx] = await Promise.all([q('data.json'), q('index.html')]);
+    const map = new Map();
+    const add = (c, file) => map.set(c.sha, {sha:c.sha, file, date:(c.commit.committer || c.commit.author || {}).date || '', msg:String(c.commit.message || '').split('\n')[0]});
+    (idx || []).forEach(c => add(c, 'index.html'));
+    (dj || []).forEach(c => add(c, 'data.json'));
+    const list = Array.from(map.values()).sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    if (!list.length) { box.replaceChildren(h('p', {class:'ed-hint'}, '履歴が見つかりませんでした。')); return; }
+    box.replaceChildren(...list.map((it, i) => {
+      const byAdmin = /^サイト更新/.test(it.msg);
+      return h('div', {class:'hist-row'},
+        h('div', {class:'hist-main'}, h('b', {}, fmtDT(it.date), i === 0 ? h('span', {class:'hist-now'}, '最新') : null), h('small', {title:it.msg}, it.msg)),
+        h('span', {class:'hist-tag' + (byAdmin ? ' ok' : '')}, byAdmin ? '管理ページから公開' : '手動アップロード'),
+        h('button', {class:'ed-btn ghost', type:'button', onclick:() => restoreFrom(it)}, '読み込む'));
+    }));
+  } catch (e) {
+    box.replaceChildren(h('p', {class:'ed-hint'}, e instanceof GhError ? ghErrorText(e) : `エラー：${e.message}`));
+  }
+}
+async function restoreFrom(it) {
+  const go = async () => {
+    setPubStatus('過去の版を読み込んでいます…');
+    try {
+      const f = await readRemoteFile(it.file, it.sha);
+      const d = !f.exists ? null : it.file === 'data.json' ? parseJSONSafe(f.text) : embeddedOf(f.text);
+      if (!d) { setPubStatus('この版には設定が入っていません（初期状態の版です）。「管理ページから公開」の版を選んでください。', 'warn'); return; }
+      const cur = await readRemoteState((GH.branch || 'main').trim());
+      loadTemplate(cur.idx.exists ? cur.idx.text : S.template, '履歴から復元', d);
+      S.loadedStamp = cur.stamp;
+      ED.dirty = true; updateDirty();
+      setPubStatus(`${fmtDT(it.date)} の設定を読み込みました。\nプレビューで確認して、右上の「GitHubに公開」を押すと元に戻ります。`, 'ok');
+    } catch (e) {
+      setPubStatus(e instanceof GhError ? ghErrorText(e) : `エラー：${e.message}`, 'err');
+    }
+  };
+  if (ED.dirty) setPubStatus('公開していない変更があります。過去の版を読み込むと、その変更は消えます。', 'warn', {label:'読み込む', fn:go});
+  else go();
+}
 
 /* =========================================================
    背景透過（AI・ブラウザ内で処理）
@@ -1613,8 +1691,8 @@ function parseSiteData(html) {
   if (!m) throw new Error('RyuSe1 STUDIO の index.html ではないようです（site-data が見つかりません）');
   try { return JSON.parse(m[1]); } catch (e) { return null; }
 }
-function loadTemplate(html, source) {
-  const d = parseSiteData(html);
+function loadTemplate(html, source, data) {
+  const d = arguments.length > 2 ? data : parseSiteData(html);
   S.data = mergeData(d);
   S.template = html;
   S.source = source;
@@ -1631,10 +1709,11 @@ async function loadFromGitHub() {
   if (!ghReady()) { ED.tab = 'github'; drawAll(); setPubStatus('先に「公開設定」でGitHubと接続してください。', 'warn'); return; }
   setPubStatus('GitHubから読み込んでいます…');
   try {
-    const r = await readRemote((GH.branch || 'main').trim());
-    if (!r.exists) { setPubStatus('GitHubのリポジトリに index.html がありません。先に index.html をアップロードしてください。', 'err'); return; }
-    loadTemplate(r.html, 'GitHub');
-    if (!S.oldTemplate) setPubStatus('GitHubから最新の内容を読み込みました。', 'ok');
+    const r = await readRemoteState((GH.branch || 'main').trim());
+    if (!r.idx.exists) { setPubStatus('GitHubのリポジトリに index.html がありません。先に index.html をアップロードしてください。', 'err'); return; }
+    loadTemplate(r.idx.text, 'GitHub', r.data);
+    if (!r.data) setPubStatus('保存された設定が見つからないため、初期状態で表示しています。\n以前の設定に戻すには「公開設定」タブの「過去の公開から復元」を使ってください。', 'warn', {label:'復元画面を開く', fn:() => { ED.tab = 'github'; drawAll(); }});
+    else if (!S.oldTemplate) setPubStatus('GitHubから最新の内容を読み込みました。', 'ok');
   } catch (e) {
     setPubStatus(e instanceof GhError ? ghErrorText(e) : `エラー：${e.message}`, 'err');
   }
@@ -1642,7 +1721,10 @@ async function loadFromGitHub() {
 async function loadFromSite() {
   const r = await fetch('index.html', {cache:'no-store'});
   if (!r.ok) throw new Error(String(r.status));
-  loadTemplate(await r.text(), 'サイト');
+  const html = await r.text();
+  let data;
+  try { const j = await fetch('data.json?t=' + Date.now(), {cache:'no-store'}); if (j.ok) data = await j.json(); } catch (e) {}
+  loadTemplate(html, 'サイト', data !== undefined ? data : embeddedOf(html));
 }
 function pickIndexFile() {
   const file = h('input', {type:'file', accept:'.html,text/html', onchange:() => {
