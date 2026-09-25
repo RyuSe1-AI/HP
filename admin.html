@@ -266,6 +266,34 @@ body{overflow:hidden;font-size:14px}
   .lk-st{grid-column:2;justify-self:start}
 }
 
+/* ---------- 背景透過（AI） ---------- */
+.im-bg{justify-content:center;padding:5px 8px;font-size:12px}
+.im-thumb{background:repeating-conic-gradient(var(--surface-2) 0 25%,transparent 0 50%) 0 0/14px 14px}
+.bg-modal-back{position:fixed;inset:0;z-index:200;background:rgba(14,16,36,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:grid;place-items:center;padding:20px}
+.bg-modal{width:min(980px,100%);max-height:calc(100vh - 40px);overflow:auto;background:var(--surface-solid);border-radius:24px;box-shadow:0 30px 80px rgba(20,24,60,.35);display:flex;flex-direction:column}
+.bg-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.bg-head b{font-size:16px}
+.bg-body{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px 18px 6px}
+.bg-pane{display:flex;flex-direction:column;gap:8px;min-width:0}
+.bg-pane small{font-size:12px;color:var(--text-2);font-weight:700}
+.bg-pane-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.bg-pane-h .seg button{padding:3px 9px;font-size:11.5px}
+.bg-view{position:relative;height:min(52vh,440px);border-radius:16px;overflow:hidden;display:grid;place-items:center;border:1px solid var(--line)}
+.bg-view img,.bg-view canvas{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.bg-view.checker{background:repeating-conic-gradient(#e3e6f1 0 25%,#fff 0 50%) 0 0/20px 20px}
+.bg-view.site{background:radial-gradient(80% 60% at 50% 30%,color-mix(in srgb,var(--c) 34%,transparent),transparent 72%),linear-gradient(180deg,color-mix(in srgb,var(--c) 8%,var(--surface-solid)),color-mix(in srgb,var(--c) 26%,var(--surface-solid)))}
+.bg-view.white{background:#fff}
+.bg-view.black{background:#14172b}
+.bg-busy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center;font-size:13px;font-weight:700;color:var(--text-2);background:color-mix(in srgb,var(--surface-solid) 80%,transparent);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.bg-busy.err{color:#c93a5e}
+.bg-bar{width:70%;height:6px;border-radius:6px;background:var(--surface-2);overflow:hidden}
+.bg-bar i{display:block;height:100%;width:0;background:var(--holo);transition:width .2s}
+.spin{width:24px;height:24px;border-radius:50%;border:3px solid var(--accent-soft);border-top-color:var(--accent);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.bg-ctrl{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;padding:8px 18px 0}
+.bg-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 18px 16px;border-top:1px solid var(--line);margin-top:8px}
+@media (max-width:760px){.bg-body,.bg-ctrl{grid-template-columns:1fr}.bg-view{height:min(40vh,360px)}}
+
 </style>
 </head>
 <body>
@@ -336,6 +364,7 @@ const ICONS = {
   plus:'<path d="M12 5v14M5 12h14"/>',
   trash:'<path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13"/>',
   edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+  wand:'<path d="m4 20 10.5-10.5"/><path d="m14.5 3 .8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/><path d="m19.5 10 .5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5z"/>',
   gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
   x:'F:<path d="M3.8 4h4.6l4.1 5.6L17.2 4h2.6l-6.1 7.2L20.4 20h-4.6l-4.4-6-5.1 6H3.7l6.6-7.7z"/>',
   youtube:'F:<path fill-rule="evenodd" d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2C2 8.9 2 12 2 12s0 3.1.4 4.8a2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2c.4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8zM10 15.2V8.8l5.3 3.2z"/>',
@@ -437,13 +466,14 @@ const NEWS_CATS = {
 const CHAR_SEED = [
   ['akane','あかね','AKANE','#ea6a80'],
   ['aoi','あおい','AOI','#5b9cf0'],
-  ['tamaki','たまき','TAMAKI','#e2b04f'],
+  ['tamaki','たまき','TAMAKI','#ada2e3'],
   ['sumire','すみれ','SUMIRE','#9679e0'],
-  ['kaede','かえで','KAEDE','#ef8a4c'],
+  ['kaede','かえで','KAEDE','#eeb22c'],
   ['tsubaki','つばき','TSUBAKI','#d65582'],
   ['hisui','ひすい','HISUI','#39b597'],
-  ['kasumi','かすみ','KASUMI','#94a9d6']
+  ['kasumi','かすみ','KASUMI','#9b98ad']
 ];
+const OSHI_HEARTS = ['❤️','💙','🤍','💜','💛','🩷','💚','🩶'];
 const DEFAULT = {
   version: 1,
   site: {
@@ -497,15 +527,20 @@ const DEFAULT = {
   patreon: {
     url:'https://www.patreon.com/c/RyuSe1421',
     title:'Patreon 会員限定',
-    lead:'高解像度イラストや差分、制作の裏側など、支援してくださる方だけのコンテンツをお届けしています。',
+    lead:'Patreonでは、ここでは公開していないイラストや動画をお届けしています。「もっとみたいコース」は7日間無料でお試しできます。',
     cta:'Patreonで支援する',
     tiers:[
-      {name:'Star', price:'$3 / 月', color:'#6fb8ec', icon:'star', perks:'限定イラスト（毎月）\n先行公開', best:false},
-      {name:'Comet', price:'$8 / 月', color:'#9a86ee', icon:'comet', perks:'Star の内容すべて\n高解像度データ\n差分イラスト', best:true},
-      {name:'Galaxy', price:'$15 / 月', color:'#e07ab8', icon:'crown', perks:'Comet の内容すべて\n制作過程の解説\nリクエスト投票に参加', best:false}
+      {name:'もっとみたいコース/basic plan', price:'$3 / 月', color:'#6fb8ec', icon:'star', badge:'7日間無料お試しあり', perks:'R15〜R18までの画像（モザイク処理を必要としないものが多いです）\nシチュエーションも単発な傾向にあり', best:false, url:''},
+      {name:'めっちゃみたいコース/Extra Plan', price:'$8 / 月', color:'#9a86ee', icon:'comet', badge:'', perks:'もっとみたいコースの内容\nR18コンテンツ（いろいろなシチュエーション）\n短編動画', best:true, url:''},
+      {name:'まじでみたいプラン/ULTRA Plan', price:'$15 / 月', color:'#e07ab8', icon:'crown', badge:'', perks:'めっちゃプランの内容\nさらに限定画像\n長編動画や漫画等、作成に大幅な時間がかかるもの', best:false, url:''}
     ],
-    previews: Array.from({length:6}, (_, i) => ({image:'', title:'限定イラスト '+String(i+1).padStart(2,'0'), tier:i%2?'Comet':'Star'})),
-    note:'※ 限定コンテンツの本編は Patreon 上で公開しています。このページの画像はプレビュー（ぼかし）です。'
+    oshi:{
+      title:'推しプラン', price:'$3 / 月',
+      lead:'好きな子を選んで応援できるプランです。',
+      items: CHAR_SEED.map(([id, name], i) => ({char:id, name:`${name}推し${OSHI_HEARTS[i]}プラン`, text:`もっと-まじの${name}ちゃんのコンテンツが見れます${OSHI_HEARTS[i]}`, url:''}))
+    },
+    previews: Array.from({length:6}, (_, i) => ({image:'', title:'限定イラスト '+String(i+1).padStart(2,'0'), tier:i%2?'Extra':'basic'})),
+    note:'※ 一部のプランには成人向け（R18）の内容が含まれます。18歳未満の方はご利用いただけません。\n※ 限定コンテンツの本編は Patreon 上で公開しています。このページの画像はプレビュー（ぼかし）です。'
   },
   news: [
     {date:'2026-09-25', cat:'update', text:'RyuSe1 STUDIO をオープンしました', link:''},
@@ -531,6 +566,15 @@ function mergeData(d) {
   for (const k of ['site','hero','tiles','pages','patreon']) d[k] = Object.assign({}, base[k], d[k] || {});
   for (const k of Object.keys(base.tiles)) d.tiles[k] = Object.assign({}, base.tiles[k], d.tiles[k] || {});
   for (const k of Object.keys(base.pages)) d.pages[k] = Object.assign({}, base.pages[k], d.pages[k] || {});
+  const pt = d.patreon;
+  if (Array.isArray(pt.tiers) && pt.tiers.map(t => t && t.name).join() === 'Star,Comet,Galaxy') {   // 仮プランのままなら実プランに置き換え
+    pt.tiers = base.patreon.tiers;
+    if (/^高解像度イラストや差分/.test(pt.lead || '')) pt.lead = base.patreon.lead;
+    if (/^※ 限定コンテンツの本編は/.test(pt.note || '')) pt.note = base.patreon.note;
+    (pt.previews || []).forEach(x => { if (x.tier === 'Star') x.tier = 'basic'; if (x.tier === 'Comet') x.tier = 'Extra'; });
+  }
+  if (!pt.oshi || typeof pt.oshi !== 'object') pt.oshi = base.patreon.oshi;
+  if (!Array.isArray(pt.oshi.items)) pt.oshi.items = [];
   return d;
 }
 
@@ -601,6 +645,11 @@ function updateSize() {
 }
 
 /* ---------- image processing ---------- */
+function hasAlpha(c) {
+  const d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+  for (let i = 3; i < d.length; i += 16) if (d[i] < 250) return true;
+  return false;
+}
 function fileToDataURL(file, max = 1600) {
   return new Promise((resolve, reject) => {
     if (/gif|svg/.test(file.type) && file.size < 3 * 1024 * 1024) {       // GIF/SVG はそのまま
@@ -615,7 +664,7 @@ function fileToDataURL(file, max = 1600) {
       c.height = Math.max(1, Math.round(img.naturalHeight * s));
       c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
       let d = c.toDataURL('image/webp', 0.86);
-      if (!d.startsWith('data:image/webp')) d = c.toDataURL('image/jpeg', 0.88);
+      if (!d.startsWith('data:image/webp')) d = /png|webp/.test(file.type) && hasAlpha(c) ? c.toDataURL('image/png') : c.toDataURL('image/jpeg', 0.88);
       URL.revokeObjectURL(url);
       resolve(d);
     };
@@ -726,6 +775,8 @@ function fImage(label, obj, key, o = {}) {
   return wrapField(label, h('div', {class:'ed-img'}, prev, h('div', {class:'ed-img-ctl'},
     h('div', {class:'ed-row'},
       h('button', {class:'ed-btn', type:'button', onclick:() => file.click(), html:icon('upload') + '画像を選ぶ'}),
+      h('button', {class:'ed-btn ghost', type:'button', title:'AIで背景を消して透過にする', html:icon('wand') + '背景を消す',
+        onclick:() => openBgRemove({obj, key, max:o.max || 1600, folder:o.folder, color:o.color}, () => { paint(); o.after && o.after(); })}),
       h('button', {class:'ed-btn ghost', type:'button', title:'画像をクリア', onclick:() => { obj[key] = ''; paint(); changed(); o.after && o.after(); }, html:icon('trash')}), badge),
     txt, file)), o.hint);
 }
@@ -884,7 +935,7 @@ function tabChars() {
         body: (c, refresh) => [
           h('div', {class:'ed-grid2'}, fText('名前', c, 'name', {after:refresh}), fText('ローマ字', c, 'romaji', {after:refresh})),
           fColor('テーマカラー', c, 'color', {after:refresh}),
-          fImage('立ち絵・メイン画像', c, 'image', {max:1400, folder:'characters'}),
+          fImage('立ち絵・メイン画像', c, 'image', {max:1400, folder:'characters', color:c.color}),
           fRange('顔の位置（上0〜下100）', c, 'pos', 0, 100),
           fText('ひとことセリフ', c, 'catch'),
           fArea('紹介文', c, 'desc', {rows:4}),
@@ -956,6 +1007,8 @@ function tabGallery() {
 }
 function tabPatreon() {
   const P = D().patreon;
+  P.oshi = P.oshi && typeof P.oshi === 'object' ? P.oshi : {title:'推しプラン', price:'', lead:'', items:[]};
+  if (!Array.isArray(P.oshi.items)) P.oshi.items = [];
   let pvList;
   return [
     sec('Patreon ページ', 'crown',
@@ -964,18 +1017,36 @@ function tabPatreon() {
       fArea('説明文', P, 'lead', {rows:3}),
       fText('ボタン名', P, 'cta'),
       fArea('注意書き', P, 'note', {rows:2})),
-    sec('プラン', 'star',
+    sec('コース（メインのプラン）', 'star',
+      h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, 'プラン名は「日本語/English」のように / で区切ると、英語が小さく表示されます。'),
       fList(P.tiers, {
         lead: t => h('span', {class:'ed-sum-dot', style:`background:${t.color}`}),
         leadUpdate: (el, t) => { el.style.background = t.color; },
         summary: t => `${esc(t.name)}<small>${esc(t.price)}${t.best ? '・人気' : ''}</small>`,
-        make: () => ({name:'New Tier', price:'$5 / 月', color:'#9a86ee', icon:'star', perks:'', best:false}),
+        make: () => ({name:'新しいコース', price:'$5 / 月', color:'#9a86ee', icon:'star', badge:'', perks:'', best:false, url:''}),
         addLabel:'プランを追加',
         body: (t, refresh) => [
           h('div', {class:'ed-grid2'}, fText('プラン名', t, 'name', {after:refresh}), fText('価格', t, 'price', {after:refresh})),
           h('div', {class:'ed-grid2'}, fColor('カラー', t, 'color', {after:refresh}), fIcon('アイコン', t, 'icon')),
           fArea('特典（1行に1つ）', t, 'perks', {rows:4}),
-          fCheck('「POPULAR」表示', t, 'best', {after:refresh})
+          h('div', {class:'ed-grid2'}, fText('バッジ（任意）', t, 'badge', {ph:'7日間無料お試しあり'}), fText('参加リンク（任意）', t, 'url', {ph:'空欄ならPatreonページ'})),
+          fCheck('「おすすめ」表示', t, 'best', {after:refresh})
+        ]
+      })),
+    sec('推しプラン', 'heart',
+      h('div', {class:'ed-grid2'}, fText('見出し', P.oshi, 'title'), fText('価格（共通）', P.oshi, 'price', {ph:'$3 / 月'})),
+      fText('説明文', P.oshi, 'lead'),
+      fList(P.oshi.items, {
+        lead: x => h('span', {class:'ed-sum-dot', style:`background:${(charById(x.char) || {}).color || '#ccc'}`}),
+        leadUpdate: (el, x) => { el.style.background = (charById(x.char) || {}).color || '#ccc'; },
+        summary: x => esc(x.name || '(名前なし)'),
+        make: () => ({char:(D().characters[0] || {}).id || '', name:'推しプラン', text:'', url:''}),
+        addLabel:'推しプランを追加',
+        body: (x, refresh) => [
+          fSelect('キャラクター（画像と色を使います）', x, 'char', D().characters.map(c => [c.id, c.name]), {after:refresh}),
+          fText('プラン名', x, 'name', {after:refresh}),
+          fText('説明', x, 'text'),
+          fText('参加リンク（任意）', x, 'url', {ph:'空欄ならPatreonページ'})
         ]
       })),
     sec('限定コンテンツのプレビュー', 'lock',
@@ -993,7 +1064,7 @@ function tabPatreon() {
         addLabel:'プレビューを追加',
         body: (x, refresh) => [
           fImage('プレビュー画像', x, 'image', {max:420, folder:'patreon', after:refresh}),
-          h('div', {class:'ed-grid2'}, fText('タイトル', x, 'title', {after:refresh}), fText('対象プラン表記', x, 'tier', {after:refresh, ph:'Comet'}))
+          h('div', {class:'ed-grid2'}, fText('タイトル', x, 'title', {after:refresh}), fText('対象プラン表記', x, 'tier', {after:refresh, ph:'Extra'}))
         ]
       }))
   ];
@@ -1305,6 +1376,232 @@ function importJSON(e) {
 
 
 /* =========================================================
+   背景透過（AI・ブラウザ内で処理）
+   モデル：skytnt/anime-seg（ISNet・Apache-2.0） / 実行：onnxruntime-web
+   ========================================================= */
+const BG = {
+  ortVer: '1.22.0',
+  modelUrl: 'https://huggingface.co/skytnt/anime-seg/resolve/main/isnetis.onnx',
+  cacheName: 'rs-bg-model-v1',
+  size: 1024,
+  session: null, model: null, ep: '', loading: null
+};
+const ortBase = () => `https://cdn.jsdelivr.net/npm/onnxruntime-web@${BG.ortVer}/dist/`;
+const nextFrame = () => new Promise(r => requestAnimationFrame(() => setTimeout(r, 0)));
+function loadScript(src) {
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res;
+    s.onerror = () => rej(new Error('AIの実行ライブラリを読み込めませんでした（ネット接続を確認してください）'));
+    document.head.append(s);
+  });
+}
+async function bgCache() { try { return window.caches ? await caches.open(BG.cacheName) : null; } catch (e) { return null; } }
+async function isModelCached() { const c = await bgCache(); try { return !!(c && await c.match(BG.modelUrl)); } catch (e) { return false; } }
+async function fetchModel(onStatus) {
+  const cache = await bgCache();
+  if (cache) {
+    try { const hit = await cache.match(BG.modelUrl); if (hit) { onStatus('AIモデルを読み込んでいます（保存済み）…', 1); return new Uint8Array(await hit.arrayBuffer()); } } catch (e) {}
+  }
+  let r;
+  try { r = await fetch(BG.modelUrl); } catch (e) { throw new Error('AIモデルをダウンロードできませんでした（ネット接続を確認してください）'); }
+  if (!r.ok) throw new Error(`AIモデルをダウンロードできませんでした（${r.status}）`);
+  const total = +r.headers.get('content-length') || 0;
+  const reader = r.body.getReader(), chunks = [];
+  let got = 0;
+  for (;;) {
+    const {done, value} = await reader.read();
+    if (done) break;
+    chunks.push(value); got += value.length;
+    onStatus(`AIモデルをダウンロード中… ${total ? Math.round(got / total * 100) + '%' : Math.round(got / 1048576) + 'MB'}（初回のみ）`, total ? got / total : 0);
+  }
+  const buf = new Uint8Array(got);
+  let off = 0; for (const c of chunks) { buf.set(c, off); off += c.length; }
+  if (cache) { try { await cache.put(BG.modelUrl, new Response(new Blob([buf]), {headers:{'Content-Type':'application/octet-stream'}})); } catch (e) {} }
+  return buf;
+}
+async function createSession(eps) {
+  let lastErr;
+  for (const ep of eps) {
+    try {
+      const s = await ort.InferenceSession.create(BG.model, {executionProviders:[ep], graphOptimizationLevel:'all'});
+      BG.session = s; BG.ep = ep; return s;
+    } catch (e) { lastErr = e; }
+  }
+  throw new Error('AIを起動できませんでした：' + (lastErr && lastErr.message || lastErr));
+}
+async function ensureBgSession(onStatus) {
+  if (BG.session) return BG.session;
+  if (BG.loading) return BG.loading;
+  BG.loading = (async () => {
+    if (!window.ort) { onStatus('AIの準備をしています…', 0); await loadScript(ortBase() + 'ort.webgpu.min.js'); }
+    ort.env.wasm.wasmPaths = ortBase();
+    ort.env.wasm.numThreads = self.crossOriginIsolated ? Math.min(4, navigator.hardwareConcurrency || 2) : 1;
+    if (!BG.model) BG.model = await fetchModel(onStatus);
+    onStatus('AIを起動しています…', 1);
+    let hasGpu = false;
+    try { hasGpu = !!(navigator.gpu && await navigator.gpu.requestAdapter()); } catch (e) {}
+    return createSession(hasGpu ? ['webgpu', 'wasm'] : ['wasm']);
+  })();
+  try { return await BG.loading; } finally { BG.loading = null; }
+}
+async function computeMask(img) {
+  const S1 = BG.size, w0 = img.naturalWidth, h0 = img.naturalHeight;
+  const sc = S1 / Math.max(w0, h0);
+  const w = Math.max(1, Math.round(w0 * sc)), h = Math.max(1, Math.round(h0 * sc));
+  const px = Math.floor((S1 - w) / 2), py = Math.floor((S1 - h) / 2);
+  const c = document.createElement('canvas'); c.width = S1; c.height = S1;
+  const g = c.getContext('2d', {willReadFrequently:true});
+  g.fillStyle = '#000'; g.fillRect(0, 0, S1, S1);
+  g.drawImage(img, px, py, w, h);
+  const d = g.getImageData(0, 0, S1, S1).data, n = S1 * S1;
+  const input = new Float32Array(3 * n);
+  for (let i = 0, j = 0; i < n; i++, j += 4) { input[i] = d[j] / 255; input[n + i] = d[j + 1] / 255; input[2 * n + i] = d[j + 2] / 255; }
+  const run = s => s.run({[s.inputNames[0]]: new ort.Tensor('float32', input, [1, 3, S1, S1])});
+  let out;
+  try { out = await run(BG.session); }
+  catch (e) {
+    if (BG.ep !== 'wasm') { await createSession(['wasm']); out = await run(BG.session); }   // GPUでだめならCPUでやり直す
+    else throw e;
+  }
+  const m = out[BG.session.outputNames[0]].data;
+  let mn = Infinity, mx = -Infinity;
+  for (let i = 0; i < m.length; i += 101) { if (m[i] < mn) mn = m[i]; if (m[i] > mx) mx = m[i]; }
+  const sig = mn < -0.01 || mx > 1.01;   // ロジットで出てくるモデルにも対応
+  // 余白を除いてマスクを元の大きさへ
+  const mc = document.createElement('canvas'); mc.width = w; mc.height = h;
+  const mg = mc.getContext('2d');
+  const md = mg.createImageData(w, h);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    let v = m[(y + py) * S1 + (x + px)];
+    if (sig) v = 1 / (1 + Math.exp(-v));
+    v = Math.round(Math.min(1, Math.max(0, v)) * 255);
+    const o = (y * w + x) * 4; md.data[o] = md.data[o + 1] = md.data[o + 2] = v; md.data[o + 3] = 255;
+  }
+  mg.putImageData(md, 0, 0);
+  const fc = document.createElement('canvas'); fc.width = w0; fc.height = h0;
+  const fg = fc.getContext('2d', {willReadFrequently:true});
+  fg.imageSmoothingQuality = 'high';
+  fg.drawImage(mc, 0, 0, w0, h0);
+  const fd = fg.getImageData(0, 0, w0, h0).data;
+  const mask = new Uint8ClampedArray(w0 * h0);
+  for (let i = 0, j = 0; i < mask.length; i++, j += 4) mask[i] = fd[j];
+  return mask;
+}
+function composeCut(img, mask, th, soft) {
+  const w = img.naturalWidth, h = img.naturalHeight;
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const g = c.getContext('2d', {willReadFrequently:true});
+  g.drawImage(img, 0, 0);
+  const id = g.getImageData(0, 0, w, h), d = id.data;
+  const lo = Math.max(0, th - soft / 2), hi = Math.min(1, th + soft / 2), span = Math.max(0.001, hi - lo);
+  for (let i = 0, j = 3; i < mask.length; i++, j += 4) {
+    let a = (mask[i] / 255 - lo) / span;
+    a = a < 0 ? 0 : a > 1 ? 1 : a;
+    d[j] = Math.round(d[j] * a);
+  }
+  g.putImageData(id, 0, 0);
+  return c;
+}
+function encodeAlpha(c) {
+  const d = c.toDataURL('image/webp', 0.9);
+  return d.startsWith('data:image/webp') ? d : c.toDataURL('image/png');   // Safari は PNG
+}
+function loadImageEl(src) {
+  return new Promise((res, rej) => {
+    const i = new Image();
+    if (/^https?:/i.test(src)) i.crossOrigin = 'anonymous';
+    i.onload = () => res(i);
+    i.onerror = () => rej(new Error('画像を読み込めませんでした'));
+    i.src = src;
+  });
+}
+async function openBgRemove(sl, onDone) {
+  const cur = sl.obj[sl.key] || '';
+  if (!cur) { toast('先に画像を入れてください'); return; }
+  const color = sl.color || '#9a86ee';
+  let img = null, mask = null, cut = null, raf = 0, closed = false;
+  const msg = h('div', {}, '準備しています…');
+  const barI = h('i');
+  const busy = h('div', {class:'bg-busy'}, h('span', {class:'spin'}), msg, h('div', {class:'bg-bar'}, barI));
+  const setStatus = (t, p) => { msg.textContent = t; if (p != null) barI.style.width = Math.round(p * 100) + '%'; };
+  const before = h('div', {class:'bg-view checker'});
+  const after = h('div', {class:'bg-view site', style:`--c:${color}`}, busy);
+  const th = h('input', {type:'range', min:10, max:90, value:50});
+  const soft = h('input', {type:'range', min:4, max:100, value:100});
+  const thOut = h('span', {}, '50'), softOut = h('span', {}, '100');
+  const apply = h('button', {class:'ed-btn primary', type:'button', disabled:true, style:'flex:none', html:icon('check') + 'この画像にする'});
+  const close = () => { closed = true; back.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e => { if (e.key === 'Escape') close(); };
+  const bgBtns = h('div', {class:'seg'}, [['site', 'サイト風'], ['checker', '透過'], ['white', '白'], ['black', '黒']].map(([k, t]) =>
+    h('button', {type:'button', class:k === 'site' ? 'on' : '', onclick:e => {
+      after.className = 'bg-view ' + k;
+      $$('button', bgBtns).forEach(b => b.classList.toggle('on', b === e.currentTarget));
+    }}, t)));
+  const back = h('div', {class:'bg-modal-back', onclick:e => { if (e.target === back) close(); }},
+    h('div', {class:'bg-modal', role:'dialog', 'aria-modal':'true', 'aria-label':'背景を消す'},
+      h('div', {class:'bg-head'}, h('span', {class:'logo-mark', html:LOGO_SVG}), h('b', {}, '背景を消す（AI）'), h('span', {class:'grow'}),
+        h('button', {class:'ed-mini', type:'button', title:'閉じる', html:icon('close'), onclick:close})),
+      h('div', {class:'bg-body'},
+        h('div', {class:'bg-pane'}, h('small', {}, '元の画像'), before),
+        h('div', {class:'bg-pane'}, h('div', {class:'bg-pane-h'}, h('small', {}, '背景を消した画像'), bgBtns), after)),
+      h('div', {class:'bg-ctrl'},
+        wrapField(h('span', {}, '切り抜きの強さ：', thOut), th, '大きくすると、背景に近い部分をより多く消します。'),
+        wrapField(h('span', {}, 'フチのなめらかさ：', softOut), soft, '小さくするとフチがくっきり、大きくするとふんわりします。')),
+      h('div', {class:'bg-foot'},
+        h('p', {class:'ed-hint', style:'margin:0;flex:1'}, 'AIはこのブラウザの中で動きます（画像は外部に送信されません）。モデル：skytnt/anime-seg（Apache-2.0）'),
+        h('button', {class:'ed-btn ghost', type:'button', onclick:close}, 'キャンセル'), apply)));
+  document.body.append(back);
+  document.addEventListener('keydown', onKey);
+
+  const redraw = () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      thOut.textContent = th.value; softOut.textContent = soft.value;
+      if (!img || !mask) return;
+      cut = composeCut(img, mask, +th.value / 100, +soft.value / 100);
+      after.replaceChildren(cut);
+    });
+  };
+  th.addEventListener('input', redraw); soft.addEventListener('input', redraw);
+  apply.addEventListener('click', () => {
+    if (!cut) return;
+    const d = encodeAlpha(cut);
+    const base = (/^data:/.test(cur) ? 'img' : String(cur).split('/').pop().replace(/\.[^.]+$/, '')).toLowerCase().replace(/[^a-z0-9_-]+/g, '-').replace(/-nobg.*$/, '').slice(0, 32) || 'img';
+    const path = `images/${sl.folder || 'misc'}/${base}-nobg-${uid().slice(0, 5)}.${extOf(d)}`;
+    ASSETS.set(path, d);
+    sl.obj[sl.key] = path;
+    close(); changed(); onDone && onDone();
+    toast('背景を透過した画像に差し替えました（公開すると反映されます）');
+  });
+
+  const fail = e => { busy.replaceChildren(h('div', {class:'bg-err'}, e.message || String(e))); busy.classList.add('err'); };
+  try {
+    img = await loadImageEl(imgSrc(cur));
+    before.append(h('img', {src:img.src, alt:''}));
+    if (!BG.session && !BG.model && !(await isModelCached())) {
+      await new Promise(res => {
+        busy.replaceChildren(
+          h('div', {}, '初回だけ、AIモデル（約170MB）をダウンロードします。'),
+          h('div', {style:'font-weight:400;font-size:12px'}, '2回目からはこのブラウザに保存したものを使います。Wi-Fi 推奨。'),
+          h('button', {class:'ed-btn primary', type:'button', style:'flex:none', html:icon('download') + 'ダウンロードして開始', onclick:() => {
+            busy.replaceChildren(h('span', {class:'spin'}), msg, h('div', {class:'bg-bar'}, barI)); res();
+          }}));
+      });
+    }
+    if (closed) return;
+    await ensureBgSession(setStatus);
+    if (closed) return;
+    setStatus(`背景を判定しています…（${BG.ep === 'webgpu' ? '数秒' : '数十秒かかることがあります'}）`, 1);
+    await nextFrame();
+    mask = await computeMask(img);
+    if (closed) return;
+    redraw();
+    apply.disabled = false;
+  } catch (e) { fail(e); }
+}
+
+/* =========================================================
    ADMIN — 画面構成・読み込み・プレビュー
    ========================================================= */
 const TAB_ROUTE = {images:'#/home', links:'#/links', site:'#/home', nav:'#/home', hero:'#/home', chars:'#/characters', gallery:'#/gallery', patreon:'#/patreon', news:'#/news', sns:'#/links'};
@@ -1374,12 +1671,12 @@ function injectData(html, data) {
 }
 function buildPreviewFrame() {
   if (!PV.frame || !S.template) return;
-  const flag = `<script>window.RS_PREVIEW=1;window.RS_BASE=${JSON.stringify(RS_BASE)};<\/script>`;
+  const flag = `<script>window.RS_PREVIEW=1;window.RS_BASE=${JSON.stringify(RS_BASE)};window.RS_ROUTE=${JSON.stringify(PV.route)};<\/script>`;
   const html = injectData(S.template, S.data).replace(/<head>/i, m => m + flag);
   if (PV.url) URL.revokeObjectURL(PV.url);
   PV.url = URL.createObjectURL(new Blob([html], {type:'text/html'}));
   PV.ready = false; PV.sent = new Set();
-  PV.frame.src = PV.url + PV.route;
+  PV.frame.src = PV.url;
 }
 function sendPreview() {
   if (!PV.ready || !PV.frame || !S.data) return;
@@ -1422,7 +1719,7 @@ function imageSlots() {
   d.hero.slides.forEach((s, i) => out.push({group:'トップ画像', label:`スライド ${i + 1}`, hint:s.title ? s.title.replace(/\n/g, ' ') : '', obj:s, key:'image', max:1920, folder:'hero', ph:phHero(i), ratio:'1.15'}));
   [['characters', 'キャラクター'], ['gallery', 'ギャラリー'], ['patreon', '会員限定']].forEach(([k, t]) =>
     out.push({group:'Explore のサムネイル', label:t, hint:'空欄なら自動', obj:d.tiles[k], key:'image', max:1200, folder:'site', ph:holo, ratio:'.92'}));
-  d.characters.forEach(c => out.push({group:'キャラクター', label:c.name, hint:c.romaji, obj:c, key:'image', max:1400, folder:'characters', ph:phChar(c), ratio:'3/4'}));
+  d.characters.forEach(c => out.push({group:'キャラクター', label:c.name, hint:c.romaji, obj:c, key:'image', max:1400, folder:'characters', ph:phChar(c), ratio:'3/4', color:c.color}));
   d.gallery.forEach(g => { const c = charById((g.chars || [])[0]); out.push({group:'ギャラリー', label:g.title || '(無題)', hint:fmtDate(g.date), obj:g, key:'image', max:1600, folder:'gallery', ph:phArt(g.id || g.title, g.title, c && c.color), ratio:'1'}); });
   d.patreon.previews.forEach((x, i) => out.push({group:'Patreon プレビュー', label:x.title || '(無題)', hint:'ぼかして表示', obj:x, key:'image', max:420, folder:'patreon', ph:phArt('pv' + i, '', SOFT[i % SOFT.length]), ratio:'3/4'}));
   return out;
@@ -1455,7 +1752,9 @@ function imageCard(sl) {
     h('div', {class:'im-actions'},
       h('button', {class:'ed-btn', type:'button', html:icon('upload') + '差し替え', onclick:() => file.click()}),
       h('button', {class:'ed-mini', type:'button', title:'画像を外す', html:icon('trash'), onclick:() => { sl.obj[sl.key] = ''; paint(); changed(); refreshImageSummary(); }}),
-      file));
+      file),
+    h('button', {class:'ed-btn ghost im-bg', type:'button', title:'AIで背景を消して透過にする', html:icon('wand') + '背景を消す',
+      onclick:() => openBgRemove(sl, () => { paint(); refreshImageSummary(); })}));
   card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('drag'); });
   card.addEventListener('dragleave', () => card.classList.remove('drag'));
   card.addEventListener('drop', e => { e.preventDefault(); card.classList.remove('drag'); set(e.dataTransfer.files[0]); });
@@ -1492,6 +1791,8 @@ function tabImages() {
 function linkSlots() {
   const d = D(), out = [];
   out.push({group:'Patreon', label:'Patreon ページのURL', obj:d.patreon, key:'url', icon:'patreon'});
+  (d.patreon.tiers || []).forEach(t => out.push({group:'Patreon', label:`${t.name} の参加リンク`, obj:t, key:'url', icon:'crown', fallback:'Patreonページへ'}));
+  ((d.patreon.oshi || {}).items || []).forEach(x => out.push({group:'Patreon', label:`${x.name} の参加リンク`, obj:x, key:'url', icon:'heart', fallback:'Patreonページへ'}));
   d.sns.forEach(x => out.push({group:'SNS・外部リンク', label:`${x.label}${x.handle ? '（' + x.handle + '）' : ''}`, obj:x, key:'url', icon:x.icon}));
   out.push({group:'連絡先ボタン', label:d.site.contactLabel || '連絡ボタン', obj:d.site, key:'contactUrl', icon:'mail'});
   d.hero.slides.forEach((s, i) => out.push({group:'トップ画像のボタン', label:`スライド${i + 1}「${s.linkLabel || '詳しく見る'}」`, obj:s, key:'link', icon:'star', internal:true}));
@@ -1507,9 +1808,9 @@ function linkState(v) {
   return ['要確認', 'err'];
 }
 function linkRow(r) {
-  const inp = h('input', {class:'ed-in', value:r.obj[r.key] || '', placeholder:r.internal ? '#/gallery や https://' : 'https://', list:'rs-pages', spellcheck:'false'});
+  const inp = h('input', {class:'ed-in', value:r.obj[r.key] || '', placeholder:r.fallback ? '空欄ならPatreonページ' : r.internal ? '#/gallery や https://' : 'https://', list:'rs-pages', spellcheck:'false'});
   const st = h('span', {class:'lk-st'});
-  const check = () => { const [t, k] = linkState(inp.value.trim()); st.textContent = t; st.className = 'lk-st ' + k; };
+  const check = () => { const v = inp.value.trim(); const [t, k] = !v && r.fallback ? [r.fallback, 'ok'] : linkState(v); st.textContent = t; st.className = 'lk-st ' + k; };
   inp.addEventListener('input', () => { r.obj[r.key] = inp.value.trim(); check(); changed(); });
   const open = h('button', {class:'ed-mini', type:'button', title:'開いて確認', html:icon('arrow'), onclick:() => {
     const v = inp.value.trim(); if (!v) return;
