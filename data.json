@@ -185,7 +185,7 @@
    "id": "tamaki",
    "name": "たまき",
    "romaji": "TAMAKI",
-   "color": "#e2b04f",
+   "color": "#a4e4ea",
    "image": "images/characters/tamaki1-3-71uoi-nobg-tpc4s.webp",
    "pos": 25,
    "catch": "（ひとことセリフ）",
@@ -235,7 +235,7 @@
    "id": "kaede",
    "name": "かえで",
    "romaji": "KAEDE",
-   "color": "#ef8a4c",
+   "color": "#f4c10b",
    "image": "images/characters/kaede1-2-rjlc6-nobg-yil8b.webp",
    "pos": 25,
    "catch": "（ひとことセリフ）",
@@ -623,5 +623,5 @@
    "pin": false
   }
  ],
- "publishedAt": "2026-09-25T10:35:53.042Z"
+ "publishedAt": "2026-09-25T10:39:31.579Z"
 }
