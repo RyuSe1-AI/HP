@@ -334,6 +334,34 @@
  ],
  "gallery": [
   {
+   "id": "guewfrml",
+   "image": "",
+   "title": "20260827_2038_image",
+   "date": "2026-09-25",
+   "chars": []
+  },
+  {
+   "id": "gopwa6a1",
+   "image": "",
+   "title": "20260827_2038_image (1)",
+   "date": "2026-09-25",
+   "chars": []
+  },
+  {
+   "id": "gyzybypy",
+   "image": "",
+   "title": "20260827_2026_image",
+   "date": "2026-09-25",
+   "chars": []
+  },
+  {
+   "id": "g6vvg8sp",
+   "image": "",
+   "title": "20260827_1502_image",
+   "date": "2026-09-25",
+   "chars": []
+  },
+  {
    "id": "g1",
    "image": "",
    "title": "Artwork 01",
@@ -595,5 +623,5 @@
    "pin": false
   }
  ],
- "publishedAt": "2026-09-25T10:31:09.278Z"
+ "publishedAt": "2026-09-25T10:35:53.042Z"
 }
