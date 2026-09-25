@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>管理ページ | RyuSe1 STUDIO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%239ed7ff'/%3E%3Cstop offset='.55' stop-color='%23bdb4ff'/%3E%3Cstop offset='1' stop-color='%23f4c6ec'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='40' height='40' rx='12' fill='url(%23g)'/%3E%3Cpath d='M26 7c.6 3.9 2.9 6.2 6.8 6.8-3.9.6-6.2 2.9-6.8 6.8-.6-3.9-2.9-6.2-6.8-6.8 3.9-.6 6.2-2.9 6.8-6.8z' fill='%23fff'/%3E%3Cpath d='M8 32 19 21M7 25l7-7M14 33l7-7' stroke='%23fff' stroke-width='2.4' stroke-linecap='round' opacity='.85'/%3E%3C/svg%3E">
+<style>
+/* RyuSe1 STUDIO — layout: editorial journal / colors & type: icy blue × lavender */
+:root{
+  --bg:#f3f5fb;--surface:rgba(255,255,255,.76);--surface-solid:#ffffff;--surface-2:rgba(236,240,252,.95);
+  --text:#252b47;--text-2:#4a5272;--muted:#8990ad;--line:rgba(135,150,205,.22);--line-strong:rgba(135,150,205,.4);
+  --accent:#7482ea;--accent-2:#9a86ee;--accent-soft:rgba(116,130,234,.11);
+  --holo:linear-gradient(118deg,#9ed7ff 0%,#bdb4ff 40%,#f2c3ea 70%,#b6ecdf 100%);
+  --holo-soft:linear-gradient(118deg,rgba(158,215,255,.28),rgba(189,180,255,.28) 45%,rgba(242,195,234,.24) 75%,rgba(182,236,223,.22));
+  --shadow:0 1px 2px rgba(40,50,100,.04),0 10px 30px rgba(70,82,150,.07);
+  --shadow-hover:0 2px 4px rgba(40,50,100,.05),0 18px 40px rgba(70,82,150,.14);
+  --shadow-lg:0 30px 80px rgba(30,36,80,.28);
+  --glow-1:rgba(158,215,255,.42);--glow-2:rgba(189,180,255,.34);--glow-3:rgba(244,198,236,.22);
+  --r-xl:26px;--r-lg:20px;--r-md:14px;--r-sm:10px;
+  --ff-ja:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic UI","Meiryo",sans-serif;
+  --ff-en:"Outfit",var(--ff-ja);color-scheme:light;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1022;--surface:rgba(25,30,58,.72);--surface-solid:#181d38;--surface-2:rgba(33,39,72,.85);
+  --text:#e9ecfb;--text-2:#c3c9e8;--muted:#8e96bd;--line:rgba(150,165,235,.14);--line-strong:rgba(150,165,235,.28);
+  --accent:#9ba7ff;--accent-2:#b8a6ff;--accent-soft:rgba(155,167,255,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.25),0 12px 32px rgba(0,0,0,.28);--shadow-hover:0 2px 4px rgba(0,0,0,.3),0 20px 44px rgba(0,0,0,.4);
+  --glow-1:rgba(80,140,220,.20);--glow-2:rgba(130,110,230,.20);--glow-3:rgba(210,120,190,.10);color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0d1022;--surface:rgba(25,30,58,.72);--surface-solid:#181d38;--surface-2:rgba(33,39,72,.85);
+  --text:#e9ecfb;--text-2:#c3c9e8;--muted:#8e96bd;--line:rgba(150,165,235,.14);--line-strong:rgba(150,165,235,.28);
+  --accent:#9ba7ff;--accent-2:#b8a6ff;--accent-soft:rgba(155,167,255,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.25),0 12px 32px rgba(0,0,0,.28);--shadow-hover:0 2px 4px rgba(0,0,0,.3),0 20px 44px rgba(0,0,0,.4);
+  --glow-1:rgba(80,140,220,.20);--glow-2:rgba(130,110,230,.20);--glow-3:rgba(210,120,190,.10);color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:110px}
+body{margin:0;min-height:100vh;color:var(--text);font:14px/1.8 var(--ff-ja);-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:var(--bg);
+  background-image:radial-gradient(900px 520px at 6% -8%,var(--glow-1),transparent 62%),radial-gradient(820px 620px at 104% 6%,var(--glow-2),transparent 60%),radial-gradient(760px 520px at 50% 112%,var(--glow-3),transparent 62%);
+  background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.55;
+  background-image:radial-gradient(1.4px 1.4px at 12% 18%,#fff,transparent 60%),radial-gradient(1.2px 1.2px at 32% 72%,#fff,transparent 60%),radial-gradient(1.6px 1.6px at 58% 12%,#fff,transparent 60%),radial-gradient(1.2px 1.2px at 78% 44%,#fff,transparent 60%),radial-gradient(1.4px 1.4px at 90% 82%,#fff,transparent 60%),radial-gradient(1px 1px at 46% 90%,#fff,transparent 60%)}
+#app{position:relative;z-index:1}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}button,input,textarea,select{font:inherit;color:inherit}
+button{border:0;background:none;padding:0;cursor:pointer}h1,h2,h3,h4,p{margin:0}h1,h2,h3,h4{line-height:1.4}ul{margin:0;padding:0;list-style:none}
+button,a,input,textarea{touch-action:manipulation}button,a{ -webkit-tap-highlight-color:transparent }
+:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:8px}
+::selection{background:var(--accent-2);color:#fff}
+.ic{width:20px;height:20px;flex:none}.en{font-family:var(--ff-en)}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.skip-link{position:fixed;left:18px;top:10px;transform:translateY(-150%);z-index:120;background:var(--text);color:var(--bg);padding:10px 20px;border-radius:99px}.skip-link:focus{transform:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--shadow);-webkit-backdrop-filter:blur(16px) saturate(1.25);backdrop-filter:blur(16px) saturate(1.25)}
+
+
+/* ---------- editor parts ---------- */
+
+@media (min-width:1200px){ body.ed-open{padding-right:440px} }
+.ed-panel{position:fixed;top:0;right:0;bottom:0;width:440px;max-width:100vw;z-index:100;background:var(--surface-solid);color:var(--text);border-left:1px solid var(--line);
+  box-shadow:-20px 0 60px rgba(30,36,80,.14);display:flex;flex-direction:column;font-size:13.5px;font-family:var(--ff-ja);animation:edIn .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes edIn{from{transform:translateX(30px);opacity:0}}
+.ed-top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.ed-top .logo-mark{width:30px;height:30px;border-radius:10px}.ed-top .logo-mark svg{width:22px;height:22px}
+.ed-top b{font-size:15px}
+.ed-dirty{font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px;background:rgba(224,69,107,.12);color:#e0456b;display:none}
+.ed-dirty.on{display:inline-block}
+.ed-x{margin-left:auto;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:var(--text-2)}
+.ed-x:hover{background:var(--accent-soft)}
+.ed-tabs{display:flex;flex-wrap:wrap;gap:4px;padding:10px 12px;border-bottom:1px solid var(--line);flex:none}
+.ed-tab{display:flex;align-items:center;gap:4px;padding:6px 9px;border-radius:10px;white-space:nowrap;font-size:12px;color:var(--text-2)}
+.ed-tab .ic{width:15px;height:15px}
+.ed-tab:hover{background:var(--accent-soft)}
+.ed-tab.on{background:var(--text);color:var(--bg);font-weight:700}
+.ed-body{flex:1;overflow:auto;padding:14px 16px 40px}
+.ed-sec{margin-bottom:22px}
+.ed-sec-t{font-size:12px;letter-spacing:.08em;color:var(--accent);font-weight:700;margin:2px 2px 10px;display:flex;align-items:center;gap:6px}
+.ed-sec-t .ic{width:15px;height:15px}
+.ed-field{margin-bottom:10px}
+.ed-lab{display:block;font-size:12px;color:var(--text-2);margin-bottom:4px;font-weight:700}
+.ed-in{width:100%;padding:8px 10px;border-radius:10px;border:1px solid var(--line-strong);background:var(--surface-2);color:var(--text);font:inherit;font-size:13.5px}
+textarea.ed-in{min-height:78px;resize:vertical;line-height:1.6}
+.ed-in:focus{outline:2px solid var(--accent);outline-offset:-1px}
+input[type=color].ed-in{padding:3px;height:38px;cursor:pointer}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.ed-grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.ed-img{display:flex;gap:10px;align-items:flex-start}
+.ed-img-prev{width:84px;height:84px;border-radius:12px;flex:none;overflow:hidden;border:1px dashed var(--line-strong);display:grid;place-items:center;font-size:11px;color:var(--muted);
+  background:repeating-conic-gradient(var(--surface-2) 0 25%,transparent 0 50%) 0 0/14px 14px}
+.ed-img-prev img{width:100%;height:100%;object-fit:cover}
+.ed-img-prev.drag{outline:2px solid var(--accent);outline-offset:2px}
+.ed-img-ctl{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.ed-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ed-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-size:12.5px;font-weight:700}
+.ed-btn:hover{filter:brightness(1.05)}
+.ed-btn .ic{width:15px;height:15px}
+.ed-btn.ghost{background:transparent;border:1px solid var(--line-strong);color:var(--text-2)}
+.ed-btn.primary{background:var(--text);color:var(--bg);padding:11px 16px;font-size:14px;justify-content:center;flex:1}
+.ed-hint{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.6}
+.ed-item{border:1px solid var(--line);border-radius:12px;margin-bottom:8px;background:var(--surface-2)}
+.ed-item[open]{border-color:var(--line-strong)}
+.ed-item summary{list-style:none;display:flex;align-items:center;gap:8px;padding:7px 8px 7px 10px;cursor:pointer}
+.ed-item summary::-webkit-details-marker{display:none}
+.ed-sum-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;font-size:13px}
+.ed-sum-t small{font-weight:400;color:var(--muted);margin-left:6px}
+.ed-sum-thumb{width:30px;height:30px;border-radius:8px;object-fit:cover;flex:none;background:var(--surface-solid)}
+.ed-sum-dot{width:12px;height:12px;border-radius:50%;flex:none}
+.ed-sum-btns{display:flex;gap:2px}
+.ed-mini{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:var(--muted)}
+.ed-mini:hover{background:var(--accent-soft);color:var(--text)}
+.ed-mini:disabled{opacity:.25;pointer-events:none}
+.ed-mini.warn{background:#e0456b;color:#fff;width:auto;padding:0 8px;font-size:11.5px;font-weight:700}
+.ed-mini .ic{width:15px;height:15px}
+.ed-item-body{padding:10px 12px 12px;border-top:1px solid var(--line)}
+.ed-add{width:100%;display:flex;justify-content:center;align-items:center;gap:6px;padding:10px;border-radius:12px;border:1.5px dashed var(--line-strong);color:var(--text-2);font-weight:700;font-size:13px;margin-bottom:8px}
+.ed-add:hover{border-color:var(--accent);color:var(--accent)}
+.ed-add .ic{width:16px;height:16px}
+.ed-checks{display:flex;flex-wrap:wrap;gap:6px}
+.ed-ck{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;border:1px solid var(--line-strong);font-size:12.5px;cursor:pointer;user-select:none}
+.ed-ck input{position:absolute;opacity:0;pointer-events:none}
+.ed-ck i{width:9px;height:9px;border-radius:50%;background:var(--c,var(--accent))}
+.ed-ck.on{background:var(--c,var(--accent));border-color:var(--c,var(--accent));color:#fff}
+.ed-ck.on i{background:#fff}
+.ed-switch{display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;margin-bottom:10px}
+.ed-switch input{width:17px;height:17px;accent-color:var(--accent)}
+.ed-kv{display:grid;grid-template-columns:110px 1fr 28px;gap:6px;margin-bottom:6px;align-items:center}
+.ed-icsel{display:flex;gap:8px;align-items:center}
+.ed-icsel .pv{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);flex:none}
+.ed-foot{border-top:1px solid var(--line);padding:12px 16px 14px;display:flex;flex-direction:column;gap:8px;flex:none;background:var(--surface-solid)}
+.ed-size{font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.ed-fab{position:fixed;right:18px;bottom:18px;z-index:100;display:flex;align-items:center;gap:8px;padding:12px 18px;border-radius:99px;background:var(--text);color:var(--bg);font-weight:700;font-size:14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.ed-fab .ic{width:17px;height:17px}
+.ed-fab .dot{width:8px;height:8px;border-radius:50%;background:#ff6b8b;display:none}
+.ed-fab .dot.on{display:block}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:130;background:var(--text);color:var(--bg);padding:11px 18px;border-radius:12px;font-size:13.5px;font-weight:700;box-shadow:0 12px 30px rgba(0,0,0,.25);animation:rise .3s}
+.ed-info{font-size:12px;line-height:1.7;color:var(--text-2);background:var(--holo-soft);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:14px}
+.ed-info b{color:var(--text)}
+.ed-info ol{margin:6px 0 0;padding-left:18px}.ed-info li{margin:2px 0}
+.ed-info code{font-size:11px;background:var(--surface-solid);padding:1px 5px;border-radius:5px}
+.ed-badge{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 8px;border-radius:99px;background:rgba(242,165,58,.16);color:#c77a12;margin-left:6px}
+.ed-status{font-size:12.5px;line-height:1.6;border-radius:12px;padding:10px 12px;background:var(--surface-2);border:1px solid var(--line);color:var(--text-2);white-space:pre-wrap}
+.ed-status:empty{display:none}
+.ed-panel[data-tab="github"] #edPubStatus{display:none}
+.ed-status.ok{background:rgba(57,181,151,.12);border-color:rgba(57,181,151,.35);color:#1f8a6f}
+.ed-status.err{background:rgba(224,69,107,.1);border-color:rgba(224,69,107,.35);color:#c93a5e}
+.ed-status.warn{background:rgba(242,165,58,.12);border-color:rgba(242,165,58,.4);color:#b56b0c}
+.ed-status .ed-btn{margin-top:8px}
+.ed-url{font-size:12px;word-break:break-all;color:var(--accent)}
+.ed-btn:disabled{opacity:.5;pointer-events:none}
+@media (max-width:760px){ .ed-panel{width:100vw} .ed-grid2{grid-template-columns:1fr} }
+
+/* ---------- admin layout ---------- */
+html,body{height:100%}
+body{overflow:hidden;font-size:14px}
+#admin{position:relative;z-index:1;height:100vh;display:flex;flex-direction:column}
+.logo-mark{position:relative;overflow:hidden;width:34px;height:34px;flex:none;display:grid;place-items:center;background:var(--holo);border-radius:11px;box-shadow:0 6px 18px rgba(150,160,240,.35),inset 0 1px 0 rgba(255,255,255,.6)}
+.logo-mark::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.55),transparent 45%)}
+.logo-mark svg{width:26px;height:26px;position:relative;z-index:1}
+.grow{flex:1}
+.ed-btn{white-space:nowrap}
+
+/* header */
+.ad-hdr{flex:none;min-height:62px;display:flex;align-items:center;gap:8px;padding:0 16px;border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);position:relative;z-index:30}
+.ad-logo{display:flex;align-items:center;gap:10px;font:600 16.5px var(--ff-en);margin-right:6px;white-space:nowrap}
+.ad-logo small{font:700 11px var(--ff-ja);color:var(--accent);margin-left:8px;letter-spacing:.08em}
+.ad-src{font-size:11.5px;color:var(--text-2);padding:4px 10px;border-radius:99px;background:var(--surface);border:1px solid var(--line);white-space:nowrap}
+.ad-hdr .ed-btn.primary{flex:none;padding:10px 16px}
+.ad-hdr .ed-btn.ghost{padding:7px 10px}
+
+/* body */
+.ad-body{flex:1;min-height:0;display:grid;grid-template-columns:188px minmax(0,1fr) minmax(0,46%)}
+.ad-side{border-right:1px solid var(--line);overflow:auto;padding:14px 10px;display:flex;flex-direction:column;gap:2px}
+.ad-tab{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;font-size:13.5px;color:var(--text-2);text-align:left;transition:background .15s,color .15s}
+.ad-tab:hover{background:var(--accent-soft);color:var(--text)}
+.ad-tab.on{background:var(--holo-soft);color:var(--text);font-weight:700;box-shadow:inset 0 0 0 1px var(--line)}
+.ad-tab .ic{width:18px;height:18px;color:var(--muted)}
+.ad-tab.on .ic{color:var(--accent)}
+.ad-tab:disabled{opacity:.35;pointer-events:none}
+.ad-side hr{border:0;border-top:1px dashed var(--line-strong);margin:8px 6px;width:auto}
+.ad-side .ed-size{margin-top:auto;padding:12px 6px 0;font-size:11px}
+.ad-main{overflow:auto;padding:16px 22px 70px;min-width:0}
+.ad-main>.ed-status{margin:-2px 0 14px}
+.ad-body[data-tab="github"] #edPubStatus{display:none}
+.ad-h{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin:2px 0 14px}
+.ad-h h2{font-size:21px}
+.ad-h small{color:var(--muted);font-size:12px}
+.ad-load{padding:24px 26px;margin-bottom:22px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.ad-load h2{font-size:20px}
+.ad-load p{font-size:13px;color:var(--text-2)}
+
+/* preview */
+.ad-preview{position:relative;border-left:1px solid var(--line);display:flex;flex-direction:column;min-width:0;background:color-mix(in srgb,var(--surface-2) 55%,transparent)}
+.pv-bar{flex:none;height:48px;display:flex;align-items:center;gap:8px;padding:0 12px;border-bottom:1px solid var(--line)}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:2px}
+.seg button{padding:5px 11px;border-radius:8px;font-size:12px;color:var(--text-2)}
+.seg button.on{background:var(--text);color:var(--bg);font-weight:700}
+.pv-wrap{position:relative;flex:1;min-height:0;overflow:hidden}
+.pv-wrap iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;background:var(--bg)}
+.pv-wrap.sp iframe{top:14px;border-radius:28px;box-shadow:0 0 0 8px #1d2238,0 20px 50px rgba(20,24,60,.3)}
+.pv-close{display:none}
+
+/* images */
+.im-sum{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.im-sum span{font-size:12px;padding:5px 12px;border-radius:99px;background:var(--surface);border:1px solid var(--line);color:var(--text-2)}
+.im-group{margin-bottom:24px}
+.im-group-h{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px;font-weight:700;margin:0 2px 10px}
+.im-group-h small{color:var(--muted);font-weight:400;font-size:12px}
+.im-group-h .ed-row{margin:0 0 0 auto!important}
+.im-group-h>.ed-btn{margin-left:auto}
+.im-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px}
+.im-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,box-shadow .2s}
+.im-card:hover{box-shadow:var(--shadow)}
+.im-card.drag{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.im-thumb{position:relative;border-radius:11px;overflow:hidden;background:var(--surface-2)}
+.im-thumb img{width:100%;height:100%;object-fit:cover}
+.im-thumb img.is-ph{opacity:.5}
+.im-chip{position:absolute;top:6px;left:6px;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.92);color:#4a5272}
+.im-chip.warn{background:#fff1da;color:#b56b0c}
+.im-chip.ok{background:#e1f6ef;color:#1f8a6f}
+.im-chip.none{background:rgba(255,255,255,.88);color:#8990ad}
+.im-chip.ext{background:#e8ecff;color:#5563d6}
+.im-meta{min-width:0;padding:0 2px}
+.im-meta b{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.im-meta small{display:block;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.im-actions{display:flex;gap:4px;align-items:center}
+.im-actions .ed-btn{flex:1;justify-content:center;padding:6px 8px}
+
+/* links */
+.lk-row{display:grid;grid-template-columns:36px minmax(0,1fr) auto 30px;gap:10px;align-items:center;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:8px}
+.lk-ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;color:#fff;background:var(--c)}
+.lk-ic .ic{width:18px;height:18px}
+.lk-main{min-width:0}
+.lk-main b{display:block;font-size:12.5px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lk-main .ed-in{padding:6px 9px;font-size:13px}
+.lk-st{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.lk-st.ok{background:rgba(57,181,151,.12);color:#1f8a6f}
+.lk-st.none{background:var(--surface-2);color:var(--muted)}
+.lk-st.err{background:rgba(224,69,107,.1);color:#c93a5e}
+
+.ad-pv-toggle{display:none!important}
+@media (max-width:1180px){
+  .ad-body{grid-template-columns:170px minmax(0,1fr)}
+  .ad-preview{display:none;position:fixed;inset:0;z-index:60;border:0;background:var(--bg)}
+  .ad-preview.show{display:flex}
+  .ad-pv-toggle{display:inline-flex!important}
+  .pv-close{display:grid}
+}
+@media (max-width:760px){
+  body{overflow:auto}
+  #admin{height:auto;min-height:100vh}
+  .ad-hdr{flex-wrap:wrap;padding:10px 12px;gap:6px}
+  .ad-logo small,.ad-src{display:none}
+  .hide-sp{display:none}
+  .ad-body{grid-template-columns:minmax(0,1fr)}
+  .ad-side{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:8px;position:sticky;top:0;z-index:20;background:var(--bg)}
+  .ad-tab{white-space:nowrap;padding:8px 10px}
+  .ad-side hr,.ad-side .ed-size{display:none}
+  .ad-main{overflow:visible;padding:14px 14px 60px}
+  .im-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lk-row{grid-template-columns:32px minmax(0,1fr) 30px}
+  .lk-st{grid-column:2;justify-self:start}
+}
+
+</style>
+</head>
+<body>
+<div id="admin"></div>
+<div id="toast-root"></div>
+<datalist id="rs-pages">
+  <option value="#/home">ホーム</option><option value="#/characters">キャラクター</option><option value="#/gallery">ギャラリー</option>
+  <option value="#/patreon">会員限定</option><option value="#/news">お知らせ</option><option value="#/links">リンク</option>
+</datalist>
+<script>
+(function(){
+'use strict';
+/* =========================================================
+   helpers
+   ========================================================= */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl = u => {
+  u = String(u || '').trim();
+  if (!u) return '';
+  if (/^(https?:|mailto:|data:image\/|blob:|#|\.{0,2}\/)/i.test(u)) return u;
+  if (/^[a-z][a-z0-9+.\-]*:/i.test(u)) return '';           // javascript: などは無効化
+  return u;                                                   // images/xxx.png などの相対パス
+};
+const isExt = u => /^https?:/i.test(u || '');
+const extAttr = u => isExt(u) ? ' target="_blank" rel="noopener"' : '';
+const hashStr = s => { let h = 2166136261; for (const ch of String(s)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+const uid = () => Math.random().toString(36).slice(2, 9);
+
+/* =========================================================
+   icons (24x24, stroke) — "F:" prefix = filled brand glyph
+   ========================================================= */
+const ICONS = {
+  home:'<path d="M3.5 10.5 12 3.5l8.5 7"/><path d="M5.5 9v10.5a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1V9"/>',
+  star:'<path d="M12 3c.6 4.6 3.4 7.4 8 8-4.6.6-7.4 3.4-8 8-.6-4.6-3.4-7.4-8-8 4.6-.6 7.4-3.4 8-8z"/>',
+  comet:'<path d="M16.5 3c.4 2.7 2 4.3 4.5 4.6-2.5.4-4.1 2-4.5 4.6-.4-2.6-2-4.2-4.5-4.6 2.5-.3 4.1-1.9 4.5-4.6z"/><path d="M3 21l8-8M3.5 15.5l4.5-4.5M8.5 20.5l4.5-4.5"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-6 6.5-6s5.9 2.4 6.5 6"/><path d="M15.5 4.8a3.5 3.5 0 0 1 0 6.4M17.5 14.3c2.2.7 3.6 2.9 4 5.7"/>',
+  image:'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/>',
+  heart:'<path d="M12 20s-7.5-4.4-9-9.3C2 7.4 4.2 4.5 7.3 4.5c2 0 3.6 1.1 4.7 2.7 1.1-1.6 2.7-2.7 4.7-2.7 3.1 0 5.3 2.9 4.3 6.2-1.5 4.9-9 9.3-9 9.3z"/>',
+  crown:'<path d="M3.5 8.5 8 12.5l4-7 4 7 4.5-4-1.8 10.5H5.3z"/><path d="M6 21h12"/>',
+  lock:'<rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2"/>',
+  bell:'<path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+  news:'<rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+  link:'<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/>',
+  mail:'<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/>',
+  folder:'<path d="M3.5 7a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/>',
+  palette:'<path d="M12 3a9 9 0 1 0 0 18c1.3 0 2-.8 2-1.8 0-1.3-1-1.6-1-2.7 0-1 .8-1.5 1.8-1.5H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.2"/><circle cx="10" cy="7" r="1.2"/><circle cx="15" cy="7.5" r="1.2"/>',
+  book:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23"/><path d="M20 18v3H6.5"/>',
+  video:'<rect x="3" y="5.5" width="13" height="13" rx="2.5"/><path d="m16 10 5-3v10l-5-3z"/>',
+  music:'<path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',
+  gift:'<rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12"/><path d="M12 8c-1.5-3.5-5.5-4-5.5-1.5S10 8 12 8zm0 0c1.5-3.5 5.5-4 5.5-1.5S14 8 12 8z"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/>',
+  pause:'<path d="M8 5v14M16 5v14"/>',
+  play:'<path d="m8 5 11 7-11 7z"/>',
+  moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>',
+  arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  chev:'<path d="m9 6 6 6-6 6"/>',
+  chevL:'<path d="m15 6-6 6 6 6"/>',
+  up:'<path d="m6 15 6-6 6 6"/>',
+  down:'<path d="m6 9 6 6 6-6"/>',
+  menu:'<path d="M4 7h16M4 12h16M4 17h10"/>',
+  close:'<path d="M6 6l12 12M18 6 6 18"/>',
+  check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  upload:'<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/>',
+  download:'<path d="M12 4v12M7 11l5 5 5-5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  trash:'<path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13"/>',
+  edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  x:'F:<path d="M3.8 4h4.6l4.1 5.6L17.2 4h2.6l-6.1 7.2L20.4 20h-4.6l-4.4-6-5.1 6H3.7l6.6-7.7z"/>',
+  youtube:'F:<path fill-rule="evenodd" d="M21.6 7.2a2.8 2.8 0 0 0-2-2C17.9 4.8 12 4.8 12 4.8s-5.9 0-7.6.4a2.8 2.8 0 0 0-2 2C2 8.9 2 12 2 12s0 3.1.4 4.8a2.8 2.8 0 0 0 2 2c1.7.4 7.6.4 7.6.4s5.9 0 7.6-.4a2.8 2.8 0 0 0 2-2c.4-1.7.4-4.8.4-4.8s0-3.1-.4-4.8zM10 15.2V8.8l5.3 3.2z"/>',
+  discord:'F:<path fill-rule="evenodd" d="M19.1 5.6A16 16 0 0 0 15.1 4.3l-.5 1a14.6 14.6 0 0 0-5.2 0l-.5-1a16 16 0 0 0-4 1.3C2.4 9.4 1.7 13.1 2 16.7a16 16 0 0 0 4.9 2.5l1-1.6c-.9-.3-1.7-.7-2.4-1.2l.6-.4a11.5 11.5 0 0 0 11.8 0l.6.4c-.8.5-1.6.9-2.4 1.2l1 1.6a16 16 0 0 0 4.9-2.5c.4-4.2-.7-7.9-2.9-11.1zM9 14.3c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/>',
+  pixiv:'F:<path fill-rule="evenodd" d="M6 3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3zm3.2 4v11h2.1v-3.3h2.3a3.85 3.85 0 0 0 0-7.7zm2.1 2h2.2a1.85 1.85 0 0 1 0 3.7h-2.2z"/>',
+  patreon:'F:<circle cx="14.6" cy="9.6" r="6.1"/><rect x="3.4" y="3.5" width="3.6" height="17" rx=".9"/>',
+  instagram:'<rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor"/>',
+  tiktok:'F:<path d="M14 3h3c.2 2 1.6 3.5 3.5 3.7v3a7 7 0 0 1-3.5-1V15a6 6 0 1 1-6-6v3.1a3 3 0 1 0 3 3z"/>',
+  bluesky:'F:<path d="M6.3 4.6C8.6 6.3 11.1 9.8 12 11.7c.9-1.9 3.4-5.4 5.7-7.1 1.7-1.2 4.3-2.2 4.3.8 0 .6-.3 5-.5 5.8-.7 2.6-3.3 3.3-5.7 2.9 4.1.7 5.2 3 2.9 5.3-4.3 4.4-6.2-1.1-6.7-2.5-.5 1.4-2.4 6.9-6.7 2.5-2.3-2.3-1.2-4.6 2.9-5.3-2.4.4-5-.3-5.7-2.9C2.3 10.4 2 6 2 5.4c0-3 2.6-2 4.3-.8z"/>',
+  fanbox:'<rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M10 17V8h5M10 12.5h4"/>',
+  booth:'<path d="M4 9h16l-1.5 11h-13z"/><path d="M8.5 9V7a3.5 3.5 0 0 1 7 0v2"/>',
+  ko_fi:'<path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9.5h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M10.5 15.5s-3-1.8-3-3.6c0-1.4 1.7-2 3-.7 1.3-1.3 3-.7 3 .7 0 1.8-3 3.6-3 3.6z"/>'
+};
+const ICON_LABEL = {home:'ホーム',star:'スター',comet:'流星',users:'人物',image:'画像',heart:'ハート',crown:'王冠',lock:'鍵',bell:'ベル',news:'ニュース',link:'リンク',mail:'メール',globe:'Web',folder:'フォルダ',palette:'パレット',book:'本',video:'動画',music:'音楽',gift:'ギフト',x:'X',youtube:'YouTube',discord:'Discord',pixiv:'pixiv',patreon:'Patreon',instagram:'Instagram',tiktok:'TikTok',bluesky:'Bluesky',fanbox:'FANBOX',booth:'BOOTH',ko_fi:'Ko-fi'};
+const BRAND = {x:'#1f2334',youtube:'#ff4f60',discord:'#6c7bf2',pixiv:'#3a9ee8',patreon:'#f7695a',instagram:'#e0569a',tiktok:'#22262f',bluesky:'#3d8bff',fanbox:'#f2a53a',booth:'#fc4d50',ko_fi:'#29abe0',mail:'#7482ea',globe:'#7482ea',link:'#9a86ee'};
+function icon(name, cls='') {
+  let d = ICONS[name] || ICONS.star;
+  const fill = d.startsWith('F:');
+  if (fill) d = d.slice(2);
+  return fill
+    ? `<svg class="ic ${cls}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">${d}</svg>`
+    : `<svg class="ic ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+}
+const LOGO_SVG = '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M26 6.5c.6 3.9 2.9 6.2 6.8 6.8-3.9.6-6.2 2.9-6.8 6.8-.6-3.9-2.9-6.2-6.8-6.8 3.9-.6 6.2-2.9 6.8-6.8z" fill="#fff"/><path d="M7.5 32.5 18.5 21.5M6.5 25.5l7-7M14.5 33.5l7-7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".9"/></svg>';
+
+/* =========================================================
+   placeholders (画像未設定の枠をきれいに埋める)
+   ========================================================= */
+const svgURI = s => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+const SOFT = ['#9ed7ff','#bdb4ff','#f2c3ea','#b6ecdf','#ffd8b8','#c9d8ff'];
+function phChar(c) {
+  const col = c.color || '#9aa6ff';
+  const ini = esc((c.romaji || c.name || '?').trim().charAt(0).toUpperCase());
+  return svgURI(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${col}" stop-opacity=".75"/><stop offset=".62" stop-color="#c7c0ff" stop-opacity=".55"/><stop offset="1" stop-color="#eef6ff"/></linearGradient>
+<radialGradient id="r" cx=".25" cy=".15" r=".8"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+<rect width="600" height="800" fill="#f5f7ff"/><rect width="600" height="800" fill="url(#g)"/><rect width="600" height="800" fill="url(#r)"/>
+<text x="44" y="250" font-family="Outfit,Arial,sans-serif" font-size="230" font-weight="700" fill="#fff" fill-opacity=".42">${ini}</text>
+<g fill="#fff" fill-opacity=".82"><circle cx="300" cy="350" r="96"/><path d="M104 800c8-196 92-306 196-306s188 110 196 306z"/></g>
+<path d="M468 112c4 27 20 43 47 47-27 4-43 20-47 47-4-27-20-43-47-47 27-4 43-20 47-47z" fill="#fff"/>
+</svg>`);
+}
+function phArt(seed, label, colorHint) {
+  const h = hashStr(seed);
+  const ratios = [[4,5],[1,1],[3,4],[16,11],[2,3],[5,4]];
+  const [rw, rh] = ratios[h % ratios.length];
+  const W = 800, H = Math.round(800 * rh / rw);
+  const a = colorHint || SOFT[h % SOFT.length], b = SOFT[(h >> 3) % SOFT.length], c = SOFT[(h >> 6) % SOFT.length];
+  const cx1 = 15 + (h >> 4) % 50, cy1 = 10 + (h >> 7) % 40, cx2 = 50 + (h >> 9) % 45;
+  return svgURI(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>
+<filter id="f"><feGaussianBlur stdDeviation="60"/></filter></defs>
+<rect width="${W}" height="${H}" fill="url(#g)"/>
+<g filter="url(#f)" opacity=".85"><circle cx="${cx1}%" cy="${cy1}%" r="${W*0.32}" fill="${c}"/><circle cx="${cx2}%" cy="80%" r="${W*0.28}" fill="#ffffff" fill-opacity=".7"/></g>
+<path d="M${W*0.72} ${H*0.2}c4 30 22 48 52 52-30 4-48 22-52 52-4-30-22-48-52-52 30-4 48-22 52-52z" fill="#fff" fill-opacity=".9"/>
+</svg>`);
+}
+function phHero(i) {
+  const sets = [['#bfe4ff','#d9d0ff','#ffe0f2'],['#cfe0ff','#e6d6ff','#dff6ef'],['#d8ecff','#f3d8f0','#e2dcff']];
+  const [a,b,c] = sets[i % sets.length];
+  let stars = '';
+  for (let k = 0; k < 22; k++) { const h = hashStr('s'+i+k); stars += `<circle cx="${h%920}" cy="${(h>>11)%600}" r="${1+(h>>20)%3}" fill="#fff" fill-opacity="${0.5+((h>>5)%5)/10}"/>`; }
+  return svgURI(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 800" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset=".55" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></linearGradient>
+<linearGradient id="t" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".95"/></linearGradient>
+<filter id="f"><feGaussianBlur stdDeviation="70"/></filter></defs>
+<rect width="920" height="800" fill="url(#g)"/>
+<g filter="url(#f)"><circle cx="${180+i*120}" cy="640" r="260" fill="#fff" fill-opacity=".75"/><circle cx="${760-i*80}" cy="140" r="240" fill="${c}"/></g>
+${stars}
+<path d="M230 650 562 340" stroke="url(#t)" stroke-width="7" stroke-linecap="round"/>
+<path d="M300 690 520 485" stroke="url(#t)" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+<path d="M170 560 390 355" stroke="url(#t)" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+<path d="M600 190c9 66 47 104 113 113-66 9-104 47-113 113-9-66-47-104-113-113 66-9 104-47 113-113z" fill="#fff"/>
+<path d="M290 150c3 24 17 38 41 41-24 3-38 17-41 41-3-24-17-38-41-41 24-3 38-17 41-41z" fill="#fff" fill-opacity=".85"/>
+</svg>`);
+}
+function phAvatar() {
+  return svgURI(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ed7ff"/><stop offset=".55" stop-color="#bdb4ff"/><stop offset="1" stop-color="#f2c3ea"/></linearGradient></defs>
+<rect width="200" height="200" fill="url(#g)"/><path d="M128 42c3 20 15 32 35 35-20 3-32 15-35 35-3-20-15-32-35-35 20-3 32-15 35-35z" fill="#fff"/>
+<path d="M40 160l52-52M36 128l34-34M72 164l34-34" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".9"/></svg>`);
+}
+/* 画像：編集中に選んだ画像は images/… のパスで保存し、公開前はここ（メモリ）からプレビュー */
+const ASSETS = new Map();      // path -> dataURL（管理ページで選んだ未公開の画像）
+let RS_BASE = String(window.RS_BASE || '');   // プレビュー時の画像の基準URL
+const relBase = u => RS_BASE && u && !/^(https?:|data:|blob:|\/|#)/i.test(u) ? RS_BASE + u : u;
+const imgSrc = u => (u && ASSETS.get(u)) || relBase(safeUrl(u));
+const imgOr = (src, ph) => imgSrc(src) || ph;
+
+/* =========================================================
+   default data
+   ========================================================= */
+const NEWS_CATS = {
+  update:{label:'アップデート', color:'#4f9be6'},
+  info:{label:'お知らせ', color:'#e0668f'},
+  new:{label:'新作', color:'#8a6ee0'},
+  patreon:{label:'Patreon', color:'#ef6c5a'},
+  event:{label:'イベント', color:'#2fae8c'}
+};
+const CHAR_SEED = [
+  ['akane','あかね','AKANE','#ea6a80'],
+  ['aoi','あおい','AOI','#5b9cf0'],
+  ['tamaki','たまき','TAMAKI','#e2b04f'],
+  ['sumire','すみれ','SUMIRE','#9679e0'],
+  ['kaede','かえで','KAEDE','#ef8a4c'],
+  ['tsubaki','つばき','TSUBAKI','#d65582'],
+  ['hisui','ひすい','HISUI','#39b597'],
+  ['kasumi','かすみ','KASUMI','#94a9d6']
+];
+const DEFAULT = {
+  version: 1,
+  site: {
+    name:'RyuSe1', suffix:'STUDIO',
+    tagline:'AI Illustration & Original Characters',
+    bio:'オリジナルキャラクターたちのAIイラストを制作・発信しています。',
+    avatar:'', cover:'',
+    footer:'© 2026 RyuSe1 STUDIO. All rights reserved.',
+    notice:'サイト内の画像の無断転載・再配布はご遠慮ください。',
+    contactText:'お仕事のご相談・ご連絡は、SNSのDMからお気軽にどうぞ。',
+    contactLabel:'Xで連絡する', contactUrl:'https://x.com/RyuSe1_AI'
+  },
+  nav: [
+    {id:'home', label:'ホーム', en:'Home', icon:'home', show:true},
+    {id:'characters', label:'キャラクター', en:'Characters', icon:'users', show:true},
+    {id:'gallery', label:'ギャラリー', en:'Gallery', icon:'image', show:true},
+    {id:'patreon', label:'会員限定', en:'Patreon', icon:'crown', show:true},
+    {id:'news', label:'お知らせ', en:'News', icon:'bell', show:true},
+    {id:'links', label:'リンク', en:'Links', icon:'link', show:true}
+  ],
+  hero: {
+    widget:true, widgetLabel:"TODAY'S MUSE", interval:6,
+    slides: [
+      {image:'', badge:'ILLUSTRATION / ORIGINAL CHARACTERS', title:'想像を、\n好きのかたちに。', sub:'ひとりひとりの個性と、小さな物語。\nオリジナルキャラクターたちの世界を描いています。', link:'#/characters', linkLabel:'キャラクターを見る'},
+      {image:'', badge:'NEW', title:'ときめきを、\n一枚に。', sub:'最新のイラストはギャラリーから', link:'#/gallery', linkLabel:'ギャラリーへ'},
+      {image:'', badge:'MEMBERS', title:'創作の、\nもう一歩奥へ。', sub:'高解像度・差分イラストは会員限定で公開中', link:'#/patreon', linkLabel:'詳しく見る'}
+    ]
+  },
+  tiles: {
+    characters:{title:'キャラクター', en:'CHARACTERS', icon:'users', image:''},
+    patreon:{title:'会員限定', en:'PATREON ONLY', icon:'lock', image:''},
+    gallery:{title:'ギャラリー', en:'GALLERY', icon:'image', image:''}
+  },
+  pages: {
+    characters:{title:'キャラクター', en:'CHARACTERS', lead:'RyuSe1 STUDIO のオリジナルキャラクターたち。カードを押すとプロフィールが開きます。'},
+    gallery:{title:'ギャラリー', en:'GALLERY', lead:'これまでに制作したイラストの一覧です。キャラクターごとに絞り込めます。'},
+    news:{title:'お知らせ', en:'NEWS', lead:'サイトの更新情報や新作のお知らせ。'},
+    links:{title:'リンク', en:'LINKS', lead:'各SNS・支援サイトはこちらから。'}
+  },
+  characters: CHAR_SEED.map(([id,name,romaji,color]) => ({
+    id, name, romaji, color, image:'', pos:25,
+    catch:'（ひとことセリフ）',
+    desc:'ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。',
+    profile:[{k:'誕生日',v:'--/--'},{k:'身長',v:'---cm'},{k:'好きなもの',v:'---'}],
+    tags:''
+  })),
+  gallery: CHAR_SEED.map(([id], i) => ({
+    id:'g'+(i+1), image:'', title:'Artwork '+String(i+1).padStart(2,'0'),
+    date:`2026-09-${String(24 - i*2).padStart(2,'0')}`, chars:[id]
+  })),
+  patreon: {
+    url:'https://www.patreon.com/c/RyuSe1421',
+    title:'Patreon 会員限定',
+    lead:'高解像度イラストや差分、制作の裏側など、支援してくださる方だけのコンテンツをお届けしています。',
+    cta:'Patreonで支援する',
+    tiers:[
+      {name:'Star', price:'$3 / 月', color:'#6fb8ec', icon:'star', perks:'限定イラスト（毎月）\n先行公開', best:false},
+      {name:'Comet', price:'$8 / 月', color:'#9a86ee', icon:'comet', perks:'Star の内容すべて\n高解像度データ\n差分イラスト', best:true},
+      {name:'Galaxy', price:'$15 / 月', color:'#e07ab8', icon:'crown', perks:'Comet の内容すべて\n制作過程の解説\nリクエスト投票に参加', best:false}
+    ],
+    previews: Array.from({length:6}, (_, i) => ({image:'', title:'限定イラスト '+String(i+1).padStart(2,'0'), tier:i%2?'Comet':'Star'})),
+    note:'※ 限定コンテンツの本編は Patreon 上で公開しています。このページの画像はプレビュー（ぼかし）です。'
+  },
+  news: [
+    {date:'2026-09-25', cat:'update', text:'RyuSe1 STUDIO をオープンしました', link:''},
+    {date:'2026-09-25', cat:'new', text:'キャラクターページを公開しました（8人）', link:'#/characters'},
+    {date:'2026-09-22', cat:'patreon', text:'Patreon 会員限定ページを準備しています', link:'#/patreon'},
+    {date:'2026-09-20', cat:'info', text:'ギャラリーを順次追加していきます', link:'#/gallery'}
+  ],
+  sns: [
+    {icon:'patreon', label:'Patreon', handle:'支援はこちら', url:'https://www.patreon.com/c/RyuSe1421', pin:true},
+    {icon:'x', label:'X', handle:'@RyuSe1_AI', url:'https://x.com/RyuSe1_AI', pin:true},
+    {icon:'pixiv', label:'pixiv', handle:'作品一覧', url:'https://www.pixiv.net/', pin:true},
+    {icon:'discord', label:'Discord', handle:'コミュニティに参加', url:'https://discord.com/', pin:true},
+    {icon:'youtube', label:'YouTube', handle:'動画・配信', url:'https://www.youtube.com/', pin:false}
+  ]
+};
+
+/* 保存データに足りない項目を初期値で補う */
+function mergeData(d) {
+  const base = JSON.parse(JSON.stringify(DEFAULT));
+  if (!d || typeof d !== 'object') return base;
+  d = JSON.parse(JSON.stringify(d));
+  for (const k of Object.keys(base)) if (!(k in d)) d[k] = base[k];
+  for (const k of ['site','hero','tiles','pages','patreon']) d[k] = Object.assign({}, base[k], d[k] || {});
+  for (const k of Object.keys(base.tiles)) d.tiles[k] = Object.assign({}, base.tiles[k], d.tiles[k] || {});
+  for (const k of Object.keys(base.pages)) d.pages[k] = Object.assign({}, base.pages[k], d.pages[k] || {});
+  return d;
+}
+
+
+/* =========================================================
+   admin state
+   ========================================================= */
+const UPLOADED = new Set();    // GitHubに送信済みのpath
+const S = {data:null, template:'', source:'', loadedStamp:null, oldTemplate:false};
+const D = () => S.data;
+const charById = id => D().characters.find(c => c.id === id);
+const fmtDate = s => String(s || '').replace(/-/g, '.');
+const galImg = g => { const c = charById((g.chars || [])[0]); return imgOr(g.image, phArt(g.id || g.title, g.title, c && c.color)); };
+
+/* =========================================================
+   EDITOR（自分専用）
+   開き方：URLの末尾に ?edit を付ける  または  Ctrl + Shift + E
+   変更 → 「HTMLを書き出し」→ ダウンロードされた index.html で差し替え
+   ========================================================= */
+const ED = {tab:'images', dirty:false, sizeT:null, busy:false, lastStatus:null};
+const OPEN = new WeakSet();
+
+
+/* ---------- tiny DOM helper ---------- */
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  let val;
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === 'class') el.className = v;
+    else if (k === 'html') el.innerHTML = v;
+    else if (k === 'value') val = v;
+    else if (k === 'style') el.style.cssText = v;
+    else if (k.startsWith('on') && typeof v === 'function') el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  for (const kid of kids.flat(Infinity)) {
+    if (kid == null || kid === false) continue;
+    el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+  }
+  if (val !== undefined) el.value = val;
+  return el;
+}
+function toast(msg) {
+  const r = $('#toast-root');
+  r.innerHTML = '';
+  const t = h('div', {class:'toast', role:'status'}, msg);
+  r.append(t);
+  setTimeout(() => t.remove(), 2600);
+}
+
+/* ---------- change tracking ---------- */
+function changed() {
+  ED.dirty = true;
+  updateDirty();
+  schedulePreview();
+  clearTimeout(ED.sizeT);
+  ED.sizeT = setTimeout(updateSize, 600);
+}
+function updateDirty() {
+  const b = $('.ed-dirty'); if (b) b.classList.toggle('on', ED.dirty);
+}
+function updateSize() {
+  const el = $('#edSize'); if (!el) return;
+  const bytes = new Blob([JSON.stringify(D())]).size;
+  const n = pendingAssets().length;
+  el.textContent = `未公開の画像 ${n}枚 ／ データ ${bytes > 1048576 ? (bytes / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(bytes / 1024)) + ' KB'}`;
+}
+
+/* ---------- image processing ---------- */
+function fileToDataURL(file, max = 1600) {
+  return new Promise((resolve, reject) => {
+    if (/gif|svg/.test(file.type) && file.size < 3 * 1024 * 1024) {       // GIF/SVG はそのまま
+      const fr = new FileReader(); fr.onload = () => resolve(fr.result); fr.onerror = reject; fr.readAsDataURL(file); return;
+    }
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const s = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement('canvas');
+      c.width = Math.max(1, Math.round(img.naturalWidth * s));
+      c.height = Math.max(1, Math.round(img.naturalHeight * s));
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      let d = c.toDataURL('image/webp', 0.86);
+      if (!d.startsWith('data:image/webp')) d = c.toDataURL('image/jpeg', 0.88);
+      URL.revokeObjectURL(url);
+      resolve(d);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('画像を読み込めませんでした')); };
+    img.src = url;
+  });
+}
+const kb = s => Math.round(String(s || '').length * 0.75 / 1024);
+const extOf = d => { const m = /^data:image\/([a-z0-9+.-]+)/i.exec(d || ''); const e = m ? m[1].toLowerCase() : 'png'; return e === 'jpeg' ? 'jpg' : e.startsWith('svg') ? 'svg' : e; };
+async function fileToAsset(file, max, folder) {
+  const d = await fileToDataURL(file, max);
+  const base = file.name.replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'img';
+  const path = `images/${folder || 'misc'}/${base}-${uid().slice(0, 5)}.${extOf(d)}`;
+  ASSETS.set(path, d);
+  return path;
+}
+/* 以前の「埋め込み画像」を images/ のファイルに切り出す */
+function extractEmbedded(root) {
+  let n = 0;
+  const conv = d => { const p = `images/uploads/img-${hashStr(d).toString(36)}.${extOf(d)}`; ASSETS.set(p, d); n++; return p; };
+  const walk = x => {
+    if (!x || typeof x !== 'object') return;
+    for (const k of Object.keys(x)) {
+      const v = x[k];
+      if (typeof v === 'string' && v.startsWith('data:image/')) x[k] = conv(v);
+      else if (v && typeof v === 'object') walk(v);
+    }
+  };
+  walk(root);
+  return n;
+}
+function pendingAssets() {
+  const json = JSON.stringify(D());
+  return Array.from(ASSETS.keys()).filter(p => !UPLOADED.has(p) && json.includes(JSON.stringify(p)));
+}
+
+/* ---------- field builders ---------- */
+function wrapField(label, control, hint) {
+  return h('div', {class:'ed-field'}, label ? h('label', {class:'ed-lab'}, label) : null, control, hint ? h('p', {class:'ed-hint'}, hint) : null);
+}
+function fText(label, obj, key, o = {}) {
+  const inp = h('input', {class:'ed-in', type:o.type || 'text', placeholder:o.ph || '', value:obj[key] ?? ''});
+  inp.addEventListener('input', () => { obj[key] = o.type === 'number' ? (+inp.value || 0) : inp.value; changed(); o.after && o.after(); });
+  return wrapField(label, inp, o.hint);
+}
+function fArea(label, obj, key, o = {}) {
+  const ta = h('textarea', {class:'ed-in', placeholder:o.ph || '', rows:o.rows || 3, value:obj[key] ?? ''});
+  ta.addEventListener('input', () => { obj[key] = ta.value; changed(); o.after && o.after(); });
+  return wrapField(label, ta, o.hint);
+}
+function fColor(label, obj, key, o = {}) {
+  const inp = h('input', {class:'ed-in', type:'color', value:obj[key] || '#9a86ee'});
+  inp.addEventListener('input', () => { obj[key] = inp.value; changed(); o.after && o.after(); });
+  return wrapField(label, inp, o.hint);
+}
+function fCheck(label, obj, key, o = {}) {
+  const inp = h('input', {type:'checkbox'});
+  inp.checked = !!obj[key];
+  inp.addEventListener('change', () => { obj[key] = inp.checked; changed(); o.after && o.after(); });
+  return h('label', {class:'ed-switch'}, inp, label);
+}
+function fSelect(label, obj, key, options, o = {}) {
+  const sel = h('select', {class:'ed-in'}, options.map(([v, t]) => h('option', {value:v}, t)));
+  sel.value = obj[key] ?? '';
+  sel.addEventListener('change', () => { obj[key] = sel.value; changed(); o.after && o.after(); });
+  return wrapField(label, sel, o.hint);
+}
+function fRange(label, obj, key, min, max, o = {}) {
+  const out = h('span', {}, String(obj[key] ?? 0));
+  const inp = h('input', {type:'range', min, max, value:obj[key] ?? 0});
+  inp.addEventListener('input', () => { obj[key] = +inp.value; out.textContent = inp.value; changed(); });
+  return wrapField(h('span', {}, label, '：', out), inp, o.hint);
+}
+function fIcon(label, obj, key, o = {}) {
+  const pv = h('span', {class:'pv', html:icon(obj[key] || 'star')});
+  const sel = h('select', {class:'ed-in'}, Object.keys(ICONS).map(k => h('option', {value:k}, `${ICON_LABEL[k] || k}（${k}）`)));
+  sel.value = obj[key] || 'star';
+  sel.addEventListener('change', () => { obj[key] = sel.value; pv.innerHTML = icon(sel.value); changed(); o.after && o.after(); });
+  return wrapField(label, h('div', {class:'ed-icsel'}, pv, sel), o.hint);
+}
+function fImage(label, obj, key, o = {}) {
+  const prev = h('div', {class:'ed-img-prev'});
+  const badge = h('span', {class:'ed-badge', style:'display:none'}, '未公開');
+  const txt = h('input', {class:'ed-in', type:'text'});
+  const paintPrev = () => {
+    const v = obj[key] || '';
+    prev.innerHTML = v ? `<img src="${esc(imgSrc(v))}" alt="">` : '<span>未設定</span>';
+    badge.style.display = v && ASSETS.has(v) && !UPLOADED.has(v) ? '' : 'none';
+  };
+  const paint = () => {
+    const v = obj[key] || '';
+    paintPrev();
+    const embedded = v.startsWith('data:');
+    txt.value = embedded ? '' : v;
+    txt.placeholder = embedded ? `埋め込み画像（約${kb(v)}KB・公開時にファイル化）` : 'images/xxx.jpg または URL';
+  };
+  const setFile = async f => {
+    if (!f || !/^image\//.test(f.type)) return;
+    try { obj[key] = await fileToAsset(f, o.max || 1600, o.folder); paint(); changed(); o.after && o.after(); }
+    catch (err) { toast(err.message); }
+  };
+  const file = h('input', {type:'file', accept:'image/*', hidden:true, onchange:() => { setFile(file.files[0]); file.value = ''; }});
+  txt.addEventListener('input', () => { obj[key] = txt.value.trim(); paintPrev(); changed(); o.after && o.after(); });
+  prev.addEventListener('dragover', e => { e.preventDefault(); prev.classList.add('drag'); });
+  prev.addEventListener('dragleave', () => prev.classList.remove('drag'));
+  prev.addEventListener('drop', e => { e.preventDefault(); prev.classList.remove('drag'); setFile(e.dataTransfer.files[0]); });
+  paint();
+  return wrapField(label, h('div', {class:'ed-img'}, prev, h('div', {class:'ed-img-ctl'},
+    h('div', {class:'ed-row'},
+      h('button', {class:'ed-btn', type:'button', onclick:() => file.click(), html:icon('upload') + '画像を選ぶ'}),
+      h('button', {class:'ed-btn ghost', type:'button', title:'画像をクリア', onclick:() => { obj[key] = ''; paint(); changed(); o.after && o.after(); }, html:icon('trash')}), badge),
+    txt, file)), o.hint);
+}
+function sec(title, iconName, ...kids) {
+  return h('div', {class:'ed-sec'}, h('div', {class:'ed-sec-t', html:icon(iconName || 'star') + esc(title)}), ...kids);
+}
+function move(arr, i, d) { const j = i + d; if (j < 0 || j >= arr.length) return; [arr[i], arr[j]] = [arr[j], arr[i]]; }
+
+/* ---------- list editor ---------- */
+function fList(arr, o) {
+  const wrap = h('div', {class:'ed-list'});
+  const draw = () => {
+    wrap.innerHTML = '';
+    if (o.add !== false && o.addTop) wrap.append(addBtn());
+    arr.forEach((item, i) => {
+      const sumT = h('span', {class:'ed-sum-t', html:o.summary(item, i)});
+      const lead = o.lead ? o.lead(item) : null;
+      const refresh = () => { sumT.innerHTML = o.summary(item, i); if (lead && o.leadUpdate) o.leadUpdate(lead, item); };
+      const det = h('details', {class:'ed-item'});
+      if (OPEN.has(item)) det.open = true;
+      det.addEventListener('toggle', () => { det.open ? OPEN.add(item) : OPEN.delete(item); });
+      const mini = (ic, title, fn, dis) => h('button', {class:'ed-mini', type:'button', title, disabled:dis || null, html:icon(ic),
+        onclick:e => { e.preventDefault(); e.stopPropagation(); fn(e.currentTarget); }});
+      let delArmed = null;
+      const del = o.del === false ? null : mini('trash', '削除', btn => {
+        if (!delArmed) {
+          btn.classList.add('warn'); btn.innerHTML = '削除?';
+          delArmed = setTimeout(() => { btn.classList.remove('warn'); btn.innerHTML = icon('trash'); delArmed = null; }, 2500);
+          return;
+        }
+        clearTimeout(delArmed);
+        const [removed] = arr.splice(i, 1);
+        o.onDelete && o.onDelete(removed);
+        draw(); changed();
+      });
+      det.append(
+        h('summary', {}, lead, sumT, h('span', {class:'ed-sum-btns'},
+          mini('up', '上へ', () => { move(arr, i, -1); draw(); changed(); }, i === 0),
+          mini('down', '下へ', () => { move(arr, i, 1); draw(); changed(); }, i === arr.length - 1),
+          del)),
+        h('div', {class:'ed-item-body'}, o.body(item, refresh))
+      );
+      wrap.append(det);
+    });
+    if (o.add !== false && !o.addTop) wrap.append(addBtn());
+  };
+  const addBtn = () => h('button', {class:'ed-add', type:'button', html:icon('plus') + esc(o.addLabel || '追加'),
+    onclick:() => { const n = o.make(); o.addTop ? arr.unshift(n) : arr.push(n); OPEN.add(n); draw(); changed(); }});
+  draw();
+  wrap.redraw = draw;
+  return wrap;
+}
+function bulkImageButton(label, onFiles) {
+  const file = h('input', {type:'file', accept:'image/*', multiple:true, hidden:true, onchange:async () => {
+    const fs = Array.from(file.files || []); file.value = '';
+    if (fs.length) { toast(`${fs.length}枚を読み込み中…`); await onFiles(fs); }
+  }});
+  return h('div', {class:'ed-row', style:'margin-bottom:10px'},
+    h('button', {class:'ed-btn', type:'button', onclick:() => file.click(), html:icon('upload') + esc(label)}), file);
+}
+const thumbLead = (getSrc) => ({
+  lead: item => h('img', {class:'ed-sum-thumb', src:getSrc(item), alt:''}),
+  leadUpdate: (el, item) => { el.src = getSrc(item); }
+});
+const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; };
+
+/* ---------- tabs ---------- */
+const TABS = [
+  ['site', 'サイト', 'home'], ['nav', 'メニュー', 'menu'], ['hero', 'トップ画像', 'star'],
+  ['chars', 'キャラ', 'users'], ['gallery', 'ギャラリー', 'image'], ['patreon', 'Patreon', 'crown'],
+  ['news', 'お知らせ', 'bell'], ['sns', 'SNS', 'link'], ['github', '公開設定', 'globe']
+];
+function tabSite() {
+  const s = D().site, P = D().pages;
+  return [
+    h('div', {class:'ed-info', html:'編集した内容は右のプレビューにすぐ反映されます。右上の<b>「GitHubに公開」</b>を押すと、1〜2分で本番サイトに反映されます。'}),
+    sec('サイト情報', 'home',
+      h('div', {class:'ed-grid2'}, fText('サイト名', s, 'name'), fText('サブ表記', s, 'suffix', {ph:'STUDIO'})),
+      fText('キャッチコピー（英字推奨）', s, 'tagline'),
+      fArea('プロフィール文', s, 'bio', {rows:3}),
+      fImage('アイコン画像', s, 'avatar', {max:512, folder:'site'}),
+      fImage('プロフィールのカバー画像', s, 'cover', {max:1000, folder:'site', hint:'スマホメニューのプロフィール上部に表示します。'})),
+    sec('フッター', 'news',
+      fText('コピーライト', s, 'footer'),
+      fText('注意書き', s, 'notice', {hint:'空欄にすると非表示'})),
+    sec('連絡先（リンクページ下部）', 'mail',
+      fArea('案内文', s, 'contactText', {rows:2}),
+      h('div', {class:'ed-grid2'}, fText('ボタン名', s, 'contactLabel'), fText('ボタンのリンク先', s, 'contactUrl', {ph:'https:// または mailto:'}))),
+    sec('各ページの見出し', 'book',
+      ...[['characters','キャラクター'],['gallery','ギャラリー'],['news','お知らせ'],['links','リンク']].map(([k, t]) =>
+        h('details', {class:'ed-item'}, h('summary', {}, h('span', {class:'ed-sum-t'}, t)),
+          h('div', {class:'ed-item-body'},
+            h('div', {class:'ed-grid2'}, fText('見出し', P[k], 'title'), fText('英字ラベル', P[k], 'en')),
+            fArea('リード文', P[k], 'lead', {rows:2})))))
+  ];
+}
+function tabNav() {
+  const T = D().tiles;
+  return [
+    sec('メニュー（ヘッダー＆スマホメニュー）', 'menu',
+      h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, '並び順・名前・アイコン・表示/非表示を変更できます。'),
+      fList(D().nav, {
+        add:false, del:false,
+        lead: item => h('span', {class:'pv', style:'width:28px;height:28px;display:grid;place-items:center;color:var(--accent)', html:icon(item.icon)}),
+        leadUpdate: (el, item) => { el.innerHTML = icon(item.icon); },
+        summary: n => `${esc(n.label)}<small>${esc(n.en)}${n.show ? '' : '・非表示'}</small>`,
+        body: (n, refresh) => [
+          h('div', {class:'ed-grid2'}, fText('日本語表記', n, 'label', {after:refresh}), fText('ヘッダー表記（英字）', n, 'en', {after:refresh})),
+          fIcon('アイコン', n, 'icon', {after:refresh}),
+          fCheck('メニューに表示する', n, 'show', {after:refresh})
+        ]
+      })),
+    sec('Explore のリンク一覧（3項目）', 'image',
+      ...[['characters','キャラクター'],['patreon','会員限定'],['gallery','ギャラリー']].map(([k, t]) =>
+        h('details', {class:'ed-item'}, h('summary', {}, h('span', {class:'ed-sum-t'}, t)),
+          h('div', {class:'ed-item-body'},
+            h('div', {class:'ed-grid2'}, fText('タイトル', T[k], 'title'), fText('英字ラベル', T[k], 'en')),
+            fIcon('アイコン', T[k], 'icon'),
+            fImage('サムネイル画像（任意）', T[k], 'image', {max:1200, folder:'site', hint: k === 'patreon' ? '空欄ならPatreonプレビュー1枚目をぼかして使用。' : '空欄なら登録済みの最初の画像を使用します。'})))))
+  ];
+}
+function tabHero() {
+  const H = D().hero;
+  return [
+    sec('スライド', 'star',
+      h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, '推奨サイズ：横1920×縦720 前後（横長）'),
+      fList(H.slides, {
+        ...thumbLead(s => imgOr(s.image, phHero(H.slides.indexOf(s)))),
+        summary: (s, i) => `${i+1}. ${esc(s.title || '(タイトルなし)')}`,
+        make: () => ({image:'', badge:'NEW', title:'New Slide', sub:'', link:'', linkLabel:''}),
+        addLabel:'スライドを追加',
+        body: (s, refresh) => [
+          fImage('画像', s, 'image', {max:1920, folder:'hero', after:refresh}),
+          h('div', {class:'ed-grid2'}, fText('ラベル', s, 'badge', {ph:'PICK UP'}), fArea('タイトル（改行可）', s, 'title', {after:refresh, rows:2})),
+          fText('サブテキスト', s, 'sub'),
+          h('div', {class:'ed-grid2'}, fText('ボタンのリンク先', s, 'link', {ph:'#/gallery や https://'}), fText('ボタン名', s, 'linkLabel')),
+        ]
+      })),
+    sec('紹介帯のウィジェット（PC）', 'sun',
+      fCheck('時計＋今日のキャラを表示', H, 'widget'),
+      h('div', {class:'ed-grid2'}, fText('ラベル', H, 'widgetLabel'), fText('切替間隔（秒）', H, 'interval', {type:'number'})))
+  ];
+}
+function tabChars() {
+  const cs = D().characters;
+  return [
+    sec('キャラクター', 'users',
+      h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, '縦長（3:4くらい）の画像がきれいに収まります。「顔の位置」で切り抜きの上下を調整できます。'),
+      fList(cs, {
+        lead: c => h('span', {class:'ed-sum-dot', style:`background:${c.color}`}),
+        leadUpdate: (el, c) => { el.style.background = c.color; },
+        summary: c => `${esc(c.name)}<small>${esc(c.romaji)}</small>`,
+        make: () => ({id:'c' + uid(), name:'なまえ', romaji:'NAME', color:SOFT[cs.length % SOFT.length], image:'', pos:25, catch:'', desc:'', profile:[{k:'誕生日', v:''}], tags:''}),
+        addLabel:'キャラクターを追加',
+        onDelete: c => D().gallery.forEach(g => { g.chars = (g.chars || []).filter(x => x !== c.id); }),
+        body: (c, refresh) => [
+          h('div', {class:'ed-grid2'}, fText('名前', c, 'name', {after:refresh}), fText('ローマ字', c, 'romaji', {after:refresh})),
+          fColor('テーマカラー', c, 'color', {after:refresh}),
+          fImage('立ち絵・メイン画像', c, 'image', {max:1400, folder:'characters'}),
+          fRange('顔の位置（上0〜下100）', c, 'pos', 0, 100),
+          fText('ひとことセリフ', c, 'catch'),
+          fArea('紹介文', c, 'desc', {rows:4}),
+          profileEditor(c),
+          fText('タグ（カンマ区切り）', c, 'tags', {ph:'元気, 甘党, ギター'})
+        ]
+      }))
+  ];
+}
+function profileEditor(c) {
+  c.profile = c.profile || [];
+  const box = h('div');
+  const draw = () => {
+    box.innerHTML = '';
+    c.profile.forEach((p, i) => {
+      const k = h('input', {class:'ed-in', value:p.k, placeholder:'項目'});
+      const v = h('input', {class:'ed-in', value:p.v, placeholder:'内容'});
+      k.addEventListener('input', () => { p.k = k.value; changed(); });
+      v.addEventListener('input', () => { p.v = v.value; changed(); });
+      box.append(h('div', {class:'ed-kv'}, k, v, h('button', {class:'ed-mini', type:'button', title:'削除', html:icon('close'), onclick:() => { c.profile.splice(i, 1); draw(); changed(); }})));
+    });
+    box.append(h('button', {class:'ed-btn ghost', type:'button', html:icon('plus') + 'プロフィール項目を追加', onclick:() => { c.profile.push({k:'', v:''}); draw(); changed(); }}));
+  };
+  draw();
+  return wrapField('プロフィール表', box);
+}
+function charChecks(g, after) {
+  g.chars = g.chars || [];
+  return h('div', {class:'ed-checks'}, D().characters.map(c => {
+    const inp = h('input', {type:'checkbox'});
+    inp.checked = g.chars.includes(c.id);
+    const lab = h('label', {class:'ed-ck' + (inp.checked ? ' on' : ''), style:`--c:${c.color}`}, inp, h('i'), c.name);
+    inp.addEventListener('change', () => {
+      g.chars = inp.checked ? [...g.chars, c.id] : g.chars.filter(x => x !== c.id);
+      lab.classList.toggle('on', inp.checked); changed(); after && after();
+    });
+    return lab;
+  }));
+}
+function tabGallery() {
+  const G = D().gallery;
+  let list;
+  return [
+    sec('ギャラリー', 'image',
+      bulkImageButton('画像をまとめて追加', async files => {
+        for (const f of files) {
+          try {
+            const img = await fileToAsset(f, 1600, 'gallery');
+            const n = {id:'g' + uid(), image:img, title:f.name.replace(/\.[^.]+$/, ''), date:today(), chars:[]};
+            G.unshift(n);
+          } catch (e) {}
+        }
+        list.redraw(); changed(); toast('追加しました（キャラの紐付けを設定してください）');
+      }),
+      h('p', {class:'ed-hint', style:'margin:-2px 0 10px'}, '公開ページでは日付の新しい順に並びます。'),
+      list = fList(G, {
+        addTop:true,
+        ...thumbLead(g => galImg(g)),
+        summary: g => `${esc(g.title || '(無題)')}<small>${esc(fmtDate(g.date))}</small>`,
+        make: () => ({id:'g' + uid(), image:'', title:'New Artwork', date:today(), chars:[]}),
+        addLabel:'作品を1件追加',
+        body: (g, refresh) => [
+          fImage('画像', g, 'image', {max:1600, folder:'gallery', after:refresh}),
+          h('div', {class:'ed-grid2'}, fText('タイトル', g, 'title', {after:refresh}), fText('日付', g, 'date', {type:'date', after:refresh})),
+          wrapField('登場キャラ', charChecks(g, refresh))
+        ]
+      }))
+  ];
+}
+function tabPatreon() {
+  const P = D().patreon;
+  let pvList;
+  return [
+    sec('Patreon ページ', 'crown',
+      fText('PatreonのURL', P, 'url', {ph:'https://www.patreon.com/c/RyuSe1421'}),
+      fText('タイトル', P, 'title'),
+      fArea('説明文', P, 'lead', {rows:3}),
+      fText('ボタン名', P, 'cta'),
+      fArea('注意書き', P, 'note', {rows:2})),
+    sec('プラン', 'star',
+      fList(P.tiers, {
+        lead: t => h('span', {class:'ed-sum-dot', style:`background:${t.color}`}),
+        leadUpdate: (el, t) => { el.style.background = t.color; },
+        summary: t => `${esc(t.name)}<small>${esc(t.price)}${t.best ? '・人気' : ''}</small>`,
+        make: () => ({name:'New Tier', price:'$5 / 月', color:'#9a86ee', icon:'star', perks:'', best:false}),
+        addLabel:'プランを追加',
+        body: (t, refresh) => [
+          h('div', {class:'ed-grid2'}, fText('プラン名', t, 'name', {after:refresh}), fText('価格', t, 'price', {after:refresh})),
+          h('div', {class:'ed-grid2'}, fColor('カラー', t, 'color', {after:refresh}), fIcon('アイコン', t, 'icon')),
+          fArea('特典（1行に1つ）', t, 'perks', {rows:4}),
+          fCheck('「POPULAR」表示', t, 'best', {after:refresh})
+        ]
+      })),
+    sec('限定コンテンツのプレビュー', 'lock',
+      h('div', {class:'ed-info', html:'ここの画像は公開リポジトリの images/ に置かれ、ぼかし前の画像も<b>誰でも見られます</b>。本編ではなく<b>全年齢のプレビュー用画像</b>を使ってください（小さく縮小して保存されます）。'}),
+      bulkImageButton('画像をまとめて追加', async files => {
+        for (const f of files) {
+          try { P.previews.push({image:await fileToAsset(f, 420, 'patreon'), title:f.name.replace(/\.[^.]+$/, ''), tier:''}); } catch (e) {}
+        }
+        pvList.redraw(); changed();
+      }),
+      pvList = fList(P.previews, {
+        ...thumbLead(x => imgOr(x.image, phArt('pv' + P.previews.indexOf(x), '', '#bdb4ff'))),
+        summary: x => `${esc(x.title || '(無題)')}<small>${esc(x.tier || '')}</small>`,
+        make: () => ({image:'', title:'限定イラスト', tier:''}),
+        addLabel:'プレビューを追加',
+        body: (x, refresh) => [
+          fImage('プレビュー画像', x, 'image', {max:420, folder:'patreon', after:refresh}),
+          h('div', {class:'ed-grid2'}, fText('タイトル', x, 'title', {after:refresh}), fText('対象プラン表記', x, 'tier', {after:refresh, ph:'Comet'}))
+        ]
+      }))
+  ];
+}
+function tabNews() {
+  return [
+    sec('お知らせ', 'bell',
+      h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, 'トップには新しい順に4件表示されます。'),
+      fList(D().news, {
+        addTop:true,
+        lead: n => h('span', {class:'ed-sum-dot', style:`background:${(NEWS_CATS[n.cat] || NEWS_CATS.info).color}`}),
+        leadUpdate: (el, n) => { el.style.background = (NEWS_CATS[n.cat] || NEWS_CATS.info).color; },
+        summary: n => `${esc(n.text || '(本文なし)')}<small>${esc(fmtDate(n.date))}</small>`,
+        make: () => ({date:today(), cat:'info', text:'', link:''}),
+        addLabel:'お知らせを追加',
+        body: (n, refresh) => [
+          h('div', {class:'ed-grid2'}, fText('日付', n, 'date', {type:'date', after:refresh}),
+            fSelect('カテゴリ', n, 'cat', Object.entries(NEWS_CATS).map(([k, v]) => [k, v.label]), {after:refresh})),
+          fText('本文', n, 'text', {after:refresh}),
+          fText('リンク（任意）', n, 'link', {ph:'#/gallery や https://'})
+        ]
+      }))
+  ];
+}
+function tabSns() {
+  return [
+    sec('SNS・外部リンク', 'link',
+      h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, '「トップに表示」をONにしたもの（上から4つ）がトップページのカードになります。'),
+      fList(D().sns, {
+        lead: x => h('span', {style:'width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:#fff;background:' + (BRAND[x.icon] || 'var(--accent)'), html:icon(x.icon)}),
+        leadUpdate: (el, x) => { el.innerHTML = icon(x.icon); el.style.background = BRAND[x.icon] || 'var(--accent)'; },
+        summary: x => `${esc(x.label)}<small>${x.pin ? 'トップに表示' : ''}</small>`,
+        make: () => ({icon:'globe', label:'Website', handle:'', url:'https://', pin:false}),
+        addLabel:'リンクを追加',
+        body: (x, refresh) => [
+          fIcon('アイコン', x, 'icon', {after:refresh}),
+          h('div', {class:'ed-grid2'}, fText('名前', x, 'label', {after:refresh}), fText('サブテキスト', x, 'handle', {ph:'@your_id'})),
+          fText('URL', x, 'url'),
+          fCheck('トップに表示', x, 'pin', {after:refresh})
+        ]
+      }))
+  ];
+}
+const TAB_FN = {site:tabSite, nav:tabNav, hero:tabHero, chars:tabChars, gallery:tabGallery, patreon:tabPatreon, news:tabNews, sns:tabSns, github:tabGithub};
+
+/* ---------- export / import ---------- */
+function download(text, name, type) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([text], {type}));
+  a.download = name;
+  document.body.append(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+function buildFromTemplate(tpl) {
+  const s = D().site;
+  let html = injectData(tpl || S.template, D());
+  html = html.replace(/<title>[\s\S]*?<\/title>/, () => `<title>${esc(`${s.name} ${s.suffix}`.trim())}</title>`);
+  html = html.replace(/(<meta name="description" content=")[^"]*(")/, (m, a, b) => a + esc(`${s.name} ${s.suffix} — ${s.tagline}`.trim()) + b);
+  return html;
+}
+function downloadBlob(blob, name) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.append(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+}
+function exportJSON() {
+  const assets = {};
+  for (const p of pendingAssets()) assets[p] = ASSETS.get(p);
+  download(JSON.stringify({data:D(), assets}, null, 1), `ryuse1-studio-backup-${today()}.json`, 'application/json');
+  toast('バックアップを保存しました');
+}
+
+/* ---------- ZIP（手動アップ用・無圧縮） ---------- */
+const CRC_TABLE = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u8) { let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC_TABLE[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function makeZip(files) {
+  const enc = new TextEncoder(), parts = [], central = [];
+  const now = new Date();
+  const time = (now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1);
+  const date = ((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate();
+  let offset = 0;
+  for (const f of files) {
+    const name = enc.encode(f.name), crc = crc32(f.data), size = f.data.length;
+    const lh = new DataView(new ArrayBuffer(30));
+    lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(8, 0, true);
+    lh.setUint16(10, time, true); lh.setUint16(12, date, true); lh.setUint32(14, crc, true);
+    lh.setUint32(18, size, true); lh.setUint32(22, size, true); lh.setUint16(26, name.length, true); lh.setUint16(28, 0, true);
+    parts.push(new Uint8Array(lh.buffer), name, f.data);
+    const ch = new DataView(new ArrayBuffer(46));
+    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true);
+    ch.setUint16(10, 0, true); ch.setUint16(12, time, true); ch.setUint16(14, date, true); ch.setUint32(16, crc, true);
+    ch.setUint32(20, size, true); ch.setUint32(24, size, true); ch.setUint16(28, name.length, true);
+    ch.setUint32(42, offset, true);
+    central.push(new Uint8Array(ch.buffer), name);
+    offset += 30 + name.length + size;
+  }
+  const cdSize = central.reduce((a, b) => a + b.length, 0);
+  const end = new DataView(new ArrayBuffer(22));
+  end.setUint32(0, 0x06054b50, true); end.setUint16(8, files.length, true); end.setUint16(10, files.length, true);
+  end.setUint32(12, cdSize, true); end.setUint32(16, offset, true);
+  return new Blob([...parts, ...central, new Uint8Array(end.buffer)], {type:'application/zip'});
+}
+const b64ToU8 = b64 => { const bin = atob(b64); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; };
+function utf8ToB64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
+function exportZip() {
+  extractEmbedded(D());
+  D().publishedAt = new Date().toISOString();
+  const files = pendingAssets().map(p => ({name:p, data:b64ToU8(ASSETS.get(p).split(',')[1])}));
+  if (!S.template) { toast('index.html が読み込まれていません'); return; }
+  files.unshift({name:'index.html', data:new TextEncoder().encode(buildFromTemplate(S.template))});
+  downloadBlob(makeZip(files), `ryuse1-studio-update-${today()}.zip`);
+  S.loadedStamp = D().publishedAt;
+  toast(`ZIPを書き出しました（index.html＋画像${files.length - 1}枚）`);
+}
+
+/* ---------- GitHub 公開 ---------- */
+const GH_KEY = 'ryuse1-studio-github';
+const GH = {owner:'', repo:'', branch:'main', dir:'', token:'', remember:false};
+function ghLoad() {
+  try { const j = JSON.parse(localStorage.getItem(GH_KEY) || 'null'); if (j) Object.assign(GH, j); } catch (e) {}
+}
+function ghSave() {
+  try {
+    const o = {owner:GH.owner, repo:GH.repo, branch:GH.branch, dir:GH.dir, remember:GH.remember};
+    if (GH.remember) o.token = GH.token;
+    localStorage.setItem(GH_KEY, JSON.stringify(o));
+  } catch (e) {}
+}
+const ghReady = () => GH.owner && GH.repo && GH.token;
+const ghJoin = p => { const d = String(GH.dir || '').replace(/^\/+|\/+$/g, ''); return d ? `${d}/${p}` : p; };
+function ghSiteUrl() {
+  if (!GH.owner || !GH.repo) return '';
+  const o = GH.owner.toLowerCase(), r = GH.repo.toLowerCase();
+  const base = r === `${o}.github.io` ? `https://${o}.github.io/` : `https://${o}.github.io/${GH.repo}/`;
+  const d = String(GH.dir || '').replace(/^\/+|\/+$/g, '');
+  return base + (d && d !== 'docs' ? d + '/' : '');
+}
+class GhError extends Error { constructor(status, msg) { super(msg); this.status = status; } }
+async function ghApi(path, opt = {}) {
+  let r;
+  try {
+    r = await fetch(`https://api.github.com/repos/${encodeURIComponent(GH.owner)}/${encodeURIComponent(GH.repo)}${path}`, {
+      method: opt.method || 'GET',
+      headers: Object.assign({
+        'Authorization': `Bearer ${GH.token.trim()}`,
+        'Accept': opt.raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      }, opt.body ? {'Content-Type':'application/json'} : {}),
+      body: opt.body ? JSON.stringify(opt.body) : undefined,
+      cache: 'no-store'
+    });
+  } catch (e) { throw new GhError(0, 'network'); }
+  if (!r.ok) { let m = ''; try { m = (await r.json()).message || ''; } catch (e) {} throw new GhError(r.status, m); }
+  return opt.raw ? r.text() : r.json();
+}
+function ghErrorText(e) {
+  const st = e.status;
+  if (st === 0) return 'GitHubに接続できませんでした。ネット接続を確認してください。';
+  if (st === 401) return 'トークンが正しくないか、期限切れです。「公開設定」でトークンを入れ直してください。';
+  if (st === 403) return 'トークンの権限が足りません。Fine-grained token の Permissions で「Contents: Read and write」を付けてください。';
+  if (st === 404) return 'リポジトリかブランチが見つかりません。ユーザー名・リポジトリ名・ブランチ名と、トークンの対象リポジトリを確認してください。';
+  if (st === 409) return 'リポジトリが空のようです。GitHubでリポジトリ作成時に「Add a README file」をONにするか、ファイルを1つ作ってから公開してください。';
+  if (st === 422) return `GitHubがデータを受け付けませんでした（${e.message}）。`;
+  return `エラーが発生しました（${st} ${e.message}）。`;
+}
+function setPubStatus(msg, kind = '', action = null) {
+  ED.lastStatus = msg ? {msg, kind, action} : null;
+  if ((kind === 'warn' || kind === 'err') && ED.tab !== 'github') { const mm = $('#adMain'); if (mm) mm.scrollTop = 0; if (window.innerWidth <= 760) window.scrollTo(0, 0); }
+  $$('#edPubStatus, #ghStatus').forEach(el => {
+    el.className = 'ed-status' + (kind ? ' ' + kind : '');
+    el.textContent = msg || '';
+    if (action) el.append(h('div', {}, h('button', {class:'ed-btn', type:'button', onclick:action.fn}, action.label)));
+  });
+}
+async function readRemote(branch) {
+  try {
+    const html = await ghApi(`/contents/${ghJoin('index.html').split('/').map(encodeURIComponent).join('/')}?ref=${encodeURIComponent(branch)}`, {raw:true});
+    let stamp = null;
+    const m = /<script id="site-data" type="application\/json">([\s\S]*?)<\/script>/.exec(html);
+    if (m) { try { const d = JSON.parse(m[1]); stamp = (d && d.publishedAt) || null; } catch (e) {} }
+    return {exists:true, stamp, html};
+  } catch (e) {
+    if (e.status === 404) return {exists:false, stamp:null, html:''};
+    throw e;
+  }
+}
+async function publish(force) {
+  if (ED.busy) return;
+  if (!ghReady()) { ED.tab = 'github'; drawAll(); setPubStatus('最初に「公開設定」でGitHubと接続してください。', 'warn'); return; }
+  const btn = $('#edPubBtn');
+  ED.busy = true; if (btn) btn.disabled = true;
+  const prevStamp = D().publishedAt;
+  try {
+    const branch = (GH.branch || 'main').trim();
+    setPubStatus('GitHubを確認しています…');
+    const ref = await ghApi(`/git/ref/heads/${encodeURIComponent(branch)}`);
+    const baseSha = ref.object.sha;
+    const baseCommit = await ghApi(`/git/commits/${baseSha}`);
+    const remote = await readRemote(branch);
+    {
+      if (!force && remote.exists && remote.stamp && remote.stamp !== S.loadedStamp) {
+        setPubStatus('GitHub上に、このページを開いた後に公開された新しい版があります。\nこのまま公開すると、その内容を上書きします。\n（別のPCで編集した場合などは、ページを再読み込みしてから編集し直すのが安全です）', 'warn',
+          {label:'上書きして公開する', fn:() => publish(true)});
+        return;
+      }
+    }
+    const tpl = remote.exists && remote.html.includes('rs-preview') ? remote.html : S.template;
+    if (!tpl) throw new Error('index.html が読み込まれていません');
+    const moved = extractEmbedded(D());
+    const stamp = new Date().toISOString();
+    D().publishedAt = stamp;
+    const assets = pendingAssets();
+    const files = assets.map(p => ({path:ghJoin(p), b64:ASSETS.get(p).split(',')[1], asset:p}));
+    const built = buildFromTemplate(tpl);
+    files.push({path:ghJoin('index.html'), b64:utf8ToB64(built)});
+    const tree = [];
+    for (let i = 0; i < files.length; i++) {
+      setPubStatus(`アップロード中… ${i + 1} / ${files.length}`);
+      const b = await ghApi('/git/blobs', {method:'POST', body:{content:files[i].b64, encoding:'base64'}});
+      tree.push({path:files[i].path, mode:'100644', type:'blob', sha:b.sha});
+    }
+    setPubStatus('保存しています…');
+    const t = await ghApi('/git/trees', {method:'POST', body:{base_tree:baseCommit.tree.sha, tree}});
+    const c = await ghApi('/git/commits', {method:'POST', body:{message:`サイト更新（画像${assets.length}枚）`, tree:t.sha, parents:[baseSha]}});
+    await ghApi(`/git/refs/heads/${encodeURIComponent(branch)}`, {method:'PATCH', body:{sha:c.sha}});
+    assets.forEach(p => UPLOADED.add(p));
+    S.loadedStamp = stamp; S.template = built; S.oldTemplate = false;
+    ED.dirty = false; updateDirty(); updateSize();
+    if (ED.tab === 'images') drawMain();
+    $$('.ed-badge').forEach(b => { b.style.display = 'none'; });
+    const url = ghSiteUrl();
+    setPubStatus(`公開しました（index.html＋画像${assets.length}枚${moved ? `・埋め込み画像${moved}枚をファイル化` : ''}）。\nサイトへの反映まで1〜2分かかります。${url ? '\n' + url : ''}`, 'ok');
+    toast('GitHubに公開しました');
+  } catch (e) {
+    D().publishedAt = prevStamp;
+    setPubStatus(e instanceof GhError ? ghErrorText(e) : `エラー：${e.message}`, 'err');
+  } finally {
+    ED.busy = false; if (btn) btn.disabled = false;
+  }
+}
+async function ghTest() {
+  if (!ghReady()) { setPubStatus('ユーザー名・リポジトリ名・トークンを入力してください。', 'warn'); return; }
+  setPubStatus('接続を確認しています…');
+  try {
+    const repo = await ghApi('');
+    await ghApi(`/git/ref/heads/${encodeURIComponent((GH.branch || 'main').trim())}`);
+    const pr = repo.private ? '\n※ 非公開リポジトリです。無料プランのGitHub Pagesは公開リポジトリが必要です。' : '';
+    setPubStatus(`接続OK：${repo.full_name}（ブランチ ${GH.branch || 'main'}）${pr}`, 'ok');
+  } catch (e) {
+    setPubStatus(e instanceof GhError ? ghErrorText(e) : `エラー：${e.message}`, 'err');
+  }
+}
+function tabGithub() {
+  const inp = (label, key, o = {}) => {
+    const el = h('input', {class:'ed-in', type:o.type || 'text', placeholder:o.ph || '', value:GH[key] || '', autocomplete:'off', spellcheck:'false'});
+    el.addEventListener('input', () => { GH[key] = el.value.trim(); ghSave(); RS_BASE = previewBase(); urlEl.textContent = ghSiteUrl() ? ghSiteUrl() + 'admin.html' : '—'; });
+    return wrapField(label, el, o.hint);
+  };
+  const urlEl = h('div', {class:'ed-url'}, ghSiteUrl() ? ghSiteUrl() + 'admin.html' : '—');
+  const rem = h('input', {type:'checkbox'}); rem.checked = !!GH.remember;
+  rem.addEventListener('change', () => { GH.remember = rem.checked; ghSave(); });
+  return [
+    h('div', {class:'ed-info', html:
+      '<b>はじめに（1回だけ）</b><ol>' +
+      '<li>GitHubで<b>公開(Public)</b>リポジトリを作成（「Add a README file」をON）</li>' +
+      '<li>リポジトリの <code>Settings → Pages</code> で Branch を <code>main</code> / <code>(root)</code> にして Save</li>' +
+      '<li>右上アイコン → <code>Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</code><br>・Repository access：<b>Only select repositories</b> でこのリポジトリだけ選ぶ<br>・Permissions：<b>Contents を Read and write</b></li>' +
+      '<li><b>index.html</b> と <b>admin.html</b> をリポジトリにアップロード（Add file → Upload files）</li>' +
+      '<li>できたトークンを下に貼って「接続テスト」→「GitHubから読み込む」</li></ol>'}),
+    sec('GitHub リポジトリ', 'globe',
+      h('div', {class:'ed-grid2'}, inp('ユーザー名', 'owner', {ph:'your-name'}), inp('リポジトリ名', 'repo', {ph:'ryuse1-studio'})),
+      h('div', {class:'ed-grid2'}, inp('ブランチ', 'branch', {ph:'main'}), inp('フォルダ（通常は空欄）', 'dir', {ph:'空欄＝ルート'})),
+      inp('トークン', 'token', {type:'password', ph:'github_pat_…', hint:'トークンはHTMLには入りません。下のチェックをOFFにすると、ページを閉じた時点で消えます。'}),
+      h('label', {class:'ed-switch'}, rem, 'このブラウザにトークンを記憶する（自分のPCだけでON）'),
+      h('div', {class:'ed-row', style:'margin:4px 0 12px'},
+        h('button', {class:'ed-btn', type:'button', html:icon('check') + '接続テスト', onclick:ghTest}),
+        h('button', {class:'ed-btn ghost', type:'button', html:icon('download') + 'GitHubから読み込む', onclick:loadFromGitHub})),
+      h('div', {class:'ed-status', id:'ghStatus'})),
+    sec('管理ページのURL', 'link',
+      urlEl,
+      h('p', {class:'ed-hint'}, '次回からはこのURLを開けば、どのPCからでも編集→公開できます（ブックマーク推奨）。管理ページ自体は誰でも開けますが、トークンがないと何も変更できません。'))
+  ];
+}
+
+function importJSON(e) {
+  const f = e.target.files[0]; e.target.value = '';
+  if (!f) return;
+  const fr = new FileReader();
+  fr.onload = () => {
+    try {
+      const raw = JSON.parse(fr.result);
+      const d = raw && raw.data && Array.isArray(raw.data.characters) ? raw.data : raw;
+      if (!d || typeof d !== 'object' || !Array.isArray(d.characters)) throw new Error();
+      if (raw.assets && typeof raw.assets === 'object') for (const [p, v] of Object.entries(raw.assets)) if (typeof v === 'string' && v.startsWith('data:image/')) ASSETS.set(p, v);
+      S.data = mergeData(d);
+      changed(); drawAll(); toast('バックアップを読み込みました');
+    } catch (err) { toast('読み込めませんでした（JSONを確認してください）'); }
+  };
+  fr.readAsText(f);
+}
+
+
+
+/* =========================================================
+   ADMIN — 画面構成・読み込み・プレビュー
+   ========================================================= */
+const TAB_ROUTE = {images:'#/home', links:'#/links', site:'#/home', nav:'#/home', hero:'#/home', chars:'#/characters', gallery:'#/gallery', patreon:'#/patreon', news:'#/news', sns:'#/links'};
+const PAGE_IDS = ['home', 'characters', 'gallery', 'patreon', 'news', 'links'];
+
+/* ---------- 読み込み ---------- */
+function parseSiteData(html) {
+  const m = /<script id="site-data" type="application\/json">([\s\S]*?)<\/script>/.exec(html);
+  if (!m) throw new Error('RyuSe1 STUDIO の index.html ではないようです（site-data が見つかりません）');
+  try { return JSON.parse(m[1]); } catch (e) { return null; }
+}
+function loadTemplate(html, source) {
+  const d = parseSiteData(html);
+  S.data = mergeData(d);
+  S.template = html;
+  S.source = source;
+  S.loadedStamp = S.data.publishedAt || null;
+  S.oldTemplate = !html.includes('rs-preview');
+  UPLOADED.clear();
+  ED.dirty = false; updateDirty();
+  RS_BASE = previewBase();
+  buildPreviewFrame();
+  drawAll();
+  if (S.oldTemplate) setPubStatus('この index.html は古い版です（編集パネル付き）。新しい index.html を一度GitHubにアップしてから使ってください。プレビューが更新されません。', 'warn');
+}
+async function loadFromGitHub() {
+  if (!ghReady()) { ED.tab = 'github'; drawAll(); setPubStatus('先に「公開設定」でGitHubと接続してください。', 'warn'); return; }
+  setPubStatus('GitHubから読み込んでいます…');
+  try {
+    const r = await readRemote((GH.branch || 'main').trim());
+    if (!r.exists) { setPubStatus('GitHubのリポジトリに index.html がありません。先に index.html をアップロードしてください。', 'err'); return; }
+    loadTemplate(r.html, 'GitHub');
+    if (!S.oldTemplate) setPubStatus('GitHubから最新の内容を読み込みました。', 'ok');
+  } catch (e) {
+    setPubStatus(e instanceof GhError ? ghErrorText(e) : `エラー：${e.message}`, 'err');
+  }
+}
+async function loadFromSite() {
+  const r = await fetch('index.html', {cache:'no-store'});
+  if (!r.ok) throw new Error(String(r.status));
+  loadTemplate(await r.text(), 'サイト');
+}
+function pickIndexFile() {
+  const file = h('input', {type:'file', accept:'.html,text/html', onchange:() => {
+    const f = file.files[0]; if (!f) return;
+    const fr = new FileReader();
+    fr.onload = () => { try { loadTemplate(String(fr.result), 'ファイル'); setPubStatus('index.html を読み込みました。', 'ok'); } catch (e) { setPubStatus(e.message, 'err'); } };
+    fr.readAsText(f);
+  }});
+  file.click();
+}
+function reloadData() {
+  const go = () => ghReady() ? loadFromGitHub() : (location.protocol.startsWith('http') ? loadFromSite().catch(() => setPubStatus('読み込めませんでした。', 'err')) : pickIndexFile());
+  if (ED.dirty) { setPubStatus('公開していない変更があります。読み込み直すと変更は消えます。', 'warn', {label:'変更を捨てて読み込む', fn:go}); return; }
+  go();
+}
+
+/* ---------- プレビュー（index.html を iframe で表示） ---------- */
+const PV = {frame:null, url:'', ready:false, sent:new Set(), mode:'pc', route:'#/home', timer:null};
+function previewBase() {
+  if (/^https?:$/.test(location.protocol)) return new URL('./', location.href).href;
+  return ghSiteUrl() || new URL('./', location.href).href;
+}
+function injectData(html, data) {
+  const json = JSON.stringify(data).replace(/</g, '\\u003c');
+  return html.replace(/(<script id="site-data" type="application\/json">)[\s\S]*?(<\/script>)/, (m, a, b) => a + json + b);
+}
+function buildPreviewFrame() {
+  if (!PV.frame || !S.template) return;
+  const flag = `<script>window.RS_PREVIEW=1;window.RS_BASE=${JSON.stringify(RS_BASE)};<\/script>`;
+  const html = injectData(S.template, S.data).replace(/<head>/i, m => m + flag);
+  if (PV.url) URL.revokeObjectURL(PV.url);
+  PV.url = URL.createObjectURL(new Blob([html], {type:'text/html'}));
+  PV.ready = false; PV.sent = new Set();
+  PV.frame.src = PV.url + PV.route;
+}
+function sendPreview() {
+  if (!PV.ready || !PV.frame || !S.data) return;
+  const w = PV.frame.contentWindow;
+  const add = {};
+  for (const [p, d] of ASSETS) if (!PV.sent.has(p)) { add[p] = d; PV.sent.add(p); }
+  if (Object.keys(add).length) w.postMessage({type:'rs-assets', assets:add}, '*');
+  w.postMessage({type:'rs-preview', data:S.data}, '*');
+}
+function schedulePreview() { clearTimeout(PV.timer); PV.timer = setTimeout(sendPreview, 220); }
+function previewRoute(r) {
+  if (!r) return;
+  PV.route = r;
+  if (PV.ready) PV.frame.contentWindow.postMessage({type:'rs-route', route:r}, '*');
+}
+window.addEventListener('message', e => {
+  if (!PV.frame || e.source !== PV.frame.contentWindow) return;
+  if (e.data && e.data.type === 'rs-ready') { PV.ready = true; sendPreview(); }
+});
+function fitPreview() {
+  const wrap = $('#pvWrap'), f = PV.frame;
+  if (!wrap || !f) return;
+  const W = wrap.clientWidth, H = wrap.clientHeight;
+  wrap.classList.toggle('sp', PV.mode === 'sp');
+  if (PV.mode === 'pc') {
+    const vw = 1360, sc = Math.min(1, W / vw);
+    Object.assign(f.style, {width:vw + 'px', height:(H / sc) + 'px', transform:`scale(${sc})`, left:'0px'});
+  } else {
+    const vw = 390, vh = Math.max(400, Math.min(844, H - 28)), sc = Math.min(1, (W - 28) / vw);
+    Object.assign(f.style, {width:vw + 'px', height:(vh / sc) + 'px', transform:`scale(${sc})`, left:Math.max(14, (W - vw * sc) / 2) + 'px'});
+  }
+}
+
+/* ---------- 画像一覧 ---------- */
+function imageSlots() {
+  const d = D(), out = [];
+  const holo = svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 4"><defs><linearGradient id="g"><stop stop-color="#9ed7ff"/><stop offset=".5" stop-color="#bdb4ff"/><stop offset="1" stop-color="#f2c3ea"/></linearGradient></defs><rect width="10" height="4" fill="url(#g)"/></svg>');
+  out.push({group:'サイト', label:'アイコン', hint:'正方形・512px', obj:d.site, key:'avatar', max:512, folder:'site', ph:phAvatar(), ratio:'1'});
+  out.push({group:'サイト', label:'カバー（スマホメニュー）', hint:'横長', obj:d.site, key:'cover', max:1000, folder:'site', ph:holo, ratio:'2.5'});
+  d.hero.slides.forEach((s, i) => out.push({group:'トップ画像', label:`スライド ${i + 1}`, hint:s.title ? s.title.replace(/\n/g, ' ') : '', obj:s, key:'image', max:1920, folder:'hero', ph:phHero(i), ratio:'1.15'}));
+  [['characters', 'キャラクター'], ['gallery', 'ギャラリー'], ['patreon', '会員限定']].forEach(([k, t]) =>
+    out.push({group:'Explore のサムネイル', label:t, hint:'空欄なら自動', obj:d.tiles[k], key:'image', max:1200, folder:'site', ph:holo, ratio:'.92'}));
+  d.characters.forEach(c => out.push({group:'キャラクター', label:c.name, hint:c.romaji, obj:c, key:'image', max:1400, folder:'characters', ph:phChar(c), ratio:'3/4'}));
+  d.gallery.forEach(g => { const c = charById((g.chars || [])[0]); out.push({group:'ギャラリー', label:g.title || '(無題)', hint:fmtDate(g.date), obj:g, key:'image', max:1600, folder:'gallery', ph:phArt(g.id || g.title, g.title, c && c.color), ratio:'1'}); });
+  d.patreon.previews.forEach((x, i) => out.push({group:'Patreon プレビュー', label:x.title || '(無題)', hint:'ぼかして表示', obj:x, key:'image', max:420, folder:'patreon', ph:phArt('pv' + i, '', SOFT[i % SOFT.length]), ratio:'3/4'}));
+  return out;
+}
+function imgState(v) {
+  if (!v) return ['未設定', 'none'];
+  if (v.startsWith('data:')) return ['埋め込み', 'warn'];
+  if (ASSETS.has(v) && !UPLOADED.has(v)) return ['未公開', 'warn'];
+  if (/^https?:/i.test(v)) return ['外部URL', 'ext'];
+  return ['公開済み', 'ok'];
+}
+function imageCard(sl) {
+  const img = h('img', {alt:'', loading:'lazy'});
+  const chip = h('span', {class:'im-chip'});
+  const paint = () => {
+    const v = sl.obj[sl.key] || '';
+    img.src = v ? imgSrc(v) : sl.ph;
+    img.classList.toggle('is-ph', !v);
+    const [t, k] = imgState(v); chip.textContent = t; chip.className = 'im-chip ' + k;
+  };
+  const set = async f => {
+    if (!f || !/^image\//.test(f.type)) return;
+    try { sl.obj[sl.key] = await fileToAsset(f, sl.max, sl.folder); paint(); changed(); refreshImageSummary(); }
+    catch (e) { toast(e.message); }
+  };
+  const file = h('input', {type:'file', accept:'image/*', hidden:true, onchange:() => { set(file.files[0]); file.value = ''; }});
+  const card = h('div', {class:'im-card'},
+    h('div', {class:'im-thumb', style:`aspect-ratio:${sl.ratio || '1'}`}, img, chip),
+    h('div', {class:'im-meta'}, h('b', {title:sl.label}, sl.label), h('small', {}, sl.hint || ' ')),
+    h('div', {class:'im-actions'},
+      h('button', {class:'ed-btn', type:'button', html:icon('upload') + '差し替え', onclick:() => file.click()}),
+      h('button', {class:'ed-mini', type:'button', title:'画像を外す', html:icon('trash'), onclick:() => { sl.obj[sl.key] = ''; paint(); changed(); refreshImageSummary(); }}),
+      file));
+  card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('drag'); });
+  card.addEventListener('dragleave', () => card.classList.remove('drag'));
+  card.addEventListener('drop', e => { e.preventDefault(); card.classList.remove('drag'); set(e.dataTransfer.files[0]); });
+  paint();
+  return card;
+}
+function refreshImageSummary() {
+  const el = $('#imSum'); if (!el) return;
+  const slots = imageSlots();
+  const cnt = k => slots.filter(s => imgState(s.obj[s.key] || '')[1] === k).length;
+  el.innerHTML = '';
+  el.append(h('span', {}, `画像の枠 ${slots.length}`), h('span', {}, `未設定 ${cnt('none')}`), h('span', {}, `未公開 ${cnt('warn')}`), h('span', {}, `公開済み ${cnt('ok') + cnt('ext')}`));
+}
+function tabImages() {
+  const slots = imageSlots();
+  const groups = [];
+  for (const s of slots) { let g = groups.find(x => x.name === s.group); if (!g) groups.push(g = {name:s.group, items:[]}); g.items.push(s); }
+  const G = D().gallery;
+  return [
+    h('div', {class:'ad-h'}, h('h2', {}, '画像一覧'), h('small', {}, 'サイトで使うすべての画像。カードに画像をドラッグしても差し替えできます')),
+    h('div', {class:'im-sum', id:'imSum'}),
+    ...groups.map(g => h('section', {class:'im-group'},
+      h('div', {class:'im-group-h'}, g.name, h('small', {}, `${g.items.length}枠`),
+        g.name === 'ギャラリー' ? bulkImageButton('ギャラリーにまとめて追加', async files => {
+          for (const f of files) { try { G.unshift({id:'g' + uid(), image:await fileToAsset(f, 1600, 'gallery'), title:f.name.replace(/\.[^.]+$/, ''), date:today(), chars:[]}); } catch (e) {} }
+          changed(); drawMain(); toast('追加しました。タイトルやキャラは「ギャラリー」タブで設定できます');
+        }) : null),
+      h('div', {class:'im-grid'}, g.items.map(imageCard)))),
+    h('p', {class:'ed-hint'}, '画像を選ぶと自動で縮小され、公開時に GitHub の images/ フォルダへ保存されます。')
+  ];
+}
+
+/* ---------- リンク一覧 ---------- */
+function linkSlots() {
+  const d = D(), out = [];
+  out.push({group:'Patreon', label:'Patreon ページのURL', obj:d.patreon, key:'url', icon:'patreon'});
+  d.sns.forEach(x => out.push({group:'SNS・外部リンク', label:`${x.label}${x.handle ? '（' + x.handle + '）' : ''}`, obj:x, key:'url', icon:x.icon}));
+  out.push({group:'連絡先ボタン', label:d.site.contactLabel || '連絡ボタン', obj:d.site, key:'contactUrl', icon:'mail'});
+  d.hero.slides.forEach((s, i) => out.push({group:'トップ画像のボタン', label:`スライド${i + 1}「${s.linkLabel || '詳しく見る'}」`, obj:s, key:'link', icon:'star', internal:true}));
+  d.news.forEach(n => out.push({group:'お知らせ', label:`${fmtDate(n.date)} ${n.text}`, obj:n, key:'link', icon:'bell', internal:true}));
+  return out;
+}
+function linkState(v) {
+  if (!v) return ['未設定', 'none'];
+  if (/^https?:\/\/[^\s/]+\.[^\s]+$/i.test(v)) return ['外部リンク', 'ok'];
+  if (/^mailto:[^\s@]+@[^\s@]+$/i.test(v)) return ['メール', 'ok'];
+  const m = /^#\/([a-z]+)/.exec(v);
+  if (m) return PAGE_IDS.includes(m[1]) ? ['サイト内', 'ok'] : ['ページなし', 'err'];
+  return ['要確認', 'err'];
+}
+function linkRow(r) {
+  const inp = h('input', {class:'ed-in', value:r.obj[r.key] || '', placeholder:r.internal ? '#/gallery や https://' : 'https://', list:'rs-pages', spellcheck:'false'});
+  const st = h('span', {class:'lk-st'});
+  const check = () => { const [t, k] = linkState(inp.value.trim()); st.textContent = t; st.className = 'lk-st ' + k; };
+  inp.addEventListener('input', () => { r.obj[r.key] = inp.value.trim(); check(); changed(); });
+  const open = h('button', {class:'ed-mini', type:'button', title:'開いて確認', html:icon('arrow'), onclick:() => {
+    const v = inp.value.trim(); if (!v) return;
+    if (v.startsWith('#/')) { previewRoute(v); showPreview(true); }
+    else window.open(v, '_blank', 'noopener');
+  }});
+  check();
+  return h('div', {class:'lk-row'},
+    h('span', {class:'lk-ic', style:`--c:${BRAND[r.icon] || 'var(--accent)'}`, html:icon(r.icon || 'link')}),
+    h('div', {class:'lk-main'}, h('b', {title:r.label}, r.label), inp), st, open);
+}
+function tabLinks() {
+  const rows = linkSlots();
+  const groups = [];
+  for (const r of rows) { let g = groups.find(x => x.name === r.group); if (!g) groups.push(g = {name:r.group, items:[]}); g.items.push(r); }
+  const bad = rows.filter(r => linkState(r.obj[r.key] || '')[1] === 'err').length;
+  return [
+    h('div', {class:'ad-h'}, h('h2', {}, 'リンク一覧'), h('small', {}, 'サイト内のリンク先をまとめて確認・変更できます')),
+    bad ? h('div', {class:'ed-status warn'}, `確認が必要なリンクが ${bad} 件あります。`) : null,
+    ...groups.map(g => h('section', {class:'im-group'},
+      h('div', {class:'im-group-h'}, g.name, h('small', {}, `${g.items.length}件`),
+        g.name === 'SNS・外部リンク' ? h('button', {class:'ed-btn ghost', type:'button', html:icon('plus') + 'SNSを追加・並べ替え', onclick:() => { ED.tab = 'sns'; drawAll(); }}) : null),
+      g.items.map(linkRow))),
+    h('p', {class:'ed-hint'}, 'サイト内のページは #/home #/characters #/gallery #/patreon #/news #/links で指定できます（入力欄で候補が出ます）。')
+  ];
+}
+
+/* ---------- 全体レイアウト ---------- */
+const ADMIN_TABS = [
+  ['images', '画像一覧', 'image'], ['links', 'リンク一覧', 'link'], null,
+  ['site', 'サイト', 'home'], ['nav', 'メニュー', 'menu'], ['hero', 'トップ画像', 'star'],
+  ['chars', 'キャラクター', 'users'], ['gallery', 'ギャラリー', 'folder'], ['patreon', 'Patreon', 'crown'],
+  ['news', 'お知らせ', 'bell'], ['sns', 'SNS', 'globe'], null,
+  ['github', '公開設定', 'gear']
+];
+function showPreview(on) { const p = $('.ad-preview'); if (p) { p.classList.toggle('show', on); fitPreview(); } }
+function initLayout() {
+  const root = $('#admin');
+  const jsonIn = h('input', {type:'file', accept:'application/json,.json', hidden:true, onchange:importJSON});
+  PV.frame = h('iframe', {title:'プレビュー', id:'pvFrame'});
+  const seg = h('div', {class:'seg'},
+    h('button', {type:'button', class:'on', 'data-mode':'pc', onclick:e => setMode('pc')}, 'PC'),
+    h('button', {type:'button', 'data-mode':'sp', onclick:e => setMode('sp')}, 'スマホ'));
+  const routeSel = h('select', {class:'ed-in', id:'pvRoute', style:'width:auto;padding:5px 8px;font-size:12px', onchange:() => previewRoute(routeSel.value)},
+    PAGE_IDS.map(p => h('option', {value:'#/' + p}, p)));
+  root.append(
+    h('header', {class:'ad-hdr'},
+      h('div', {class:'ad-logo'}, h('span', {class:'logo-mark', html:LOGO_SVG}), h('span', {}, 'RyuSe1 STUDIO', h('small', {}, '管理ページ'))),
+      h('span', {class:'ad-src', id:'adSrc'}, '未読み込み'),
+      h('span', {class:'ed-dirty', id:'adDirty'}, '未公開の変更あり'),
+      h('span', {class:'grow'}),
+      h('button', {class:'ed-btn ghost', type:'button', title:'最新の内容を読み込み直す', html:icon('download') + '<span class="hide-sp">読み込み直す</span>', onclick:reloadData}),
+      h('button', {class:'ed-btn ghost', type:'button', title:'index.html と新しい画像をZIPで保存（手動アップ用）', html:icon('folder') + '<span class="hide-sp">ZIP</span>', onclick:() => S.data ? exportZip() : null}),
+      h('button', {class:'ed-btn ghost', type:'button', title:'バックアップ（JSON）を保存', html:icon('book') + '<span class="hide-sp">バックアップ</span>', onclick:() => S.data ? exportJSON() : null}),
+      h('button', {class:'ed-btn ghost', type:'button', title:'バックアップ（JSON）を読み込む', html:icon('upload') + '<span class="hide-sp">復元</span>', onclick:() => S.data ? jsonIn.click() : null}), jsonIn,
+      h('button', {class:'ed-btn ghost ad-pv-toggle', type:'button', html:icon('image') + 'プレビュー', onclick:() => showPreview(true)}),
+      h('button', {class:'ed-btn primary', type:'button', id:'edPubBtn', html:icon('upload') + 'GitHubに公開', onclick:() => S.data ? publish(false) : null})),
+    h('div', {class:'ad-body'},
+      h('nav', {class:'ad-side', id:'adSide', 'aria-label':'設定メニュー'}),
+      h('main', {class:'ad-main', id:'adMain'}),
+      h('section', {class:'ad-preview', 'aria-label':'プレビュー'},
+        h('div', {class:'pv-bar'}, h('b', {style:'font-size:12.5px;margin-right:4px'}, 'プレビュー'), seg, routeSel, h('span', {class:'grow'}),
+          h('button', {class:'ed-mini', type:'button', title:'プレビューを再読み込み', html:icon('comet'), onclick:buildPreviewFrame}),
+          h('button', {class:'ed-mini pv-close', type:'button', title:'閉じる', html:icon('close'), onclick:() => showPreview(false)})),
+        h('div', {class:'pv-wrap', id:'pvWrap'}, PV.frame)))
+  );
+  function setMode(m) { PV.mode = m; $$('.seg button').forEach(b => b.classList.toggle('on', b.dataset.mode === m)); fitPreview(); }
+  new ResizeObserver(fitPreview).observe($('#pvWrap'));
+  window.addEventListener('beforeunload', e => { if (ED.dirty) { e.preventDefault(); e.returnValue = ''; } });
+}
+function drawSide() {
+  const side = $('#adSide'); side.innerHTML = '';
+  ADMIN_TABS.forEach(t => {
+    if (!t) { side.append(h('hr')); return; }
+    const [k, label, ic] = t;
+    side.append(h('button', {class:'ad-tab' + (ED.tab === k ? ' on' : ''), type:'button', disabled:(!S.data && k !== 'github') || null, html:icon(ic) + esc(label),
+      onclick:() => { ED.tab = k; drawAll(); }}));
+  });
+  side.append(h('div', {class:'ed-size'}, h('span', {id:'edSize'})));
+}
+function drawMain() {
+  const main = $('#adMain'); main.innerHTML = '';
+  $('.ad-body').dataset.tab = ED.tab;
+  main.append(h('div', {class:'ed-status', id:'edPubStatus'}));
+  if (!S.data) {
+    main.append(h('div', {class:'card ad-load'},
+      h('span', {class:'logo-mark', html:LOGO_SVG}),
+      h('h2', {}, 'サイトの内容を読み込みます'),
+      h('p', {}, 'GitHub と接続済みなら「GitHubから読み込む」。まだの場合は下の公開設定を入力するか、手元の index.html を選んでください。'),
+      h('div', {class:'ed-row'},
+        h('button', {class:'ed-btn primary', type:'button', style:'flex:none', html:icon('globe') + 'GitHubから読み込む', onclick:loadFromGitHub}),
+        h('button', {class:'ed-btn ghost', type:'button', html:icon('folder') + 'index.html を選ぶ', onclick:pickIndexFile}))));
+    main.append(...tabGithub());
+  } else {
+    const fn = ED.tab === 'images' ? tabImages : ED.tab === 'links' ? tabLinks : TAB_FN[ED.tab];
+    main.append(...[].concat(fn()).filter(Boolean));
+  }
+  if (ED.lastStatus) setPubStatus(ED.lastStatus.msg, ED.lastStatus.kind, ED.lastStatus.action);
+  refreshImageSummary();
+  updateSize();
+  main.scrollTop = 0;
+}
+function drawAll() {
+  drawSide(); drawMain(); updateDirty();
+  const src = $('#adSrc'); if (src) src.textContent = S.data ? `読み込み元：${S.source}` : '未読み込み';
+  if (TAB_ROUTE[ED.tab]) { previewRoute(TAB_ROUTE[ED.tab]); const sel = $('#pvRoute'); if (sel) sel.value = TAB_ROUTE[ED.tab]; }
+}
+
+/* ---------- boot ---------- */
+ED.tab = 'images';
+ghLoad();
+RS_BASE = previewBase();
+initLayout();
+drawAll();
+(async () => {
+  if (ghReady()) { await loadFromGitHub(); if (S.data) return; }
+  if (/^https?:$/.test(location.protocol)) { try { await loadFromSite(); setPubStatus('サイトの index.html を読み込みました。GitHubと接続すると、公開直後の最新版から読み込めます。'); } catch (e) {} }
+})();
+
+})();
+</script>
+</body>
+</html>
