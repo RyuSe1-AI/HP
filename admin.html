@@ -304,6 +304,44 @@ body{overflow:hidden;font-size:14px}
 .hist-tag.ok{background:rgba(57,181,151,.12);color:#1f8a6f}
 @media (max-width:760px){.hist-row{grid-template-columns:minmax(0,1fr) auto}.hist-tag{grid-column:1;justify-self:start}}
 
+/* ---------- 画像カードのタイトル ---------- */
+.im-title{display:block;width:calc(100% + 12px);margin:-4px -6px 0;padding:3px 6px;border:1px solid transparent;border-radius:8px;background:transparent;font:700 12.5px var(--ff-ja);color:var(--text)}
+.im-title:hover{border-color:var(--line-strong)}
+.im-title:focus{outline:0;border-color:var(--accent);background:var(--surface-2)}
+.ed-sum-dot{box-shadow:0 0 0 1px rgba(40,50,100,.18)}
+/* ---------- 背景をまとめて消す ---------- */
+.bb-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:14px 18px 4px}
+.bb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;padding:10px 18px;max-height:50vh;overflow:auto}
+.bb-card{position:relative;border:1px solid var(--line);border-radius:14px;padding:6px;background:var(--surface);cursor:pointer;transition:border-color .2s,box-shadow .2s,opacity .2s}
+.bb-card.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.bb-card:not(.sel){opacity:.55}
+.bb-thumb{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;display:grid;place-items:center;background:var(--surface-2)}
+.bb-thumb img,.bb-thumb canvas{width:100%;height:100%;object-fit:contain;display:block}
+.bb-grid.checker .bb-thumb.done{background:repeating-conic-gradient(#e3e6f1 0 25%,#fff 0 50%) 0 0/14px 14px}
+.bb-grid.white .bb-thumb.done{background:#fff}
+.bb-grid.black .bb-thumb.done{background:#14172b}
+.bb-grid.site .bb-thumb.done{background:radial-gradient(80% 60% at 50% 30%,color-mix(in srgb,var(--c) 34%,transparent),transparent 72%),linear-gradient(180deg,color-mix(in srgb,var(--c) 8%,var(--surface-solid)),color-mix(in srgb,var(--c) 26%,var(--surface-solid)))}
+.bb-check{position:absolute;top:10px;left:10px;z-index:2;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:rgba(255,255,255,.92);box-shadow:0 0 0 1px rgba(40,50,100,.2);color:transparent}
+.bb-card.sel .bb-check{background:var(--accent);color:#fff}
+.bb-check .ic{width:14px;height:14px}
+.bb-state{position:absolute;right:10px;top:10px;z-index:2;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.92);color:#4a5272}
+.bb-state:empty{display:none}
+.bb-state.run{background:#e8ecff;color:#5563d6}.bb-state.done{background:#e1f6ef;color:#1f8a6f}.bb-state.err{background:#fde6ec;color:#c93a5e}.bb-state.skip{background:#f1f2f7;color:#8990ad}
+.bb-card b{display:block;font-size:12px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bb-card small{display:block;font-size:10.5px;color:var(--muted)}
+.bb-msg{font-size:12.5px;font-weight:700;color:var(--text-2)}
+.bb-foot-bar{flex:1;min-width:140px;display:flex;flex-direction:column;gap:6px}
+
+/* ---------- シェア表示のプレビュー ---------- */
+.sc-card{max-width:520px;border:1px solid var(--line-strong);border-radius:16px;overflow:hidden;background:var(--surface-solid)}
+.sc-img{aspect-ratio:1200/630;background:var(--surface-2);display:grid;place-items:center}
+.sc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.sc-img.none{font-size:12px;color:var(--muted);padding:20px;text-align:center;aspect-ratio:auto;min-height:90px}
+.sc-body{padding:10px 14px 12px;display:flex;flex-direction:column;gap:2px}
+.sc-body small{font-size:12px;color:var(--muted)}
+.sc-body b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sc-body p{font-size:12.5px;color:var(--text-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
 </style>
 </head>
 <body>
@@ -312,6 +350,7 @@ body{overflow:hidden;font-size:14px}
 <datalist id="rs-pages">
   <option value="#/home">ホーム</option><option value="#/characters">キャラクター</option><option value="#/gallery">ギャラリー</option>
   <option value="#/patreon">会員限定</option><option value="#/news">お知らせ</option><option value="#/links">リンク</option>
+  <option value="#/downloads">壁紙・アイコン</option><option value="#/faq">よくある質問</option><option value="#/guide">ガイドライン</option>
 </datalist>
 <script>
 (function(){
@@ -462,10 +501,23 @@ let RS_BASE = String(window.RS_BASE || '');   // プレビュー時の画像の�
 const relBase = u => RS_BASE && u && !/^(https?:|data:|blob:|\/|#)/i.test(u) ? RS_BASE + u : u;
 const imgSrc = u => (u && ASSETS.get(u)) || relBase(safeUrl(u));
 const imgOr = (src, ph) => imgSrc(src) || ph;
+/* 白や黄色など淡い色は、文字や細い線には少し濃くした色を使う */
+function inkOf(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex || '').trim());
+  if (!m) return hex;
+  let [r, g, b] = [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16));
+  const L = () => [r, g, b].map(v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }).reduce((a, v, i) => a + v * [.2126, .7152, .0722][i], 0);
+  if (L() <= .45) return '#' + m[1];
+  if (Math.max(r, g, b) - Math.min(r, g, b) < 24) return '#9d9fb5';
+  for (let k = 0; k < 24 && L() > .38; k++) { r *= .92; g *= .92; b *= .92; }
+  return '#' + [r, g, b].map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
+}
+const cv = c => `--c:${esc(c)};--ci:${esc(inkOf(c))}`;
 
 /* =========================================================
    default data
    ========================================================= */
+const DL_TYPES = {pc:'PC壁紙', sp:'スマホ壁紙', icon:'アイコン', other:'その他'};
 const NEWS_CATS = {
   update:{label:'アップデート', color:'#4f9be6'},
   info:{label:'お知らせ', color:'#e0668f'},
@@ -476,9 +528,9 @@ const NEWS_CATS = {
 const CHAR_SEED = [
   ['akane','あかね','AKANE','#ea6a80'],
   ['aoi','あおい','AOI','#5b9cf0'],
-  ['tamaki','たまき','TAMAKI','#ada2e3'],
+  ['tamaki','たまき','TAMAKI','#ffffff'],
   ['sumire','すみれ','SUMIRE','#9679e0'],
-  ['kaede','かえで','KAEDE','#eeb22c'],
+  ['kaede','かえで','KAEDE','#f5c518'],
   ['tsubaki','つばき','TSUBAKI','#d65582'],
   ['hisui','ひすい','HISUI','#39b597'],
   ['kasumi','かすみ','KASUMI','#9b98ad']
@@ -502,7 +554,10 @@ const DEFAULT = {
     {id:'gallery', label:'ギャラリー', en:'Gallery', icon:'image', show:true},
     {id:'patreon', label:'会員限定', en:'Patreon', icon:'crown', show:true},
     {id:'news', label:'お知らせ', en:'News', icon:'bell', show:true},
-    {id:'links', label:'リンク', en:'Links', icon:'link', show:true}
+    {id:'downloads', label:'壁紙・アイコン', en:'Downloads', icon:'download', show:true},
+    {id:'links', label:'リンク', en:'Links', icon:'link', show:true},
+    {id:'faq', label:'よくある質問', en:'FAQ', icon:'book', show:true, header:false},
+    {id:'guide', label:'ガイドライン', en:'Guidelines', icon:'check', show:true, header:false}
   ],
   hero: {
     widget:true, widgetLabel:"TODAY'S MUSE", interval:6,
@@ -517,11 +572,56 @@ const DEFAULT = {
     patreon:{title:'会員限定', en:'PATREON ONLY', icon:'lock', image:''},
     gallery:{title:'ギャラリー', en:'GALLERY', icon:'image', image:''}
   },
+  home: {
+    kicker:'RyuSe1 STUDIO / Creative journal', featured:'FEATURED VISUAL', heroLink2:'作品を見る',
+    worksIndex:'01 / Latest collection', worksTitle:'Selected works.', worksSub:'新着イラスト', worksLink:'すべての作品',
+    exploreIndex:'02 / Explore', exploreTitle:'Find your favorite.', exploreIntro:'キャラクターを知る。作品を眺める。\nあなたの「好き」が見つかる場所。',
+    newsIndex:'03 / Studio notes', newsTitle:"What's new.", newsSub:'お知らせ', newsLink:'すべてのお知らせ',
+    follow:'FOLLOW THE STUDIO'
+  },
+  faq: {
+    items: [
+      {q:'Patreonって何ですか？', a:'クリエイターを月額で応援できる海外のサービスです。プランに参加すると、Patreonでしか見られない限定の作品を楽しめます。'},
+      {q:'どうやって参加するの？', a:'「会員限定」ページのボタンからPatreonを開き、好きなプランの「参加する」を押します。Patreonのアカウントを作って支払い方法を登録すれば完了です。'},
+      {q:'コースと推しプランの違いは？', a:'コース（basic / Extra / ULTRA）は、いろいろなキャラの作品をまとめて楽しめるプランです。推しプランは、選んだ1人のキャラのコンテンツを楽しめるプランです。'},
+      {q:'無料で試せますか？', a:'「もっとみたいコース（basic）」は7日間の無料お試しがあります。'},
+      {q:'料金や支払い方法は？', a:'料金はドル（$）建ての月額です。日本円での金額は為替によって少し変わります。支払い方法はPatreonの画面で選べます。'},
+      {q:'プランの変更や解約はできますか？', a:'Patreonのメンバーシップ設定から、いつでもプランの変更や解約ができます。'},
+      {q:'18歳未満でも参加できますか？', a:'一部のプランには成人向けの内容が含まれるため、18歳未満の方はご利用いただけません。'}
+    ],
+    note:'※ 料金・お試し・解約などの細かい条件は、Patreonの表示が最新です。'
+  },
+  guide: {
+    okTitle:'OKなこと',
+    ok:'作品ページのURLやSNS投稿のシェア（リポスト・引用）\n配布している壁紙・アイコンを個人で使うこと\nファンアート（二次創作）を描いて投稿すること',
+    ngTitle:'ご遠慮いただきたいこと',
+    ng:'画像の無断転載・再配布（SNS・まとめサイト・動画など）\n自作発言、作者を偽っての投稿\n商用利用・グッズ化・販売\nAIの学習（LoRA作成など）への利用\n加工・トレースした画像の公開\nPatreon限定コンテンツの共有・転載',
+    sections: [
+      {title:'AIを使った作品について', body:'当サイトの作品は、画像生成AIを使って制作しています。'},
+      {title:'ファンアートについて', body:'ファンアート（二次創作）は大歓迎です。公序良俗に反しない範囲で楽しんでください。'},
+      {title:'お問い合わせ', body:'わからないことや、上記以外の使い方をしたい場合は、SNSのDMからご相談ください。'}
+    ],
+    updated:'2026-09-25'
+  },
+  downloads: {
+    items: [],
+    note:'※ 配布画像は個人での利用に限ります。ご利用の前にガイドラインをご確認ください。'
+  },
+  share: {url:'', title:'', description:'', image:'', twitter:''},
+  gate: {
+    enabled:true, page:true, links:true, remember:30,
+    title:'年齢確認',
+    text:'ここから先は、成人向け（R18）の内容を含むページです。\nあなたは18歳以上ですか？',
+    yes:'はい、18歳以上です', no:'いいえ'
+  },
   pages: {
     characters:{title:'キャラクター', en:'CHARACTERS', lead:'RyuSe1 STUDIO のオリジナルキャラクターたち。カードを押すとプロフィールが開きます。'},
     gallery:{title:'ギャラリー', en:'GALLERY', lead:'これまでに制作したイラストの一覧です。キャラクターごとに絞り込めます。'},
     news:{title:'お知らせ', en:'NEWS', lead:'サイトの更新情報や新作のお知らせ。'},
-    links:{title:'リンク', en:'LINKS', lead:'各SNS・支援サイトはこちらから。'}
+    links:{title:'リンク', en:'LINKS', lead:'各SNS・支援サイトはこちらから。'},
+    faq:{title:'よくある質問', en:'FAQ', lead:'Patreonへの参加方法やプランについて、よくいただく質問をまとめました。'},
+    guide:{title:'ご利用ガイドライン', en:'GUIDELINES', lead:'作品を楽しんでいただくためのお願いです。ご利用の前にお読みください。'},
+    downloads:{title:'壁紙・アイコン配布', en:'DOWNLOADS', lead:'スマホ・PCの壁紙やSNSアイコンを無料で配布しています。'}
   },
   characters: CHAR_SEED.map(([id,name,romaji,color]) => ({
     id, name, romaji, color, image:'', pos:25,
@@ -539,6 +639,7 @@ const DEFAULT = {
     title:'Patreon 会員限定',
     lead:'Patreonでは、ここでは公開していないイラストや動画をお届けしています。「もっとみたいコース」は7日間無料でお試しできます。',
     cta:'Patreonで支援する',
+    courseTitle:'コース', previewTitle:'限定コンテンツのプレビュー',
     tiers:[
       {name:'もっとみたいコース/basic plan', price:'$3 / 月', color:'#6fb8ec', icon:'star', badge:'7日間無料お試しあり', perks:'R15〜R18までの画像（モザイク処理を必要としないものが多いです）\nシチュエーションも単発な傾向にあり', best:false, url:''},
       {name:'めっちゃみたいコース/Extra Plan', price:'$8 / 月', color:'#9a86ee', icon:'comet', badge:'', perks:'もっとみたいコースの内容\nR18コンテンツ（いろいろなシチュエーション）\n短編動画', best:true, url:''},
@@ -573,9 +674,15 @@ function mergeData(d) {
   if (!d || typeof d !== 'object') return base;
   d = JSON.parse(JSON.stringify(d));
   for (const k of Object.keys(base)) if (!(k in d)) d[k] = base[k];
-  for (const k of ['site','hero','tiles','pages','patreon']) d[k] = Object.assign({}, base[k], d[k] || {});
+  for (const k of ['site','home','hero','tiles','pages','patreon','faq','guide','downloads','gate','share']) d[k] = Object.assign({}, base[k], d[k] || {});
+  if (Array.isArray(d.nav)) base.nav.forEach((n, i) => { if (!d.nav.some(x => x && x.id === n.id)) d.nav.splice(Math.min(i, d.nav.length), 0, n); });   // 新しいページをメニューに追加
   for (const k of Object.keys(base.tiles)) d.tiles[k] = Object.assign({}, base.tiles[k], d.tiles[k] || {});
   for (const k of Object.keys(base.pages)) d.pages[k] = Object.assign({}, base.pages[k], d.pages[k] || {});
+  (d.characters || []).forEach(c => {   // 以前の初期カラーのままなら新しいイメージカラーへ
+    const col = String(c.color || '').toLowerCase();
+    if (c.id === 'tamaki' && ['#ada2e3', '#e2b04f'].includes(col)) c.color = '#ffffff';
+    if (c.id === 'kaede' && ['#eeb22c', '#ef8a4c'].includes(col)) c.color = '#f5c518';
+  });
   const pt = d.patreon;
   if (Array.isArray(pt.tiers) && pt.tiers.map(t => t && t.name).join() === 'Star,Comet,Galaxy') {   // 仮プランのままなら実プランに置き換え
     pt.tiers = base.patreon.tiers;
@@ -874,13 +981,153 @@ function tabSite() {
       fText('注意書き', s, 'notice', {hint:'空欄にすると非表示'})),
     sec('連絡先（リンクページ下部）', 'mail',
       fArea('案内文', s, 'contactText', {rows:2}),
-      h('div', {class:'ed-grid2'}, fText('ボタン名', s, 'contactLabel'), fText('ボタンのリンク先', s, 'contactUrl', {ph:'https:// または mailto:'}))),
+      h('div', {class:'ed-grid2'}, fText('ボタン名', s, 'contactLabel'), fText('ボタンのリンク先', s, 'contactUrl', {ph:'https:// または mailto:'})))
+  ];
+}
+function tabTexts() {
+  const Hm = D().home, P = D().pages, T = D().tiles, Pt = D().patreon;
+  const g2 = (...k) => h('div', {class:'ed-grid2'}, ...k);
+  return [
+    h('div', {class:'ed-info', html:'サイト内の見出しや短い文言をここでまとめて変えられます。小見出しやリンクの文字は、空欄にすると非表示になります。'}),
+    sec('ホーム：いちばん上', 'home',
+      fText('上の小さな文字', Hm, 'kicker'),
+      g2(fText('画像の下のラベル', Hm, 'featured'), fText('2つ目のボタンの文字', Hm, 'heroLink2'))),
+    sec('ホーム：新着イラスト', 'image',
+      g2(fText('番号ラベル', Hm, 'worksIndex'), fText('見出し', Hm, 'worksTitle')),
+      g2(fText('小見出し', Hm, 'worksSub'), fText('リンクの文字', Hm, 'worksLink'))),
+    sec('ホーム：Explore', 'folder',
+      g2(fText('番号ラベル', Hm, 'exploreIndex'), fText('見出し', Hm, 'exploreTitle')),
+      fArea('説明文', Hm, 'exploreIntro', {rows:2}),
+      ...[['characters','キャラクター'],['gallery','ギャラリー'],['patreon','会員限定']].map(([k, t]) =>
+        g2(fText(`${t}：大きい文字`, T[k], 'en'), fText(`${t}：小さい文字`, T[k], 'title')))),
+    sec('ホーム：お知らせ', 'bell',
+      g2(fText('番号ラベル', Hm, 'newsIndex'), fText('見出し', Hm, 'newsTitle')),
+      g2(fText('小見出し', Hm, 'newsSub'), fText('リンクの文字', Hm, 'newsLink'))),
+    sec('ホーム：SNS欄', 'link', fText('ラベル', Hm, 'follow')),
     sec('各ページの見出し', 'book',
-      ...[['characters','キャラクター'],['gallery','ギャラリー'],['news','お知らせ'],['links','リンク']].map(([k, t]) =>
-        h('details', {class:'ed-item'}, h('summary', {}, h('span', {class:'ed-sum-t'}, t)),
+      ...[['characters','キャラクター'],['gallery','ギャラリー'],['news','お知らせ'],['downloads','壁紙・アイコン'],['links','リンク'],['faq','よくある質問'],['guide','ガイドライン']].map(([k, t]) =>
+        h('details', {class:'ed-item', open:true}, h('summary', {}, h('span', {class:'ed-sum-t'}, t + ' ページ')),
           h('div', {class:'ed-item-body'},
-            h('div', {class:'ed-grid2'}, fText('見出し', P[k], 'title'), fText('英字ラベル', P[k], 'en')),
-            fArea('リード文', P[k], 'lead', {rows:2})))))
+            g2(fText('見出し', P[k], 'title'), fText('英字ラベル', P[k], 'en')),
+            fArea('リード文', P[k], 'lead', {rows:2}))))),
+    sec('会員限定（Patreon）ページの見出し', 'crown',
+      fText('ページタイトル', Pt, 'title'),
+      g2(fText('コースの見出し', Pt, 'courseTitle'), fText('プレビューの見出し', Pt, 'previewTitle')),
+      g2(fText('推しプランの見出し', Pt.oshi, 'title'), fText('推しプランの価格表記', Pt.oshi, 'price')))
+  ];
+}
+function tabFaq() {
+  const F = D().faq;
+  if (!Array.isArray(F.items)) F.items = [];
+  return [
+    h('div', {class:'ed-info', html:'「よくある質問」ページの内容です。上から順に表示されます。回答の中のURLは自動でリンクになります。<br><b>初期の文面は下書きです。</b>内容を確認して書き換えてください。'}),
+    sec('質問と回答', 'book',
+      fList(F.items, {
+        summary: x => esc(x.q || '(質問なし)'),
+        make: () => ({q:'新しい質問', a:''}),
+        addLabel:'質問を追加',
+        body: (x, refresh) => [fText('質問', x, 'q', {after:refresh}), fArea('回答', x, 'a', {rows:4})]
+      })),
+    sec('ページ下の注意書き', 'news', fArea('注意書き', F, 'note', {rows:2, hint:'空欄にすると非表示'}))
+  ];
+}
+function tabGuide() {
+  const G = D().guide;
+  if (!Array.isArray(G.sections)) G.sections = [];
+  const g2 = (...k) => h('div', {class:'ed-grid2'}, ...k);
+  return [
+    h('div', {class:'ed-info', html:'「ご利用ガイドライン」ページの内容です。<b>初期の文面は下書きです。</b>ご自身のルールに合わせて書き換えてください。'}),
+    sec('OKなこと・NGなこと', 'check',
+      g2(fText('OKの見出し', G, 'okTitle'), fText('NGの見出し', G, 'ngTitle')),
+      fArea('OKなこと（1行に1つ）', G, 'ok', {rows:5}),
+      fArea('NGなこと（1行に1つ）', G, 'ng', {rows:7})),
+    sec('説明の項目', 'book',
+      fList(G.sections, {
+        summary: x => esc(x.title || '(見出しなし)'),
+        make: () => ({title:'新しい項目', body:''}),
+        addLabel:'項目を追加',
+        body: (x, refresh) => [fText('見出し', x, 'title', {after:refresh}), fArea('本文', x, 'body', {rows:4})]
+      })),
+    sec('最終更新日', 'bell', fText('日付', G, 'updated', {type:'date', hint:'空欄にすると非表示'}))
+  ];
+}
+const readAsDataURL = f => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = () => rej(new Error('ファイルを読み込めませんでした')); fr.readAsDataURL(f); });
+const imgDims = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res({w:i.naturalWidth, h:i.naturalHeight}); i.onerror = () => rej(new Error('画像を読み込めませんでした')); i.src = src; });
+const fmtBytes = n => n > 1048576 ? (n / 1048576).toFixed(1) + 'MB' : Math.max(1, Math.round(n / 1024)) + 'KB';
+async function dlFromFile(f, x) {
+  if (!/^image\//.test(f.type)) throw new Error('画像ファイルを選んでください');
+  if (f.size > 25 * 1048576) throw new Error('25MBより大きい画像は配布できません');
+  const orig = await readAsDataURL(f);
+  const dims = await imgDims(orig);
+  const ext = (/(png|jpe?g|webp|gif)/i.exec(f.type) || /\.(png|jpe?g|webp|gif)$/i.exec(f.name) || [, 'png'])[1].toLowerCase().replace('jpeg', 'jpg');
+  const base = f.name.replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'image';
+  const fp = `images/downloads/${base}-${uid().slice(0, 5)}.${ext}`;
+  ASSETS.set(fp, orig);
+  x = x || {id:'d' + uid(), title:f.name.replace(/\.[^.]+$/, ''), note:'', chars:[]};
+  x.file = fp; x.bytes = f.size; x.size = `${dims.w}×${dims.h}`;
+  x.image = await fileToAsset(f, 900, 'downloads/preview');
+  const r = dims.w / dims.h;
+  if (!x.type || x.autoType !== false) x.type = Math.abs(r - 1) < 0.08 ? 'icon' : r > 1 ? 'pc' : 'sp';
+  return x;
+}
+function dlFileField(x, refresh) {
+  const prev = h('div', {class:'ed-img-prev'});
+  const info = h('p', {class:'ed-hint', style:'margin:0'});
+  const paint = () => {
+    const v = x.image || x.file;
+    prev.innerHTML = v ? `<img src="${esc(imgSrc(v))}" alt="">` : '<span>未設定</span>';
+    info.textContent = x.file ? `${x.size || ''}${x.bytes ? ' ／ ' + fmtBytes(x.bytes) : ''}${ASSETS.has(x.file) && !UPLOADED.has(x.file) ? '（未公開）' : ''}` : '選んだ画像は元の画質のまま配布用に保存されます。';
+  };
+  const file = h('input', {type:'file', accept:'image/*', hidden:true, onchange:async () => {
+    const f = file.files[0]; file.value = ''; if (!f) return;
+    try { await dlFromFile(f, x); paint(); changed(); refresh && refresh(); } catch (e) { toast(e.message); }
+  }});
+  paint();
+  return wrapField('配布する画像', h('div', {class:'ed-img'}, prev, h('div', {class:'ed-img-ctl'},
+    h('div', {class:'ed-row'}, h('button', {class:'ed-btn', type:'button', html:icon('upload') + '画像を選ぶ', onclick:() => file.click()})), info, file)));
+}
+function tabDownloads() {
+  const DL = D().downloads;
+  if (!Array.isArray(DL.items)) DL.items = [];
+  let list;
+  return [
+    h('div', {class:'ed-info', html:'配布する画像は<b>元の画質のまま</b>保存されます（ページには小さいプレビューを表示）。1枚25MBまで。縦横の比率から「PC壁紙／スマホ壁紙／アイコン」を自動で振り分けます。'}),
+    sec('配布する画像', 'download',
+      bulkImageButton('画像をまとめて追加', async files => {
+        for (const f of files) { try { DL.items.unshift(await dlFromFile(f)); } catch (e) { toast(e.message); } }
+        list.redraw(); changed();
+      }),
+      list = fList(DL.items, {
+        addTop:true,
+        ...thumbLead(x => imgOr(x.image || x.file, phArt('dl' + (x.title || ''), '', ''))),
+        summary: x => `${esc(x.title || '(無題)')}<small>${esc(DL_TYPES[x.type] || '')}${x.size ? '・' + esc(x.size) : ''}</small>`,
+        make: () => ({id:'d' + uid(), title:'新しい壁紙', type:'pc', image:'', file:'', size:'', note:'', chars:[]}),
+        addLabel:'配布画像を1件追加',
+        body: (x, refresh) => [
+          dlFileField(x, refresh),
+          h('div', {class:'ed-grid2'}, fText('タイトル', x, 'title', {after:refresh}),
+            fSelect('種類', x, 'type', Object.entries(DL_TYPES), {after:() => { x.autoType = false; refresh(); }})),
+          fText('ひとこと（任意）', x, 'note'),
+          wrapField('登場キャラ', charChecks(x, refresh))
+        ]
+      })),
+    sec('ページ下の注意書き', 'news', fArea('注意書き', DL, 'note', {rows:2}))
+  ];
+}
+function tabGate() {
+  const G = D().gate;
+  return [
+    h('div', {class:'ed-info', html:'成人向けの内容に進む前に、年齢を確認する画面を出します。「はい」を押した人には、下の日数のあいだ表示しません。<br>※ 管理ページのプレビューでは普段は表示されません（下のボタンで確認できます）。'}),
+    sec('年齢確認', 'lock',
+      fCheck('年齢確認を使う', G, 'enabled'),
+      fCheck('会員限定ページを開く前に確認する', G, 'page'),
+      fCheck('Patreonへのリンクを開く前に確認する', G, 'links'),
+      fText('タイトル', G, 'title'),
+      fArea('本文', G, 'text', {rows:3}),
+      h('div', {class:'ed-grid2'}, fText('「はい」ボタン', G, 'yes'), fText('「いいえ」ボタン', G, 'no')),
+      fText('確認を覚えておく日数', G, 'remember', {type:'number'}),
+      h('div', {class:'ed-row'}, h('button', {class:'ed-btn', type:'button', html:icon('image') + 'プレビューで表示してみる',
+        onclick:() => { if (PV.ready) PV.frame.contentWindow.postMessage({type:'rs-gate'}, '*'); showPreview(true); }})))
   ];
 }
 function tabNav() {
@@ -896,7 +1143,8 @@ function tabNav() {
         body: (n, refresh) => [
           h('div', {class:'ed-grid2'}, fText('日本語表記', n, 'label', {after:refresh}), fText('ヘッダー表記（英字）', n, 'en', {after:refresh})),
           fIcon('アイコン', n, 'icon', {after:refresh}),
-          fCheck('メニューに表示する', n, 'show', {after:refresh})
+          fCheck('メニューに表示する', n, 'show', {after:refresh}),
+          (n.header = n.header !== false, fCheck('PCの上部メニューにも表示する（OFFならフッターとスマホメニューのみ）', n, 'header', {after:refresh}))
         ]
       })),
     sec('Explore のリンク一覧（3項目）', 'image',
@@ -977,7 +1225,7 @@ function charChecks(g, after) {
   return h('div', {class:'ed-checks'}, D().characters.map(c => {
     const inp = h('input', {type:'checkbox'});
     inp.checked = g.chars.includes(c.id);
-    const lab = h('label', {class:'ed-ck' + (inp.checked ? ' on' : ''), style:`--c:${c.color}`}, inp, h('i'), c.name);
+    const lab = h('label', {class:'ed-ck' + (inp.checked ? ' on' : ''), style:`--c:${inkOf(c.color)}`}, inp, h('i'), c.name);
     inp.addEventListener('change', () => {
       g.chars = inp.checked ? [...g.chars, c.id] : g.chars.filter(x => x !== c.id);
       lab.classList.toggle('on', inp.checked); changed(); after && after();
@@ -1118,7 +1366,7 @@ function tabSns() {
       }))
   ];
 }
-const TAB_FN = {site:tabSite, nav:tabNav, hero:tabHero, chars:tabChars, gallery:tabGallery, patreon:tabPatreon, news:tabNews, sns:tabSns, github:tabGithub};
+const TAB_FN = {site:tabSite, texts:tabTexts, share:tabShare, faq:tabFaq, guide:tabGuide, downloads:tabDownloads, gate:tabGate, nav:tabNav, hero:tabHero, chars:tabChars, gallery:tabGallery, patreon:tabPatreon, news:tabNews, sns:tabSns, github:tabGithub};
 
 /* ---------- export / import ---------- */
 function download(text, name, type) {
@@ -1133,7 +1381,7 @@ function buildFromTemplate(tpl) {
   let html = injectData(tpl || S.template, D());
   html = html.replace(/<title>[\s\S]*?<\/title>/, () => `<title>${esc(`${s.name} ${s.suffix}`.trim())}</title>`);
   html = html.replace(/(<meta name="description" content=")[^"]*(")/, (m, a, b) => a + esc(`${s.name} ${s.suffix} — ${s.tagline}`.trim()) + b);
-  return html;
+  return applyShareMeta(html);
 }
 function downloadBlob(blob, name) {
   const a = document.createElement('a');
@@ -1454,6 +1702,190 @@ async function restoreFrom(it) {
 }
 
 /* =========================================================
+   SNSでシェアされた時のカード（OGP / X カード）
+   ・index.html の <head> に meta タグを書き込む（公開時に自動）
+   ・X などは JavaScript を実行しないので、ページの中身ではなくここで決めた内容が表示される
+   ========================================================= */
+function siteBaseUrl() {
+  const sh = D().share || {};
+  let u = String(sh.url || '').trim();
+  if (!u) u = /^https?:$/.test(location.protocol) ? new URL('./', location.href).href : ghSiteUrl();
+  if (u && !u.endsWith('/')) u += '/';
+  return u;
+}
+function shareValues() {
+  const s = D().site, sh = D().share || {};
+  const xs = (D().sns || []).find(x => x.icon === 'x' && /^@/.test(x.handle || ''));
+  const base = siteBaseUrl();
+  const abs = u => { if (!u) return ''; if (/^https?:/i.test(u)) return u; try { return base ? new URL(u, base).href : ''; } catch (e) { return ''; } };
+  return {
+    base,
+    title: String(sh.title || `${s.name} ${s.suffix}`.trim()),
+    desc: String(sh.description || s.bio || s.tagline || '').replace(/\s+/g, ' ').trim(),
+    image: abs(sh.image),
+    twitter: String(sh.twitter || (xs ? xs.handle : '')).trim(),
+    siteName: `${s.name} ${s.suffix}`.trim()
+  };
+}
+function shareMetaBlock() {
+  const v = shareValues();
+  const tags = [
+    ['property', 'og:type', 'website'],
+    ['property', 'og:site_name', v.siteName],
+    ['property', 'og:title', v.title],
+    ['property', 'og:description', v.desc],
+    v.base && ['property', 'og:url', v.base],
+    v.image && ['property', 'og:image', v.image],
+    v.image && ['property', 'og:image:width', '1200'],
+    v.image && ['property', 'og:image:height', '630'],
+    ['property', 'og:locale', 'ja_JP'],
+    ['name', 'twitter:card', v.image ? 'summary_large_image' : 'summary'],
+    ['name', 'twitter:title', v.title],
+    ['name', 'twitter:description', v.desc],
+    v.image && ['name', 'twitter:image', v.image],
+    v.twitter && ['name', 'twitter:site', v.twitter],
+    ['name', 'theme-color', '#bdb4ff']
+  ].filter(Boolean);
+  return '<!-- share:start -->\n' + tags.map(([a, k, val]) => `<meta ${a}="${k}" content="${esc(val)}">`).join('\n') + '\n<!-- share:end -->';
+}
+function applyShareMeta(html) {
+  const block = shareMetaBlock(), v = shareValues();
+  html = /<!-- share:start -->[\s\S]*?<!-- share:end -->/.test(html)
+    ? html.replace(/<!-- share:start -->[\s\S]*?<!-- share:end -->/, () => block)
+    : html.replace(/(<meta name="description"[^>]*>)/, (m) => m + '\n' + block);
+  if (v.desc) html = html.replace(/(<meta name="description" content=")[^"]*(")/, (m, a, b) => a + esc(v.desc) + b);
+  return html;
+}
+
+/* ---------- カード画像（1200×630）を作る ---------- */
+function roundRectPath(g, x, y, w, h, r) {
+  g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath();
+}
+function drawCover(g, img, x, y, w, h, posY = .3) {
+  const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+  const s = Math.max(w / iw, h / ih), sw = w / s, sh = h / s;
+  g.drawImage(img, (iw - sw) / 2, Math.max(0, Math.min(ih - sh, (ih - sh) * posY)), sw, sh, x, y, w, h);
+}
+function wrapLines(g, text, maxW, maxLines) {
+  const out = []; let line = '';
+  for (const ch of String(text)) {
+    if (g.measureText(line + ch).width > maxW && line) { out.push(line); line = ch; if (out.length === maxLines) break; }
+    else line += ch;
+  }
+  if (out.length < maxLines && line) out.push(line);
+  if (out.length === maxLines && (out.join('').length < String(text).length)) out[maxLines - 1] = out[maxLines - 1].replace(/.$/, '…');
+  return out;
+}
+function cardSourceImage() {
+  const d = D();
+  const s0 = (d.hero.slides || []).find(s => s.image);
+  if (s0) return {src:imgSrc(s0.image), posY:.3};
+  const c = d.characters.find(c => c.image);
+  if (c) return {src:imgSrc(c.image), posY:(+c.pos || 25) / 100};
+  if (d.site.avatar) return {src:imgSrc(d.site.avatar), posY:.5};
+  return {src:phHero(0), posY:.5};
+}
+async function makeCardImage() {
+  const W = 1200, H = 630;
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  try { await Promise.all([document.fonts.load('700 96px Outfit'), document.fonts.load('300 28px Outfit'), document.fonts.load('700 28px "Zen Maru Gothic"')]); } catch (e) {}
+  // 背景（サイトと同じアイシーブルー×ラベンダー）
+  const bg = g.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0, '#e6f2ff'); bg.addColorStop(.5, '#eee9ff'); bg.addColorStop(1, '#fbe9f5');
+  g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  const glow = (x, y, r, col) => { const rg = g.createRadialGradient(x, y, 0, x, y, r); rg.addColorStop(0, col); rg.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = rg; g.fillRect(0, 0, W, H); };
+  glow(120, 60, 420, 'rgba(158,215,255,.55)'); glow(1100, 600, 460, 'rgba(242,195,234,.5)'); glow(640, 320, 380, 'rgba(189,180,255,.28)');
+  for (let i = 0; i < 40; i++) { const h = hashStr('card' + i); g.fillStyle = `rgba(255,255,255,${.5 + (h % 5) / 10})`; g.beginPath(); g.arc(h % W, (h >> 11) % H, 1 + (h >> 20) % 2, 0, Math.PI * 2); g.fill(); }
+  // 右：メイン画像
+  const src = cardSourceImage();
+  try {
+    const img = await loadImageEl(src.src);
+    g.save(); g.shadowColor = 'rgba(60,70,150,.28)'; g.shadowBlur = 40; g.shadowOffsetY = 16;
+    roundRectPath(g, 640, 56, 500, 518, 36); g.fillStyle = '#fff'; g.fill(); g.restore();
+    g.save(); roundRectPath(g, 640, 56, 500, 518, 36); g.clip();
+    const ig = g.createLinearGradient(640, 56, 1140, 574); ig.addColorStop(0, '#dfeaff'); ig.addColorStop(1, '#f1e4ff'); g.fillStyle = ig; g.fillRect(640, 56, 500, 518);
+    drawCover(g, img, 640, 56, 500, 518, src.posY); g.restore();
+  } catch (e) {}
+  // 左：ロゴ・サイト名・説明
+  const s = D().site, v = shareValues();
+  const lg = g.createLinearGradient(70, 80, 142, 152); lg.addColorStop(0, '#9ed7ff'); lg.addColorStop(.5, '#bdb4ff'); lg.addColorStop(1, '#f2c3ea');
+  roundRectPath(g, 70, 78, 72, 72, 22); g.fillStyle = lg; g.fill();
+  g.save(); g.translate(70, 78); g.scale(72 / 40, 72 / 40); g.fillStyle = '#fff';
+  g.fill(new Path2D('M26 6.5c.6 3.9 2.9 6.2 6.8 6.8-3.9.6-6.2 2.9-6.8 6.8-.6-3.9-2.9-6.2-6.8-6.8 3.9-.6 6.2-2.9 6.8-6.8z'));
+  g.strokeStyle = 'rgba(255,255,255,.9)'; g.lineWidth = 2.4; g.lineCap = 'round'; g.stroke(new Path2D('M7.5 32.5 18.5 21.5M6.5 25.5l7-7M14.5 33.5l7-7')); g.restore();
+  g.fillStyle = '#252b47'; g.textBaseline = 'alphabetic';
+  let size = 104; g.font = `700 ${size}px Outfit, "Zen Maru Gothic", sans-serif`;
+  while (g.measureText(s.name).width > 520 && size > 48) { size -= 4; g.font = `700 ${size}px Outfit, "Zen Maru Gothic", sans-serif`; }
+  g.fillText(s.name, 66, 270);
+  if (s.suffix) { g.font = '300 30px Outfit, sans-serif'; g.fillStyle = '#4a5272'; g.letterSpacing = '12px'; g.fillText(String(s.suffix).toUpperCase(), 72, 322); g.letterSpacing = '0px'; }
+  const bar = g.createLinearGradient(72, 0, 172, 0); bar.addColorStop(0, '#9ed7ff'); bar.addColorStop(.5, '#bdb4ff'); bar.addColorStop(1, '#f2c3ea');
+  roundRectPath(g, 72, 352, 96, 6, 3); g.fillStyle = bar; g.fill();
+  g.fillStyle = '#4a5272'; g.font = '700 27px "Zen Maru Gothic", sans-serif';
+  wrapLines(g, v.desc, 520, 3).forEach((ln, i) => g.fillText(ln, 72, 410 + i * 44));
+  if (v.base) { g.font = '500 20px Outfit, sans-serif'; g.fillStyle = '#8990ad'; g.fillText(v.base.replace(/^https?:\/\//, '').replace(/\/$/, ''), 72, 572); }
+  return c.toDataURL('image/jpeg', .92);
+}
+async function fileToCard(f) {
+  const d = await readAsDataURL(f);
+  const img = await loadImageEl(d);
+  const c = document.createElement('canvas'); c.width = 1200; c.height = 630;
+  const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, 1200, 630);
+  drawCover(g, img, 0, 0, 1200, 630, .3);
+  return c.toDataURL('image/jpeg', .92);
+}
+function setShareImage(dataUrl) {
+  const p = `images/share/card-${uid().slice(0, 6)}.jpg`;
+  ASSETS.set(p, dataUrl);
+  D().share.image = p;
+  changed();
+}
+
+/* ---------- 管理ページのタブ ---------- */
+function tabShare() {
+  const sh = D().share;
+  const auto = shareValues();
+  const card = h('div', {class:'sc-card'});
+  const paintCard = () => {
+    const v = shareValues();
+    const src = sh.image ? imgSrc(sh.image) : '';
+    card.innerHTML = `${src ? `<div class="sc-img"><img src="${esc(src)}" alt=""></div>` : `<div class="sc-img none">カード画像が未設定です（小さい表示になります）</div>`}
+      <div class="sc-body"><small>${esc((v.base || 'サイトのURL未設定').replace(/^https?:\/\//, '').replace(/\/$/, ''))}</small><b>${esc(v.title)}</b><p>${esc(v.desc)}</p></div>`;
+  };
+  const refresh = () => { paintCard(); };
+  const busy = h('span', {class:'ed-hint', style:'margin:0'});
+  const upl = h('input', {type:'file', accept:'image/*', hidden:true, onchange:async () => {
+    const f = upl.files[0]; upl.value = ''; if (!f) return;
+    try { busy.textContent = '画像を整えています…'; setShareImage(await fileToCard(f)); busy.textContent = ''; paintCard(); }
+    catch (e) { busy.textContent = ''; toast(e.message); }
+  }});
+  paintCard();
+  return [
+    h('div', {class:'ed-info', html:'XやDiscord、LINEなどにサイトのURLを貼ったときに出るカードの設定です。<b>「GitHubに公開」を押すと反映</b>されます。<br>※ SNS側は表示を数日キャッシュすることがあるので、変更がすぐ出ない場合があります。'}),
+    sec('プレビュー（Xでの表示イメージ）', 'image', card),
+    sec('カード画像（1200×630）', 'image',
+      h('div', {class:'ed-row', style:'margin-bottom:8px'},
+        h('button', {class:'ed-btn', type:'button', html:icon('wand') + 'サイトの画像から自動で作る', onclick:async () => {
+          busy.textContent = 'カード画像を作っています…';
+          try { setShareImage(await makeCardImage()); busy.textContent = ''; paintCard(); }
+          catch (e) { busy.textContent = ''; toast('作れませんでした：' + e.message); }
+        }}),
+        h('button', {class:'ed-btn ghost', type:'button', html:icon('upload') + '画像をアップロード', onclick:() => upl.click()}),
+        h('button', {class:'ed-btn ghost', type:'button', title:'カード画像を外す', html:icon('trash'), onclick:() => { sh.image = ''; changed(); paintCard(); }}),
+        upl),
+      busy,
+      h('p', {class:'ed-hint'}, '自動作成は、トップ画像1枚目（なければキャラの画像）とサイト名・説明文で作ります。文字や画像を変えたら、もう一度押すと作り直せます。アップロードした画像は横長（1200×630）に自動で切り抜きます。')),
+    sec('表示する文字', 'book',
+      fText('タイトル', sh, 'title', {ph:auto.title, after:refresh, hint:'空欄ならサイト名'}),
+      fArea('説明文', sh, 'description', {rows:3, ph:auto.desc, after:refresh, hint:'空欄ならプロフィール文。60〜100文字くらいがおすすめです。'}),
+      h('div', {class:'ed-grid2'},
+        fText('XのユーザーID', sh, 'twitter', {ph:auto.twitter || '@your_id', after:refresh}),
+        fText('サイトのURL', sh, 'url', {ph:auto.base || 'https://ユーザー名.github.io/リポジトリ名/', after:refresh})),
+      h('p', {class:'ed-hint'}, 'サイトのURLは、独自ドメインを使う時だけ入力してください（空欄なら自動）。'))
+  ];
+}
+
+/* =========================================================
    背景透過（AI・ブラウザ内で処理）
    モデル：skytnt/anime-seg（ISNet・Apache-2.0） / 実行：onnxruntime-web
    ========================================================= */
@@ -1645,8 +2077,7 @@ async function openBgRemove(sl, onDone) {
   apply.addEventListener('click', () => {
     if (!cut) return;
     const d = encodeAlpha(cut);
-    const base = (/^data:/.test(cur) ? 'img' : String(cur).split('/').pop().replace(/\.[^.]+$/, '')).toLowerCase().replace(/[^a-z0-9_-]+/g, '-').replace(/-nobg.*$/, '').slice(0, 32) || 'img';
-    const path = `images/${sl.folder || 'misc'}/${base}-nobg-${uid().slice(0, 5)}.${extOf(d)}`;
+    const path = nobgPath(cur, sl.folder, d);
     ASSETS.set(path, d);
     sl.obj[sl.key] = path;
     close(); changed(); onDone && onDone();
@@ -1679,11 +2110,158 @@ async function openBgRemove(sl, onDone) {
   } catch (e) { fail(e); }
 }
 
+function nobgPath(cur, folder, d) {
+  const base = (/^data:/.test(cur) ? 'img' : String(cur).split('/').pop().replace(/\.[^.]+$/, '')).toLowerCase().replace(/[^a-z0-9_-]+/g, '-').replace(/-nobg.*$/, '').slice(0, 32) || 'img';
+  return `images/${folder || 'misc'}/${base}-nobg-${uid().slice(0, 5)}.${extOf(d)}`;
+}
+/* 一覧表示用の小さい切り抜き（元の大きさで作るのは差し替える時だけ） */
+function composeThumb(img, mask, th, soft, max = 300) {
+  const w0 = img.naturalWidth, h0 = img.naturalHeight, s = Math.min(1, max / Math.max(w0, h0));
+  const w = Math.max(1, Math.round(w0 * s)), h = Math.max(1, Math.round(h0 * s));
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const g = c.getContext('2d', {willReadFrequently:true});
+  g.drawImage(img, 0, 0, w, h);
+  const id = g.getImageData(0, 0, w, h), d = id.data;
+  const lo = Math.max(0, th - soft / 2), hi = Math.min(1, th + soft / 2), span = Math.max(0.001, hi - lo);
+  for (let y = 0; y < h; y++) {
+    const sy = Math.min(h0 - 1, Math.floor(y / s));
+    for (let x = 0; x < w; x++) {
+      const sx = Math.min(w0 - 1, Math.floor(x / s));
+      let a = (mask[sy * w0 + sx] / 255 - lo) / span; a = a < 0 ? 0 : a > 1 ? 1 : a;
+      const j = (y * w + x) * 4 + 3; d[j] = Math.round(d[j] * a);
+    }
+  }
+  g.putImageData(id, 0, 0);
+  return c;
+}
+/* ---------- 背景をまとめて消す ---------- */
+async function openBgBatch() {
+  const all = imageSlots().filter(s => s.obj[s.key]);
+  if (!all.length) { toast('画像が入っている枠がありません'); return; }
+  const items = all.map(sl => {
+    const cur = sl.obj[sl.key], already = /-nobg-/.test(cur);
+    return {sl, cur, already, sel:!already && ['キャラクター', 'ギャラリー'].includes(sl.group), state:'', img:null, mask:null};
+  });
+  let phase = 'select', closed = false;
+  const th = h('input', {type:'range', min:10, max:90, value:50});
+  const soft = h('input', {type:'range', min:4, max:100, value:100});
+  const thOut = h('span', {}, '50'), softOut = h('span', {}, '100');
+  const msg = h('div', {class:'bb-msg'});
+  const barI = h('i'), bar = h('div', {class:'bg-bar', style:'width:100%;display:none'}, barI);
+  const main = h('button', {class:'ed-btn primary', type:'button', style:'flex:none'});
+  const grid = h('div', {class:'bb-grid site'});
+  const setMsg = (t, p) => { msg.textContent = t || ''; if (p != null) { bar.style.display = ''; barI.style.width = Math.round(p * 100) + '%'; } };
+  const selCount = () => items.filter(it => it.sel && (phase === 'select' || it.state === 'done')).length;
+  const updateMain = () => {
+    const n = selCount();
+    main.innerHTML = phase === 'select' ? icon('wand') + `${n}枚の背景を消す` : phase === 'run' ? '処理中…' : icon('check') + `${n}枚を差し替える`;
+    main.disabled = phase === 'run' || n === 0;
+  };
+  const setState = (it, t, k) => { it.stateEl.textContent = t; it.stateEl.className = 'bb-state' + (k ? ' ' + k : ''); };
+  const showCut = it => {
+    const c = composeThumb(it.img, it.mask, +th.value / 100, +soft.value / 100);
+    it.thumb.classList.add('done');
+    it.thumb.querySelector('img, canvas').replaceWith(c);
+  };
+  items.forEach(it => {
+    it.stateEl = h('span', {class:'bb-state'});
+    it.thumb = h('div', {class:'bb-thumb'}, h('img', {src:imgSrc(it.cur), alt:'', loading:'lazy'}), h('span', {class:'bb-check', html:icon('check')}), it.stateEl);
+    it.card = h('div', {class:'bb-card' + (it.sel ? ' sel' : ''), style:`--c:${it.sl.color || '#9a86ee'}`, onclick:() => {
+      if (phase === 'run') return;
+      it.sel = !it.sel; it.card.classList.toggle('sel', it.sel); updateMain();
+    }}, it.thumb, h('b', {title:it.sl.label}, it.sl.label), h('small', {}, it.sl.group));
+    if (it.already) setState(it, '透過済み', 'skip');
+    grid.append(it.card);
+  });
+  const groups = Array.from(new Set(items.map(it => it.sl.group)));
+  const groupBtns = h('div', {class:'ed-row'},
+    groups.map(g => h('button', {class:'ed-btn ghost', type:'button', onclick:() => {
+      if (phase === 'run') return;
+      const its = items.filter(it => it.sl.group === g), on = !its.every(it => it.sel);
+      its.forEach(it => { it.sel = on; it.card.classList.toggle('sel', on); }); updateMain();
+    }}, `${g}（${items.filter(it => it.sl.group === g).length}）`)),
+    h('button', {class:'ed-btn ghost', type:'button', onclick:() => { if (phase === 'run') return; items.forEach(it => { it.sel = false; it.card.classList.remove('sel'); }); updateMain(); }}, 'すべて解除'));
+  const bgSeg = h('div', {class:'seg'}, [['site', 'サイト風'], ['checker', '透過'], ['white', '白'], ['black', '黒']].map(([k, t]) =>
+    h('button', {type:'button', class:k === 'site' ? 'on' : '', onclick:e => {
+      grid.className = 'bb-grid ' + k; $$('button', bgSeg).forEach(b => b.classList.toggle('on', b === e.currentTarget));
+    }}, t)));
+  const close = () => { closed = true; back.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e => { if (e.key === 'Escape' && phase !== 'run') close(); };
+  const back = h('div', {class:'bg-modal-back', onclick:e => { if (e.target === back && phase !== 'run') close(); }},
+    h('div', {class:'bg-modal', role:'dialog', 'aria-modal':'true', 'aria-label':'背景をまとめて消す'},
+      h('div', {class:'bg-head'}, h('span', {class:'logo-mark', html:LOGO_SVG}), h('b', {}, '背景をまとめて消す（AI）'), h('span', {class:'grow'}),
+        h('button', {class:'ed-mini', type:'button', title:'閉じる', html:icon('close'), onclick:() => { if (phase !== 'run') close(); else { closed = true; setMsg('止めています…'); } }})),
+      h('div', {class:'bb-top'}, h('span', {class:'bb-msg'}, '選ぶ：'), groupBtns, h('span', {class:'grow'}), bgSeg),
+      grid,
+      h('div', {class:'bg-ctrl'},
+        wrapField(h('span', {}, '切り抜きの強さ：', thOut), th, '大きくすると、背景に近い部分をより多く消します（全画像に適用）。'),
+        wrapField(h('span', {}, 'フチのなめらかさ：', softOut), soft, '小さくするとフチがくっきり、大きくするとふんわりします。')),
+      h('div', {class:'bg-foot'},
+        h('div', {class:'bb-foot-bar'}, msg, bar),
+        h('button', {class:'ed-btn ghost', type:'button', onclick:() => { if (phase !== 'run') close(); else { closed = true; setMsg('止めています…'); } }}, 'キャンセル'), main)));
+  document.body.append(back);
+  document.addEventListener('keydown', onKey);
+  const retune = () => {
+    thOut.textContent = th.value; softOut.textContent = soft.value;
+    if (phase === 'done') items.filter(it => it.state === 'done').forEach(showCut);
+  };
+  th.addEventListener('input', () => { thOut.textContent = th.value; });
+  soft.addEventListener('input', () => { softOut.textContent = soft.value; });
+  th.addEventListener('change', retune); soft.addEventListener('change', retune);
+  updateMain();
+  if (!BG.session && !BG.model && !(await isModelCached())) setMsg('初回だけ、AIモデル（約170MB）をダウンロードします（2回目からは不要）。');
+  else setMsg('背景を消したい画像を選んでください。');
+
+  main.addEventListener('click', async () => {
+    if (phase === 'select') {
+      const todo = items.filter(it => it.sel);
+      if (!todo.length) return;
+      phase = 'run'; updateMain();
+      try {
+        await ensureBgSession(setMsg);
+      } catch (e) { setMsg(e.message || String(e)); phase = 'select'; updateMain(); return; }
+      let ok = 0;
+      for (let i = 0; i < todo.length; i++) {
+        if (closed) break;
+        const it = todo[i];
+        setMsg(`処理中… ${i + 1} / ${todo.length}（${it.sl.label}）`, i / todo.length);
+        setState(it, '処理中', 'run');
+        await nextFrame();
+        try {
+          it.img = await loadImageEl(imgSrc(it.cur));
+          it.mask = await computeMask(it.img);
+          it.state = 'done'; ok++;
+          showCut(it); setState(it, '完了', 'done');
+        } catch (e) {
+          it.state = 'err'; it.sel = false; it.card.classList.remove('sel');
+          setState(it, 'エラー', 'err'); it.stateEl.title = e.message || String(e);
+        }
+      }
+      if (closed) return;
+      items.filter(it => it.state !== 'done').forEach(it => { it.sel = false; it.card.classList.remove('sel'); });
+      phase = 'done'; updateMain();
+      setMsg(`${ok}枚できました。仕上がりを確認して、差し替えない画像はクリックで外してください。`, 1);
+    } else if (phase === 'done') {
+      const list = items.filter(it => it.sel && it.state === 'done');
+      setMsg('保存しています…');
+      await nextFrame();
+      for (const it of list) {
+        const d = encodeAlpha(composeCut(it.img, it.mask, +th.value / 100, +soft.value / 100));
+        const path = nobgPath(it.cur, it.sl.folder, d);
+        ASSETS.set(path, d);
+        it.sl.obj[it.sl.key] = path;
+      }
+      close(); changed(); drawMain();
+      toast(`${list.length}枚の背景を透過しました（公開すると反映されます）`);
+    }
+  });
+}
+
 /* =========================================================
    ADMIN — 画面構成・読み込み・プレビュー
    ========================================================= */
-const TAB_ROUTE = {images:'#/home', links:'#/links', site:'#/home', nav:'#/home', hero:'#/home', chars:'#/characters', gallery:'#/gallery', patreon:'#/patreon', news:'#/news', sns:'#/links'};
-const PAGE_IDS = ['home', 'characters', 'gallery', 'patreon', 'news', 'links'];
+const TAB_ROUTE = {images:'#/home', links:'#/links', site:'#/home', texts:'#/home', share:'#/home', faq:'#/faq', guide:'#/guide', downloads:'#/downloads', gate:'#/patreon', nav:'#/home', hero:'#/home', chars:'#/characters', gallery:'#/gallery', patreon:'#/patreon', news:'#/news', sns:'#/links'};
+const PAGE_IDS = ['home', 'characters', 'gallery', 'patreon', 'news', 'downloads', 'links', 'faq', 'guide'];
 
 /* ---------- 読み込み ---------- */
 function parseSiteData(html) {
@@ -1802,8 +2380,8 @@ function imageSlots() {
   [['characters', 'キャラクター'], ['gallery', 'ギャラリー'], ['patreon', '会員限定']].forEach(([k, t]) =>
     out.push({group:'Explore のサムネイル', label:t, hint:'空欄なら自動', obj:d.tiles[k], key:'image', max:1200, folder:'site', ph:holo, ratio:'.92'}));
   d.characters.forEach(c => out.push({group:'キャラクター', label:c.name, hint:c.romaji, obj:c, key:'image', max:1400, folder:'characters', ph:phChar(c), ratio:'3/4', color:c.color}));
-  d.gallery.forEach(g => { const c = charById((g.chars || [])[0]); out.push({group:'ギャラリー', label:g.title || '(無題)', hint:fmtDate(g.date), obj:g, key:'image', max:1600, folder:'gallery', ph:phArt(g.id || g.title, g.title, c && c.color), ratio:'1'}); });
-  d.patreon.previews.forEach((x, i) => out.push({group:'Patreon プレビュー', label:x.title || '(無題)', hint:'ぼかして表示', obj:x, key:'image', max:420, folder:'patreon', ph:phArt('pv' + i, '', SOFT[i % SOFT.length]), ratio:'3/4'}));
+  d.gallery.forEach(g => { const c = charById((g.chars || [])[0]); out.push({group:'ギャラリー', label:g.title || '(無題)', titleKey:'title', hint:fmtDate(g.date), obj:g, key:'image', max:1600, folder:'gallery', ph:phArt(g.id || g.title, g.title, c && c.color), ratio:'1'}); });
+  d.patreon.previews.forEach((x, i) => out.push({group:'Patreon プレビュー', label:x.title || '(無題)', titleKey:'title', hint:'ぼかして表示', obj:x, key:'image', max:420, folder:'patreon', ph:phArt('pv' + i, '', SOFT[i % SOFT.length]), ratio:'3/4'}));
   return out;
 }
 function imgState(v) {
@@ -1830,7 +2408,7 @@ function imageCard(sl) {
   const file = h('input', {type:'file', accept:'image/*', hidden:true, onchange:() => { set(file.files[0]); file.value = ''; }});
   const card = h('div', {class:'im-card'},
     h('div', {class:'im-thumb', style:`aspect-ratio:${sl.ratio || '1'}`}, img, chip),
-    h('div', {class:'im-meta'}, h('b', {title:sl.label}, sl.label), h('small', {}, sl.hint || ' ')),
+    h('div', {class:'im-meta'}, sl.titleKey ? titleInput(sl) : h('b', {title:sl.label}, sl.label), h('small', {}, sl.hint || ' ')),
     h('div', {class:'im-actions'},
       h('button', {class:'ed-btn', type:'button', html:icon('upload') + '差し替え', onclick:() => file.click()}),
       h('button', {class:'ed-mini', type:'button', title:'画像を外す', html:icon('trash'), onclick:() => { sl.obj[sl.key] = ''; paint(); changed(); refreshImageSummary(); }}),
@@ -1842,6 +2420,11 @@ function imageCard(sl) {
   card.addEventListener('drop', e => { e.preventDefault(); card.classList.remove('drag'); set(e.dataTransfer.files[0]); });
   paint();
   return card;
+}
+function titleInput(sl) {
+  const inp = h('input', {class:'im-title', value:sl.obj[sl.titleKey] || '', placeholder:'タイトルを入力', title:'クリックでタイトルを変更'});
+  inp.addEventListener('input', () => { sl.obj[sl.titleKey] = inp.value; changed(); });
+  return inp;
 }
 function refreshImageSummary() {
   const el = $('#imSum'); if (!el) return;
@@ -1856,7 +2439,8 @@ function tabImages() {
   for (const s of slots) { let g = groups.find(x => x.name === s.group); if (!g) groups.push(g = {name:s.group, items:[]}); g.items.push(s); }
   const G = D().gallery;
   return [
-    h('div', {class:'ad-h'}, h('h2', {}, '画像一覧'), h('small', {}, 'サイトで使うすべての画像。カードに画像をドラッグしても差し替えできます')),
+    h('div', {class:'ad-h'}, h('h2', {}, '画像一覧'), h('small', {}, 'サイトで使うすべての画像。カードに画像をドラッグしても差し替えできます'),
+      h('button', {class:'ed-btn', type:'button', style:'margin-left:auto', html:icon('wand') + '背景をまとめて消す', onclick:openBgBatch})),
     h('div', {class:'im-sum', id:'imSum'}),
     ...groups.map(g => h('section', {class:'im-group'},
       h('div', {class:'im-group-h'}, g.name, h('small', {}, `${g.items.length}枠`),
@@ -1923,9 +2507,10 @@ function tabLinks() {
 /* ---------- 全体レイアウト ---------- */
 const ADMIN_TABS = [
   ['images', '画像一覧', 'image'], ['links', 'リンク一覧', 'link'], null,
-  ['site', 'サイト', 'home'], ['nav', 'メニュー', 'menu'], ['hero', 'トップ画像', 'star'],
+  ['site', 'サイト', 'home'], ['texts', '見出し・文言', 'book'], ['nav', 'メニュー', 'menu'], ['hero', 'トップ画像', 'star'],
   ['chars', 'キャラクター', 'users'], ['gallery', 'ギャラリー', 'folder'], ['patreon', 'Patreon', 'crown'],
-  ['news', 'お知らせ', 'bell'], ['sns', 'SNS', 'globe'], null,
+  ['news', 'お知らせ', 'bell'], ['sns', 'SNS', 'globe'], ['share', 'シェア表示', 'link'], null,
+  ['downloads', '壁紙・アイコン', 'download'], ['faq', 'よくある質問', 'book'], ['guide', 'ガイドライン', 'check'], ['gate', '年齢確認', 'lock'], null,
   ['github', '公開設定', 'gear']
 ];
 function showPreview(on) { const p = $('.ad-preview'); if (p) { p.classList.toggle('show', on); fitPreview(); } }

@@ -4,7 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RyuSe1 STUDIO</title>
-<meta name="description" content="RyuSe1 STUDIO — AI Illustration &amp; Original Characters">
+<meta name="description" content="RyuSe1 STUDIO — AI Illustration & Original Characters">
+<!-- share:start -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RyuSe1 STUDIO">
+<meta property="og:title" content="RyuSe1 STUDIO">
+<meta property="og:description" content="AI Illustration &amp; Original Characters">
+<meta name="twitter:card" content="summary">
+<!-- share:end -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
@@ -152,14 +159,14 @@ button,a,input,textarea{touch-action:manipulation}button,a{ -webkit-tap-highligh
 .eyebrow{display:flex;align-items:center;gap:8px;color:var(--accent)}.eyebrow .ic{width:14px;height:14px}
 .page-head h1{font-size:40px;letter-spacing:-.01em;font-weight:700;margin:13px 0 14px}.page-head p{color:var(--text-2);font-size:13.5px;max-width:680px}
 .page-head::after{content:"";position:absolute;left:0;bottom:-1px;width:64px;height:3px;border-radius:3px;background:var(--holo)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{display:flex;align-items:center;gap:7px;font-size:12.5px;padding:7px 15px;background:var(--surface);border:1px solid var(--line);border-radius:99px;color:var(--text-2);transition:all .2s}.chip:hover{border-color:var(--line-strong);color:var(--text)}.chip.on{background:var(--text);color:var(--bg);border-color:var(--text)}.chip i{width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent))}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{display:flex;align-items:center;gap:7px;font-size:12.5px;padding:7px 15px;background:var(--surface);border:1px solid var(--line);border-radius:99px;color:var(--text-2);transition:all .2s}.chip:hover{border-color:var(--line-strong);color:var(--text)}.chip.on{background:var(--text);color:var(--bg);border-color:var(--text)}.chip i{width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent));box-shadow:0 0 0 1px rgba(40,50,100,.16)}
 
 .char-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 24px}.char-card{position:relative;text-align:left;min-width:0}
-.cc-bar{position:absolute;left:14px;top:14px;width:26px;height:5px;border-radius:5px;background:var(--c);z-index:2;box-shadow:0 0 0 2px rgba(255,255,255,.75)}
-.cc-img{aspect-ratio:3/4;overflow:hidden;background:radial-gradient(80% 60% at 50% 30%,color-mix(in srgb,var(--c) 34%,transparent),transparent 72%),linear-gradient(180deg,color-mix(in srgb,var(--c) 8%,var(--surface-solid)),color-mix(in srgb,var(--c) 26%,var(--surface-solid)));border-radius:var(--r-lg);box-shadow:var(--shadow);transition:box-shadow .3s,transform .3s}
+.cc-bar{position:absolute;left:14px;top:14px;width:26px;height:5px;border-radius:5px;background:var(--c);z-index:2;box-shadow:0 0 0 2px rgba(255,255,255,.75),0 0 0 3px rgba(40,50,100,.12)}
+.cc-img{aspect-ratio:3/4;overflow:hidden;background:radial-gradient(80% 60% at 50% 30%,color-mix(in srgb,var(--ci,var(--c)) 34%,transparent),transparent 72%),linear-gradient(180deg,color-mix(in srgb,var(--c) 8%,var(--surface-solid)),color-mix(in srgb,var(--ci,var(--c)) 26%,var(--surface-solid)));border-radius:var(--r-lg);box-shadow:var(--shadow);transition:box-shadow .3s,transform .3s}
 .char-card:hover .cc-img{transform:translateY(-4px);box-shadow:0 0 0 2px var(--c),var(--shadow-hover)}
 .cc-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.char-card:hover img{transform:scale(1.03)}
-.cc-plate{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:15px 2px;border-bottom:1px solid var(--line)}.cc-plate b{font-size:15.5px;font-weight:700}.cc-no{font:600 10.5px var(--ff-en);color:var(--c)}.cc-plate small{font:9.5px var(--ff-en);letter-spacing:.12em;color:var(--muted);margin-left:auto}
+.cc-plate{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:15px 2px;border-bottom:1px solid var(--line)}.cc-plate b{font-size:15.5px;font-weight:700}.cc-no{font:600 10.5px var(--ff-en);color:var(--ci,var(--c))}.cc-plate small{font:9.5px var(--ff-en);letter-spacing:.12em;color:var(--muted);margin-left:auto}
 
 .masonry{columns:3 260px;column-gap:24px}.g-item{display:block;width:100%;position:relative;break-inside:avoid;text-align:left;margin-bottom:26px}
 .g-item img{width:100%;height:auto;background:var(--holo-soft),var(--surface-2);border-radius:var(--r-lg);box-shadow:var(--shadow);transition:transform .35s,box-shadow .35s}.g-item:hover img{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
@@ -189,10 +196,10 @@ button,a,input,textarea{touch-action:manipulation}button,a{ -webkit-tap-highligh
 .oshi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .oshi{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);transition:transform .3s,box-shadow .3s}
 .oshi:hover{transform:translateY(-3px);box-shadow:0 0 0 2px var(--c),var(--shadow-hover)}
-.oshi-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(80% 60% at 50% 30%,color-mix(in srgb,var(--c) 34%,transparent),transparent 72%),linear-gradient(180deg,color-mix(in srgb,var(--c) 8%,var(--surface-solid)),color-mix(in srgb,var(--c) 26%,var(--surface-solid)))}.oshi-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.oshi:hover .oshi-img img{transform:scale(1.04)}
-.oshi-img::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--c)}
+.oshi-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:radial-gradient(80% 60% at 50% 30%,color-mix(in srgb,var(--ci,var(--c)) 34%,transparent),transparent 72%),linear-gradient(180deg,color-mix(in srgb,var(--c) 8%,var(--surface-solid)),color-mix(in srgb,var(--ci,var(--c)) 26%,var(--surface-solid)))}.oshi-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.oshi:hover .oshi-img img{transform:scale(1.04)}
+.oshi-img::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--ci,var(--c))}
 .oshi-t{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px}.oshi-t b{font-size:14.5px;line-height:1.5}.oshi-t small{font-size:11.5px;color:var(--text-2);line-height:1.7}
-.oshi-go{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.9);color:var(--c);box-shadow:0 4px 12px rgba(40,50,110,.14)}.oshi-go .ic{width:15px;height:15px;transform:rotate(-45deg)}
+.oshi-go{position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.9);color:var(--ci,var(--c));box-shadow:0 4px 12px rgba(40,50,110,.14)}.oshi-go .ic{width:15px;height:15px;transform:rotate(-45deg)}
 .tier ul{display:flex;flex-direction:column;gap:10px;margin-top:22px}.tier li{display:flex;gap:10px;font-size:12.5px;color:var(--text-2)}.tier li .ic{width:15px;height:15px;margin-top:3px;color:var(--c)}
 .best-tag{position:absolute;right:18px;top:18px;background:var(--c);color:#fff;font:600 9.5px var(--ff-en);letter-spacing:.14em;padding:4px 9px;border-radius:99px}
 .lock-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
@@ -215,10 +222,10 @@ button,a,input,textarea{touch-action:manipulation}button,a{ -webkit-tap-highligh
 .modal-back{position:fixed;inset:0;z-index:80;background:rgba(14,16,36,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:grid;place-items:center;padding:24px;animation:fade .25s}
 .modal{position:relative;width:min(940px,100%);max-height:calc(100dvh - 48px);overflow:auto;background:var(--surface-solid);box-shadow:var(--shadow-lg);border-radius:28px;animation:rise .35s cubic-bezier(.2,.8,.2,1)}
 .m-close{position:absolute;top:14px;right:14px;z-index:5;width:40px;height:40px;display:grid;place-items:center;background:var(--surface-2);border:1px solid var(--line);border-radius:50%}.m-close:hover{background:var(--accent-soft)}
-.char-modal{display:grid;grid-template-columns:.9fr 1fr}.cm-img{min-height:460px;position:relative;background:radial-gradient(80% 60% at 50% 30%,color-mix(in srgb,var(--c) 34%,transparent),transparent 72%),linear-gradient(180deg,color-mix(in srgb,var(--c) 8%,var(--surface-solid)),color-mix(in srgb,var(--c) 26%,var(--surface-solid)))}.cm-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.char-modal{display:grid;grid-template-columns:.9fr 1fr}.cm-img{min-height:460px;position:relative;background:radial-gradient(80% 60% at 50% 30%,color-mix(in srgb,var(--ci,var(--c)) 34%,transparent),transparent 72%),linear-gradient(180deg,color-mix(in srgb,var(--c) 8%,var(--surface-solid)),color-mix(in srgb,var(--ci,var(--c)) 26%,var(--surface-solid)))}.cm-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cm-img::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 25%,#fff))}
-.cm-body{display:flex;flex-direction:column;gap:15px;padding:34px}.cm-body .eyebrow{color:var(--c)}.cm-body h2{font-size:32px;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:14px}.cm-body h2 i{width:12px;height:12px;background:var(--c);border-radius:50%;box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 25%,transparent)}
-.cm-catch{font-size:13.5px;border-left:3px solid var(--c);padding:10px 16px;border-radius:14px;background:color-mix(in srgb,var(--c) 10%,transparent)}
+.cm-body{display:flex;flex-direction:column;gap:15px;padding:34px}.cm-body .eyebrow{color:var(--ci,var(--c))}.cm-body h2{font-size:32px;font-weight:700;letter-spacing:.04em;display:flex;align-items:center;gap:14px}.cm-body h2 i{width:12px;height:12px;background:var(--c);border-radius:50%;box-shadow:0 0 0 1px rgba(40,50,100,.16),0 0 0 4px color-mix(in srgb,var(--ci,var(--c)) 22%,transparent)}
+.cm-catch{font-size:13.5px;border-left:3px solid var(--ci,var(--c));padding:10px 16px;border-radius:14px;background:color-mix(in srgb,var(--c) 10%,transparent)}
 .cm-desc{font-size:13px;line-height:2;white-space:pre-wrap;color:var(--text-2)}
 .cm-prof{display:grid;grid-template-columns:auto 1fr;margin:0;border-top:1px solid var(--line)}.cm-prof dt,.cm-prof dd{margin:0;padding:10px 0;border-bottom:1px solid var(--line);font-size:12.5px}.cm-prof dt{padding-right:25px;color:var(--muted)}
 .tags{display:flex;flex-wrap:wrap;gap:6px}.tags span{font-size:11px;padding:3px 10px;border:1px solid var(--line);border-radius:99px;background:var(--surface-2);color:var(--text-2)}
@@ -243,6 +250,62 @@ button,a,input,textarea{touch-action:manipulation}button,a{ -webkit-tap-highligh
 .prof-name{font:600 24px var(--ff-en)}.prof-tag{font:9.5px var(--ff-en);letter-spacing:.1em;color:var(--muted);margin-top:7px;text-transform:uppercase}.prof-bio{font-size:12px;color:var(--text-2);margin-top:14px}
 .snav{margin:24px 0;display:flex;flex-direction:column}.snav a{display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line);font-size:13.5px}.snav a.on{color:var(--accent);font-weight:700}.snav .ic{width:17px;height:17px;color:var(--muted)}.snav a.on .ic{color:var(--accent)}
 .drawer .sns-row{flex-wrap:wrap}
+/* FAQ */
+.faq{display:flex;flex-direction:column;gap:12px}
+.faq-item{padding:0;overflow:hidden}
+.faq-item summary{list-style:none;display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary b{flex:1;font-size:15px;line-height:1.6}
+.faq-q{flex:none;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font:600 14px var(--ff-en);color:#fff;background:var(--holo)}
+.faq-q.a{background:var(--surface-2);color:var(--accent);box-shadow:inset 0 0 0 1px var(--line)}
+.faq-tog{color:var(--muted);transition:transform .25s;display:grid}.faq-item[open] .faq-tog{transform:rotate(180deg)}
+.faq-a{display:flex;gap:14px;padding:0 22px 20px}
+.faq-a p{flex:1;font-size:13.5px;color:var(--text-2);line-height:2;padding-top:3px}
+.faq-a a,.guide-sec a{color:var(--accent);text-decoration:underline;word-break:break-all}
+/* guidelines */
+.guide-okng{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.guide-box{padding:24px 26px}
+.guide-box h3{display:flex;align-items:center;gap:10px;font-size:17px;margin-bottom:14px}
+.guide-box h3 .ic{width:30px;height:30px;padding:6px;border-radius:10px;color:#fff}
+.guide-box.ok h3 .ic{background:#39b597}.guide-box.ng h3 .ic{background:#e0567a}
+.guide-box ul{display:flex;flex-direction:column;gap:10px}
+.guide-box li{position:relative;padding-left:20px;font-size:13.5px;color:var(--text-2);line-height:1.8}
+.guide-box li::before{content:"";position:absolute;left:4px;top:.75em;width:7px;height:7px;border-radius:50%}
+.guide-box.ok li::before{background:#39b597}.guide-box.ng li::before{background:#e0567a}
+.guide-sec{padding:24px 26px}
+.guide-sec p{margin-top:10px;font-size:13.5px;color:var(--text-2);line-height:2}
+.guide-sec .sec-t{margin:0}
+/* downloads */
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;align-items:start}
+.dl-item{overflow:hidden;padding:0;display:flex;flex-direction:column}
+.dl-img{aspect-ratio:16/10;overflow:hidden;background:var(--holo-soft),var(--surface-2)}
+.dl-item.type-sp .dl-img{aspect-ratio:9/14}
+.dl-item.type-icon .dl-img{aspect-ratio:16/10;position:relative}
+.dl-item.type-icon .dl-img img{position:absolute;top:50%;left:50%;width:auto;height:74%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;box-shadow:0 8px 24px rgba(40,50,110,.2)}
+.dl-img img{width:100%;height:100%;object-fit:cover}
+.dl-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px}
+.dl-type{font:600 10.5px var(--ff-en);letter-spacing:.14em;color:var(--accent)}
+.dl-body b{font-size:14.5px}
+.dl-body small{font:11px var(--ff-en);color:var(--muted)}
+.dl-body p{font-size:12px;color:var(--text-2)}
+.dl-btn{margin-top:10px;padding:10px 16px}
+/* age gate */
+.gate{width:min(440px,100%);padding:34px 30px 28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.gate-ic{width:60px;height:60px;border-radius:20px;display:grid;place-items:center;color:#fff;background:linear-gradient(125deg,#4a3f8e,#c47aa9);flex:none}
+.gate-ic .ic{width:28px;height:28px}
+.gate h2{font-size:21px}
+.gate p{font-size:13.5px;color:var(--text-2);line-height:1.9}
+.gate-btns{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:6px}
+.gate-btns .btn{width:100%}
+.btn-ghost{background:transparent;color:var(--text);border-color:var(--line-strong);box-shadow:none}
+.btn-ghost:hover{background:var(--surface-2);color:var(--text);border-color:var(--line-strong)}
+.gated{padding:40px 26px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;font-size:13.5px;color:var(--text-2)}
+.pt-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:26px}
+.pt-actions .btn-patreon{margin-top:0}
+.pt-banner .text-link{color:#fff;border-color:rgba(255,255,255,.5)}
+.pt-banner .text-link:hover{color:#fff;border-color:#fff}
+@media(max-width:640px){.guide-okng{grid-template-columns:1fr}.guide-box,.guide-sec{padding:20px}.dl-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.dl-body{padding:12px}.faq-item summary{padding:14px 16px;gap:10px}.faq-item summary b{font-size:14px}.faq-a{padding:0 16px 16px;gap:10px}}
+@container main (max-width:600px){.guide-okng{grid-template-columns:1fr}.dl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @keyframes fade{from{opacity:0}}@keyframes rise{from{opacity:0;transform:translateY(14px) scale(.985)}}@keyframes drawerIn{from{transform:translateX(100%)}}
 
 /* responsive (layout unchanged from the attached UI) */
@@ -260,7 +323,7 @@ button,a,input,textarea{touch-action:manipulation}button,a{ -webkit-tap-highligh
 <div id="modal-root"></div>
 
 <!-- サイトデータの予備（本体は data.json）。admin.html から公開すると自動で更新されます -->
-<script id="site-data" type="application/json">{"version":1,"site":{"name":"RyuSe1","suffix":"STUDIO","tagline":"AI Illustration & Original Characters","bio":"オリジナルキャラクターたちのAIイラストを制作・発信しています。","avatar":"images/site/8yc3d-zu8xl.webp","cover":"images/site/bupjb-ykfjy.webp","footer":"© 2026 RyuSe1 STUDIO. All rights reserved.","notice":"サイト内の画像の無断転載・再配布はご遠慮ください。","contactText":"お仕事のご相談・ご連絡は、SNSのDMからお気軽にどうぞ。","contactLabel":"Xで連絡する","contactUrl":"https://x.com/RyuSe1_AI"},"nav":[{"id":"home","label":"ホーム","en":"Home","icon":"home","show":true},{"id":"characters","label":"キャラクター","en":"Characters","icon":"users","show":true},{"id":"gallery","label":"ギャラリー","en":"Gallery","icon":"image","show":true},{"id":"patreon","label":"会員限定","en":"Patreon","icon":"crown","show":true},{"id":"news","label":"お知らせ","en":"News","icon":"bell","show":true},{"id":"links","label":"リンク","en":"Links","icon":"link","show":true}],"hero":{"widget":true,"widgetLabel":"TODAY'S MUSE","interval":6,"slides":[{"image":"","badge":"ILLUSTRATION / ORIGINAL CHARACTERS","title":"想像を、\n好きのかたちに。","sub":"ひとりひとりの個性と、小さな物語。\nオリジナルキャラクターたちの世界を描いています。","link":"#/characters","linkLabel":"キャラクターを見る"},{"image":"","badge":"NEW","title":"ときめきを、\n一枚に。","sub":"最新のイラストはギャラリーから","link":"#/gallery","linkLabel":"ギャラリーへ"},{"image":"","badge":"MEMBERS","title":"創作の、\nもう一歩奥へ。","sub":"高解像度・差分イラストは会員限定で公開中","link":"#/patreon","linkLabel":"詳しく見る"}]},"tiles":{"characters":{"title":"キャラクター","en":"CHARACTERS","icon":"users","image":""},"patreon":{"title":"会員限定","en":"PATREON ONLY","icon":"lock","image":""},"gallery":{"title":"ギャラリー","en":"GALLERY","icon":"image","image":""}},"pages":{"characters":{"title":"キャラクター","en":"CHARACTERS","lead":"RyuSe1 STUDIO のオリジナルキャラクターたち。カードを押すとプロフィールが開きます。"},"gallery":{"title":"ギャラリー","en":"GALLERY","lead":"これまでに制作したイラストの一覧です。キャラクターごとに絞り込めます。"},"news":{"title":"お知らせ","en":"NEWS","lead":"サイトの更新情報や新作のお知らせ。"},"links":{"title":"リンク","en":"LINKS","lead":"各SNS・支援サイトはこちらから。"}},"characters":[{"id":"akane","name":"あかね","romaji":"AKANE","color":"#ea6a80","image":"images/characters/akane1-5-qdy2s-nobg-rzog8.webp","pos":25,"catch":"（ひとことセリフ）","desc":"ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。","profile":[{"k":"誕生日","v":"--/--"},{"k":"身長","v":"---cm"},{"k":"好きなもの","v":"---"}],"tags":""},{"id":"aoi","name":"あおい","romaji":"AOI","color":"#5b9cf0","image":"images/characters/aoi1-7-vgg30-nobg-5jjkz.webp","pos":25,"catch":"（ひとことセリフ）","desc":"ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。","profile":[{"k":"誕生日","v":"--/--"},{"k":"身長","v":"---cm"},{"k":"好きなもの","v":"---"}],"tags":""},{"id":"tamaki","name":"たまき","romaji":"TAMAKI","color":"#a4e4ea","image":"images/characters/tamaki1-3-71uoi-nobg-tpc4s.webp","pos":25,"catch":"（ひとことセリフ）","desc":"ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。","profile":[{"k":"誕生日","v":"--/--"},{"k":"身長","v":"---cm"},{"k":"好きなもの","v":"---"}],"tags":""},{"id":"sumire","name":"すみれ","romaji":"SUMIRE","color":"#9679e0","image":"images/characters/sumire1-4-ht4a1-nobg-7wsf9.webp","pos":25,"catch":"（ひとことセリフ）","desc":"ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。","profile":[{"k":"誕生日","v":"--/--"},{"k":"身長","v":"---cm"},{"k":"好きなもの","v":"---"}],"tags":""},{"id":"kaede","name":"かえで","romaji":"KAEDE","color":"#f4c10b","image":"images/characters/kaede1-2-rjlc6-nobg-yil8b.webp","pos":25,"catch":"（ひとことセリフ）","desc":"ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。","profile":[{"k":"誕生日","v":"--/--"},{"k":"身長","v":"---cm"},{"k":"好きなもの","v":"---"}],"tags":""},{"id":"tsubaki","name":"つばき","romaji":"TSUBAKI","color":"#d65582","image":"images/characters/tsubaki1-3-06tuk-nobg-lkpmt.webp","pos":25,"catch":"（ひとことセリフ）","desc":"ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。","profile":[{"k":"誕生日","v":"--/--"},{"k":"身長","v":"---cm"},{"k":"好きなもの","v":"---"}],"tags":""},{"id":"hisui","name":"ひすい","romaji":"HISUI","color":"#39b597","image":"images/characters/hisui1-6-frh6z-nobg-tbq0b.webp","pos":25,"catch":"（ひとことセリフ）","desc":"ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。","profile":[{"k":"誕生日","v":"--/--"},{"k":"身長","v":"---cm"},{"k":"好きなもの","v":"---"}],"tags":""},{"id":"kasumi","name":"かすみ","romaji":"KASUMI","color":"#94a9d6","image":"images/characters/kasumi1-4-ew1yc-nobg-xdlln.webp","pos":25,"catch":"（ひとことセリフ）","desc":"ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。","profile":[{"k":"誕生日","v":"--/--"},{"k":"身長","v":"---cm"},{"k":"好きなもの","v":"---"}],"tags":""}],"gallery":[{"id":"guewfrml","image":"","title":"20260827_2038_image","date":"2026-09-25","chars":[]},{"id":"gopwa6a1","image":"","title":"20260827_2038_image (1)","date":"2026-09-25","chars":[]},{"id":"gyzybypy","image":"","title":"20260827_2026_image","date":"2026-09-25","chars":[]},{"id":"g6vvg8sp","image":"","title":"20260827_1502_image","date":"2026-09-25","chars":[]},{"id":"g1","image":"","title":"Artwork 01","date":"2026-09-24","chars":["akane"]},{"id":"g2","image":"","title":"Artwork 02","date":"2026-09-22","chars":["aoi"]},{"id":"g3","image":"","title":"Artwork 03","date":"2026-09-20","chars":["tamaki"]},{"id":"g4","image":"","title":"Artwork 04","date":"2026-09-18","chars":["sumire"]},{"id":"g5","image":"","title":"Artwork 05","date":"2026-09-16","chars":["kaede"]},{"id":"g6","image":"","title":"Artwork 06","date":"2026-09-14","chars":["tsubaki"]},{"id":"g7","image":"","title":"Artwork 07","date":"2026-09-12","chars":["hisui"]},{"id":"g8","image":"","title":"Artwork 08","date":"2026-09-10","chars":["kasumi"]}],"patreon":{"url":"https://www.patreon.com/c/RyuSe1421","title":"Patreon 会員限定","lead":"Patreonでは、ここでは公開していないイラストや動画をお届けしています。「もっとみたいコース」は7日間無料でお試しできます。","cta":"Patreonで支援する","tiers":[{"name":"もっとみたいコース/basic plan","price":"$3 / 月","color":"#6fb8ec","icon":"star","badge":"7日間無料お試しあり","perks":"R15〜R18までの画像（モザイク処理を必要としないものが多いです）\nシチュエーションも単発な傾向にあり","best":false,"url":""},{"name":"めっちゃみたいコース/Extra Plan","price":"$8 / 月","color":"#9a86ee","icon":"comet","badge":"","perks":"もっとみたいコースの内容\nR18コンテンツ（いろいろなシチュエーション）\n短編動画","best":true,"url":""},{"name":"まじでみたいプラン/ULTRA Plan","price":"$15 / 月","color":"#e07ab8","icon":"crown","badge":"","perks":"めっちゃプランの内容\nさらに限定画像\n長編動画や漫画等、作成に大幅な時間がかかるもの","best":false,"url":""}],"oshi":{"title":"推しプラン","price":"$3 / 月","lead":"好きな子を選んで応援できるプランです。","items":[{"char":"akane","name":"あかね推し❤️プラン","text":"もっと-まじのあかねちゃんのコンテンツが見れます❤️","url":""},{"char":"aoi","name":"あおい推し💙プラン","text":"もっと-まじのあおいちゃんのコンテンツが見れます💙","url":""},{"char":"tamaki","name":"たまき推し🤍プラン","text":"もっと-まじのたまきちゃんのコンテンツが見れます🤍","url":""},{"char":"sumire","name":"すみれ推し💜プラン","text":"もっと-まじのすみれちゃんのコンテンツが見れます💜","url":""},{"char":"kaede","name":"かえで推し💛プラン","text":"もっと-まじのかえでちゃんのコンテンツが見れます💛","url":""},{"char":"tsubaki","name":"つばき推し🩷プラン","text":"もっと-まじのつばきちゃんのコンテンツが見れます🩷","url":""},{"char":"hisui","name":"ひすい推し💚プラン","text":"もっと-まじのひすいちゃんのコンテンツが見れます💚","url":""},{"char":"kasumi","name":"かすみ推し🩶プラン","text":"もっと-まじのかすみちゃんのコンテンツが見れます🩶","url":""}]},"previews":[{"image":"","title":"限定イラスト 01","tier":"basic"},{"image":"","title":"限定イラスト 02","tier":"Extra"},{"image":"","title":"限定イラスト 03","tier":"basic"},{"image":"","title":"限定イラスト 04","tier":"Extra"},{"image":"","title":"限定イラスト 05","tier":"basic"},{"image":"","title":"限定イラスト 06","tier":"Extra"}],"note":"※ 一部のプランには成人向け（R18）の内容が含まれます。18歳未満の方はご利用いただけません。\n※ 限定コンテンツの本編は Patreon 上で公開しています。このページの画像はプレビュー（ぼかし）です。"},"news":[{"date":"2026-09-25","cat":"update","text":"RyuSe1 STUDIO をオープンしました","link":""},{"date":"2026-09-25","cat":"new","text":"キャラクターページを公開しました（8人）","link":"#/characters"},{"date":"2026-09-22","cat":"patreon","text":"Patreon 会員限定ページを準備しています","link":"#/patreon"},{"date":"2026-09-20","cat":"info","text":"ギャラリーを順次追加していきます","link":"#/gallery"}],"sns":[{"icon":"patreon","label":"Patreon","handle":"支援はこちら","url":"https://www.patreon.com/c/RyuSe1421","pin":true},{"icon":"x","label":"X","handle":"@RyuSe1_AI","url":"https://x.com/RyuSe1_AI","pin":true},{"icon":"pixiv","label":"pixiv","handle":"作品一覧","url":"https://www.pixiv.net/","pin":true},{"icon":"discord","label":"Discord","handle":"コミュニティに参加","url":"https://discord.com/","pin":true},{"icon":"youtube","label":"YouTube","handle":"動画・配信","url":"https://www.youtube.com/","pin":false}],"publishedAt":"2026-09-25T10:39:31.579Z"}</script>
+<script id="site-data" type="application/json">null</script>
 
 <script>
 (function(){
@@ -411,10 +474,23 @@ let RS_BASE = String(window.RS_BASE || '');   // プレビュー時の画像の�
 const relBase = u => RS_BASE && u && !/^(https?:|data:|blob:|\/|#)/i.test(u) ? RS_BASE + u : u;
 const imgSrc = u => (u && ASSETS.get(u)) || relBase(safeUrl(u));
 const imgOr = (src, ph) => imgSrc(src) || ph;
+/* 白や黄色など淡い色は、文字や細い線には少し濃くした色を使う */
+function inkOf(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(String(hex || '').trim());
+  if (!m) return hex;
+  let [r, g, b] = [0, 2, 4].map(i => parseInt(m[1].slice(i, i + 2), 16));
+  const L = () => [r, g, b].map(v => { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }).reduce((a, v, i) => a + v * [.2126, .7152, .0722][i], 0);
+  if (L() <= .45) return '#' + m[1];
+  if (Math.max(r, g, b) - Math.min(r, g, b) < 24) return '#9d9fb5';
+  for (let k = 0; k < 24 && L() > .38; k++) { r *= .92; g *= .92; b *= .92; }
+  return '#' + [r, g, b].map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
+}
+const cv = c => `--c:${esc(c)};--ci:${esc(inkOf(c))}`;
 
 /* =========================================================
    default data
    ========================================================= */
+const DL_TYPES = {pc:'PC壁紙', sp:'スマホ壁紙', icon:'アイコン', other:'その他'};
 const NEWS_CATS = {
   update:{label:'アップデート', color:'#4f9be6'},
   info:{label:'お知らせ', color:'#e0668f'},
@@ -425,9 +501,9 @@ const NEWS_CATS = {
 const CHAR_SEED = [
   ['akane','あかね','AKANE','#ea6a80'],
   ['aoi','あおい','AOI','#5b9cf0'],
-  ['tamaki','たまき','TAMAKI','#ada2e3'],
+  ['tamaki','たまき','TAMAKI','#ffffff'],
   ['sumire','すみれ','SUMIRE','#9679e0'],
-  ['kaede','かえで','KAEDE','#eeb22c'],
+  ['kaede','かえで','KAEDE','#f5c518'],
   ['tsubaki','つばき','TSUBAKI','#d65582'],
   ['hisui','ひすい','HISUI','#39b597'],
   ['kasumi','かすみ','KASUMI','#9b98ad']
@@ -451,7 +527,10 @@ const DEFAULT = {
     {id:'gallery', label:'ギャラリー', en:'Gallery', icon:'image', show:true},
     {id:'patreon', label:'会員限定', en:'Patreon', icon:'crown', show:true},
     {id:'news', label:'お知らせ', en:'News', icon:'bell', show:true},
-    {id:'links', label:'リンク', en:'Links', icon:'link', show:true}
+    {id:'downloads', label:'壁紙・アイコン', en:'Downloads', icon:'download', show:true},
+    {id:'links', label:'リンク', en:'Links', icon:'link', show:true},
+    {id:'faq', label:'よくある質問', en:'FAQ', icon:'book', show:true, header:false},
+    {id:'guide', label:'ガイドライン', en:'Guidelines', icon:'check', show:true, header:false}
   ],
   hero: {
     widget:true, widgetLabel:"TODAY'S MUSE", interval:6,
@@ -466,11 +545,56 @@ const DEFAULT = {
     patreon:{title:'会員限定', en:'PATREON ONLY', icon:'lock', image:''},
     gallery:{title:'ギャラリー', en:'GALLERY', icon:'image', image:''}
   },
+  home: {
+    kicker:'RyuSe1 STUDIO / Creative journal', featured:'FEATURED VISUAL', heroLink2:'作品を見る',
+    worksIndex:'01 / Latest collection', worksTitle:'Selected works.', worksSub:'新着イラスト', worksLink:'すべての作品',
+    exploreIndex:'02 / Explore', exploreTitle:'Find your favorite.', exploreIntro:'キャラクターを知る。作品を眺める。\nあなたの「好き」が見つかる場所。',
+    newsIndex:'03 / Studio notes', newsTitle:"What's new.", newsSub:'お知らせ', newsLink:'すべてのお知らせ',
+    follow:'FOLLOW THE STUDIO'
+  },
+  faq: {
+    items: [
+      {q:'Patreonって何ですか？', a:'クリエイターを月額で応援できる海外のサービスです。プランに参加すると、Patreonでしか見られない限定の作品を楽しめます。'},
+      {q:'どうやって参加するの？', a:'「会員限定」ページのボタンからPatreonを開き、好きなプランの「参加する」を押します。Patreonのアカウントを作って支払い方法を登録すれば完了です。'},
+      {q:'コースと推しプランの違いは？', a:'コース（basic / Extra / ULTRA）は、いろいろなキャラの作品をまとめて楽しめるプランです。推しプランは、選んだ1人のキャラのコンテンツを楽しめるプランです。'},
+      {q:'無料で試せますか？', a:'「もっとみたいコース（basic）」は7日間の無料お試しがあります。'},
+      {q:'料金や支払い方法は？', a:'料金はドル（$）建ての月額です。日本円での金額は為替によって少し変わります。支払い方法はPatreonの画面で選べます。'},
+      {q:'プランの変更や解約はできますか？', a:'Patreonのメンバーシップ設定から、いつでもプランの変更や解約ができます。'},
+      {q:'18歳未満でも参加できますか？', a:'一部のプランには成人向けの内容が含まれるため、18歳未満の方はご利用いただけません。'}
+    ],
+    note:'※ 料金・お試し・解約などの細かい条件は、Patreonの表示が最新です。'
+  },
+  guide: {
+    okTitle:'OKなこと',
+    ok:'作品ページのURLやSNS投稿のシェア（リポスト・引用）\n配布している壁紙・アイコンを個人で使うこと\nファンアート（二次創作）を描いて投稿すること',
+    ngTitle:'ご遠慮いただきたいこと',
+    ng:'画像の無断転載・再配布（SNS・まとめサイト・動画など）\n自作発言、作者を偽っての投稿\n商用利用・グッズ化・販売\nAIの学習（LoRA作成など）への利用\n加工・トレースした画像の公開\nPatreon限定コンテンツの共有・転載',
+    sections: [
+      {title:'AIを使った作品について', body:'当サイトの作品は、画像生成AIを使って制作しています。'},
+      {title:'ファンアートについて', body:'ファンアート（二次創作）は大歓迎です。公序良俗に反しない範囲で楽しんでください。'},
+      {title:'お問い合わせ', body:'わからないことや、上記以外の使い方をしたい場合は、SNSのDMからご相談ください。'}
+    ],
+    updated:'2026-09-25'
+  },
+  downloads: {
+    items: [],
+    note:'※ 配布画像は個人での利用に限ります。ご利用の前にガイドラインをご確認ください。'
+  },
+  share: {url:'', title:'', description:'', image:'', twitter:''},
+  gate: {
+    enabled:true, page:true, links:true, remember:30,
+    title:'年齢確認',
+    text:'ここから先は、成人向け（R18）の内容を含むページです。\nあなたは18歳以上ですか？',
+    yes:'はい、18歳以上です', no:'いいえ'
+  },
   pages: {
     characters:{title:'キャラクター', en:'CHARACTERS', lead:'RyuSe1 STUDIO のオリジナルキャラクターたち。カードを押すとプロフィールが開きます。'},
     gallery:{title:'ギャラリー', en:'GALLERY', lead:'これまでに制作したイラストの一覧です。キャラクターごとに絞り込めます。'},
     news:{title:'お知らせ', en:'NEWS', lead:'サイトの更新情報や新作のお知らせ。'},
-    links:{title:'リンク', en:'LINKS', lead:'各SNS・支援サイトはこちらから。'}
+    links:{title:'リンク', en:'LINKS', lead:'各SNS・支援サイトはこちらから。'},
+    faq:{title:'よくある質問', en:'FAQ', lead:'Patreonへの参加方法やプランについて、よくいただく質問をまとめました。'},
+    guide:{title:'ご利用ガイドライン', en:'GUIDELINES', lead:'作品を楽しんでいただくためのお願いです。ご利用の前にお読みください。'},
+    downloads:{title:'壁紙・アイコン配布', en:'DOWNLOADS', lead:'スマホ・PCの壁紙やSNSアイコンを無料で配布しています。'}
   },
   characters: CHAR_SEED.map(([id,name,romaji,color]) => ({
     id, name, romaji, color, image:'', pos:25,
@@ -488,6 +612,7 @@ const DEFAULT = {
     title:'Patreon 会員限定',
     lead:'Patreonでは、ここでは公開していないイラストや動画をお届けしています。「もっとみたいコース」は7日間無料でお試しできます。',
     cta:'Patreonで支援する',
+    courseTitle:'コース', previewTitle:'限定コンテンツのプレビュー',
     tiers:[
       {name:'もっとみたいコース/basic plan', price:'$3 / 月', color:'#6fb8ec', icon:'star', badge:'7日間無料お試しあり', perks:'R15〜R18までの画像（モザイク処理を必要としないものが多いです）\nシチュエーションも単発な傾向にあり', best:false, url:''},
       {name:'めっちゃみたいコース/Extra Plan', price:'$8 / 月', color:'#9a86ee', icon:'comet', badge:'', perks:'もっとみたいコースの内容\nR18コンテンツ（いろいろなシチュエーション）\n短編動画', best:true, url:''},
@@ -522,9 +647,15 @@ function mergeData(d) {
   if (!d || typeof d !== 'object') return base;
   d = JSON.parse(JSON.stringify(d));
   for (const k of Object.keys(base)) if (!(k in d)) d[k] = base[k];
-  for (const k of ['site','hero','tiles','pages','patreon']) d[k] = Object.assign({}, base[k], d[k] || {});
+  for (const k of ['site','home','hero','tiles','pages','patreon','faq','guide','downloads','gate','share']) d[k] = Object.assign({}, base[k], d[k] || {});
+  if (Array.isArray(d.nav)) base.nav.forEach((n, i) => { if (!d.nav.some(x => x && x.id === n.id)) d.nav.splice(Math.min(i, d.nav.length), 0, n); });   // 新しいページをメニューに追加
   for (const k of Object.keys(base.tiles)) d.tiles[k] = Object.assign({}, base.tiles[k], d.tiles[k] || {});
   for (const k of Object.keys(base.pages)) d.pages[k] = Object.assign({}, base.pages[k], d.pages[k] || {});
+  (d.characters || []).forEach(c => {   // 以前の初期カラーのままなら新しいイメージカラーへ
+    const col = String(c.color || '').toLowerCase();
+    if (c.id === 'tamaki' && ['#ada2e3', '#e2b04f'].includes(col)) c.color = '#ffffff';
+    if (c.id === 'kaede' && ['#eeb22c', '#ef8a4c'].includes(col)) c.color = '#f5c518';
+  });
   const pt = d.patreon;
   if (Array.isArray(pt.tiers) && pt.tiers.map(t => t && t.name).join() === 'Star,Comet,Galaxy') {   // 仮プランのままなら実プランに置き換え
     pt.tiers = base.patreon.tiers;
@@ -548,7 +679,7 @@ function loadData() {
 const S = {
   data: loadData(),
   route: {page:'home', id:''},
-  galFilter:'all', newsFilter:'all',
+  galFilter:'all', newsFilter:'all', dlFilter:'all', ageOk:false, gateCb:null,
   slide:0, heroTimer:null, clockTimer:null, heroPaused:false,
   lb:null
 };
@@ -569,7 +700,7 @@ function logoHTML() {
   return `<a class="logo" href="#/home" aria-label="${esc(s.name)} ${esc(s.suffix)} ホーム"><span class="logo-mark">${LOGO_SVG}</span><span class="logo-txt">${esc(s.name)}${s.suffix ? `<span>${esc(s.suffix)}</span>` : ''}</span></a>`;
 }
 function headerHTML() {
-  const nav = D().nav.filter(n => n.show);
+  const nav = D().nav.filter(n => n.show && n.header !== false);
   return `<a class="skip-link" href="#main" data-act="skip">本文へスキップ</a><header class="hdr"><div class="hdr-in">
     ${logoHTML()}
     <nav class="gnav" aria-label="メイン">${nav.map((n,i) => `<a href="#/${n.id}" data-nav="${n.id}"><span class="nav-num">${String(i+1).padStart(2,'0')}</span>${esc(n.en || n.label)}</a>`).join('')}</nav>
@@ -641,7 +772,7 @@ function heroHTML() {
   const slides = h.slides.length ? h.slides : [{title:'', sub:''}];
   return `<section class="hero" aria-roledescription="carousel" aria-label="ピックアップ">
     <div class="hero-copy">
-      <div class="studio-kicker">${esc(D().site.name)} ${esc(D().site.suffix)} / Creative journal</div>
+      ${D().home.kicker ? `<div class="studio-kicker">${esc(D().home.kicker)}</div>` : ''}
       <div class="hero-cap" id="heroCap"></div>
       <div class="hero-signature">${esc(D().site.tagline)}</div>
     </div>
@@ -651,7 +782,7 @@ function heroHTML() {
         <span class="art-label">${icon('comet')}<span id="heroBadge"></span></span>
         <span class="art-corner">${esc(D().site.name)} / <span id="heroIndex">01</span></span>
       </div>
-      <div class="art-meta"><span>FEATURED VISUAL / ${String(slides.length).padStart(2,'0')} STORIES</span>
+      <div class="art-meta"><span>${esc(D().home.featured)}${D().home.featured ? ' / ' : ''}${String(slides.length).padStart(2,'0')} STORIES</span>
         ${slides.length>1 ? `<div class="hero-controls"><div class="hero-bars">${slides.map((_,i) => `<button data-slide="${i}" aria-label="スライド${i+1}">${String(i+1).padStart(2,'0')}</button>`).join('')}</div><button class="hero-pause" data-act="hero-pause" aria-label="${S.heroPaused?'スライドの自動再生を開始':'スライドの自動再生を停止'}" aria-pressed="${S.heroPaused}">${icon(S.heroPaused?'play':'pause')}</button></div>`:''}
       </div>
     </div>
@@ -662,14 +793,14 @@ function heroCapHTML(s) {
   return `<h1>${esc(title)}</h1>
     ${s && s.sub ? `<p>${esc(s.sub)}</p>` : ''}
     <div class="hero-actions">${s && s.link ? `<a class="hero-link" href="${esc(safeUrl(s.link))}"${extAttr(s.link)}>${esc(s.linkLabel || '詳しく見る')}${icon('arrow')}</a>`:''}
-    ${!s || s.link !== '#/gallery' ? `<a class="text-link" href="#/gallery">作品を見る${icon('arrow')}</a>`:''}</div>`;
+    ${(!s || s.link !== '#/gallery') && D().home.heroLink2 ? `<a class="text-link" href="#/gallery">${esc(D().home.heroLink2)}${icon('arrow')}</a>`:''}</div>`;
 }
 function tilesHTML() {
-  const t=D().tiles, cs=D().characters, gs=sortedGallery(), pv=D().patreon.previews||[];
+  const t=D().tiles, cs=D().characters, gs=sortedGallery(), pv=D().patreon.previews||[], hm=D().home;
   const sources={characters:cs[0]?charImg(cs[0]):phHero(0),gallery:gs[0]?galImg(gs[0]):phHero(1),patreon:pv[0]?imgOr(pv[0].image,phArt('pv0','','')):phHero(2)};
   const counts={characters:`${String(cs.length).padStart(2,'0')} CHARACTERS`,gallery:`${String(gs.length).padStart(2,'0')} WORKS`,patreon:'MEMBERS ONLY'};
   return `<section class="explore" aria-labelledby="exploreTitle">
-    <div><div class="section-head"><div><span class="section-index">02 / Explore</span><h2 id="exploreTitle">Find your favorite.</h2></div></div><p class="explore-intro">キャラクターを知る。作品を眺める。<br>あなたの「好き」が見つかる場所。</p></div>
+    <div><div class="section-head"><div>${hm.exploreIndex ? `<span class="section-index">${esc(hm.exploreIndex)}</span>` : ''}<h2 id="exploreTitle">${esc(hm.exploreTitle)}</h2></div></div>${hm.exploreIntro ? `<p class="explore-intro">${esc(hm.exploreIntro).replace(/\n/g, '<br>')}</p>` : ''}</div>
     <div class="directory">${['characters','gallery','patreon'].map((key,i) => {const x=t[key]; return `<a class="directory-row" href="#/${key}">
       <span class="directory-number">0${i+1}</span><span class="directory-thumb${key==='patreon'?' restricted':''}"><img src="${esc(imgOr(x.image,sources[key]))}" alt="" loading="lazy"></span>
       <span class="directory-name"><b>${esc(x.en)}</b><small>${icon(x.icon)}${esc(x.title)}</small></span><span class="directory-count">${counts[key]}</span>${icon('arrow')}
@@ -677,7 +808,7 @@ function tilesHTML() {
   </section>`;
 }
 function homeHTML() {
-  const d=D(), s=d.site;
+  const d=D(), s=d.site, hm=d.home;
   const pins=d.sns.filter(x=>x.pin&&x.url).slice(0,4);
   const news=sortedNews().slice(0,4), fresh=sortedGallery().slice(0,3), m=museOfToday();
   return `${heroHTML()}
@@ -687,20 +818,20 @@ function homeHTML() {
       ${d.hero.widget ? `<div class="muse-inline"><div><small>${esc(d.hero.widgetLabel)}</small><span class="w-date" id="wDate"></span><span class="w-time" id="wTime"></span></div>${m?`<button class="w-muse" data-char="${esc(m.id)}"><img src="${esc(charImg(m))}" alt=""><span><b>${esc(m.name)}</b><small>${esc(m.romaji)}</small></span></button>`:''}</div>`:''}
     </section>
     <section class="selected-works" aria-labelledby="worksTitle">
-      <div class="section-head"><div><span class="section-index">01 / Latest collection</span><h2 id="worksTitle">Selected works.<span>新着イラスト</span></h2></div><a class="text-link" href="#/gallery">すべての作品${icon('arrow')}</a></div>
+      <div class="section-head"><div>${hm.worksIndex ? `<span class="section-index">${esc(hm.worksIndex)}</span>` : ''}<h2 id="worksTitle">${esc(hm.worksTitle)}${hm.worksSub ? `<span>${esc(hm.worksSub)}</span>` : ''}</h2></div>${hm.worksLink ? `<a class="text-link" href="#/gallery">${esc(hm.worksLink)}${icon('arrow')}</a>` : ''}</div>
       ${fresh.length ? `<div class="selected-grid">${fresh.map(g=>`<button class="work-item" data-gal="${esc(g.id)}" aria-label="${esc(g.title)}を拡大"><span class="work-visual"><img src="${esc(galImg(g))}" alt="${esc(g.title)}" loading="lazy"><span class="work-open">${icon('arrow')}</span></span><span class="work-info"><b>${esc(g.title)}</b><small>${esc(fmtDate(g.date))}</small></span><span class="work-caption">${esc((g.chars||[]).map(id=>charById(id)?.romaji).filter(Boolean).join(' / ')||'ILLUSTRATION')}</span></button>`).join('')}</div>`:`<div class="empty">まだ作品がありません</div>`}
     </section>
     ${tilesHTML()}
     <section class="journal" aria-labelledby="newsTitle">
-      <div class="section-head"><div><span class="section-index">03 / Studio notes</span><h2 id="newsTitle">What's new.<span>お知らせ</span></h2></div><a class="text-link" href="#/news">すべてのお知らせ${icon('arrow')}</a></div>
+      <div class="section-head"><div>${hm.newsIndex ? `<span class="section-index">${esc(hm.newsIndex)}</span>` : ''}<h2 id="newsTitle">${esc(hm.newsTitle)}${hm.newsSub ? `<span>${esc(hm.newsSub)}</span>` : ''}</h2></div>${hm.newsLink ? `<a class="text-link" href="#/news">${esc(hm.newsLink)}${icon('arrow')}</a>` : ''}</div>
       ${newsList(news)}
     </section>
-    ${pins.length ? `<nav class="connect-strip" aria-label="SNSリンク"><span>FOLLOW THE STUDIO</span>${pins.map(x=>`<a href="${esc(safeUrl(x.url))}"${extAttr(x.url)}>${icon(x.icon)}${esc(x.label)}${icon('arrow')}</a>`).join('')}</nav>`:''}`;
+    ${pins.length ? `<nav class="connect-strip" aria-label="SNSリンク"><span>${esc(hm.follow)}</span>${pins.map(x=>`<a href="${esc(safeUrl(x.url))}"${extAttr(x.url)}>${icon(x.icon)}${esc(x.label)}${icon('arrow')}</a>`).join('')}</nav>`:''}`;
 }
 function charactersHTML() {
   const cs = D().characters;
   return `${pageHead('characters', 'users')}
-  <section class="char-grid">${cs.map((c, i) => `<button class="char-card" data-char="${esc(c.id)}" style="--c:${esc(c.color)}">
+  <section class="char-grid">${cs.map((c, i) => `<button class="char-card" data-char="${esc(c.id)}" style="${cv(c.color)}">
       <span class="cc-bar"></span>
       <div class="cc-img"><img src="${esc(charImg(c))}" alt="${esc(c.name)}" loading="lazy" style="object-position:50% ${+c.pos || 25}%"></div>
       <div class="cc-plate"><span class="cc-no">${String(i+1).padStart(2,'0')}</span><b>${esc(c.name)}</b><small>${esc(c.romaji)}</small></div>
@@ -716,11 +847,11 @@ function galleryHTML() {
   return `${pageHead('gallery', 'image')}
   <div class="chips" role="group" aria-label="絞り込み">
     <button class="chip${S.galFilter === 'all' ? ' on' : ''}" data-filter="all">すべて <span class="en">${D().gallery.length}</span></button>
-    ${cs.map(c => `<button class="chip${S.galFilter === c.id ? ' on' : ''}" data-filter="${esc(c.id)}" style="--c:${esc(c.color)}"><i></i>${esc(c.name)}</button>`).join('')}
+    ${cs.map(c => `<button class="chip${S.galFilter === c.id ? ' on' : ''}" data-filter="${esc(c.id)}" style="${cv(c.color)}"><i></i>${esc(c.name)}</button>`).join('')}
   </div>
   ${list.length ? `<section class="masonry">${list.map(g => `<button class="g-item" data-gal="${esc(g.id)}">
       <img src="${esc(galImg(g))}" alt="${esc(g.title)}" loading="lazy">
-      <span class="g-dots">${(g.chars || []).map(id => { const c = charById(id); return c ? `<i style="--c:${esc(c.color)}"></i>` : ''; }).join('')}</span>
+      <span class="g-dots">${(g.chars || []).map(id => { const c = charById(id); return c ? `<i style="${cv(c.color)}"></i>` : ''; }).join('')}</span>
       <span class="g-cap"><b>${esc(g.title)}</b><small>${esc(fmtDate(g.date))}</small></span>
     </button>`).join('')}</section>` : `<div class="card empty">該当する作品がありません</div>`}`;
 }
@@ -734,10 +865,11 @@ function patreonHTML() {
   const oshi = (o.items || []).filter(x => x && (x.name || x.char));
   return `<section class="card pt-banner">
     <div><span class="eyebrow">${icon('crown')}PATREON MEMBERS</span><h1>${esc(p.title)}</h1><p>${esc(p.lead)}</p>
-    ${url ? `<a class="btn btn-patreon" href="${esc(url)}"${extAttr(url)}>${icon('patreon')}${esc(p.cta || 'Patreonで支援する')}${icon('arrow')}</a>` : ''}</div>
+    <div class="pt-actions">${url ? `<a class="btn btn-patreon" href="${esc(url)}"${extAttr(url)}>${icon('patreon')}${esc(p.cta || 'Patreonで支援する')}${icon('arrow')}</a>` : ''}
+    ${navItem('faq').show ? `<a class="text-link" href="#/faq">${esc(navItem('faq').label)}${icon('arrow')}</a>` : ''}</div></div>
     <div class="pt-art">${art}<div class="lockc">${icon('lock')}</div></div>
   </section>
-  ${(p.tiers || []).length ? `<h3 class="sec-t">コース</h3>
+  ${(p.tiers || []).length ? `<h3 class="sec-t">${esc(p.courseTitle || 'コース')}</h3>
   <section class="tier-grid">${p.tiers.map(t => { const [jp, ...rest] = String(t.name || '').split('/'); const en = rest.join('/').trim(); return `<div class="card tier${t.best ? ' best' : ''}" style="--c:${esc(t.color || '#9a86ee')}">
       ${t.best ? '<span class="best-tag">おすすめ</span>' : ''}
       <span class="tier-ic">${icon(t.icon || 'star')}</span>
@@ -748,11 +880,11 @@ function patreonHTML() {
     </div>`; }).join('')}</section>` : ''}
   ${oshi.length ? `<h3 class="sec-t">${esc(o.title || '推しプラン')}${o.price ? `<small>各 ${esc(o.price)}</small>` : ''}</h3>
   ${o.lead ? `<p class="oshi-lead">${esc(o.lead)}</p>` : ''}
-  <section class="oshi-grid">${oshi.map(x => { const c = charById(x.char); return `<a class="oshi" ${join(x.url)} style="--c:${esc(c ? c.color : '#9a86ee')}">
+  <section class="oshi-grid">${oshi.map(x => { const c = charById(x.char); return `<a class="oshi" ${join(x.url)} style="${cv(c ? c.color : '#9a86ee')}">
       <span class="oshi-img"><img src="${esc(c ? charImg(c) : phArt('oshi' + x.name, '', ''))}" alt="${esc(c ? c.name : '')}" loading="lazy" style="object-position:50% ${c ? (+c.pos || 25) : 25}%"></span>
       <span class="oshi-t"><b>${esc(x.name)}</b>${x.text ? `<small>${esc(x.text)}</small>` : ''}</span>
       <span class="oshi-go">${icon('arrow')}</span></a>`; }).join('')}</section>` : ''}
-  ${pv.length ? `<h3 class="sec-t">限定コンテンツのプレビュー</h3>
+  ${pv.length ? `<h3 class="sec-t">${esc(p.previewTitle || '限定コンテンツのプレビュー')}</h3>
   <section class="lock-grid">${pv.map((x, i) => `<a class="lock-item" href="${esc(url || '#/patreon')}"${extAttr(url)}>
       <img src="${esc(imgOr(x.image, phArt('pv'+i, '', SOFT[i % SOFT.length])))}" alt="" loading="lazy">
       <span class="lock-in"><span class="lk">${icon('lock')}</span><b>${esc(x.title)}</b>${x.tier ? `<small>${esc(x.tier)}</small>` : ''}</span>
@@ -778,7 +910,84 @@ function linksHTML() {
   ${s.contactText ? `<section class="card contact"><span class="q-ic">${icon('mail')}</span><p>${esc(s.contactText)}</p>
     ${s.contactUrl ? `<a class="btn btn-main" href="${esc(safeUrl(s.contactUrl))}"${extAttr(s.contactUrl)}>${esc(s.contactLabel || '連絡する')}${icon('arrow')}</a>` : ''}</section>` : ''}`;
 }
-const PAGES = {home:homeHTML, characters:charactersHTML, gallery:galleryHTML, patreon:patreonHTML, news:newsHTML, links:linksHTML};
+/* 文章中のURLをリンクにする */
+function richText(t) {
+  return esc(t).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>').replace(/\n/g, '<br>');
+}
+function faqHTML() {
+  const f = D().faq || {}, items = (f.items || []).filter(x => x && x.q);
+  const pt = navItem('patreon');
+  return `${pageHead('faq', 'book')}
+  ${items.length ? `<section class="faq">${items.map((x, i) => `<details class="card faq-item"${i === 0 ? ' open' : ''}>
+      <summary><span class="faq-q">Q</span><b>${esc(x.q)}</b><span class="faq-tog">${icon('down')}</span></summary>
+      <div class="faq-a"><span class="faq-q a">A</span><p>${richText(x.a)}</p></div>
+    </details>`).join('')}</section>` : `<div class="card empty">質問はまだありません</div>`}
+  ${pt.show ? `<section class="card contact"><span class="q-ic" style="--c:#f7695a">${icon('patreon')}</span><p>プランの内容や料金は「${esc(pt.label)}」ページで確認できます。</p><a class="btn btn-main" href="#/patreon">${esc(pt.label)}ページへ${icon('arrow')}</a></section>` : ''}
+  ${f.note ? `<p class="note">${esc(f.note)}</p>` : ''}`;
+}
+function guideHTML() {
+  const g = D().guide || {};
+  const lines = t => String(t || '').split('\n').map(x => x.trim()).filter(Boolean);
+  const ok = lines(g.ok), ng = lines(g.ng);
+  return `${pageHead('guide', 'check')}
+  ${ok.length || ng.length ? `<section class="guide-okng">
+    ${ok.length ? `<div class="card guide-box ok"><h3>${icon('check')}${esc(g.okTitle || 'OKなこと')}</h3><ul>${ok.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+    ${ng.length ? `<div class="card guide-box ng"><h3>${icon('close')}${esc(g.ngTitle || 'ご遠慮いただきたいこと')}</h3><ul>${ng.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+  </section>` : ''}
+  ${(g.sections || []).filter(x => x && (x.title || x.body)).map(x => `<section class="card guide-sec">${x.title ? `<h3 class="sec-t">${esc(x.title)}</h3>` : ''}${x.body ? `<p>${richText(x.body)}</p>` : ''}</section>`).join('')}
+  ${g.updated ? `<p class="note">最終更新：${esc(fmtDate(g.updated))}</p>` : ''}`;
+}
+function downloadsHTML() {
+  const dl = D().downloads || {}, items = (dl.items || []).filter(x => x && (x.file || x.image));
+  const used = Object.keys(DL_TYPES).filter(k => items.some(x => x.type === k));
+  if (S.dlFilter !== 'all' && !used.includes(S.dlFilter)) S.dlFilter = 'all';
+  const list = items.filter(x => S.dlFilter === 'all' || x.type === S.dlFilter);
+  const gd = navItem('guide');
+  return `${pageHead('downloads', 'download')}
+  ${used.length > 1 ? `<div class="chips"><button class="chip${S.dlFilter === 'all' ? ' on' : ''}" data-dlfilter="all">すべて <span class="en">${items.length}</span></button>
+    ${used.map(k => `<button class="chip${S.dlFilter === k ? ' on' : ''}" data-dlfilter="${k}">${esc(DL_TYPES[k])}</button>`).join('')}</div>` : ''}
+  ${list.length ? `<section class="dl-grid">${list.map(x => {
+      const file = imgSrc(x.file || x.image), name = String(x.file || x.image || '').split('/').pop() || 'image';
+      return `<div class="card dl-item type-${esc(x.type || 'other')}">
+        <div class="dl-img"><img src="${esc(imgOr(x.image || x.file, phArt('dl' + (x.title || ''), '', '')))}" alt="${esc(x.title || '')}" loading="lazy"></div>
+        <div class="dl-body"><span class="dl-type">${esc(DL_TYPES[x.type] || '')}</span><b>${esc(x.title || '')}</b>${x.size ? `<small>${esc(x.size)}</small>` : ''}${x.note ? `<p>${esc(x.note)}</p>` : ''}
+          <a class="btn dl-btn" href="${esc(file)}" download="${esc(name)}">${icon('download')}ダウンロード</a></div>
+      </div>`; }).join('')}</section>` : `<div class="card empty">配布中の画像はまだありません</div>`}
+  ${dl.note ? `<p class="note">${esc(dl.note)}${gd.show ? ` <a href="#/guide" style="text-decoration:underline">${esc(gd.label)}を見る</a>` : ''}</p>` : ''}`;
+}
+/* 年齢確認 */
+function ageOk() {
+  if (S.ageOk) return true;
+  try { const t = +localStorage.getItem('rs-age-ok'); return !!t && Date.now() - t < (+D().gate.remember || 30) * 864e5; } catch (e) { return false; }
+}
+function gateOn(kind) {
+  const g = D().gate || {};
+  return !window.RS_PREVIEW && !!g.enabled && (kind === 'page' ? g.page !== false : g.links !== false) && !ageOk();
+}
+function showGate(onYes, onNo) {
+  const g = D().gate || {};
+  S.gateCb = {onYes, onNo};
+  $('#modal-root').innerHTML = `<div class="modal-back"><div class="modal gate" role="dialog" aria-modal="true" aria-labelledby="gateT">
+    <span class="gate-ic">${icon('lock')}</span><h2 id="gateT">${esc(g.title || '年齢確認')}</h2><p>${esc(g.text || '').replace(/\n/g, '<br>')}</p>
+    <div class="gate-btns"><button class="btn" data-gate="yes">${esc(g.yes || 'はい')}</button><button class="btn btn-ghost" data-gate="no">${esc(g.no || 'いいえ')}</button></div>
+  </div></div>`;
+  document.body.style.overflow = 'hidden';
+  const y = $('[data-gate="yes"]'); if (y) y.focus({preventScroll:true});
+}
+function gatedHTML() {
+  const pt = navItem('patreon');
+  return `<section class="card page-head"><span class="eyebrow">${icon('lock')}MEMBERS ONLY</span><h1>${esc(pt.label)}</h1></section>
+  <section class="card gated"><span class="gate-ic">${icon('lock')}</span><p>このページを見るには年齢の確認が必要です。</p><button class="btn" data-act="gate-open">確認する</button></section>`;
+}
+function pageBody(page) {
+  if (page === 'patreon' && gateOn('page')) return gatedHTML();
+  return PAGES[page]();
+}
+function gatePage() {
+  if (S.route.page !== 'patreon' || !gateOn('page')) return;
+  showGate(() => render(), () => { location.hash = '#/home'; });
+}
+const PAGES = {home:homeHTML, characters:charactersHTML, gallery:galleryHTML, patreon:patreonHTML, news:newsHTML, downloads:downloadsHTML, links:linksHTML, faq:faqHTML, guide:guideHTML};
 
 /* =========================================================
    render
@@ -788,7 +997,7 @@ function render() {
   const page = PAGES[S.route.page] ? S.route.page : 'home';
   app.innerHTML = `${headerHTML()}
   <div class="shell">
-    <main class="main" id="main" tabindex="-1" data-page="${page}">${PAGES[page]()}</main>
+    <main class="main" id="main" tabindex="-1" data-page="${page}">${pageBody(page)}</main>
   </div>
   ${footerHTML()}
   <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="メニュー"><div class="drawer-back" data-act="drawer-close"></div><div class="drawer-panel"><button class="ibtn drawer-close" data-act="drawer-close" aria-label="メニューを閉じる">${icon('close')}</button>${sidebarHTML()}</div></div>`;
@@ -797,11 +1006,12 @@ function render() {
   document.title = page === 'home' ? `${s.name} ${s.suffix}`.trim() : `${nv.label} | ${s.name} ${s.suffix}`.trim();
   if (page === 'home') startHero(); else stopHero();
   startClock();
+  gatePage();
 }
 function renderMain() {
   const main = $('#main');
   if (!main) return render();
-  main.innerHTML = PAGES[S.route.page]();
+  main.innerHTML = pageBody(S.route.page);
   if (S.route.page === 'home') startHero();
   startClock();
 }
@@ -862,7 +1072,7 @@ function openChar(id) {
   const works = sortedGallery().filter(g => (g.chars || []).includes(c.id)).slice(0, 4);
   const tags = String(c.tags || '').split(/[,、，]/).map(x => x.trim()).filter(Boolean);
   $('#modal-root').innerHTML = `<div class="modal-back" data-backdrop>
-    <div class="modal char-modal" role="dialog" aria-modal="true" aria-label="${esc(c.name)}" style="--c:${esc(c.color)}">
+    <div class="modal char-modal" role="dialog" aria-modal="true" aria-label="${esc(c.name)}" style="${cv(c.color)}">
       <button class="m-close" data-act="modal-close" aria-label="閉じる">${icon('close')}</button>
       <div class="cm-img"><img src="${esc(charImg(c))}" alt="${esc(c.name)}" style="object-position:50% ${+c.pos || 25}%"></div>
       <div class="cm-body">
@@ -874,8 +1084,8 @@ function openChar(id) {
         ${tags.length ? `<div class="tags">${tags.map(t => `<span>#${esc(t)}</span>`).join('')}</div>` : ''}
         ${works.length ? `<div><div class="cm-sub">ARTWORKS</div><div class="cm-gal" style="margin-top:8px">${works.map(g => `<button data-gal="${esc(g.id)}" data-galscope="${esc(c.id)}"><img src="${esc(galImg(g))}" alt="${esc(g.title)}"></button>`).join('')}</div></div>` : ''}
         <div class="cm-nav">
-          <button data-char="${esc(prev.id)}" style="--c:${esc(prev.color)}">${icon('chevL')}${esc(prev.name)}</button>
-          <button data-char="${esc(next.id)}" style="--c:${esc(next.color)}">${esc(next.name)}${icon('chev')}</button>
+          <button data-char="${esc(prev.id)}" style="${cv(prev.color)}">${icon('chevL')}${esc(prev.name)}</button>
+          <button data-char="${esc(next.id)}" style="${cv(next.color)}">${esc(next.name)}${icon('chev')}</button>
         </div>
       </div>
     </div></div>`;
@@ -904,7 +1114,7 @@ function drawLightbox() {
     <div class="lb-stage" data-backdrop><img src="${esc(galImg(g))}" alt="${esc(g.title)}"></div>
     ${list.length > 1 ? `<button class="lb-btn lb-prev" data-act="lb-prev" aria-label="前へ">${icon('chevL')}</button><button class="lb-btn lb-next" data-act="lb-next" aria-label="次へ">${icon('chev')}</button>` : ''}
     <div class="lb-bar"><div><b>${esc(g.title)}</b><br><small>${esc(fmtDate(g.date))}</small></div>
-      <div class="lb-chips">${(g.chars || []).map(id => { const c = charById(id); return c ? `<span style="--c:${esc(c.color)}">${esc(c.name)}</span>` : ''; }).join('')}</div>
+      <div class="lb-chips">${(g.chars || []).map(id => { const c = charById(id); return c ? `<span style="${cv(c.color)}">${esc(c.name)}</span>` : ''; }).join('')}</div>
       <span class="cnt">${i+1} / ${list.length}</span></div>
   </div>`;
 }
@@ -957,11 +1167,19 @@ document.addEventListener('click', e => {
   if (t.closest('#editor-root')) return;
   const bd = t.closest('[data-backdrop]');
   if (bd && t === bd) { closeModal(); return; }
-  const a = t.closest('[data-act],[data-char],[data-gal],[data-filter],[data-newsfilter],[data-slide]');
+  const a = t.closest('[data-act],[data-char],[data-gal],[data-filter],[data-newsfilter],[data-dlfilter],[data-gate],[data-slide]');
   if (!a) {
     if (t.closest('.drawer a')) closeDrawer();
     return;
   }
+  if (a.dataset.gate) {
+    const cb = S.gateCb || {}; S.gateCb = null;
+    if (a.dataset.gate === 'yes') { S.ageOk = true; try { localStorage.setItem('rs-age-ok', String(Date.now())); } catch (e) {} closeModal(); cb.onYes && cb.onYes(); }
+    else { closeModal(); cb.onNo && cb.onNo(); }
+    return;
+  }
+  if (a.dataset.dlfilter) { S.dlFilter = a.dataset.dlfilter; renderMain(); return; }
+  if (a.dataset.act === 'gate-open') { gatePage(); return; }
   if (a.dataset.act) {
     const act = a.dataset.act;
     if (act === 'theme') toggleTheme();
@@ -986,6 +1204,14 @@ function startHeroTimerOnly() {
     S.heroTimer=setInterval(()=>showSlide(S.slide+1),Math.max(2,+D().hero.interval||6)*1000);
 }
 // Stop automatic changes while someone reads or uses the featured links.
+document.addEventListener('click', e => {
+  const a = e.target.closest && e.target.closest('a[href]');
+  if (!a) return;
+  const href = a.getAttribute('href') || '';
+  if (!/^https?:\/\/([a-z0-9-]+\.)?patreon\.com/i.test(href) || !gateOn('links')) return;
+  e.preventDefault(); e.stopPropagation();
+  showGate(() => window.open(href, '_blank', 'noopener'), null);
+}, true);
 document.addEventListener('pointerover',e=>{if(e.target.closest('.hero')) stopHero();});
 document.addEventListener('pointerout',e=>{if(e.target.closest('.hero') && !e.relatedTarget?.closest?.('.hero') && !document.activeElement?.closest?.('.hero')) startHeroTimerOnly();});
 document.addEventListener('focusin',e=>{if(e.target.closest('.hero')) stopHero();});
@@ -1054,6 +1280,8 @@ if (window.RS_PREVIEW) {
       root.style.scrollBehavior = 'auto'; render(); window.scrollTo(0, y); root.style.scrollBehavior = '';
     } else if (m.type === 'rs-route' && typeof m.route === 'string') {
       goRoute(m.route);
+    } else if (m.type === 'rs-gate') {
+      showGate(() => {}, () => {});
     }
   });
   window.parent.postMessage({type:'rs-ready'}, '*');
