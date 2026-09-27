@@ -986,7 +986,7 @@
     "badge": "7日間無料お試しあり",
     "perks": "R15〜R18までの画像（モザイク処理を必要としないものが多いです）\nシチュエーションも単発な傾向にあり",
     "best": false,
-    "url": ""
+    "url": "https://www.patreon.com/cw/RyuSe1421/membership"
    },
    {
     "name": "めっちゃみたいコース/Extra Plan",
@@ -996,7 +996,7 @@
     "badge": "",
     "perks": "もっとみたいコースの内容\nR18コンテンツ（いろいろなシチュエーション）\n短編動画",
     "best": true,
-    "url": ""
+    "url": "https://www.patreon.com/cw/RyuSe1421/membership"
    },
    {
     "name": "まじでみたいプラン/ULTRA Plan",
@@ -1006,7 +1006,7 @@
     "badge": "",
     "perks": "めっちゃプランの内容\nさらに限定画像\n長編動画や漫画等、作成に大幅な時間がかかるもの",
     "best": false,
-    "url": ""
+    "url": "https://www.patreon.com/cw/RyuSe1421/membership"
    }
   ],
   "oshi": {
@@ -1018,7 +1018,7 @@
      "char": "akane",
      "name": "あかね推し❤️プラン",
      "text": "もっと-まじのあかねちゃんのコンテンツが見れます❤️",
-     "url": "",
+     "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 100,
      "fy": 7,
      "fz": 1.15
@@ -1027,7 +1027,7 @@
      "char": "aoi",
      "name": "あおい推し💙プラン",
      "text": "もっと-まじのあおいちゃんのコンテンツが見れます💙",
-     "url": "",
+     "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 0,
      "fy": 9,
      "fz": 1.2
@@ -1036,7 +1036,7 @@
      "char": "tamaki",
      "name": "たまき推し🤍プラン",
      "text": "もっと-まじのたまきちゃんのコンテンツが見れます🤍",
-     "url": "",
+     "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 51,
      "fy": 12,
      "fz": 1.2
@@ -1045,7 +1045,7 @@
      "char": "sumire",
      "name": "すみれ推し💜プラン",
      "text": "もっと-まじのすみれちゃんのコンテンツが見れます💜",
-     "url": "",
+     "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 55,
      "fy": 0,
      "fz": 1.15
@@ -1054,7 +1054,7 @@
      "char": "kaede",
      "name": "かえで推し💛プラン",
      "text": "もっと-まじのかえでちゃんのコンテンツが見れます💛",
-     "url": "",
+     "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 53,
      "fy": 9
     },
@@ -1062,7 +1062,7 @@
      "char": "tsubaki",
      "name": "つばき推し🩷プラン",
      "text": "もっと-まじのつばきちゃんのコンテンツが見れます🩷",
-     "url": "",
+     "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 51,
      "fy": 11,
      "fz": 1.15
@@ -1071,7 +1071,7 @@
      "char": "hisui",
      "name": "ひすい推し💚プラン",
      "text": "もっと-まじのひすいちゃんのコンテンツが見れます💚",
-     "url": "",
+     "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 52,
      "fy": 9
     },
@@ -1079,7 +1079,7 @@
      "char": "kasumi",
      "name": "かすみ推し🩶プラン",
      "text": "もっと-まじのかすみちゃんのコンテンツが見れます🩶",
-     "url": "",
+     "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 51,
      "fy": 5
     }
@@ -1161,7 +1161,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-27T16:45:23.692Z",
+ "publishedAt": "2026-09-27T16:52:07.216Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
