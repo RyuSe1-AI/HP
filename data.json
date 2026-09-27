@@ -107,7 +107,7 @@
     "image": "images/hero/20260124_0109_image-3-a92e6-nobg-ubl3b.webp",
     "badge": "NEW",
     "title": "ときめきを、\n一枚に。",
-    "sub": "最新のイラストはギャラリーから",
+    "sub": "過去の人気のイラストはギャラリーから",
     "link": "#/gallery",
     "linkLabel": "ギャラリーへ",
     "fx": 49,
@@ -118,7 +118,7 @@
     "image": "images/hero/download-s0czs.webp",
     "badge": "MEMBERS",
     "title": "好きを、\nかたちに。",
-    "sub": "高解像度・差分イラストは会員限定で公開中",
+    "sub": "ちょっとHなイラスト・差分イラストは会員限定で公開中",
     "link": "#/patreon",
     "linkLabel": "詳しく見る",
     "fx": 47,
@@ -1188,7 +1188,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-27T17:34:16.980Z",
+ "publishedAt": "2026-09-27T17:35:11.159Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
