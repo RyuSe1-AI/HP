@@ -99,23 +99,30 @@
     "title": "想像を、\n好きのかたちに。",
     "sub": "ひとりひとりの個性と、小さな物語。\nオリジナルキャラクターたちの世界を描いています。",
     "link": "#/characters",
-    "linkLabel": "キャラクターを見る"
+    "linkLabel": "キャラクターを見る",
+    "fx": 47,
+    "fy": 10
    },
    {
-    "image": "",
+    "image": "images/hero/20260124_0109_image-3-a92e6-nobg-ubl3b.webp",
     "badge": "NEW",
     "title": "ときめきを、\n一枚に。",
     "sub": "最新のイラストはギャラリーから",
     "link": "#/gallery",
-    "linkLabel": "ギャラリーへ"
+    "linkLabel": "ギャラリーへ",
+    "fx": 49,
+    "fy": 4,
+    "fz": 1
    },
    {
-    "image": "",
+    "image": "images/hero/download-s0czs.webp",
     "badge": "MEMBERS",
     "title": "創作の、\nもう一歩奥へ。",
     "sub": "高解像度・差分イラストは会員限定で公開中",
     "link": "#/patreon",
-    "linkLabel": "詳しく見る"
+    "linkLabel": "詳しく見る",
+    "fx": 47,
+    "fy": 15
    }
   ]
  },
@@ -1161,7 +1168,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-27T16:52:07.216Z",
+ "publishedAt": "2026-09-27T17:11:40.605Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
@@ -1170,6 +1177,7 @@
   "worksTitle": "Selected works.",
   "worksSub": "新着イラスト",
   "worksLink": "すべての作品",
+  "works": [],
   "exploreIndex": "02 / Explore",
   "exploreTitle": "Find your favorite.",
   "exploreIntro": "キャラクターを知る。作品を眺める。\nあなたの「好き」が見つかる場所。",
