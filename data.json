@@ -1102,34 +1102,46 @@
   },
   "previews": [
    {
-    "image": "",
+    "image": "images/patreon/7cfd4826e5a7397051cba98b608ba972-lxan6.webp",
     "title": "限定イラスト 01",
-    "tier": "basic"
+    "tier": "basic",
+    "fx": 41,
+    "fy": 0
    },
    {
-    "image": "",
+    "image": "images/patreon/3148eba7a95eb55636fe3e4df240be27-7ws0w.webp",
     "title": "限定イラスト 02",
     "tier": "Extra"
    },
    {
-    "image": "",
+    "image": "images/patreon/3e1f4eee3aaeabd38fcf82f89b634ddf-o9khv.webp",
     "title": "限定イラスト 03",
     "tier": "basic"
    },
    {
-    "image": "",
+    "image": "images/patreon/67b500b4ff32dc8b20ae877443bb8f5b-23vgf.webp",
     "title": "限定イラスト 04",
     "tier": "Extra"
    },
    {
-    "image": "",
+    "image": "images/patreon/17d9319d4619d1dc9e899b1889a49f2a-mnk5f.webp",
     "title": "限定イラスト 05",
     "tier": "basic"
    },
    {
-    "image": "",
+    "image": "images/patreon/342acc650d56f427497e9531b2b6abe0-5ndlo.webp",
     "title": "限定イラスト 06",
     "tier": "Extra"
+   },
+   {
+    "image": "images/patreon/1d9672fb94ec76879e2583e9cecf09d3-zjn8z.webp",
+    "title": "限定イラスト 07",
+    "tier": ""
+   },
+   {
+    "image": "images/patreon/c00adcaffaf22a06b5f8fa0b37b45289-sov55.webp",
+    "title": "限定イラスト 08",
+    "tier": ""
    }
   ],
   "note": "※ 一部のプランには成人向け（R18）の内容が含まれます。18歳未満の方はご利用いただけません。\n※ 限定コンテンツの本編は Patreon 上で公開しています。このページの画像はプレビュー（ぼかし）です。"
@@ -1176,7 +1188,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-27T17:16:08.376Z",
+ "publishedAt": "2026-09-27T17:32:20.306Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
@@ -1261,8 +1273,11 @@
   "url": "",
   "title": "",
   "description": "",
-  "image": "images/share/card-3tkito.jpg",
-  "twitter": ""
+  "image": "images/share/card-feg8o5.jpg",
+  "twitter": "",
+  "src": "",
+  "fx": 46,
+  "fy": 0
  },
  "gate": {
   "enabled": true,
