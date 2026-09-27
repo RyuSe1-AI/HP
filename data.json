@@ -584,7 +584,9 @@
    "chars": [],
    "tweetId": "1992420771029987701",
    "tweet": "https://x.com/RyuSe1_AI/status/1992420771029987701",
-   "likes": 2113
+   "likes": 2113,
+   "fx": 46,
+   "fy": 22
   },
   {
    "id": "x2057048940592410927",
@@ -634,7 +636,9 @@
    "chars": [],
    "tweetId": "1949002655290065300",
    "tweet": "https://x.com/RyuSe1_AI/status/1949002655290065300",
-   "likes": 1933
+   "likes": 1933,
+   "fx": 44,
+   "fy": 19
   },
   {
    "id": "x1947849059143979086",
@@ -714,7 +718,9 @@
    "chars": [],
    "tweetId": "2058452117887844501",
    "tweet": "https://x.com/RyuSe1_AI/status/2058452117887844501",
-   "likes": 1844
+   "likes": 1844,
+   "fx": 48,
+   "fy": 57
   },
   {
    "id": "x1965076301393645926",
@@ -814,7 +820,9 @@
    "chars": [],
    "tweetId": "1941977530644500497",
    "tweet": "https://x.com/RyuSe1_AI/status/1941977530644500497",
-   "likes": 1748
+   "likes": 1748,
+   "fx": 45,
+   "fy": 21
   },
   {
    "id": "x1969031045401198935",
@@ -1168,7 +1176,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-27T17:11:40.605Z",
+ "publishedAt": "2026-09-27T17:14:12.610Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
@@ -1177,7 +1185,11 @@
   "worksTitle": "Selected works.",
   "worksSub": "新着イラスト",
   "worksLink": "すべての作品",
-  "works": [],
+  "works": [
+   "x2058452117887844501",
+   "x1941977530644500497",
+   "x1992420771029987701"
+  ],
   "exploreIndex": "02 / Explore",
   "exploreTitle": "Find your favorite.",
   "exploreIntro": "キャラクターを知る。作品を眺める。\nあなたの「好き」が見つかる場所。",
