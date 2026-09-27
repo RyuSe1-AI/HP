@@ -1188,7 +1188,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-27T17:35:11.159Z",
+ "publishedAt": "2026-09-27T17:37:27.174Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
@@ -1266,7 +1266,21 @@
   "updated": "2026-09-25"
  },
  "downloads": {
-  "items": [],
+  "items": [
+   {
+    "id": "du3pmz81",
+    "title": "1周年　和装壁紙",
+    "type": "pc",
+    "image": "images/downloads/preview/1-muxly.webp",
+    "file": "images/downloads/1-1j3gq.png",
+    "size": "1500×1051",
+    "note": "1周年の際に作成したものです",
+    "chars": [],
+    "bytes": 2346009,
+    "fx": 47,
+    "fy": 0
+   }
+  ],
   "note": "※ 配布画像は個人での利用に限ります。ご利用の前にガイドラインをご確認ください。"
  },
  "share": {
