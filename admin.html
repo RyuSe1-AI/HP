@@ -391,6 +391,19 @@ body{overflow:hidden;font-size:14px}
 .xa-meta b small{font-size:10.5px;font-weight:400;color:var(--muted)}
 .xa-meta>small{font-size:10.5px;color:var(--muted)}
 .xa-meta p{margin:2px 0 0;font-size:11.5px;line-height:1.55;color:var(--text-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-all}
+.fc-frame.round{border-radius:50%;width:min(100%,260px);margin:0 auto}
+.fc-frame.round .fc-hint{left:50%;bottom:12%;transform:translateX(-50%);white-space:nowrap}
+/* Selected works の3枚 */
+.wk-pick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.wk-slot{display:flex;flex-direction:column;gap:6px;min-width:0}
+.wk-img{position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--holo-soft),var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.wk-img img{width:100%;height:100%;object-fit:cover;display:block}
+.wk-img.big{box-shadow:0 0 0 2px var(--accent)}
+.wk-no{position:absolute;top:6px;left:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 11px var(--ff-en,system-ui);background:rgba(20,22,40,.72);color:#fff}
+.wk-auto{position:absolute;bottom:6px;left:6px;font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.92);color:#4a5272}
+.wk-slot .ed-in{font-size:12px;padding:6px 8px}
+.wk-slot .ed-btn{justify-content:center;padding:6px 8px;font-size:12px}
+@media (max-width:560px){.wk-pick{grid-template-columns:1fr 1fr}}
 
 </style>
 </head>
@@ -568,11 +581,33 @@ const fnum = (v, d) => (v === '' || v == null || isNaN(+v)) ? d : +v;
 function focusCSS(o, d) {
   d = d || {x:50, y:50, z:1};
   const x = fnum(o && o.fx, d.x), y = fnum(o && o.fy, d.y), z = Math.max(1, Math.min(3, fnum(o && o.fz, d.z)));
-  return `object-position:${x}% ${y}%;transform-origin:${x}% ${y}%;--z:${z}`;
+  return `object-position:${x}% ${y}%;transform-origin:${x}% ${y}%;scale:${z}`;
 }
+/* 画像ごとの位置の保存先：image → fx/fy/fz、avatar → avatarFx/avatarFy/avatarFz */
+const fKeys = k => !k || k === 'image' ? {x:'fx', y:'fy', z:'fz'} : {x:k + 'Fx', y:k + 'Fy', z:k + 'Fz'};
+const fBase = (o, k, d) => { const K = fKeys(k); d = d || {x:50, y:50, z:1}; return {x:fnum(o && o[K.x], d.x), y:fnum(o && o[K.y], d.y), z:fnum(o && o[K.z], d.z)}; };
+const fStyle = (o, k, d) => focusCSS({}, fBase(o, k, d));
 const charFocusBase = c => ({x:fnum(c && c.fx, 50), y:fnum(c && c.pos, 25), z:fnum(c && c.fz, 1)});
 const charFocus = c => focusCSS({}, charFocusBase(c));
 const oshiFocusBase = x => { const c = charById(x.char); return x.image ? {x:50, y:50, z:1} : charFocusBase(c); };
+/* Explore のサムネイル（空欄なら登録済みの画像を使う） */
+function tileSource(key) {
+  const d = D(), x = d.tiles[key] || {};
+  if (x.image) return {src:imgSrc(x.image), base:{x:50, y:50, z:1}};
+  if (key === 'characters') { const c = d.characters[0]; return c ? {src:charImg(c), base:charFocusBase(c)} : {src:phHero(0), base:null}; }
+  if (key === 'gallery') { const g = d.gallery.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)))[0]; return g ? {src:galImg(g), base:fBase(g)} : {src:phHero(1), base:null}; }
+  const p = (d.patreon.previews || [])[0];
+  return p ? {src:imgOr(p.image, phArt('pv0', '', '')), base:fBase(p)} : {src:phHero(2), base:null};
+}
+/* トップの Selected works：選んだ作品（空き枠は新しい順で自動） */
+function homeWorks() {
+  const all = D().gallery.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  const ids = (D().home.works || []).slice(0, 3);
+  const picked = [0, 1, 2].map(i => (ids[i] && all.find(g => g.id === ids[i])) || null);
+  const used = new Set(picked.filter(Boolean).map(g => g.id));
+  const rest = all.filter(g => !used.has(g.id));
+  return picked.map(g => g || rest.shift()).filter(Boolean);
+}
 
 /* =========================================================
    default data
@@ -635,7 +670,7 @@ const DEFAULT = {
   },
   home: {
     kicker:'RyuSe1 STUDIO / Creative journal', featured:'FEATURED VISUAL', heroLink2:'作品を見る',
-    worksIndex:'01 / Latest collection', worksTitle:'Selected works.', worksSub:'新着イラスト', worksLink:'すべての作品',
+    worksIndex:'01 / Latest collection', worksTitle:'Selected works.', worksSub:'新着イラスト', worksLink:'すべての作品', works:[],
     exploreIndex:'02 / Explore', exploreTitle:'Find your favorite.', exploreIntro:'キャラクターを知る。作品を眺める。\nあなたの「好き」が見つかる場所。',
     newsIndex:'03 / Studio notes', newsTitle:"What's new.", newsSub:'お知らせ', newsLink:'すべてのお知らせ',
     follow:'FOLLOW THE STUDIO'
@@ -924,6 +959,18 @@ function fIcon(label, obj, key, o = {}) {
   sel.addEventListener('change', () => { obj[key] = sel.value; pv.innerHTML = icon(sel.value); changed(); o.after && o.after(); });
   return wrapField(label, h('div', {class:'ed-icsel'}, pv, sel), o.hint);
 }
+/* 画像ごとの「表示位置」の設定（枠の比率・保存先・元画像） */
+const FOCUS = {
+  avatar: () => ({label:'アイコンの表示位置', ratio:'1', round:true, keys:fKeys('avatar'), src:() => imgOr(D().site.avatar, phAvatar()), hint:'ヘッダー横のプロフィールと、スマホメニューのアイコンに使います。'}),
+  cover: () => ({label:'カバーの表示位置', ratio:'13/3', keys:fKeys('cover'), src:() => imgSrc(D().site.cover) || ''}),
+  hero: s => ({label:'トップ画像の表示位置', ratio:'1.15', src:() => imgOr(s.image, phHero(Math.max(0, D().hero.slides.indexOf(s))))}),
+  tile: (k, t) => ({label:`${t || ''}のサムネイル位置`, ratio:'12/13', def:() => tileSource(k).base || {x:50, y:50, z:1}, src:() => tileSource(k).src,
+    hint:'画像が空欄のときは、元の画像（キャラ・作品など）の位置をそのまま使います。'}),
+  gallery: g => ({label:'サムネイルの表示位置', ratio:'1', src:() => galImg(g), hint:'トップの「新着作品」とキャラ紹介の作品サムネイルに使います（ギャラリー一覧と拡大表示は画像全体を表示）。'}),
+  preview: x => ({label:'プレビューの表示位置', ratio:'3/4', src:() => imgOr(x.image, phArt('pv', '', '#bdb4ff')), hint:'ぼかして表示するので、だいたいの位置でOKです。'}),
+  download: x => ({label:'サムネイルの表示位置', ratio:x.type === 'sp' ? '9/14' : x.type === 'icon' ? '1' : '16/10', round:x.type === 'icon', src:() => imgOr(x.image || x.file, phArt('dl', '', '')),
+    hint:'配布ページの小さいプレビューだけに使います（配布する画像そのものは変わりません）。'})
+};
 function fImage(label, obj, key, o = {}) {
   const prev = h('div', {class:'ed-img-prev'});
   const badge = h('span', {class:'ed-badge', style:'display:none'}, '未公開');
@@ -942,11 +989,12 @@ function fImage(label, obj, key, o = {}) {
   };
   const setFile = async f => {
     if (!f || !/^image\//.test(f.type)) return;
-    try { obj[key] = await fileToAsset(f, o.max || 1600, o.folder); paint(); changed(); o.after && o.after(); }
+    try { obj[key] = await fileToAsset(f, o.max || 1600, o.folder); if (o.focus && !o.focus.keepOnChange) clearFocus(obj, o.focus.keys); paint(); changed(); o.after && o.after(); }
     catch (err) { toast(err.message); }
   };
   const file = h('input', {type:'file', accept:'image/*', hidden:true, onchange:() => { setFile(file.files[0]); file.value = ''; }});
   txt.addEventListener('input', () => { obj[key] = txt.value.trim(); paintPrev(); changed(); o.after && o.after(); });
+  const fbtn = o.focus ? focusBtn(obj, Object.assign({src:() => imgSrc(obj[key]) || ''}, o.focus), () => { o.after && o.after(); }) : null;
   prev.addEventListener('dragover', e => { e.preventDefault(); prev.classList.add('drag'); });
   prev.addEventListener('dragleave', () => prev.classList.remove('drag'));
   prev.addEventListener('drop', e => { e.preventDefault(); prev.classList.remove('drag'); setFile(e.dataTransfer.files[0]); });
@@ -956,8 +1004,51 @@ function fImage(label, obj, key, o = {}) {
       h('button', {class:'ed-btn', type:'button', onclick:() => file.click(), html:icon('upload') + '画像を選ぶ'}),
       h('button', {class:'ed-btn ghost', type:'button', title:'AIで背景を消して透過にする', html:icon('wand') + '背景を消す',
         onclick:() => openBgRemove({obj, key, max:o.max || 1600, folder:o.folder, color:o.color}, () => { paint(); o.after && o.after(); })}),
+      fbtn,
       h('button', {class:'ed-btn ghost', type:'button', title:'画像をクリア', onclick:() => { obj[key] = ''; paint(); changed(); o.after && o.after(); }, html:icon('trash')}), badge),
     txt, file)), o.hint);
+}
+/* トップの Selected works に出す3枚を選ぶ */
+function worksPicker() {
+  const Hm = D().home;
+  if (!Array.isArray(Hm.works)) Hm.works = [];
+  const box = h('div', {class:'wk-pick'});
+  const draw = () => {
+    const shown = homeWorks();
+    const opts = D().gallery.slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    box.replaceChildren(...[0, 1, 2].map(i => {
+      const id = Hm.works[i] || '', g = shown[i];
+      const img = h('img', {alt:'', src:g ? galImg(g) : phArt('wk' + i, '', SOFT[i]), style:g ? fStyle(g) : ''});
+      const sel = h('select', {class:'ed-in'}, h('option', {value:''}, '自動（新しい順）'),
+        opts.map(x => h('option', {value:x.id}, `${x.title || '(無題)'}（${fmtDate(x.date)}）`)));
+      sel.value = id;
+      sel.addEventListener('change', () => {
+        const w = [0, 1, 2].map(k => Hm.works[k] || '');
+        w[i] = sel.value;
+        if (sel.value) w.forEach((v, k) => { if (k !== i && v === sel.value) w[k] = ''; });   // 同じ作品は1枠だけ
+        Hm.works = w.some(Boolean) ? w : [];
+        changed(); draw();
+      });
+      return h('div', {class:'wk-slot'},
+        h('div', {class:'wk-img' + (i ? '' : ' big')}, img, h('span', {class:'wk-no'}, String(i + 1)), !id && g ? h('span', {class:'wk-auto'}, '自動') : null),
+        sel,
+        g ? focusBtn(g, () => FOCUS.gallery(g), draw) : null);
+    }));
+  };
+  draw();
+  return sec('トップの「Selected works」に出す3枚', 'star',
+    h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, '「自動」の枠には、選んでいない作品が新しい順に入ります。1枚目がいちばん大きく表示されます。'),
+    box);
+}
+/* 表示位置（サイトで見える範囲）を調整するボタン */
+function clearFocus(obj, keys) {
+  const K = Object.assign({x:'fx', y:'fy', z:'fz'}, keys || {});
+  delete obj[K.x]; delete obj[K.z];
+  if (K.y === 'pos') obj.pos = 25; else delete obj[K.y];
+}
+function focusBtn(obj, f, after) {
+  return h('button', {class:'ed-btn ghost', type:'button', title:'サイトで見える範囲をドラッグで調整', html:icon('image') + '表示位置',
+    onclick:() => openFocusModal({obj, focus:typeof f === 'function' ? f() : f}, after)});
 }
 /* サムネイルの表示位置を決める（ドラッグで移動・スライダーでズーム） */
 function fFocus(label, obj, o) {
@@ -965,7 +1056,8 @@ function fFocus(label, obj, o) {
   const base = () => (typeof o.def === 'function' ? o.def() : o.def) || {x:50, y:50, z:1};
   const get = k => fnum(obj[K[k]], base()[k]);
   const img = h('img', {alt:'', draggable:'false'});
-  const frame = h('div', {class:'fc-frame', style:`aspect-ratio:${o.ratio || '4/3'}`}, img, h('span', {class:'fc-hint', html:icon('image') + 'ドラッグで位置を調整'}));
+  const ratio = o.ratio || '4/3';
+  const frame = h('div', {class:'fc-frame' + (o.round ? ' round' : ''), style:`aspect-ratio:${ratio};max-width:min(100%, calc(58vh * ${ratio}))`}, img, h('span', {class:'fc-hint', html:icon('image') + 'ドラッグで位置を調整'}));
   const zoom = h('input', {type:'range', min:100, max:300, step:5});
   const zOut = h('span', {});
   const pos = h('span', {class:'fc-pos'});
@@ -1077,8 +1169,8 @@ function tabSite() {
       h('div', {class:'ed-grid2'}, fText('サイト名', s, 'name'), fText('サブ表記', s, 'suffix', {ph:'STUDIO'})),
       fText('キャッチコピー（英字推奨）', s, 'tagline'),
       fArea('プロフィール文', s, 'bio', {rows:3}),
-      fImage('アイコン画像', s, 'avatar', {max:512, folder:'site'}),
-      fImage('プロフィールのカバー画像', s, 'cover', {max:1000, folder:'site', hint:'スマホメニューのプロフィール上部に表示します。'})),
+      fImage('アイコン画像', s, 'avatar', {max:512, folder:'site', focus:FOCUS.avatar()}),
+      fImage('プロフィールのカバー画像', s, 'cover', {max:1000, folder:'site', focus:FOCUS.cover(), hint:'スマホメニューのプロフィール上部に表示します。'})),
     sec('フッター', 'news',
       fText('コピーライト', s, 'footer'),
       fText('注意書き', s, 'notice', {hint:'空欄にすると非表示'})),
@@ -1098,6 +1190,7 @@ function tabTexts() {
     sec('ホーム：新着イラスト', 'image',
       g2(fText('番号ラベル', Hm, 'worksIndex'), fText('見出し', Hm, 'worksTitle')),
       g2(fText('小見出し', Hm, 'worksSub'), fText('リンクの文字', Hm, 'worksLink'))),
+    worksPicker(),
     sec('ホーム：Explore', 'folder',
       g2(fText('番号ラベル', Hm, 'exploreIndex'), fText('見出し', Hm, 'exploreTitle')),
       fArea('説明文', Hm, 'exploreIntro', {rows:2}),
@@ -1168,6 +1261,7 @@ async function dlFromFile(f, x) {
   ASSETS.set(fp, orig);
   x = x || {id:'d' + uid(), title:f.name.replace(/\.[^.]+$/, ''), note:'', chars:[]};
   x.file = fp; x.bytes = f.size; x.size = `${dims.w}×${dims.h}`;
+  clearFocus(x);
   x.image = await fileToAsset(f, 900, 'downloads/preview');
   const r = dims.w / dims.h;
   if (!x.type || x.autoType !== false) x.type = Math.abs(r - 1) < 0.08 ? 'icon' : r > 1 ? 'pc' : 'sp';
@@ -1187,7 +1281,8 @@ function dlFileField(x, refresh) {
   }});
   paint();
   return wrapField('配布する画像', h('div', {class:'ed-img'}, prev, h('div', {class:'ed-img-ctl'},
-    h('div', {class:'ed-row'}, h('button', {class:'ed-btn', type:'button', html:icon('upload') + '画像を選ぶ', onclick:() => file.click()})), info, file)));
+    h('div', {class:'ed-row'}, h('button', {class:'ed-btn', type:'button', html:icon('upload') + '画像を選ぶ', onclick:() => file.click()}),
+      focusBtn(x, () => FOCUS.download(x), refresh)), info, file)));
 }
 function tabDownloads() {
   const DL = D().downloads;
@@ -1256,7 +1351,7 @@ function tabNav() {
           h('div', {class:'ed-item-body'},
             h('div', {class:'ed-grid2'}, fText('タイトル', T[k], 'title'), fText('英字ラベル', T[k], 'en')),
             fIcon('アイコン', T[k], 'icon'),
-            fImage('サムネイル画像（任意）', T[k], 'image', {max:1200, folder:'site', hint: k === 'patreon' ? '空欄ならPatreonプレビュー1枚目をぼかして使用。' : '空欄なら登録済みの最初の画像を使用します。'})))))
+            fImage('サムネイル画像（任意）', T[k], 'image', {max:1200, folder:'site', focus:FOCUS.tile(k, t), hint: k === 'patreon' ? '空欄ならPatreonプレビュー1枚目をぼかして使用。' : '空欄なら登録済みの最初の画像を使用します。'})))))
   ];
 }
 function tabHero() {
@@ -1270,7 +1365,7 @@ function tabHero() {
         make: () => ({image:'', badge:'NEW', title:'New Slide', sub:'', link:'', linkLabel:''}),
         addLabel:'スライドを追加',
         body: (s, refresh) => [
-          fImage('画像', s, 'image', {max:1920, folder:'hero', after:refresh}),
+          fImage('画像', s, 'image', {max:1920, folder:'hero', after:refresh, focus:FOCUS.hero(s)}),
           h('div', {class:'ed-grid2'}, fText('ラベル', s, 'badge', {ph:'PICK UP'}), fArea('タイトル（改行可）', s, 'title', {after:refresh, rows:2})),
           fText('サブテキスト', s, 'sub'),
           h('div', {class:'ed-grid2'}, fText('ボタンのリンク先', s, 'link', {ph:'#/gallery や https://'}), fText('ボタン名', s, 'linkLabel')),
@@ -1340,6 +1435,7 @@ function tabGallery() {
   const G = D().gallery;
   let list;
   return [
+    worksPicker(),
     sec('ギャラリー', 'image',
       bulkImageButton('画像をまとめて追加', async files => {
         for (const f of files) {
@@ -1361,7 +1457,7 @@ function tabGallery() {
         make: () => ({id:'g' + uid(), image:'', title:'New Artwork', date:today(), chars:[]}),
         addLabel:'作品を1件追加',
         body: (g, refresh) => [
-          fImage('画像', g, 'image', {max:1600, folder:'gallery', after:refresh}),
+          fImage('画像', g, 'image', {max:1600, folder:'gallery', after:refresh, focus:FOCUS.gallery(g)}),
           h('div', {class:'ed-grid2'}, fText('タイトル', g, 'title', {after:refresh}), fText('日付', g, 'date', {type:'date', after:refresh})),
           wrapField('登場キャラ', charChecks(g, refresh)),
           h('div', {class:'ed-grid2'}, fText('Xのポスト（任意）', g, 'tweet', {ph:'https://x.com/…/status/…'}), fText('いいね数（任意）', g, 'likes', {type:'number'}))
@@ -1434,7 +1530,7 @@ function tabPatreon() {
         make: () => ({image:'', title:'限定イラスト', tier:''}),
         addLabel:'プレビューを追加',
         body: (x, refresh) => [
-          fImage('プレビュー画像', x, 'image', {max:420, folder:'patreon', after:refresh}),
+          fImage('プレビュー画像', x, 'image', {max:420, folder:'patreon', after:refresh, focus:FOCUS.preview(x)}),
           h('div', {class:'ed-grid2'}, fText('タイトル', x, 'title', {after:refresh}), fText('対象プラン表記', x, 'tier', {after:refresh, ph:'Extra'}))
         ]
       }))
@@ -1879,6 +1975,15 @@ function drawCover(g, img, x, y, w, h, posY = .3) {
   const s = Math.max(w / iw, h / ih), sw = w / s, sh = h / s;
   g.drawImage(img, (iw - sw) / 2, Math.max(0, Math.min(ih - sh, (ih - sh) * posY)), sw, sh, x, y, w, h);
 }
+/* サイトと同じ見え方（object-fit:cover＋表示位置＋ズーム）で描く */
+function drawFocus(g, img, x, y, w, h, f) {
+  const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
+  const s0 = Math.max(w / iw, h / ih), z = Math.max(1, Math.min(3, +f.z || 1));
+  const fx = fnum(f.x, 50) / 100, fy = fnum(f.y, 50) / 100;
+  const ox = (w - iw * s0) * fx, oy = (h - ih * s0) * fy;
+  const qx = w * fx * (1 - 1 / z), qy = h * fy * (1 - 1 / z);
+  g.drawImage(img, (qx - ox) / s0, (qy - oy) / s0, w / z / s0, h / z / s0, x, y, w, h);
+}
 function wrapLines(g, text, maxW, maxLines) {
   const out = []; let line = '';
   for (const ch of String(text)) {
@@ -1890,13 +1995,14 @@ function wrapLines(g, text, maxW, maxLines) {
   return out;
 }
 function cardSourceImage() {
-  const d = D();
+  const d = D(), sh = d.share || {};
+  if (sh.src) return {src:imgSrc(sh.src), base:{x:50, y:30, z:1}, full:true};   // アップロードした画像をそのままカードに
   const s0 = (d.hero.slides || []).find(s => s.image);
-  if (s0) return {src:imgSrc(s0.image), posY:.3};
+  if (s0) return {src:imgSrc(s0.image), base:fBase(s0)};
   const c = d.characters.find(c => c.image);
-  if (c) return {src:imgSrc(c.image), posY:(+c.pos || 25) / 100};
-  if (d.site.avatar) return {src:imgSrc(d.site.avatar), posY:.5};
-  return {src:phHero(0), posY:.5};
+  if (c) return {src:imgSrc(c.image), base:charFocusBase(c)};
+  if (d.site.avatar) return {src:imgSrc(d.site.avatar), base:fBase(d.site, 'avatar')};
+  return {src:phHero(0), base:{x:50, y:50, z:1}};
 }
 async function makeCardImage() {
   const W = 1200, H = 630;
@@ -1910,15 +2016,22 @@ async function makeCardImage() {
   const glow = (x, y, r, col) => { const rg = g.createRadialGradient(x, y, 0, x, y, r); rg.addColorStop(0, col); rg.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = rg; g.fillRect(0, 0, W, H); };
   glow(120, 60, 420, 'rgba(158,215,255,.55)'); glow(1100, 600, 460, 'rgba(242,195,234,.5)'); glow(640, 320, 380, 'rgba(189,180,255,.28)');
   for (let i = 0; i < 40; i++) { const h = hashStr('card' + i); g.fillStyle = `rgba(255,255,255,${.5 + (h % 5) / 10})`; g.beginPath(); g.arc(h % W, (h >> 11) % H, 1 + (h >> 20) % 2, 0, Math.PI * 2); g.fill(); }
-  // 右：メイン画像
   const src = cardSourceImage();
+  const f = fBase(D().share, 'image', src.base);
+  if (src.full) {   // アップロード画像：全面に表示
+    const img = await loadImageEl(src.src);
+    g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+    drawFocus(g, img, 0, 0, W, H, f);
+    return c.toDataURL('image/jpeg', .92);
+  }
+  // 右：メイン画像
   try {
     const img = await loadImageEl(src.src);
     g.save(); g.shadowColor = 'rgba(60,70,150,.28)'; g.shadowBlur = 40; g.shadowOffsetY = 16;
     roundRectPath(g, 640, 56, 500, 518, 36); g.fillStyle = '#fff'; g.fill(); g.restore();
     g.save(); roundRectPath(g, 640, 56, 500, 518, 36); g.clip();
     const ig = g.createLinearGradient(640, 56, 1140, 574); ig.addColorStop(0, '#dfeaff'); ig.addColorStop(1, '#f1e4ff'); g.fillStyle = ig; g.fillRect(640, 56, 500, 518);
-    drawCover(g, img, 640, 56, 500, 518, src.posY); g.restore();
+    drawFocus(g, img, 640, 56, 500, 518, f); g.restore();
   } catch (e) {}
   // 左：ロゴ・サイト名・説明
   const s = D().site, v = shareValues();
@@ -1940,12 +2053,10 @@ async function makeCardImage() {
   return c.toDataURL('image/jpeg', .92);
 }
 async function fileToCard(f) {
-  const d = await readAsDataURL(f);
-  const img = await loadImageEl(d);
-  const c = document.createElement('canvas'); c.width = 1200; c.height = 630;
-  const g = c.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, 1200, 630);
-  drawCover(g, img, 0, 0, 1200, 630, .3);
-  return c.toDataURL('image/jpeg', .92);
+  const sh = D().share;
+  sh.src = await fileToAsset(f, 1600, 'share');   // 元の画像を残しておく（表示位置を変えて作り直せるように）
+  clearFocus(sh);
+  return makeCardImage();
 }
 function setShareImage(dataUrl) {
   const p = `images/share/card-${uid().slice(0, 6)}.jpg`;
@@ -1979,15 +2090,26 @@ function tabShare() {
     sec('カード画像（1200×630）', 'image',
       h('div', {class:'ed-row', style:'margin-bottom:8px'},
         h('button', {class:'ed-btn', type:'button', html:icon('wand') + 'サイトの画像から自動で作る', onclick:async () => {
+          if (sh.src) { sh.src = ''; clearFocus(sh); }
           busy.textContent = 'カード画像を作っています…';
           try { setShareImage(await makeCardImage()); busy.textContent = ''; paintCard(); }
           catch (e) { busy.textContent = ''; toast('作れませんでした：' + e.message); }
         }}),
         h('button', {class:'ed-btn ghost', type:'button', html:icon('upload') + '画像をアップロード', onclick:() => upl.click()}),
+        h('button', {class:'ed-btn ghost', type:'button', html:icon('image') + '表示位置', title:'カードで見える範囲を調整して作り直す', onclick:() => {
+          const src = cardSourceImage(), before = JSON.stringify([sh.fx, sh.fy, sh.fz]);
+          openFocusModal({obj:sh, focus:{label:'カード画像の表示位置', ratio:src.full ? '1200/630' : '500/518', def:() => cardSourceImage().base, src:() => cardSourceImage().src,
+            hint:src.full ? 'カード全体に表示される範囲です。' : 'カード右側の画像枠に見える範囲です。'}}, async () => {
+            if (JSON.stringify([sh.fx, sh.fy, sh.fz]) === before) return;
+            busy.textContent = 'カード画像を作り直しています…';
+            try { setShareImage(await makeCardImage()); } catch (e) { toast('作れませんでした：' + e.message); }
+            busy.textContent = ''; paintCard();
+          });
+        }}),
         h('button', {class:'ed-btn ghost', type:'button', title:'カード画像を外す', html:icon('trash'), onclick:() => { sh.image = ''; changed(); paintCard(); }}),
         upl),
       busy,
-      h('p', {class:'ed-hint'}, '自動作成は、トップ画像1枚目（なければキャラの画像）とサイト名・説明文で作ります。文字や画像を変えたら、もう一度押すと作り直せます。アップロードした画像は横長（1200×630）に自動で切り抜きます。')),
+      h('p', {class:'ed-hint'}, '自動作成は、トップ画像1枚目（なければキャラの画像）とサイト名・説明文で作ります。文字や画像を変えたら、もう一度押すと作り直せます。アップロードした画像は横長（1200×630）に自動で切り抜きます。「表示位置」で見える範囲を変えると、カードを作り直します。')),
     sec('表示する文字', 'book',
       fText('タイトル', sh, 'title', {ph:auto.title, after:refresh, hint:'空欄ならサイト名'}),
       fArea('説明文', sh, 'description', {rows:3, ph:auto.desc, after:refresh, hint:'空欄ならプロフィール文。60〜100文字くらいがおすすめです。'}),
@@ -2249,7 +2371,7 @@ function composeThumb(img, mask, th, soft, max = 300) {
 }
 /* ---------- 背景をまとめて消す ---------- */
 async function openBgBatch() {
-  const all = imageSlots().filter(s => s.obj[s.key]);
+  const all = imageSlots().filter(s => s.obj[s.key] && !s.noBg);
   if (!all.length) { toast('画像が入っている枠がありません'); return; }
   const items = all.map(sl => {
     const cur = sl.obj[sl.key], already = /-nobg-/.test(cur);
@@ -2827,17 +2949,21 @@ function fitPreview() {
 function imageSlots() {
   const d = D(), out = [];
   const holo = svgURI('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 4"><defs><linearGradient id="g"><stop stop-color="#9ed7ff"/><stop offset=".5" stop-color="#bdb4ff"/><stop offset="1" stop-color="#f2c3ea"/></linearGradient></defs><rect width="10" height="4" fill="url(#g)"/></svg>');
-  out.push({group:'サイト', label:'アイコン', hint:'正方形・512px', obj:d.site, key:'avatar', max:512, folder:'site', ph:phAvatar(), ratio:'1'});
-  out.push({group:'サイト', label:'カバー（スマホメニュー）', hint:'横長', obj:d.site, key:'cover', max:1000, folder:'site', ph:holo, ratio:'2.5'});
-  d.hero.slides.forEach((s, i) => out.push({group:'トップ画像', label:`スライド ${i + 1}`, hint:s.title ? s.title.replace(/\n/g, ' ') : '', obj:s, key:'image', max:1920, folder:'hero', ph:phHero(i), ratio:'1.15'}));
+  out.push({group:'サイト', label:'アイコン', hint:'正方形・512px', obj:d.site, key:'avatar', max:512, folder:'site', ph:phAvatar(), ratio:'1', focus:FOCUS.avatar()});
+  out.push({group:'サイト', label:'カバー（スマホメニュー）', hint:'横長', obj:d.site, key:'cover', max:1000, folder:'site', ph:holo, ratio:'2.5', focus:FOCUS.cover()});
+  d.hero.slides.forEach((s, i) => out.push({group:'トップ画像', label:`スライド ${i + 1}`, hint:s.title ? s.title.replace(/\n/g, ' ') : '', obj:s, key:'image', max:1920, folder:'hero', ph:phHero(i), ratio:'1.15', focus:FOCUS.hero(s)}));
   [['characters', 'キャラクター'], ['gallery', 'ギャラリー'], ['patreon', '会員限定']].forEach(([k, t]) =>
-    out.push({group:'Explore のサムネイル', label:t, hint:'空欄なら自動', obj:d.tiles[k], key:'image', max:1200, folder:'site', ph:holo, ratio:'.92'}));
+    out.push({group:'Explore のサムネイル', label:t, hint:'空欄なら自動', obj:d.tiles[k], key:'image', max:1200, folder:'site', ph:holo, ratio:'.92', focus:FOCUS.tile(k, t), auto:() => tileSource(k).src}));
   d.characters.forEach(c => out.push({group:'キャラクター', label:c.name, hint:c.romaji, obj:c, key:'image', max:1400, folder:'characters', ph:phChar(c), ratio:'3/4', color:c.color,
-    focus:{label:`${c.name}：カードの表示位置`, ratio:'3/4', keys:{y:'pos'}, def:{x:50, y:25, z:1}, src:() => charImg(c)}}));
+    focus:{label:`${c.name}：カードの表示位置`, ratio:'3/4', keys:{y:'pos'}, def:{x:50, y:25, z:1}, keepOnChange:true, src:() => charImg(c), hint:'キャラクター一覧のカード・紹介画面・推しプラン（専用画像なし）に使います。'}}));
   ((d.patreon.oshi || {}).items || []).forEach(x => { const c = charById(x.char); out.push({group:'推しプラン', label:x.name || '(名前なし)', hint:x.image ? '専用の画像' : 'キャラの画像を使用中', obj:x, key:'image', max:1200, folder:'patreon', ph:c ? charImg(c) : phArt('oshi', '', ''), ratio:'4/3', color:c ? c.color : '',
     focus:{label:`${x.name}：サムネイルの表示位置`, ratio:'4/3', def:() => oshiFocusBase(x), src:() => { const cc = charById(x.char); return x.image ? imgSrc(x.image) : cc ? charImg(cc) : phArt('oshi', '', ''); }}}); });
-  d.gallery.forEach(g => { const c = charById((g.chars || [])[0]); out.push({group:'ギャラリー', label:g.title || '(無題)', titleKey:'title', hint:fmtDate(g.date), obj:g, key:'image', max:1600, folder:'gallery', ph:phArt(g.id || g.title, g.title, c && c.color), ratio:'1'}); });
-  d.patreon.previews.forEach((x, i) => out.push({group:'Patreon プレビュー', label:x.title || '(無題)', titleKey:'title', hint:'ぼかして表示', obj:x, key:'image', max:420, folder:'patreon', ph:phArt('pv' + i, '', SOFT[i % SOFT.length]), ratio:'3/4'}));
+  d.gallery.forEach(g => { const c = charById((g.chars || [])[0]); out.push({group:'ギャラリー', label:g.title || '(無題)', titleKey:'title', hint:fmtDate(g.date), obj:g, key:'image', max:1600, folder:'gallery', ph:phArt(g.id || g.title, g.title, c && c.color), ratio:'1', focus:FOCUS.gallery(g)}); });
+  d.patreon.previews.forEach((x, i) => out.push({group:'Patreon プレビュー', label:x.title || '(無題)', titleKey:'title', hint:'ぼかして表示', obj:x, key:'image', max:420, folder:'patreon', ph:phArt('pv' + i, '', SOFT[i % SOFT.length]), ratio:'3/4', focus:FOCUS.preview(x)}));
+  ((d.downloads || {}).items || []).forEach(x => out.push({group:'壁紙・アイコン', label:x.title || '(無題)', titleKey:'title', obj:x, key:'image', ph:phArt('dl', '', ''),
+    get hint() { return (DL_TYPES[x.type] || '') + (x.size ? '・' + x.size : ''); },
+    get ratio() { return x.type === 'sp' ? '9/14' : x.type === 'icon' ? '1' : '16/10'; },
+    get focus() { return FOCUS.download(x); }, noBg:true, noClear:true, setFile:f => dlFromFile(f, x)}));
   return out;
 }
 function imgState(v) {
@@ -2852,28 +2978,36 @@ function imageCard(sl) {
   const chip = h('span', {class:'im-chip'});
   const paint = () => {
     const v = sl.obj[sl.key] || '';
-    img.src = v ? imgSrc(v) : sl.ph;
-    img.classList.toggle('is-ph', !v);
-    const [t, k] = imgState(v); chip.textContent = t; chip.className = 'im-chip ' + k;
+    const auto = !v && sl.auto ? sl.auto() : '';
+    img.src = v ? imgSrc(v) : auto || sl.ph;
+    img.classList.toggle('is-ph', !v && !auto);
+    img.style.cssText = sl.focus && (v || auto) ? slotFocusCSS(sl) : '';
+    const [t, k] = imgState(v); chip.textContent = auto ? '自動' : t; chip.className = 'im-chip ' + (auto ? 'ext' : k);
   };
   const set = async f => {
     if (!f || !/^image\//.test(f.type)) return;
-    try { sl.obj[sl.key] = await fileToAsset(f, sl.max, sl.folder); paint(); changed(); refreshImageSummary(); }
-    catch (e) { toast(e.message); }
+    try {
+      if (sl.setFile) { await sl.setFile(f); hintEl.textContent = sl.hint || ' '; thumb.style.aspectRatio = sl.ratio || '1'; }
+      else sl.obj[sl.key] = await fileToAsset(f, sl.max, sl.folder);
+      if (sl.focus && !sl.focus.keepOnChange) clearFocus(sl.obj, sl.focus.keys);
+      paint(); changed(); refreshImageSummary();
+    } catch (e) { toast(e.message); }
   };
   const file = h('input', {type:'file', accept:'image/*', hidden:true, onchange:() => { set(file.files[0]); file.value = ''; }});
+  const thumb = h('div', {class:'im-thumb', style:`aspect-ratio:${sl.ratio || '1'}`}, img, chip);
+  const hintEl = h('small', {}, sl.hint || ' ');
   const card = h('div', {class:'im-card'},
-    h('div', {class:'im-thumb', style:`aspect-ratio:${sl.ratio || '1'}`}, img, chip),
-    h('div', {class:'im-meta'}, sl.titleKey ? titleInput(sl) : h('b', {title:sl.label}, sl.label), h('small', {}, sl.hint || ' ')),
+    thumb,
+    h('div', {class:'im-meta'}, sl.titleKey ? titleInput(sl) : h('b', {title:sl.label}, sl.label), hintEl),
     h('div', {class:'im-actions'},
       h('button', {class:'ed-btn', type:'button', html:icon('upload') + '差し替え', onclick:() => file.click()}),
-      h('button', {class:'ed-mini', type:'button', title:'画像を外す', html:icon('trash'), onclick:() => { sl.obj[sl.key] = ''; paint(); changed(); refreshImageSummary(); }}),
+      sl.noClear ? null : h('button', {class:'ed-mini', type:'button', title:'画像を外す', html:icon('trash'), onclick:() => { sl.obj[sl.key] = ''; paint(); changed(); refreshImageSummary(); }}),
       file),
     h('div', {class:'im-actions'},
-      h('button', {class:'ed-btn ghost im-bg', type:'button', title:'AIで背景を消して透過にする', html:icon('wand') + '背景を消す',
+      sl.noBg ? null : h('button', {class:'ed-btn ghost im-bg', type:'button', title:'AIで背景を消して透過にする', html:icon('wand') + '背景を消す',
         onclick:() => openBgRemove(sl, () => { paint(); refreshImageSummary(); })}),
-      sl.focus ? h('button', {class:'ed-btn ghost im-bg', type:'button', title:'サムネイルで見える場所を決める', html:icon('image') + '表示位置',
-        onclick:() => openFocusModal(sl)}) : null));
+      sl.focus ? h('button', {class:'ed-btn ghost im-bg', type:'button', title:'サイトで見える範囲を決める', html:icon('image') + '表示位置',
+        onclick:() => openFocusModal(sl, paint)}) : null));
   card.addEventListener('dragover', e => { e.preventDefault(); card.classList.add('drag'); });
   card.addEventListener('dragleave', () => card.classList.remove('drag'));
   card.addEventListener('drop', e => { e.preventDefault(); card.classList.remove('drag'); set(e.dataTransfer.files[0]); });
@@ -2885,8 +3019,13 @@ function titleInput(sl) {
   inp.addEventListener('input', () => { sl.obj[sl.titleKey] = inp.value; changed(); });
   return inp;
 }
-function openFocusModal(sl) {
-  const close = () => { back.remove(); document.removeEventListener('keydown', onKey); };
+function slotFocusCSS(sl) {
+  const f = sl.focus, K = Object.assign({x:'fx', y:'fy', z:'fz'}, f.keys || {});
+  const b = (typeof f.def === 'function' ? f.def() : f.def) || {x:50, y:50, z:1};
+  return focusCSS({fx:sl.obj[K.x], fy:sl.obj[K.y], fz:sl.obj[K.z]}, b);
+}
+function openFocusModal(sl, onClose) {
+  const close = () => { back.remove(); document.removeEventListener('keydown', onKey); onClose && onClose(); };
   const onKey = e => { if (e.key === 'Escape') close(); };
   const back = h('div', {class:'bg-modal-back fc-back', onclick:e => { if (e.target === back) close(); }},
     h('div', {class:'bg-modal', style:'width:min(520px,100%)', role:'dialog', 'aria-modal':'true', 'aria-label':'表示位置'},
