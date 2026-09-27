@@ -355,6 +355,42 @@ body{overflow:hidden;font-size:14px}
 .fc-back{background:rgba(14,16,36,.35);-webkit-backdrop-filter:none;backdrop-filter:none}
 .im-actions+.im-actions{margin-top:-2px}
 @media (max-width:760px){.fc{grid-template-columns:1fr}}
+/* Xから追加 */
+.xa-steps{margin:0 0 4px;padding-left:20px;font-size:12.5px;line-height:1.85;color:var(--text-2)}
+.xa-busy{font-size:12.5px;padding:10px 14px;border-radius:12px;background:var(--accent-soft);margin:0 0 12px}
+.xa-sum{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:4px 0 12px}
+.xa-sum span{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:5px 12px;border-radius:99px;background:var(--surface);border:1px solid var(--line);color:var(--text-2)}
+.xa-sum span:first-child{font-weight:700;color:var(--text)}
+.xa-sum .ic{width:13px;height:13px}
+.xa-sum .mute{color:var(--muted)}
+.xa-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:4px 12px}
+.xa-cks{display:flex;flex-wrap:wrap;gap:6px 18px;margin:2px 0 10px}
+.xa-upd{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;font-size:12.5px;padding:10px 14px;border-radius:12px;background:color-mix(in srgb,#f5c518 16%,var(--surface));border:1px solid color-mix(in srgb,#f5c518 40%,var(--line));margin-bottom:10px}
+.xa-bar{position:sticky;top:-16px;z-index:3;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 12px;margin:0 0 12px;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px}
+.xa-bar .ed-btn{flex:none}
+.xa-n{margin-left:auto;font-size:12px;color:var(--text-2)}
+.xa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.xa-card{position:relative;display:flex;flex-direction:column;padding:0;border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);text-align:left;cursor:pointer;color:inherit;font:inherit;transition:border-color .15s,box-shadow .15s}
+.xa-card:hover{box-shadow:var(--shadow)}
+.xa-card.on{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.xa-card.done{cursor:default}
+.xa-card.done .xa-img img{opacity:.45}
+.xa-img{position:relative;display:block;aspect-ratio:1;background:var(--surface-2)}
+.xa-img img{width:100%;height:100%;object-fit:cover;display:block}
+.xa-img img.is-ph{opacity:.3}
+.xa-rank{position:absolute;top:6px;left:6px;font:700 11px var(--ff-en,system-ui);background:rgba(20,22,40,.72);color:#fff;border-radius:99px;padding:2px 8px}
+.xa-ck{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;border:2px solid #fff;background:rgba(20,22,40,.3);display:grid;place-items:center;color:transparent;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.xa-ck .ic{width:14px;height:14px;stroke-width:3}
+.xa-card.on .xa-ck{background:var(--accent);color:#fff}
+.xa-badges{position:absolute;bottom:6px;left:6px;right:6px;display:flex;flex-wrap:wrap;gap:4px}
+.xa-badges span{font-size:10px;font-weight:700;background:rgba(20,22,40,.72);color:#fff;border-radius:6px;padding:2px 6px}
+.xa-badges .ok{background:#39b597}
+.xa-badges .warn{background:#d65582}
+.xa-meta{display:grid;gap:2px;padding:8px 10px 10px}
+.xa-meta b{font-size:13.5px;color:#e0557a}
+.xa-meta b small{font-size:10.5px;font-weight:400;color:var(--muted)}
+.xa-meta>small{font-size:10.5px;color:var(--muted)}
+.xa-meta p{margin:2px 0 0;font-size:11.5px;line-height:1.55;color:var(--text-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-all}
 
 </style>
 </head>
@@ -570,7 +606,8 @@ const DEFAULT = {
     footer:'© 2026 RyuSe1 STUDIO. All rights reserved.',
     notice:'サイト内の画像の無断転載・再配布はご遠慮ください。',
     contactText:'お仕事のご相談・ご連絡は、SNSのDMからお気軽にどうぞ。',
-    contactLabel:'Xで連絡する', contactUrl:'https://x.com/RyuSe1_AI'
+    contactLabel:'Xで連絡する', contactUrl:'https://x.com/RyuSe1_AI',
+    showLikes:true
   },
   nav: [
     {id:'home', label:'ホーム', en:'Home', icon:'home', show:true},
@@ -1314,7 +1351,9 @@ function tabGallery() {
         }
         list.redraw(); changed(); toast('追加しました（キャラの紐付けを設定してください）');
       }),
-      h('p', {class:'ed-hint', style:'margin:-2px 0 10px'}, '公開ページでは日付の新しい順に並びます。'),
+      h('p', {class:'ed-hint', style:'margin:-2px 0 10px'}, '公開ページでは日付の新しい順に並びます（いいね数があると「人気順」も選べます）。'),
+      typeof tabXArchive === 'function' ? h('div', {class:'ed-row', style:'margin:-2px 0 12px'},
+        h('button', {class:'ed-btn ghost', type:'button', html:icon('x') + 'Xのいいね上位から追加', onclick:() => { ED.tab = 'xarc'; drawAll(); }})) : null,
       list = fList(G, {
         addTop:true,
         ...thumbLead(g => galImg(g)),
@@ -1324,7 +1363,8 @@ function tabGallery() {
         body: (g, refresh) => [
           fImage('画像', g, 'image', {max:1600, folder:'gallery', after:refresh}),
           h('div', {class:'ed-grid2'}, fText('タイトル', g, 'title', {after:refresh}), fText('日付', g, 'date', {type:'date', after:refresh})),
-          wrapField('登場キャラ', charChecks(g, refresh))
+          wrapField('登場キャラ', charChecks(g, refresh)),
+          h('div', {class:'ed-grid2'}, fText('Xのポスト（任意）', g, 'tweet', {ph:'https://x.com/…/status/…'}), fText('いいね数（任意）', g, 'likes', {type:'number'}))
         ]
       }))
   ];
@@ -2331,9 +2371,349 @@ async function openBgBatch() {
 }
 
 /* =========================================================
+   Xのデータアーカイブから、いいねの多い画像ポストをギャラリーに追加
+   ・ZIPはこのブラウザの中だけで読む（どこにも送信しない）
+   ・巨大なZIPでも必要な部分だけ読む（ZIP64 対応）
+   ========================================================= */
+const XA = {files:null, ent:null, media:null, tweets:null, user:'', uid:'', gen:'', stat:null, thumbs:new Map(), sel:new Set(), busy:false, msg:'',
+  opt:{period:'all', min:0, limit:60, sensitive:false, hideDone:true, allImages:false}};
+
+/* ---------- ZIP を少しずつ読む ---------- */
+async function zipEntries(file) {
+  const size = file.size;
+  const tailLen = Math.min(size, 65535 + 22);
+  const tail = new DataView(await file.slice(size - tailLen).arrayBuffer());
+  let eo = -1;
+  for (let i = tailLen - 22; i >= 0; i--) if (tail.getUint32(i, true) === 0x06054b50) { eo = i; break; }
+  if (eo < 0) throw new Error(`${file.name} はZIPファイルとして読み込めませんでした`);
+  let cdSize = tail.getUint32(eo + 12, true), cdOff = tail.getUint32(eo + 16, true);
+  if (cdSize === 0xffffffff || cdOff === 0xffffffff || tail.getUint16(eo + 10, true) === 0xffff) {
+    const lo = eo - 20;
+    if (lo >= 0 && tail.getUint32(lo, true) === 0x07064b50) {
+      const at = Number(tail.getBigUint64(lo + 8, true));
+      const e = new DataView(await file.slice(at, at + 56).arrayBuffer());
+      if (e.getUint32(0, true) === 0x06064b50) { cdSize = Number(e.getBigUint64(40, true)); cdOff = Number(e.getBigUint64(48, true)); }
+    }
+  }
+  const cd = new DataView(await file.slice(cdOff, cdOff + cdSize).arrayBuffer());
+  const dec = new TextDecoder();
+  const out = [];
+  let p = 0;
+  while (p + 46 <= cd.byteLength && cd.getUint32(p, true) === 0x02014b50) {
+    const method = cd.getUint16(p + 10, true);
+    let csize = cd.getUint32(p + 20, true), usize = cd.getUint32(p + 24, true), lho = cd.getUint32(p + 42, true);
+    const nlen = cd.getUint16(p + 28, true), xlen = cd.getUint16(p + 30, true), clen = cd.getUint16(p + 32, true);
+    const name = dec.decode(new Uint8Array(cd.buffer, cd.byteOffset + p + 46, nlen));
+    let xp = p + 46 + nlen; const xe = xp + xlen;
+    while (xp + 4 <= xe) {
+      const id = cd.getUint16(xp, true), sz = cd.getUint16(xp + 2, true);
+      if (id === 1) {
+        let q = xp + 4;
+        if (usize === 0xffffffff) { usize = Number(cd.getBigUint64(q, true)); q += 8; }
+        if (csize === 0xffffffff) { csize = Number(cd.getBigUint64(q, true)); q += 8; }
+        if (lho === 0xffffffff) { lho = Number(cd.getBigUint64(q, true)); q += 8; }
+      }
+      xp += 4 + sz;
+    }
+    if (!name.endsWith('/')) {
+      const e = {method, csize, lho};
+      out.push({path:name, size:usize, read:() => zipRead(file, e)});
+    }
+    p = xe + clen;
+  }
+  return out;
+}
+async function zipRead(file, e) {
+  const hd = new DataView(await file.slice(e.lho, e.lho + 30).arrayBuffer());
+  if (hd.getUint32(0, true) !== 0x04034b50) throw new Error('ZIPの中身を読み込めませんでした');
+  const start = e.lho + 30 + hd.getUint16(26, true) + hd.getUint16(28, true);
+  const raw = file.slice(start, start + e.csize);
+  if (e.method === 0) return raw;
+  if (e.method === 8) {
+    if (typeof DecompressionStream === 'undefined') throw new Error('このブラウザはZIPの展開に対応していません（Chrome / Edge / Safari 最新版で開いてください）');
+    return await new Response(raw.stream().pipeThrough(new DecompressionStream('deflate-raw'))).blob();
+  }
+  throw new Error('この圧縮形式には対応していません');
+}
+
+/* ---------- アーカイブの中身を読む ---------- */
+const xKey = p => { const m = /(?:^|\/)(data\/.*)$/.exec(String(p).replace(/\\/g, '/')); return m ? m[1] : String(p); };
+const parseYTD = t => { const s = t.slice(t.indexOf('=') + 1).trim().replace(/;\s*$/, ''); return JSON.parse(s); };
+const X_MON = {Jan:0, Feb:1, Mar:2, Apr:3, May:4, Jun:5, Jul:6, Aug:7, Sep:8, Oct:9, Nov:10, Dec:11};
+function xTime(s) {
+  const m = /^\w{3} (\w{3}) (\d{1,2}) (\d{2}):(\d{2}):(\d{2}) ([+-])(\d{2})(\d{2}) (\d{4})$/.exec(String(s || '').trim());
+  if (!m) { const t = Date.parse(s); return isNaN(t) ? 0 : t; }
+  const off = (m[6] === '-' ? -1 : 1) * (+m[7] * 60 + +m[8]) * 60000;
+  return Date.UTC(+m[9], X_MON[m[1]] ?? 0, +m[2], +m[3], +m[4], +m[5]) - off;
+}
+const ymd = t => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+const unEnt = s => String(s || '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+function xTitle(text) {
+  const s = unEnt(text).replace(/https?:\/\/\S+/g, '').replace(/^(\s*@\w+)+\s*/, '');
+  const line = s.split(/\n+/).map(l => l.replace(/[#＃][^\s#＃]+/g, '').replace(/\s+/g, ' ').trim()).find(Boolean) || '';
+  return line.length > 40 ? line.slice(0, 39) + '…' : line || 'Artwork';
+}
+function xChars(text) {
+  const t = unEnt(text);
+  return D().characters.filter(c => {
+    const nm = String(c.name || '').trim(), ro = String(c.romaji || '').trim();
+    if (nm.length >= 2 && t.includes(nm)) return true;
+    return ro.length >= 3 && new RegExp(`(^|[^a-z])${ro.replace(/[^a-z0-9]/gi, '')}([^a-z]|$)`, 'i').test(t);
+  }).map(c => c.id);
+}
+async function xLoad(files, isFolder) {
+  XA.busy = true; XA.msg = 'アーカイブを読み込んでいます…'; xDraw();
+  try {
+    const ent = new Map();
+    for (const f of files) {
+      if (isFolder) ent.set(xKey(f.webkitRelativePath || f.name), {path:f.name, size:f.size, read:async () => f});
+      else if (/\.zip$/i.test(f.name) || f.type.includes('zip')) (await zipEntries(f)).forEach(e => ent.set(xKey(e.path), e));
+    }
+    const tfiles = Array.from(ent.keys()).filter(k => /^data\/tweets?(-part\d+)?\.js$/.test(k)).sort();
+    if (!tfiles.length) throw new Error('Xのデータアーカイブではないようです（data/tweets.js が見つかりません）。\n複数のZIPに分かれている場合は、まとめて選んでください。');
+    const media = new Map();
+    for (const [k, e] of ent) {
+      const m = /^data\/(?:tweets?_media|community_tweet_media)\/([^/]+)$/.exec(k);
+      if (m) { media.set(m[1], e); const i = m[1].indexOf('-'); if (i > 0) media.set('*' + m[1].slice(i + 1), e); }
+    }
+    let user = '', uid = '', gen = '';
+    const acc = ent.get('data/account.js');
+    if (acc) try { const a = (parseYTD(await (await acc.read()).text())[0] || {}).account || {}; user = a.username || ''; uid = String(a.accountId || ''); } catch (e) {}
+    const man = ent.get('data/manifest.js');
+    if (man) try { const m = /"generationDate"\s*:\s*"([^"]+)"/.exec(await (await man.read()).text()); if (m) gen = m[1]; } catch (e) {}
+    const stat = {all:0, rt:0, reply:0, noimg:0, sensitive:0};
+    const tweets = [];
+    for (const k of tfiles) {
+      XA.msg = `ポストを読み込んでいます…（${k.replace('data/', '')}）`; xDraw();
+      const arr = parseYTD(await (await ent.get(k).read()).text());
+      for (const x of arr) {
+        const t = x.tweet || x;
+        stat.all++;
+        const text = t.full_text || t.text || '';
+        if (/^RT @/.test(text) || t.retweeted_status) { stat.rt++; continue; }
+        if (t.in_reply_to_user_id_str && t.in_reply_to_user_id_str !== uid && !(user && t.in_reply_to_screen_name === user)) { stat.reply++; continue; }
+        const md = ((t.extended_entities || {}).media || (t.entities || {}).media || []).filter(m => m && m.type === 'photo' && m.media_url_https);
+        if (!md.length) { stat.noimg++; continue; }
+        const sens = t.possibly_sensitive === true || t.possibly_sensitive === 'true';
+        if (sens) stat.sensitive++;
+        const tid = String(t.id_str || t.id);
+        const ts = xTime(t.created_at);
+        tweets.push({tid, ts, date:ymd(ts), likes:parseInt(t.favorite_count, 10) || 0, rts:parseInt(t.retweet_count, 10) || 0,
+          text:unEnt(text).replace(/https:\/\/t\.co\/\w+/g, '').trim(), title:xTitle(text), chars:xChars(text), sens,
+          media:md.map(m => ({url:m.media_url_https, base:m.media_url_https.split('/').pop().split('?')[0]}))});
+      }
+    }
+    tweets.sort((a, b) => b.likes - a.likes || b.ts - a.ts);
+    XA.thumbs.forEach(u => URL.revokeObjectURL(u)); XA.thumbs.clear();
+    Object.assign(XA, {ent, media, tweets, user, uid, gen, stat, msg:''});
+    XA.sel.clear();
+  } catch (e) {
+    XA.msg = ''; setPubStatus(`読み込めませんでした：${e.message}`, 'err');
+  } finally {
+    XA.busy = false; xDraw();
+  }
+}
+function xMediaEntry(tw, m) {
+  return XA.media.get(`${tw.tid}-${m.base}`) || XA.media.get('*' + m.base) || null;
+}
+async function xMediaBlob(tw, m) {
+  const e = xMediaEntry(tw, m);
+  if (e) try { return await e.read(); } catch (err) {}
+  try { const r = await fetch(`${m.url}?name=large`); if (r.ok) return await r.blob(); } catch (err) {}
+  return null;
+}
+const xUrl = tid => `https://x.com/${XA.user || 'i'}/status/${tid}`;
+const xDone = tid => D().gallery.some(g => String(g.tweetId || '') === tid);
+
+/* ---------- 一覧 ---------- */
+const X_PERIOD = [['all', '全期間'], ['365', '1年以内'], ['180', '半年以内'], ['90', '3か月以内'], ['30', '1か月以内']];
+function xFiltered() {
+  const o = XA.opt;
+  const latest = XA.tweets.reduce((m, t) => Math.max(m, t.ts), 0);
+  const from = o.period === 'all' ? 0 : latest - (+o.period) * 86400000;
+  return XA.tweets.filter(t => t.ts >= from && t.likes >= (+o.min || 0) && (o.sensitive || !t.sens) && !(o.hideDone && xDone(t.tid)));
+}
+function xLikesDiff() {
+  if (!XA.tweets) return [];
+  const map = new Map(XA.tweets.map(t => [t.tid, t]));
+  return D().gallery.filter(g => g.tweetId && map.has(String(g.tweetId)) && Number(g.likes) !== map.get(String(g.tweetId)).likes);
+}
+let XQ = [], XQrun = 0;
+function xThumb(tw, img) {
+  if (XA.thumbs.has(tw.tid)) { img.src = XA.thumbs.get(tw.tid); return; }
+  XQ.push([tw, img]); xPump();
+}
+async function xPump() {
+  while (XQrun < 3 && XQ.length) {
+    const [tw, img] = XQ.shift();
+    XQrun++;
+    (async () => {
+      try {
+        const e = xMediaEntry(tw, tw.media[0]);
+        let u = '';
+        if (e) u = URL.createObjectURL(await e.read());
+        else u = `${tw.media[0].url}?name=small`;
+        XA.thumbs.set(tw.tid, u);
+        img.src = u;
+      } catch (err) { img.classList.add('is-ph'); }
+      XQrun--; xPump();
+    })();
+  }
+}
+function xCard(tw, rank) {
+  const done = xDone(tw.tid), on = XA.sel.has(tw.tid);
+  const img = h('img', {alt:'', loading:'lazy'});
+  img.onerror = () => { img.removeAttribute('src'); img.classList.add('is-ph'); };
+  xThumb(tw, img);
+  const card = h('button', {class:'xa-card' + (on ? ' on' : '') + (done ? ' done' : ''), type:'button', title:tw.text,
+    onclick:() => {
+      if (done) return;
+      XA.sel.has(tw.tid) ? XA.sel.delete(tw.tid) : XA.sel.add(tw.tid);
+      card.classList.toggle('on', XA.sel.has(tw.tid)); xBarUpdate();
+    }},
+    h('span', {class:'xa-img'}, img,
+      h('span', {class:'xa-rank'}, `#${rank}`),
+      done ? null : h('span', {class:'xa-ck', html:icon('check')}),
+      h('span', {class:'xa-badges'},
+        done ? h('span', {class:'ok'}, '追加済み') : null,
+        tw.media.length > 1 ? h('span', {}, `${tw.media.length}枚`) : null,
+        tw.sens ? h('span', {class:'warn'}, 'センシティブ') : null)),
+    h('span', {class:'xa-meta'},
+      h('b', {}, `♡ ${tw.likes.toLocaleString()}`, h('small', {}, `  RP ${tw.rts.toLocaleString()}`)),
+      h('small', {}, fmtDate(tw.date)),
+      h('p', {}, tw.text || '（本文なし）')));
+  return card;
+}
+function xBarUpdate() {
+  const n = XA.sel.size;
+  const c = $('#xaSelN'); if (c) c.textContent = `${n}件選択中`;
+  const b = $('#xaAddBtn'); if (b) b.disabled = !n || XA.busy;
+}
+async function xAdd() {
+  if (XA.busy || !XA.sel.size) return;
+  const picks = XA.tweets.filter(t => XA.sel.has(t.tid) && !xDone(t.tid));
+  XA.busy = true; xBarUpdate();
+  const items = []; let miss = 0;
+  try {
+    for (let i = 0; i < picks.length; i++) {
+      const tw = picks[i];
+      const ms = XA.opt.allImages ? tw.media : tw.media.slice(0, 1);
+      for (let k = 0; k < ms.length; k++) {
+        setPubStatus(`画像を取り込んでいます… ${i + 1} / ${picks.length}`);
+        const blob = await xMediaBlob(tw, ms[k]);
+        if (!blob) { miss++; continue; }
+        const ext = (ms[k].base.split('.').pop() || 'jpg').toLowerCase();
+        const type = ext === 'png' ? 'image/png' : ext === 'webp' ? 'image/webp' : 'image/jpeg';
+        const suffix = k ? `-${k + 1}` : '';
+        const path = await fileToAsset(new File([blob], `x-${tw.tid}${suffix}.${ext}`, {type}), 1600, 'gallery');
+        items.push({id:'x' + tw.tid + suffix, image:path, title:tw.title + (ms.length > 1 ? ` (${k + 1})` : ''), date:tw.date,
+          chars:tw.chars.slice(), tweetId:tw.tid, tweet:xUrl(tw.tid), likes:tw.likes});
+      }
+    }
+  } catch (e) {
+    setPubStatus(`取り込み中にエラーが出ました：${e.message}`, 'err');
+  }
+  XA.busy = false;
+  if (items.length) {
+    D().gallery.unshift(...items);
+    XA.sel.clear(); changed();
+    setPubStatus(`${items.length}件をギャラリーに追加しました${miss ? `（画像が見つからなかったもの ${miss}件は除外）` : ''}。\nキャラの紐付けは「ギャラリー」タブで直せます。右上の「GitHubに公開」でサイトに反映されます。`, 'ok');
+  } else if (miss) setPubStatus('画像ファイルが見つかりませんでした。アーカイブの ZIP（または data フォルダ）をまるごと選んでください。', 'warn');
+  xDraw();
+}
+
+/* ---------- タブ ---------- */
+function xDraw() {
+  const box = $('#xaBody');
+  if (!box || XA.drawing) return;
+  XA.drawing = true;
+  const y = $('#adMain') ? $('#adMain').scrollTop : 0;
+  XQ = [];
+  try { box.replaceChildren(...xBody()); } finally { XA.drawing = false; }
+  if ($('#adMain')) $('#adMain').scrollTop = y;
+  xBarUpdate();
+}
+function xOptSel(label, key, options, after) {
+  const s = h('select', {class:'ed-in'}, options.map(([v, t]) => h('option', {value:v}, t)));
+  s.value = String(XA.opt[key]);
+  s.addEventListener('change', () => { XA.opt[key] = s.value; (after || xDraw)(); });
+  return wrapField(label, s);
+}
+function xOptCk(label, key) {
+  const i = h('input', {type:'checkbox'}); i.checked = !!XA.opt[key];
+  i.addEventListener('change', () => { XA.opt[key] = i.checked; xDraw(); });
+  return h('label', {class:'ed-switch'}, i, label);
+}
+function xBody() {
+  const busy = XA.busy && XA.msg ? h('p', {class:'xa-busy'}, XA.msg) : null;
+  if (!XA.tweets) return busy ? [busy] : [];
+  const list = xFiltered();
+  const shown = list.slice(0, +XA.opt.limit || 60);
+  const diff = xLikesDiff();
+  const minIn = h('input', {class:'ed-in', type:'number', min:0, value:XA.opt.min || 0});
+  minIn.addEventListener('change', () => { const v = Math.max(0, +minIn.value || 0); if (v !== XA.opt.min) { XA.opt.min = v; xDraw(); } });
+  const st = XA.stat;
+  return [
+    busy,
+    h('div', {class:'xa-sum'},
+      h('span', {html:icon('x') + esc(XA.user ? '@' + XA.user : 'アーカイブ')}),
+      XA.gen ? h('span', {}, `いいね数は ${fmtDT(XA.gen)} 時点`) : null,
+      h('span', {}, `画像付きポスト ${XA.tweets.length.toLocaleString()}件`),
+      h('span', {class:'mute', title:'リポスト・他の人への返信・画像のないポストは対象外'}, `対象外 ${(st.rt + st.reply + st.noimg).toLocaleString()}件`)),
+    h('div', {class:'xa-opts'},
+      xOptSel('期間', 'period', X_PERIOD),
+      wrapField('いいね数の下限', minIn),
+      xOptSel('表示する件数', 'limit', [['30', '上位30件'], ['60', '上位60件'], ['100', '上位100件'], ['200', '上位200件']])),
+    h('div', {class:'xa-cks'},
+      xOptCk('追加済みを隠す', 'hideDone'),
+      xOptCk(`センシティブ設定のポストも表示（${st.sensitive}件）`, 'sensitive'),
+      xOptCk('複数枚のポストは全部の画像を追加', 'allImages')),
+    diff.length ? h('div', {class:'xa-upd'},
+      h('span', {}, `ギャラリーに追加済みの ${diff.length}件 のいいね数が、このアーカイブと違います。`),
+      h('button', {class:'ed-btn ghost', type:'button', onclick:() => {
+        const map = new Map(XA.tweets.map(t => [t.tid, t]));
+        diff.forEach(g => { g.likes = map.get(String(g.tweetId)).likes; });
+        changed(); toast(`${diff.length}件のいいね数を更新しました`); xDraw();
+      }}, 'いいね数を更新')) : null,
+    h('div', {class:'xa-bar'},
+      h('button', {class:'ed-btn ghost', type:'button', onclick:() => {
+        shown.filter(t => !xDone(t.tid)).slice(0, 10).forEach(t => XA.sel.add(t.tid)); xDraw();
+      }}, '上位10件を選ぶ'),
+      h('button', {class:'ed-btn ghost', type:'button', onclick:() => { XA.sel.clear(); xDraw(); }}, '選択を解除'),
+      h('span', {class:'xa-n', id:'xaSelN'}),
+      h('button', {class:'ed-btn primary', type:'button', id:'xaAddBtn', html:icon('plus') + 'ギャラリーに追加', onclick:xAdd})),
+    shown.length ? h('div', {class:'xa-grid'}, shown.map((t, i) => xCard(t, i + 1)))
+      : h('div', {class:'card empty', style:'padding:30px;text-align:center'}, '条件に合うポストがありません'),
+    list.length > shown.length ? h('p', {class:'ed-hint', style:'margin-top:10px'}, `ほかに ${list.length - shown.length}件あります（「表示する件数」で増やせます）`) : null
+  ].filter(Boolean);
+}
+function tabXArchive() {
+  const zipIn = h('input', {type:'file', accept:'.zip,application/zip', multiple:true, hidden:true,
+    onchange:() => { const f = Array.from(zipIn.files || []); zipIn.value = ''; if (f.length) xLoad(f, false); }});
+  const dirIn = h('input', {type:'file', hidden:true, webkitdirectory:true, multiple:true,
+    onchange:() => { const f = Array.from(dirIn.files || []); dirIn.value = ''; if (f.length) xLoad(f, true); }});
+  const body = h('div', {id:'xaBody'});
+  setTimeout(xDraw);
+  return [
+    sec('Xのいいね上位をギャラリーに追加', 'x',
+      h('ol', {class:'xa-steps'},
+        h('li', {}, 'X の「設定とプライバシー」→「アカウント」→「データのアーカイブをダウンロード」で申請します（届くまで1日ほどかかります）。'),
+        h('li', {}, '届いた ZIP をここで選びます。Mac の Safari などで自動で展開された場合は、展開後のフォルダを選んでください。'),
+        h('li', {}, 'いいね順の一覧から選んで「ギャラリーに追加」→ 右上の「GitHubに公開」で完了です。')),
+      h('div', {class:'ed-row', style:'margin:12px 0 6px'},
+        h('button', {class:'ed-btn primary', type:'button', style:'flex:none', html:icon('folder') + 'ZIPファイルを選ぶ', onclick:() => zipIn.click()}),
+        h('button', {class:'ed-btn ghost', type:'button', html:icon('folder') + '展開したフォルダを選ぶ', onclick:() => dirIn.click()}),
+        zipIn, dirIn),
+      h('p', {class:'ed-hint'}, 'ファイルはこのブラウザの中だけで読み込みます（どこにも送信されません）。リポスト・他の人への返信・画像のないポストは除外。キャラは本文の名前から自動で紐付けます。'),
+      fCheck('サイトにいいね数を表示する', D().site, 'showLikes')),
+    body
+  ];
+}
+
+/* =========================================================
    ADMIN — 画面構成・読み込み・プレビュー
    ========================================================= */
-const TAB_ROUTE = {images:'#/home', links:'#/links', site:'#/home', texts:'#/home', share:'#/home', faq:'#/faq', guide:'#/guide', downloads:'#/downloads', gate:'#/patreon', nav:'#/home', hero:'#/home', chars:'#/characters', gallery:'#/gallery', patreon:'#/patreon', news:'#/news', sns:'#/links'};
+const TAB_ROUTE = {images:'#/home', links:'#/links', site:'#/home', texts:'#/home', share:'#/home', faq:'#/faq', guide:'#/guide', downloads:'#/downloads', gate:'#/patreon', nav:'#/home', hero:'#/home', chars:'#/characters', gallery:'#/gallery', xarc:'#/gallery', patreon:'#/patreon', news:'#/news', sns:'#/links'};
 const PAGE_IDS = ['home', 'characters', 'gallery', 'patreon', 'news', 'downloads', 'links', 'faq', 'guide'];
 
 /* ---------- 読み込み ---------- */
@@ -2600,7 +2980,7 @@ function tabLinks() {
 const ADMIN_TABS = [
   ['images', '画像一覧', 'image'], ['links', 'リンク一覧', 'link'], null,
   ['site', 'サイト', 'home'], ['texts', '見出し・文言', 'book'], ['nav', 'メニュー', 'menu'], ['hero', 'トップ画像', 'star'],
-  ['chars', 'キャラクター', 'users'], ['gallery', 'ギャラリー', 'folder'], ['patreon', 'Patreon', 'crown'],
+  ['chars', 'キャラクター', 'users'], ['gallery', 'ギャラリー', 'folder'], ['xarc', 'Xから追加', 'x'], ['patreon', 'Patreon', 'crown'],
   ['news', 'お知らせ', 'bell'], ['sns', 'SNS', 'globe'], ['share', 'シェア表示', 'link'], null,
   ['downloads', '壁紙・アイコン', 'download'], ['faq', 'よくある質問', 'book'], ['guide', 'ガイドライン', 'check'], ['gate', '年齢確認', 'lock'], null,
   ['github', '公開設定', 'gear']
@@ -2664,7 +3044,7 @@ function drawMain() {
         h('button', {class:'ed-btn ghost', type:'button', html:icon('folder') + 'index.html を選ぶ', onclick:pickIndexFile}))));
     main.append(...tabGithub());
   } else {
-    const fn = ED.tab === 'images' ? tabImages : ED.tab === 'links' ? tabLinks : TAB_FN[ED.tab];
+    const fn = ED.tab === 'images' ? tabImages : ED.tab === 'links' ? tabLinks : ED.tab === 'xarc' ? tabXArchive : TAB_FN[ED.tab];
     main.append(...[].concat(fn()).filter(Boolean));
   }
   if (ED.lastStatus) setPubStatus(ED.lastStatus.msg, ED.lastStatus.kind, ED.lastStatus.action);
