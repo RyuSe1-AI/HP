@@ -1142,16 +1142,16 @@
    "link": ""
   },
   {
+   "date": "2026-09-22",
+   "cat": "info",
+   "text": "随時ページを準備しています",
+   "link": ""
+  },
+  {
    "date": "2026-09-25",
    "cat": "new",
    "text": "キャラクターページを公開しました（8人）",
    "link": "#/characters"
-  },
-  {
-   "date": "2026-09-22",
-   "cat": "patreon",
-   "text": "Patreon 会員限定ページを準備しています",
-   "link": "#/patreon"
   },
   {
    "date": "2026-09-20",
@@ -1176,7 +1176,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-27T17:14:12.610Z",
+ "publishedAt": "2026-09-27T17:16:08.376Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
