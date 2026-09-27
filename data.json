@@ -94,14 +94,14 @@
   "interval": 6,
   "slides": [
    {
-    "image": "images/hero/0ddf088c4b067e9f59a28cbe37000f63-0exu5.webp",
+    "image": "images/hero/0ddf088c4b067e9f59a28cbe37000f63-eag4e.webp",
     "badge": "ILLUSTRATION / ORIGINAL CHARACTERS",
-    "title": "想像を、\n好きのかたちに。",
+    "title": "タイムラインに、\n流れ星。",
     "sub": "ひとりひとりの個性と、小さな物語。\nオリジナルキャラクターたちの世界を描いています。",
     "link": "#/characters",
     "linkLabel": "キャラクターを見る",
-    "fx": 47,
-    "fy": 10
+    "fx": 59,
+    "fy": 0
    },
    {
     "image": "images/hero/20260124_0109_image-3-a92e6-nobg-ubl3b.webp",
@@ -117,7 +117,7 @@
    {
     "image": "images/hero/download-s0czs.webp",
     "badge": "MEMBERS",
-    "title": "創作の、\nもう一歩奥へ。",
+    "title": "好きを、\nかたちに。",
     "sub": "高解像度・差分イラストは会員限定で公開中",
     "link": "#/patreon",
     "linkLabel": "詳しく見る",
@@ -1188,7 +1188,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-27T17:32:20.306Z",
+ "publishedAt": "2026-09-27T17:34:16.980Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
