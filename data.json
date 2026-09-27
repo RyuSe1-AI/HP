@@ -11,7 +11,8 @@
   "notice": "サイト内の画像の無断転載・再配布はご遠慮ください。",
   "contactText": "お仕事のご相談・ご連絡は、SNSのDMからお気軽にどうぞ。",
   "contactLabel": "Xで連絡する",
-  "contactUrl": "https://x.com/RyuSe1_AI"
+  "contactUrl": "https://x.com/RyuSe1_AI",
+  "showLikes": true
  },
  "nav": [
   {
@@ -93,7 +94,7 @@
   "interval": 6,
   "slides": [
    {
-    "image": "",
+    "image": "images/hero/0ddf088c4b067e9f59a28cbe37000f63-0exu5.webp",
     "badge": "ILLUSTRATION / ORIGINAL CHARACTERS",
     "title": "想像を、\n好きのかたちに。",
     "sub": "ひとりひとりの個性と、小さな物語。\nオリジナルキャラクターたちの世界を描いています。",
@@ -147,7 +148,7 @@
   "gallery": {
    "title": "ギャラリー",
    "en": "GALLERY",
-   "lead": "これまでに制作したイラストの一覧です。キャラクターごとに絞り込めます。"
+   "lead": "これまでにXに投稿したイラストの一覧です。いいね数の多かったものを掲載しています。"
   },
   "news": {
    "title": "お知らせ",
@@ -379,76 +380,594 @@
  ],
  "gallery": [
   {
-   "id": "g1",
-   "image": "",
-   "title": "Artwork 01",
-   "date": "2026-09-24",
-   "chars": [
-    "akane"
-   ]
+   "id": "x2056318628279038180",
+   "image": "images/gallery/x-2056318628279038180-f7tji.webp",
+   "title": "さすがに恥ずかしいかも//❤️",
+   "date": "2026-05-18",
+   "chars": [],
+   "tweetId": "2056318628279038180",
+   "tweet": "https://x.com/RyuSe1_AI/status/2056318628279038180",
+   "likes": 7479
   },
   {
-   "id": "g2",
-   "image": "",
-   "title": "Artwork 02",
-   "date": "2026-09-22",
-   "chars": [
-    "aoi"
-   ]
+   "id": "x1965751054689321397",
+   "image": "images/gallery/x-1965751054689321397-4jhoc.webp",
+   "title": "💛",
+   "date": "2025-09-10",
+   "chars": [],
+   "tweetId": "1965751054689321397",
+   "tweet": "https://x.com/RyuSe1_AI/status/1965751054689321397",
+   "likes": 4531
   },
   {
-   "id": "g3",
-   "image": "",
-   "title": "Artwork 03",
-   "date": "2026-09-20",
-   "chars": [
-    "tamaki"
-   ]
+   "id": "x1965329456849158208",
+   "image": "images/gallery/x-1965329456849158208-fuyxj.webp",
+   "title": "🤍",
+   "date": "2025-09-09",
+   "chars": [],
+   "tweetId": "1965329456849158208",
+   "tweet": "https://x.com/RyuSe1_AI/status/1965329456849158208",
+   "likes": 3590
   },
   {
-   "id": "g4",
-   "image": "",
-   "title": "Artwork 04",
-   "date": "2026-09-18",
-   "chars": [
-    "sumire"
-   ]
+   "id": "x2085363966579278128",
+   "image": "images/gallery/x-2085363966579278128-62vtt.webp",
+   "title": "💛",
+   "date": "2026-08-06",
+   "chars": [],
+   "tweetId": "2085363966579278128",
+   "tweet": "https://x.com/RyuSe1_AI/status/2085363966579278128",
+   "likes": 3571
   },
   {
-   "id": "g5",
-   "image": "",
-   "title": "Artwork 05",
-   "date": "2026-09-16",
-   "chars": [
-    "kaede"
-   ]
+   "id": "x2057367843679965206",
+   "image": "images/gallery/x-2057367843679965206-f5lcw.webp",
+   "title": "💛",
+   "date": "2026-05-21",
+   "chars": [],
+   "tweetId": "2057367843679965206",
+   "tweet": "https://x.com/RyuSe1_AI/status/2057367843679965206",
+   "likes": 3263
   },
   {
-   "id": "g6",
-   "image": "",
-   "title": "Artwork 06",
-   "date": "2026-09-14",
-   "chars": [
-    "tsubaki"
-   ]
+   "id": "x1920138581827338706",
+   "image": "images/gallery/x-1920138581827338706-1vif1.webp",
+   "title": "明日も頑張りましょ💛",
+   "date": "2025-05-08",
+   "chars": [],
+   "tweetId": "1920138581827338706",
+   "tweet": "https://x.com/RyuSe1_AI/status/1920138581827338706",
+   "likes": 3108
   },
   {
-   "id": "g7",
-   "image": "",
-   "title": "Artwork 07",
-   "date": "2026-09-12",
-   "chars": [
-    "hisui"
-   ]
+   "id": "x1957289960488521816",
+   "image": "images/gallery/x-1957289960488521816-mfvr4.webp",
+   "title": "気になる？🩷",
+   "date": "2025-08-18",
+   "chars": [],
+   "tweetId": "1957289960488521816",
+   "tweet": "https://x.com/RyuSe1_AI/status/1957289960488521816",
+   "likes": 2976
   },
   {
-   "id": "g8",
-   "image": "",
-   "title": "Artwork 08",
-   "date": "2026-09-10",
-   "chars": [
-    "kasumi"
-   ]
+   "id": "x1939535864344064031",
+   "image": "images/gallery/x-1939535864344064031-h9026.webp",
+   "title": "🩷",
+   "date": "2025-06-30",
+   "chars": [],
+   "tweetId": "1939535864344064031",
+   "tweet": "https://x.com/RyuSe1_AI/status/1939535864344064031",
+   "likes": 2436
+  },
+  {
+   "id": "x1956855756718063876",
+   "image": "images/gallery/x-1956855756718063876-q6lez.webp",
+   "title": "おはよ☀️🩷",
+   "date": "2025-08-17",
+   "chars": [],
+   "tweetId": "1956855756718063876",
+   "tweet": "https://x.com/RyuSe1_AI/status/1956855756718063876",
+   "likes": 2410
+  },
+  {
+   "id": "x1946113519205720509",
+   "image": "images/gallery/x-1946113519205720509-gahfb.webp",
+   "title": "かわいい？💙",
+   "date": "2025-07-18",
+   "chars": [],
+   "tweetId": "1946113519205720509",
+   "tweet": "https://x.com/RyuSe1_AI/status/1946113519205720509",
+   "likes": 2400
+  },
+  {
+   "id": "x1953720938517975536",
+   "image": "images/gallery/x-1953720938517975536-w2gj2.webp",
+   "title": "🤍",
+   "date": "2025-08-08",
+   "chars": [],
+   "tweetId": "1953720938517975536",
+   "tweet": "https://x.com/RyuSe1_AI/status/1953720938517975536",
+   "likes": 2399
+  },
+  {
+   "id": "x1964137443646419282",
+   "image": "images/gallery/x-1964137443646419282-60kpe.webp",
+   "title": "❤️",
+   "date": "2025-09-06",
+   "chars": [],
+   "tweetId": "1964137443646419282",
+   "tweet": "https://x.com/RyuSe1_AI/status/1964137443646419282",
+   "likes": 2383
+  },
+  {
+   "id": "x1955025452986404886",
+   "image": "images/gallery/x-1955025452986404886-5a565.webp",
+   "title": "よくねた？💚",
+   "date": "2025-08-12",
+   "chars": [],
+   "tweetId": "1955025452986404886",
+   "tweet": "https://x.com/RyuSe1_AI/status/1955025452986404886",
+   "likes": 2290
+  },
+  {
+   "id": "x1993944325844279803",
+   "image": "images/gallery/x-1993944325844279803-4qtav.webp",
+   "title": "💛",
+   "date": "2025-11-27",
+   "chars": [],
+   "tweetId": "1993944325844279803",
+   "tweet": "https://x.com/RyuSe1_AI/status/1993944325844279803",
+   "likes": 2268
+  },
+  {
+   "id": "x1939368879173816750",
+   "image": "images/gallery/x-1939368879173816750-6ddyt.webp",
+   "title": "おやすみ💤一緒に寝る？❤️",
+   "date": "2025-06-30",
+   "chars": [],
+   "tweetId": "1939368879173816750",
+   "tweet": "https://x.com/RyuSe1_AI/status/1939368879173816750",
+   "likes": 2260
+  },
+  {
+   "id": "x1963804152896913481",
+   "image": "images/gallery/x-1963804152896913481-xr01w.webp",
+   "title": "🩷",
+   "date": "2025-09-05",
+   "chars": [],
+   "tweetId": "1963804152896913481",
+   "tweet": "https://x.com/RyuSe1_AI/status/1963804152896913481",
+   "likes": 2238
+  },
+  {
+   "id": "x1942717324697760190",
+   "image": "images/gallery/x-1942717324697760190-aamck.webp",
+   "title": "おはよー💚泳ぎに行こ🌊",
+   "date": "2025-07-09",
+   "chars": [],
+   "tweetId": "1942717324697760190",
+   "tweet": "https://x.com/RyuSe1_AI/status/1942717324697760190",
+   "likes": 2236
+  },
+  {
+   "id": "x1978796363036180760",
+   "image": "images/gallery/x-1978796363036180760-izgw5.webp",
+   "title": "🩷",
+   "date": "2025-10-16",
+   "chars": [],
+   "tweetId": "1978796363036180760",
+   "tweet": "https://x.com/RyuSe1_AI/status/1978796363036180760",
+   "likes": 2198
+  },
+  {
+   "id": "x1938990433348317522",
+   "image": "images/gallery/x-1938990433348317522-58aie.webp",
+   "title": "復活🔥❤️🏁",
+   "date": "2025-06-29",
+   "chars": [],
+   "tweetId": "1938990433348317522",
+   "tweet": "https://x.com/RyuSe1_AI/status/1938990433348317522",
+   "likes": 2162
+  },
+  {
+   "id": "x1992420771029987701",
+   "image": "images/gallery/x-1992420771029987701-7gp4h.webp",
+   "title": "💜",
+   "date": "2025-11-23",
+   "chars": [],
+   "tweetId": "1992420771029987701",
+   "tweet": "https://x.com/RyuSe1_AI/status/1992420771029987701",
+   "likes": 2113
+  },
+  {
+   "id": "x2057048940592410927",
+   "image": "images/gallery/x-2057048940592410927-3qqk6.webp",
+   "title": "💜",
+   "date": "2026-05-20",
+   "chars": [],
+   "tweetId": "2057048940592410927",
+   "tweet": "https://x.com/RyuSe1_AI/status/2057048940592410927",
+   "likes": 2100
+  },
+  {
+   "id": "x1969277040751714395",
+   "image": "images/gallery/x-1969277040751714395-2tz7k.webp",
+   "title": "どう？🤍かわいい？🤍",
+   "date": "2025-09-20",
+   "chars": [],
+   "tweetId": "1969277040751714395",
+   "tweet": "https://x.com/RyuSe1_AI/status/1969277040751714395",
+   "likes": 2075
+  },
+  {
+   "id": "x1950012704590041127",
+   "image": "images/gallery/x-1950012704590041127-mdmfj.webp",
+   "title": "おはよ💜",
+   "date": "2025-07-29",
+   "chars": [],
+   "tweetId": "1950012704590041127",
+   "tweet": "https://x.com/RyuSe1_AI/status/1950012704590041127",
+   "likes": 1997
+  },
+  {
+   "id": "x1963485634947158303",
+   "image": "images/gallery/x-1963485634947158303-8rbmc.webp",
+   "title": "💜",
+   "date": "2025-09-04",
+   "chars": [],
+   "tweetId": "1963485634947158303",
+   "tweet": "https://x.com/RyuSe1_AI/status/1963485634947158303",
+   "likes": 1973
+  },
+  {
+   "id": "x1949002655290065300",
+   "image": "images/gallery/x-1949002655290065300-eaukc.webp",
+   "title": "これ、どうしたい？//🩷",
+   "date": "2025-07-26",
+   "chars": [],
+   "tweetId": "1949002655290065300",
+   "tweet": "https://x.com/RyuSe1_AI/status/1949002655290065300",
+   "likes": 1933
+  },
+  {
+   "id": "x1947849059143979086",
+   "image": "images/gallery/x-1947849059143979086-6vtga.webp",
+   "title": "💜",
+   "date": "2025-07-23",
+   "chars": [],
+   "tweetId": "1947849059143979086",
+   "tweet": "https://x.com/RyuSe1_AI/status/1947849059143979086",
+   "likes": 1933
+  },
+  {
+   "id": "x1902875286519378025",
+   "image": "images/gallery/x-1902875286519378025-z380s.webp",
+   "title": "今日も頑張ろっ🤍",
+   "date": "2025-03-21",
+   "chars": [],
+   "tweetId": "1902875286519378025",
+   "tweet": "https://x.com/RyuSe1_AI/status/1902875286519378025",
+   "likes": 1927
+  },
+  {
+   "id": "x1939923433657159871",
+   "image": "images/gallery/x-1939923433657159871-mmv5k.webp",
+   "title": "❤️🩷❤️🩷",
+   "date": "2025-07-01",
+   "chars": [],
+   "tweetId": "1939923433657159871",
+   "tweet": "https://x.com/RyuSe1_AI/status/1939923433657159871",
+   "likes": 1920
+  },
+  {
+   "id": "x1946434334850007239",
+   "image": "images/gallery/x-1946434334850007239-5k9v0.webp",
+   "title": "💛",
+   "date": "2025-07-19",
+   "chars": [],
+   "tweetId": "1946434334850007239",
+   "tweet": "https://x.com/RyuSe1_AI/status/1946434334850007239",
+   "likes": 1911
+  },
+  {
+   "id": "x1952893253570961412",
+   "image": "images/gallery/x-1952893253570961412-9197p.webp",
+   "title": "💛",
+   "date": "2025-08-06",
+   "chars": [],
+   "tweetId": "1952893253570961412",
+   "tweet": "https://x.com/RyuSe1_AI/status/1952893253570961412",
+   "likes": 1891
+  },
+  {
+   "id": "x1965477419038708021",
+   "image": "images/gallery/x-1965477419038708021-re83d.webp",
+   "title": "あらあら、おやすみね💤💙",
+   "date": "2025-09-10",
+   "chars": [],
+   "tweetId": "1965477419038708021",
+   "tweet": "https://x.com/RyuSe1_AI/status/1965477419038708021",
+   "likes": 1862
+  },
+  {
+   "id": "x1969982968782573659",
+   "image": "images/gallery/x-1969982968782573659-4xmbl.webp",
+   "title": "🩷",
+   "date": "2025-09-22",
+   "chars": [],
+   "tweetId": "1969982968782573659",
+   "tweet": "https://x.com/RyuSe1_AI/status/1969982968782573659",
+   "likes": 1860
+  },
+  {
+   "id": "x2058452117887844501",
+   "image": "images/gallery/x-2058452117887844501-6vczw.webp",
+   "title": "💚",
+   "date": "2026-05-24",
+   "chars": [],
+   "tweetId": "2058452117887844501",
+   "tweet": "https://x.com/RyuSe1_AI/status/2058452117887844501",
+   "likes": 1844
+  },
+  {
+   "id": "x1965076301393645926",
+   "image": "images/gallery/x-1965076301393645926-vrjnn.webp",
+   "title": "似合う？🩷",
+   "date": "2025-09-09",
+   "chars": [],
+   "tweetId": "1965076301393645926",
+   "tweet": "https://x.com/RyuSe1_AI/status/1965076301393645926",
+   "likes": 1837
+  },
+  {
+   "id": "x1952529819616546907",
+   "image": "images/gallery/x-1952529819616546907-9r5xh.webp",
+   "title": "おはよ☀️💜",
+   "date": "2025-08-05",
+   "chars": [],
+   "tweetId": "1952529819616546907",
+   "tweet": "https://x.com/RyuSe1_AI/status/1952529819616546907",
+   "likes": 1832
+  },
+  {
+   "id": "x1929899253997899999",
+   "image": "images/gallery/x-1929899253997899999-wedwh.webp",
+   "title": "お疲れ様❤️",
+   "date": "2025-06-03",
+   "chars": [],
+   "tweetId": "1929899253997899999",
+   "tweet": "https://x.com/RyuSe1_AI/status/1929899253997899999",
+   "likes": 1830
+  },
+  {
+   "id": "x1962722438518841778",
+   "image": "images/gallery/x-1962722438518841778-o9hlj.webp",
+   "title": "🩷",
+   "date": "2025-09-02",
+   "chars": [],
+   "tweetId": "1962722438518841778",
+   "tweet": "https://x.com/RyuSe1_AI/status/1962722438518841778",
+   "likes": 1828
+  },
+  {
+   "id": "x1950950866372235572",
+   "image": "images/gallery/x-1950950866372235572-yjf4o.webp",
+   "title": "❤️",
+   "date": "2025-08-01",
+   "chars": [],
+   "tweetId": "1950950866372235572",
+   "tweet": "https://x.com/RyuSe1_AI/status/1950950866372235572",
+   "likes": 1776
+  },
+  {
+   "id": "x2022722503282692480",
+   "image": "images/gallery/x-2022722503282692480-osb4i.webp",
+   "title": "💛🍫Happy Valentines 🍫💛",
+   "date": "2026-02-15",
+   "chars": [],
+   "tweetId": "2022722503282692480",
+   "tweet": "https://x.com/RyuSe1_AI/status/2022722503282692480",
+   "likes": 1773
+  },
+  {
+   "id": "x1992726333244543337",
+   "image": "images/gallery/x-1992726333244543337-hdf8q.webp",
+   "title": "おはよ☀🩷",
+   "date": "2025-11-24",
+   "chars": [],
+   "tweetId": "1992726333244543337",
+   "tweet": "https://x.com/RyuSe1_AI/status/1992726333244543337",
+   "likes": 1772
+  },
+  {
+   "id": "x1940175079700332898",
+   "image": "images/gallery/x-1940175079700332898-svlly.webp",
+   "title": "おはよ☀よく寝てたね💜",
+   "date": "2025-07-02",
+   "chars": [],
+   "tweetId": "1940175079700332898",
+   "tweet": "https://x.com/RyuSe1_AI/status/1940175079700332898",
+   "likes": 1770
+  },
+  {
+   "id": "x1940436479278543227",
+   "image": "images/gallery/x-1940436479278543227-51xsa.webp",
+   "title": "むぎゅする？💙",
+   "date": "2025-07-03",
+   "chars": [],
+   "tweetId": "1940436479278543227",
+   "tweet": "https://x.com/RyuSe1_AI/status/1940436479278543227",
+   "likes": 1765
+  },
+  {
+   "id": "x1941977530644500497",
+   "image": "images/gallery/x-1941977530644500497-mdo0j.webp",
+   "title": "おはよ☀️🤍",
+   "date": "2025-07-07",
+   "chars": [],
+   "tweetId": "1941977530644500497",
+   "tweet": "https://x.com/RyuSe1_AI/status/1941977530644500497",
+   "likes": 1748
+  },
+  {
+   "id": "x1969031045401198935",
+   "image": "images/gallery/x-1969031045401198935-xcems.webp",
+   "title": "💛",
+   "date": "2025-09-19",
+   "chars": [],
+   "tweetId": "1969031045401198935",
+   "tweet": "https://x.com/RyuSe1_AI/status/1969031045401198935",
+   "likes": 1710
+  },
+  {
+   "id": "x1945747467825270883",
+   "image": "images/gallery/x-1945747467825270883-ne5qd.webp",
+   "title": "//💚",
+   "date": "2025-07-17",
+   "chars": [],
+   "tweetId": "1945747467825270883",
+   "tweet": "https://x.com/RyuSe1_AI/status/1945747467825270883",
+   "likes": 1699
+  },
+  {
+   "id": "x1951094304488956057",
+   "image": "images/gallery/x-1951094304488956057-ef3h7.webp",
+   "title": "💜",
+   "date": "2025-08-01",
+   "chars": [],
+   "tweetId": "1951094304488956057",
+   "tweet": "https://x.com/RyuSe1_AI/status/1951094304488956057",
+   "likes": 1695
+  },
+  {
+   "id": "x1940672063746068681",
+   "image": "images/gallery/x-1940672063746068681-kh6mq.webp",
+   "title": "やっほー❤️",
+   "date": "2025-07-03",
+   "chars": [],
+   "tweetId": "1940672063746068681",
+   "tweet": "https://x.com/RyuSe1_AI/status/1940672063746068681",
+   "likes": 1685
+  },
+  {
+   "id": "x1917010791779471583",
+   "image": "images/gallery/x-1917010791779471583-3su5d.webp",
+   "title": "おはよ☀️🩷",
+   "date": "2025-04-29",
+   "chars": [],
+   "tweetId": "1917010791779471583",
+   "tweet": "https://x.com/RyuSe1_AI/status/1917010791779471583",
+   "likes": 1685
+  },
+  {
+   "id": "x2019066975994134821",
+   "image": "images/gallery/x-2019066975994134821-m6xdu.webp",
+   "title": "おやすみ～💜",
+   "date": "2026-02-05",
+   "chars": [],
+   "tweetId": "2019066975994134821",
+   "tweet": "https://x.com/RyuSe1_AI/status/2019066975994134821",
+   "likes": 1680
+  },
+  {
+   "id": "x1969941644700172758",
+   "image": "images/gallery/x-1969941644700172758-raw15.webp",
+   "title": "おはよ☀️💛",
+   "date": "2025-09-22",
+   "chars": [],
+   "tweetId": "1969941644700172758",
+   "tweet": "https://x.com/RyuSe1_AI/status/1969941644700172758",
+   "likes": 1680
+  },
+  {
+   "id": "x2063441144013635833",
+   "image": "images/gallery/x-2063441144013635833-9wnjd.webp",
+   "title": "おはよ☀️💛",
+   "date": "2026-06-07",
+   "chars": [],
+   "tweetId": "2063441144013635833",
+   "tweet": "https://x.com/RyuSe1_AI/status/2063441144013635833",
+   "likes": 1679
+  },
+  {
+   "id": "x1969723497661468857",
+   "image": "images/gallery/x-1969723497661468857-mqn10.webp",
+   "title": "💜",
+   "date": "2025-09-21",
+   "chars": [],
+   "tweetId": "1969723497661468857",
+   "tweet": "https://x.com/RyuSe1_AI/status/1969723497661468857",
+   "likes": 1666
+  },
+  {
+   "id": "x1953451308993990973",
+   "image": "images/gallery/x-1953451308993990973-dtnmc.webp",
+   "title": "お疲れ様💜",
+   "date": "2025-08-07",
+   "chars": [],
+   "tweetId": "1953451308993990973",
+   "tweet": "https://x.com/RyuSe1_AI/status/1953451308993990973",
+   "likes": 1662
+  },
+  {
+   "id": "x1903481480975933700",
+   "image": "images/gallery/x-1903481480975933700-lr8hz.webp",
+   "title": "もうこんな時間、、、早くねよ？🤍",
+   "date": "2025-03-23",
+   "chars": [],
+   "tweetId": "1903481480975933700",
+   "tweet": "https://x.com/RyuSe1_AI/status/1903481480975933700",
+   "likes": 1662
+  },
+  {
+   "id": "x1964902227086299201",
+   "image": "images/gallery/x-1964902227086299201-pg2hs.webp",
+   "title": "🩷",
+   "date": "2025-09-08",
+   "chars": [],
+   "tweetId": "1964902227086299201",
+   "tweet": "https://x.com/RyuSe1_AI/status/1964902227086299201",
+   "likes": 1660
+  },
+  {
+   "id": "x1916323055779123307",
+   "image": "images/gallery/x-1916323055779123307-m34v2.webp",
+   "title": "おはよ☀️💛",
+   "date": "2025-04-27",
+   "chars": [],
+   "tweetId": "1916323055779123307",
+   "tweet": "https://x.com/RyuSe1_AI/status/1916323055779123307",
+   "likes": 1640
+  },
+  {
+   "id": "x1959790244838129788",
+   "image": "images/gallery/x-1959790244838129788-u51sl.webp",
+   "title": "💛",
+   "date": "2025-08-25",
+   "chars": [],
+   "tweetId": "1959790244838129788",
+   "tweet": "https://x.com/RyuSe1_AI/status/1959790244838129788",
+   "likes": 1639
+  },
+  {
+   "id": "x1948409156580561324",
+   "image": "images/gallery/x-1948409156580561324-6ks2e.webp",
+   "title": "💛",
+   "date": "2025-07-25",
+   "chars": [],
+   "tweetId": "1948409156580561324",
+   "tweet": "https://x.com/RyuSe1_AI/status/1948409156580561324",
+   "likes": 1627
+  },
+  {
+   "id": "x1929569204212040070",
+   "image": "images/gallery/x-1929569204212040070-llbgf.webp",
+   "title": "おやすみ🌙💤",
+   "date": "2025-06-03",
+   "chars": [],
+   "tweetId": "1929569204212040070",
+   "tweet": "https://x.com/RyuSe1_AI/status/1929569204212040070",
+   "likes": 1615
   }
  ],
  "patreon": {
@@ -642,7 +1161,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-26T11:23:01.429Z",
+ "publishedAt": "2026-09-27T16:45:23.692Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
