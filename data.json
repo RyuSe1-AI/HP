@@ -13,7 +13,11 @@
   "contactLabel": "Xで連絡する",
   "contactUrl": "https://x.com/RyuSe1_AI",
   "showLikes": true,
-  "langToggle": true
+  "langToggle": true,
+  "bio_en": "I create and share AI illustrations of my original characters.",
+  "notice_en": "Please do not repost or redistribute images from this site without permission.",
+  "contactText_en": "For work inquiries or anything else, feel free to DM me on social media.",
+  "contactLabel_en": "Contact on X"
  },
  "nav": [
   {
@@ -22,7 +26,8 @@
    "en": "Home",
    "icon": "home",
    "show": true,
-   "header": true
+   "header": true,
+   "label_en": "Home"
   },
   {
    "id": "characters",
@@ -30,7 +35,8 @@
    "en": "Characters",
    "icon": "users",
    "show": true,
-   "header": true
+   "header": true,
+   "label_en": "Characters"
   },
   {
    "id": "gallery",
@@ -38,7 +44,8 @@
    "en": "Gallery",
    "icon": "image",
    "show": true,
-   "header": true
+   "header": true,
+   "label_en": "Gallery"
   },
   {
    "id": "patreon",
@@ -46,7 +53,8 @@
    "en": "Patreon",
    "icon": "crown",
    "show": true,
-   "header": true
+   "header": true,
+   "label_en": "Members only"
   },
   {
    "id": "news",
@@ -54,7 +62,8 @@
    "en": "News",
    "icon": "bell",
    "show": true,
-   "header": true
+   "header": true,
+   "label_en": "News"
   },
   {
    "id": "downloads",
@@ -62,7 +71,8 @@
    "en": "Downloads",
    "icon": "download",
    "show": true,
-   "header": true
+   "header": true,
+   "label_en": "Wallpapers & Icons"
   },
   {
    "id": "links",
@@ -70,7 +80,8 @@
    "en": "Links",
    "icon": "link",
    "show": true,
-   "header": true
+   "header": true,
+   "label_en": "Links"
   },
   {
    "id": "faq",
@@ -78,7 +89,8 @@
    "en": "FAQ",
    "icon": "book",
    "show": true,
-   "header": false
+   "header": false,
+   "label_en": "FAQ"
   },
   {
    "id": "guide",
@@ -86,7 +98,8 @@
    "en": "Guidelines",
    "icon": "check",
    "show": true,
-   "header": false
+   "header": false,
+   "label_en": "Guidelines"
   }
  ],
  "hero": {
@@ -102,7 +115,10 @@
     "link": "#/characters",
     "linkLabel": "キャラクターを見る",
     "fx": 59,
-    "fy": 0
+    "fy": 0,
+    "title_en": "A shooting star\non your timeline.",
+    "sub_en": "Each with her own personality and little story.\nI draw the world of my original characters.",
+    "linkLabel_en": "Meet the characters"
    },
    {
     "image": "images/hero/20260124_0109_image-3-a92e6-nobg-ubl3b.webp",
@@ -113,7 +129,10 @@
     "linkLabel": "ギャラリーへ",
     "fx": 49,
     "fy": 4,
-    "fz": 1
+    "fz": 1,
+    "title_en": "Heart-flutters,\nin a single frame.",
+    "sub_en": "Browse past fan favorites in the gallery",
+    "linkLabel_en": "Go to gallery"
    },
    {
     "image": "images/hero/download-yml98.webp",
@@ -123,7 +142,10 @@
     "link": "#/patreon",
     "linkLabel": "詳しく見る",
     "fx": 50,
-    "fy": 19
+    "fy": 19,
+    "title_en": "Giving shape\nto what you love.",
+    "sub_en": "Slightly spicy illustrations and variants are available to members",
+    "linkLabel_en": "Learn more"
    }
   ]
  },
@@ -132,56 +154,73 @@
    "title": "キャラクター",
    "en": "CHARACTERS",
    "icon": "users",
-   "image": ""
+   "image": "",
+   "title_en": "Characters"
   },
   "patreon": {
    "title": "会員限定",
    "en": "PATREON ONLY",
    "icon": "lock",
-   "image": ""
+   "image": "",
+   "title_en": "Members only"
   },
   "gallery": {
    "title": "ギャラリー",
    "en": "GALLERY",
    "icon": "image",
-   "image": ""
+   "image": "",
+   "title_en": "Gallery"
   }
  },
  "pages": {
   "characters": {
    "title": "キャラクター",
    "en": "CHARACTERS",
-   "lead": "RyuSe1 STUDIO のオリジナルキャラクターたち。カードを押すとプロフィールが開きます。"
+   "lead": "RyuSe1 STUDIO のオリジナルキャラクターたち。カードを押すとプロフィールが開きます。",
+   "title_en": "Characters",
+   "lead_en": "The original characters of RyuSe1 STUDIO. Tap a card to open her profile."
   },
   "gallery": {
    "title": "ギャラリー",
    "en": "GALLERY",
-   "lead": "これまでにXに投稿したイラストの一覧です。いいね数の多かったものを掲載しています。"
+   "lead": "これまでにXに投稿したイラストの一覧です。いいね数の多かったものを掲載しています。",
+   "title_en": "Gallery",
+   "lead_en": "Illustrations I've posted on X, featuring the most-liked ones."
   },
   "news": {
    "title": "お知らせ",
    "en": "NEWS",
-   "lead": "サイトの更新情報や新作のお知らせ。"
+   "lead": "サイトの更新情報や新作のお知らせ。",
+   "title_en": "News",
+   "lead_en": "Site updates and new releases."
   },
   "links": {
    "title": "リンク",
    "en": "LINKS",
-   "lead": "各SNS・支援サイトはこちらから。"
+   "lead": "各SNS・支援サイトはこちらから。",
+   "title_en": "Links",
+   "lead_en": "All my social media and support pages."
   },
   "faq": {
    "title": "よくある質問",
    "en": "FAQ",
-   "lead": "Patreonへの参加方法やプランについて、よくいただく質問をまとめました。"
+   "lead": "Patreonへの参加方法やプランについて、よくいただく質問をまとめました。",
+   "title_en": "FAQ",
+   "lead_en": "Answers to common questions about joining Patreon and the available plans."
   },
   "guide": {
    "title": "ご利用ガイドライン",
    "en": "GUIDELINES",
-   "lead": "作品を楽しんでいただくためのお願いです。ご利用の前にお読みください。"
+   "lead": "作品を楽しんでいただくためのお願いです。ご利用の前にお読みください。",
+   "title_en": "Guidelines",
+   "lead_en": "A few requests so everyone can enjoy the works. Please read before use."
   },
   "downloads": {
    "title": "壁紙・アイコン配布",
    "en": "DOWNLOADS",
-   "lead": "スマホ・PCの壁紙やSNSアイコンを無料で配布しています。"
+   "lead": "スマホ・PCの壁紙やSNSアイコンを無料で配布しています。",
+   "title_en": "Wallpapers & Icons",
+   "lead_en": "Free wallpapers for phone and PC, plus icons for social media."
   }
  },
  "characters": [
@@ -197,23 +236,34 @@
    "profile": [
     {
      "k": "名前",
-     "v": "椎名 茜（しいな あかね）"
+     "v": "椎名 茜（しいな あかね）",
+     "v_en": "Akane Shiina (椎名 茜)",
+     "k_en": "Name"
     },
     {
      "k": "誕生日",
-     "v": "9月16日"
+     "v": "9月16日",
+     "k_en": "Birthday",
+     "v_en": "September 16"
     },
     {
      "k": "性格",
-     "v": "明るい・人懐っこい"
+     "v": "明るい・人懐っこい",
+     "v_en": "Cheerful, friendly",
+     "k_en": "Personality"
     },
     {
      "k": "好きな食べ物",
-     "v": "ナポリタン"
+     "v": "ナポリタン",
+     "v_en": "Napolitan spaghetti",
+     "k_en": "Favorite food"
     }
    ],
    "tags": "",
-   "bday": "09-16"
+   "bday": "09-16",
+   "catch_en": "You've gotta make me your favorite, okay?",
+   "name_en": "Akane",
+   "desc_en": "[Name origin]\nShiina ← Ringo Shiina (the singer) ← ringo (apple) ← red\nAkane ← aka (red) + ne, and the akane (madder) flower"
   },
   {
    "id": "aoi",
@@ -227,23 +277,34 @@
    "profile": [
     {
      "k": "名前",
-     "v": "露瀬 葵（つゆせ あおい）"
+     "v": "露瀬 葵（つゆせ あおい）",
+     "v_en": "Aoi Tsuyuse (露瀬 葵)",
+     "k_en": "Name"
     },
     {
      "k": "誕生日",
-     "v": "8月29日"
+     "v": "8月29日",
+     "k_en": "Birthday",
+     "v_en": "August 29"
     },
     {
      "k": "性格",
-     "v": "積極的・照れ屋"
+     "v": "積極的・照れ屋",
+     "v_en": "Proactive, shy",
+     "k_en": "Personality"
     },
     {
      "k": "好きな食べ物",
-     "v": "白湯ラーメン"
+     "v": "白湯ラーメン",
+     "v_en": "Paitan (creamy chicken) ramen",
+     "k_en": "Favorite food"
     }
    ],
    "tags": "",
-   "bday": "08-29"
+   "bday": "08-29",
+   "catch_en": "I hope you'll come to like me.",
+   "desc_en": "[Name origin]\nTsuyuse ← gentle dewdrops (tsuyu) and rushing rapids (se)\nAoi ← aoi (blue)",
+   "name_en": "Aoi"
   },
   {
    "id": "tamaki",
@@ -257,23 +318,34 @@
    "profile": [
     {
      "k": "名前",
-     "v": "真城 環（ましろ たまき）"
+     "v": "真城 環（ましろ たまき）",
+     "v_en": "Tamaki Mashiro (真城 環)",
+     "k_en": "Name"
     },
     {
      "k": "誕生日",
-     "v": "5月29日"
+     "v": "5月29日",
+     "k_en": "Birthday",
+     "v_en": "May 29"
     },
     {
      "k": "性格",
-     "v": "内弁慶・おしとやか"
+     "v": "内弁慶・おしとやか",
+     "v_en": "Bold at home, shy outside; ladylike",
+     "k_en": "Personality"
     },
     {
      "k": "好きな食べ物",
-     "v": "白米"
+     "v": "白米",
+     "v_en": "White rice",
+     "k_en": "Favorite food"
     }
    ],
    "tags": "",
-   "bday": "05-29"
+   "bday": "05-29",
+   "catch_en": "I'd be happy if we could be friends.",
+   "desc_en": "[Name origin]\nMashiro ← shinju (pearl) and shiro (white)\nTamaki ← odamaki (columbine, a flower)",
+   "name_en": "Tamaki"
   },
   {
    "id": "sumire",
@@ -287,23 +359,34 @@
    "profile": [
     {
      "k": "名前",
-     "v": "紫藤 菫（しどう すみれ）"
+     "v": "紫藤 菫（しどう すみれ）",
+     "v_en": "Sumire Shido (紫藤 菫)",
+     "k_en": "Name"
     },
     {
      "k": "誕生日",
-     "v": "1月9日"
+     "v": "1月9日",
+     "k_en": "Birthday",
+     "v_en": "January 9"
     },
     {
      "k": "性格",
-     "v": "クール・甘えたがり"
+     "v": "クール・甘えたがり",
+     "v_en": "Cool, secretly wants to be pampered",
+     "k_en": "Personality"
     },
     {
      "k": "好きな食べ物",
-     "v": "和菓子（特に羊羹）"
+     "v": "和菓子（特に羊羹）",
+     "v_en": "Japanese sweets (especially yokan)",
+     "k_en": "Favorite food"
     }
    ],
    "tags": "",
-   "bday": "01-09"
+   "bday": "01-09",
+   "catch_en": "If you like me, just say so, okay?",
+   "desc_en": "[Name origin]\nShido ← murasaki (purple) and fuji (wisteria)\nSumire ← sumire (violet, a purple flower)",
+   "name_en": "Sumire"
   },
   {
    "id": "kaede",
@@ -317,23 +400,34 @@
    "profile": [
     {
      "k": "名前",
-     "v": "星菜 楓（ほしな かえで）"
+     "v": "星菜 楓（ほしな かえで）",
+     "v_en": "Kaede Hoshina (星菜 楓)",
+     "k_en": "Name"
     },
     {
      "k": "誕生日",
-     "v": "10月3日"
+     "v": "10月3日",
+     "k_en": "Birthday",
+     "v_en": "October 3"
     },
     {
      "k": "性格",
-     "v": "クール・ムードメーカー"
+     "v": "クール・ムードメーカー",
+     "k_en": "Personality",
+     "v_en": "Cool, the mood-maker"
     },
     {
      "k": "好きな食べ物",
-     "v": "唐揚げ"
+     "v": "唐揚げ",
+     "v_en": "Karaage (Japanese fried chicken)",
+     "k_en": "Favorite food"
     }
    ],
    "tags": "",
-   "bday": "10-03"
+   "bday": "10-03",
+   "catch_en": "You all like me the best, right?",
+   "desc_en": "[Name origin]\nHoshina ← hoshi (star, yellow) and na (canola blossoms)\nKaede ← kaede (maple, like golden autumn leaves)",
+   "name_en": "Kaede"
   },
   {
    "id": "tsubaki",
@@ -347,23 +441,34 @@
    "profile": [
     {
      "k": "名前",
-     "v": "梅桃 椿（ゆすら つばき）"
+     "v": "梅桃 椿（ゆすら つばき）",
+     "v_en": "Tsubaki Yusura (梅桃 椿)",
+     "k_en": "Name"
     },
     {
      "k": "誕生日",
-     "v": "12月10日"
+     "v": "12月10日",
+     "v_en": "December 10",
+     "k_en": "Birthday"
     },
     {
      "k": "性格",
-     "v": "明るい・イタズラ好き"
+     "v": "明るい・イタズラ好き",
+     "v_en": "Cheerful, mischievous",
+     "k_en": "Personality"
     },
     {
      "k": "好きな食べ物",
-     "v": "苺のショートケーキ"
+     "v": "苺のショートケーキ",
+     "v_en": "Strawberry shortcake",
+     "k_en": "Favorite food"
     }
    ],
    "tags": "",
-   "bday": "12-10"
+   "bday": "12-10",
+   "desc_en": "[Name origin]\nYusura → yusura-ume (Nanking cherry) and momo (peach)\nTsubaki → tsubaki (camellia — pink ones exist too!)",
+   "name_en": "Tsubaki",
+   "catch_en": "You like Tsubaki, right?"
   },
   {
    "id": "hisui",
@@ -377,23 +482,34 @@
    "profile": [
     {
      "k": "名前",
-     "v": "葉山 翠（はやま ひすい）"
+     "v": "葉山 翠（はやま ひすい）",
+     "v_en": "Hisui Hayama (葉山 翠)",
+     "k_en": "Name"
     },
     {
      "k": "誕生日",
-     "v": "8月11日"
+     "v": "8月11日",
+     "k_en": "Birthday",
+     "v_en": "August 11"
     },
     {
      "k": "性格",
-     "v": "穏やか、明るい"
+     "v": "穏やか、明るい",
+     "k_en": "Personality",
+     "v_en": "Calm, cheerful"
     },
     {
      "k": "好きな食べ物",
-     "v": "抹茶"
+     "v": "抹茶",
+     "k_en": "Favorite food",
+     "v_en": "Matcha"
     }
    ],
    "tags": "",
-   "bday": "08-11"
+   "bday": "08-11",
+   "catch_en": "Do you like older girls? ♡",
+   "desc_en": "A character born just before we reached 10,000 followers on X.",
+   "name_en": "Hisui"
   },
   {
    "id": "kasumi",
@@ -407,23 +523,34 @@
    "profile": [
     {
      "k": "名前",
-     "v": "霧黒 霞（むくろ かすみ）"
+     "v": "霧黒 霞（むくろ かすみ）",
+     "v_en": "Kasumi Mukuro (霧黒 霞)",
+     "k_en": "Name"
     },
     {
      "k": "誕生日",
-     "v": "4月4日"
+     "v": "4月4日",
+     "k_en": "Birthday",
+     "v_en": "April 4"
     },
     {
      "k": "性格",
-     "v": "ミステリアス"
+     "v": "ミステリアス",
+     "v_en": "Mysterious",
+     "k_en": "Personality"
     },
     {
      "k": "好きな食べ物",
-     "v": "サンマ"
+     "v": "サンマ",
+     "v_en": "Pacific saury (sanma)",
+     "k_en": "Favorite food"
     }
    ],
    "tags": "",
-   "bday": "04-04"
+   "bday": "04-04",
+   "desc_en": "A new character introduced for our 1st anniversary.\n\n[Name origin]\nMukuro → kiri (mist, kind of grey) + kuro (black)!\nKasumi → kasumi-sō (baby's breath) — it feels grey too",
+   "name_en": "Kasumi",
+   "catch_en": "How many Kasumi fans are out there?"
   }
  ],
  "gallery": [
@@ -437,7 +564,8 @@
    ],
    "tweetId": "2056318628279038180",
    "tweet": "https://x.com/RyuSe1_AI/status/2056318628279038180",
-   "likes": 7479
+   "likes": 7479,
+   "title_en": "This might be a little too embarrassing//❤️"
   },
   {
    "id": "x1965751054689321397",
@@ -497,7 +625,8 @@
    ],
    "tweetId": "1920138581827338706",
    "tweet": "https://x.com/RyuSe1_AI/status/1920138581827338706",
-   "likes": 3108
+   "likes": 3108,
+   "title_en": "Let's do our best tomorrow too💛"
   },
   {
    "id": "x1957289960488521816",
@@ -509,7 +638,8 @@
    ],
    "tweetId": "1957289960488521816",
    "tweet": "https://x.com/RyuSe1_AI/status/1957289960488521816",
-   "likes": 2976
+   "likes": 2976,
+   "title_en": "Curious?🩷"
   },
   {
    "id": "x1939535864344064031",
@@ -533,7 +663,8 @@
    ],
    "tweetId": "1956855756718063876",
    "tweet": "https://x.com/RyuSe1_AI/status/1956855756718063876",
-   "likes": 2410
+   "likes": 2410,
+   "title_en": "Morning☀️🩷"
   },
   {
    "id": "x1946113519205720509",
@@ -545,7 +676,8 @@
    ],
    "tweetId": "1946113519205720509",
    "tweet": "https://x.com/RyuSe1_AI/status/1946113519205720509",
-   "likes": 2400
+   "likes": 2400,
+   "title_en": "Cute?💙"
   },
   {
    "id": "x1953720938517975536",
@@ -581,7 +713,8 @@
    ],
    "tweetId": "1955025452986404886",
    "tweet": "https://x.com/RyuSe1_AI/status/1955025452986404886",
-   "likes": 2290
+   "likes": 2290,
+   "title_en": "Sleep well?💚"
   },
   {
    "id": "x1993944325844279803",
@@ -605,7 +738,8 @@
    ],
    "tweetId": "1939368879173816750",
    "tweet": "https://x.com/RyuSe1_AI/status/1939368879173816750",
-   "likes": 2260
+   "likes": 2260,
+   "title_en": "Good night💤 Wanna sleep together?❤️"
   },
   {
    "id": "x1963804152896913481",
@@ -629,7 +763,8 @@
    ],
    "tweetId": "1942717324697760190",
    "tweet": "https://x.com/RyuSe1_AI/status/1942717324697760190",
-   "likes": 2236
+   "likes": 2236,
+   "title_en": "Morning💚 Let's go swimming🌊"
   },
   {
    "id": "x1978796363036180760",
@@ -653,7 +788,8 @@
    ],
    "tweetId": "1938990433348317522",
    "tweet": "https://x.com/RyuSe1_AI/status/1938990433348317522",
-   "likes": 2162
+   "likes": 2162,
+   "title_en": "I'm back🔥❤️🏁"
   },
   {
    "id": "x1992420771029987701",
@@ -691,7 +827,8 @@
    ],
    "tweetId": "1969277040751714395",
    "tweet": "https://x.com/RyuSe1_AI/status/1969277040751714395",
-   "likes": 2075
+   "likes": 2075,
+   "title_en": "Well?🤍 Am I cute?🤍"
   },
   {
    "id": "x1950012704590041127",
@@ -703,7 +840,8 @@
    ],
    "tweetId": "1950012704590041127",
    "tweet": "https://x.com/RyuSe1_AI/status/1950012704590041127",
-   "likes": 1997
+   "likes": 1997,
+   "title_en": "Morning💜"
   },
   {
    "id": "x1963485634947158303",
@@ -729,7 +867,8 @@
    "tweet": "https://x.com/RyuSe1_AI/status/1949002655290065300",
    "likes": 1933,
    "fx": 44,
-   "fy": 19
+   "fy": 19,
+   "title_en": "So... what do you want to do with this?//🩷"
   },
   {
    "id": "x1947849059143979086",
@@ -753,7 +892,8 @@
    ],
    "tweetId": "1902875286519378025",
    "tweet": "https://x.com/RyuSe1_AI/status/1902875286519378025",
-   "likes": 1927
+   "likes": 1927,
+   "title_en": "Let's do our best today🤍"
   },
   {
    "id": "x1939923433657159871",
@@ -802,7 +942,8 @@
    ],
    "tweetId": "1965477419038708021",
    "tweet": "https://x.com/RyuSe1_AI/status/1965477419038708021",
-   "likes": 1862
+   "likes": 1862,
+   "title_en": "Oh my, good night💤💙"
   },
   {
    "id": "x1969982968782573659",
@@ -840,7 +981,8 @@
    ],
    "tweetId": "1965076301393645926",
    "tweet": "https://x.com/RyuSe1_AI/status/1965076301393645926",
-   "likes": 1837
+   "likes": 1837,
+   "title_en": "Does it suit me?🩷"
   },
   {
    "id": "x1952529819616546907",
@@ -852,7 +994,8 @@
    ],
    "tweetId": "1952529819616546907",
    "tweet": "https://x.com/RyuSe1_AI/status/1952529819616546907",
-   "likes": 1832
+   "likes": 1832,
+   "title_en": "Morning☀️💜"
   },
   {
    "id": "x1929899253997899999",
@@ -864,7 +1007,8 @@
    ],
    "tweetId": "1929899253997899999",
    "tweet": "https://x.com/RyuSe1_AI/status/1929899253997899999",
-   "likes": 1830
+   "likes": 1830,
+   "title_en": "Good work today❤️"
   },
   {
    "id": "x1962722438518841778",
@@ -912,7 +1056,8 @@
    ],
    "tweetId": "1992726333244543337",
    "tweet": "https://x.com/RyuSe1_AI/status/1992726333244543337",
-   "likes": 1772
+   "likes": 1772,
+   "title_en": "Morning☀🩷"
   },
   {
    "id": "x1940175079700332898",
@@ -924,7 +1069,8 @@
    ],
    "tweetId": "1940175079700332898",
    "tweet": "https://x.com/RyuSe1_AI/status/1940175079700332898",
-   "likes": 1770
+   "likes": 1770,
+   "title_en": "Morning☀ You slept so well💜"
   },
   {
    "id": "x1940436479278543227",
@@ -936,7 +1082,8 @@
    ],
    "tweetId": "1940436479278543227",
    "tweet": "https://x.com/RyuSe1_AI/status/1940436479278543227",
-   "likes": 1765
+   "likes": 1765,
+   "title_en": "Want a squeeze?💙"
   },
   {
    "id": "x1941977530644500497",
@@ -950,7 +1097,8 @@
    "tweet": "https://x.com/RyuSe1_AI/status/1941977530644500497",
    "likes": 1748,
    "fx": 45,
-   "fy": 21
+   "fy": 21,
+   "title_en": "Morning☀️🤍"
   },
   {
    "id": "x1969031045401198935",
@@ -998,7 +1146,8 @@
    ],
    "tweetId": "1940672063746068681",
    "tweet": "https://x.com/RyuSe1_AI/status/1940672063746068681",
-   "likes": 1685
+   "likes": 1685,
+   "title_en": "Heyyy❤️"
   },
   {
    "id": "x1917010791779471583",
@@ -1010,7 +1159,8 @@
    ],
    "tweetId": "1917010791779471583",
    "tweet": "https://x.com/RyuSe1_AI/status/1917010791779471583",
-   "likes": 1685
+   "likes": 1685,
+   "title_en": "Morning☀️🩷"
   },
   {
    "id": "x2019066975994134821",
@@ -1022,7 +1172,8 @@
    ],
    "tweetId": "2019066975994134821",
    "tweet": "https://x.com/RyuSe1_AI/status/2019066975994134821",
-   "likes": 1680
+   "likes": 1680,
+   "title_en": "Night night~💜"
   },
   {
    "id": "x1969941644700172758",
@@ -1034,7 +1185,8 @@
    ],
    "tweetId": "1969941644700172758",
    "tweet": "https://x.com/RyuSe1_AI/status/1969941644700172758",
-   "likes": 1680
+   "likes": 1680,
+   "title_en": "Morning☀️💛"
   },
   {
    "id": "x2063441144013635833",
@@ -1046,7 +1198,8 @@
    ],
    "tweetId": "2063441144013635833",
    "tweet": "https://x.com/RyuSe1_AI/status/2063441144013635833",
-   "likes": 1679
+   "likes": 1679,
+   "title_en": "Morning☀️💛"
   },
   {
    "id": "x1969723497661468857",
@@ -1070,7 +1223,8 @@
    ],
    "tweetId": "1953451308993990973",
    "tweet": "https://x.com/RyuSe1_AI/status/1953451308993990973",
-   "likes": 1662
+   "likes": 1662,
+   "title_en": "Good work today💜"
   },
   {
    "id": "x1903481480975933700",
@@ -1082,7 +1236,8 @@
    ],
    "tweetId": "1903481480975933700",
    "tweet": "https://x.com/RyuSe1_AI/status/1903481480975933700",
-   "likes": 1662
+   "likes": 1662,
+   "title_en": "It's this late already... let's get some sleep?🤍"
   },
   {
    "id": "x1964902227086299201",
@@ -1106,7 +1261,8 @@
    ],
    "tweetId": "1916323055779123307",
    "tweet": "https://x.com/RyuSe1_AI/status/1916323055779123307",
-   "likes": 1640
+   "likes": 1640,
+   "title_en": "Morning☀️💛"
   },
   {
    "id": "x1959790244838129788",
@@ -1140,7 +1296,8 @@
    "chars": [],
    "tweetId": "1929569204212040070",
    "tweet": "https://x.com/RyuSe1_AI/status/1929569204212040070",
-   "likes": 1615
+   "likes": 1615,
+   "title_en": "Good night🌙💤"
   }
  ],
  "patreon": {
@@ -1159,7 +1316,11 @@
     "badge": "7日間無料お試しあり",
     "perks": "R15〜R18までの画像（モザイク処理を必要としないものが多いです）\nシチュエーションも単発な傾向にあり",
     "best": false,
-    "url": "https://www.patreon.com/cw/RyuSe1421/membership"
+    "url": "https://www.patreon.com/cw/RyuSe1421/membership",
+    "name_en": "Want to See More/Basic Plan",
+    "price_en": "$3 / month",
+    "badge_en": "7-day free trial",
+    "perks_en": "R15–R18 images (most don't need mosaic censoring)\nMostly standalone situations"
    },
    {
     "name": "めっちゃみたいコース/Extra Plan",
@@ -1169,7 +1330,10 @@
     "badge": "",
     "perks": "もっとみたいコースの内容\nR18コンテンツ（いろいろなシチュエーション）\n短編動画",
     "best": true,
-    "url": "https://www.patreon.com/cw/RyuSe1421/membership"
+    "url": "https://www.patreon.com/cw/RyuSe1421/membership",
+    "name_en": "Really Want to See/Extra Plan",
+    "price_en": "$8 / month",
+    "perks_en": "Everything in Want to See More\nR18 content (a variety of situations)\nShort videos"
    },
    {
     "name": "まじでみたいプラン/ULTRA Plan",
@@ -1179,7 +1343,10 @@
     "badge": "",
     "perks": "めっちゃプランの内容\nさらに限定画像\n長編動画や漫画等、作成に大幅な時間がかかるもの",
     "best": false,
-    "url": "https://www.patreon.com/cw/RyuSe1421/membership"
+    "url": "https://www.patreon.com/cw/RyuSe1421/membership",
+    "name_en": "Seriously Want to See/ULTRA Plan",
+    "price_en": "$15 / month",
+    "perks_en": "Everything in Really Want to See\nEven more exclusive images\nLong videos, comics and other time-intensive works"
    }
   ],
   "oshi": {
@@ -1194,7 +1361,9 @@
      "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 100,
      "fy": 7,
-     "fz": 1.15
+     "fz": 1.15,
+     "name_en": "Akane Oshi ❤️ Plan",
+     "text_en": "Get all of Akane's content, from Want to See More up to Seriously ❤️"
     },
     {
      "char": "aoi",
@@ -1203,7 +1372,9 @@
      "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 0,
      "fy": 9,
-     "fz": 1.2
+     "fz": 1.2,
+     "name_en": "Aoi Oshi 💙 Plan",
+     "text_en": "Get all of Aoi's content, from Want to See More up to Seriously 💙"
     },
     {
      "char": "tamaki",
@@ -1212,7 +1383,9 @@
      "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 51,
      "fy": 12,
-     "fz": 1.2
+     "fz": 1.2,
+     "name_en": "Tamaki Oshi 🤍 Plan",
+     "text_en": "Get all of Tamaki's content, from Want to See More up to Seriously 🤍"
     },
     {
      "char": "sumire",
@@ -1221,7 +1394,9 @@
      "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 55,
      "fy": 0,
-     "fz": 1.15
+     "fz": 1.15,
+     "name_en": "Sumire Oshi 💜 Plan",
+     "text_en": "Get all of Sumire's content, from Want to See More up to Seriously 💜"
     },
     {
      "char": "kaede",
@@ -1229,7 +1404,9 @@
      "text": "もっと-まじのかえでちゃんのコンテンツが見れます💛",
      "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 53,
-     "fy": 9
+     "fy": 9,
+     "name_en": "Kaede Oshi 💛 Plan",
+     "text_en": "Get all of Kaede's content, from Want to See More up to Seriously 💛"
     },
     {
      "char": "tsubaki",
@@ -1238,7 +1415,9 @@
      "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 51,
      "fy": 11,
-     "fz": 1.15
+     "fz": 1.15,
+     "name_en": "Tsubaki Oshi 🩷 Plan",
+     "text_en": "Get all of Tsubaki's content, from Want to See More up to Seriously 🩷"
     },
     {
      "char": "hisui",
@@ -1246,7 +1425,9 @@
      "text": "もっと-まじのひすいちゃんのコンテンツが見れます💚",
      "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 52,
-     "fy": 9
+     "fy": 9,
+     "name_en": "Hisui Oshi 💚 Plan",
+     "text_en": "Get all of Hisui's content, from Want to See More up to Seriously 💚"
     },
     {
      "char": "kasumi",
@@ -1254,9 +1435,14 @@
      "text": "もっと-まじのかすみちゃんのコンテンツが見れます🩶",
      "url": "https://www.patreon.com/cw/RyuSe1421/membership",
      "fx": 51,
-     "fy": 5
+     "fy": 5,
+     "name_en": "Kasumi Oshi 🩶 Plan",
+     "text_en": "Get all of Kasumi's content, from Want to See More up to Seriously 🩶"
     }
-   ]
+   ],
+   "title_en": "Oshi plans",
+   "price_en": "$3 / month",
+   "lead_en": "Pick your favorite character and support her directly."
   },
   "previews": [
    {
@@ -1264,70 +1450,88 @@
     "title": "限定イラスト 01",
     "tier": "basic",
     "fx": 41,
-    "fy": 0
+    "fy": 0,
+    "title_en": "Exclusive illustration 01"
    },
    {
     "image": "images/patreon/3148eba7a95eb55636fe3e4df240be27-7ws0w.webp",
     "title": "限定イラスト 02",
-    "tier": "Extra"
+    "tier": "Extra",
+    "title_en": "Exclusive illustration 02"
    },
    {
     "image": "images/patreon/3e1f4eee3aaeabd38fcf82f89b634ddf-o9khv.webp",
     "title": "限定イラスト 03",
-    "tier": "basic"
+    "tier": "basic",
+    "title_en": "Exclusive illustration 03"
    },
    {
     "image": "images/patreon/67b500b4ff32dc8b20ae877443bb8f5b-23vgf.webp",
     "title": "限定イラスト 04",
-    "tier": "Extra"
+    "tier": "Extra",
+    "title_en": "Exclusive illustration 04"
    },
    {
     "image": "images/patreon/17d9319d4619d1dc9e899b1889a49f2a-mnk5f.webp",
     "title": "限定イラスト 05",
-    "tier": "basic"
+    "tier": "basic",
+    "title_en": "Exclusive illustration 05"
    },
    {
     "image": "images/patreon/342acc650d56f427497e9531b2b6abe0-5ndlo.webp",
     "title": "限定イラスト 06",
-    "tier": "Extra"
+    "tier": "Extra",
+    "title_en": "Exclusive illustration 06"
    },
    {
     "image": "images/patreon/1d9672fb94ec76879e2583e9cecf09d3-zjn8z.webp",
     "title": "限定イラスト 07",
-    "tier": ""
+    "tier": "",
+    "title_en": "Exclusive illustration 07"
    },
    {
     "image": "images/patreon/c00adcaffaf22a06b5f8fa0b37b45289-sov55.webp",
     "title": "限定イラスト 08",
-    "tier": ""
+    "tier": "",
+    "title_en": "Exclusive illustration 08"
    }
   ],
-  "note": "※ 一部のプランには成人向け（R18）の内容が含まれます。18歳未満の方はご利用いただけません。\n※ 限定コンテンツの本編は Patreon 上で公開しています。このページの画像はプレビュー（ぼかし）です。"
+  "note": "※ 一部のプランには成人向け（R18）の内容が含まれます。18歳未満の方はご利用いただけません。\n※ 限定コンテンツの本編は Patreon 上で公開しています。このページの画像はプレビュー（ぼかし）です。",
+  "title_en": "Patreon — Members Only",
+  "lead_en": "On Patreon, I share illustrations and videos that aren't published here. The “Want to See More” tier comes with a 7-day free trial.",
+  "cta_en": "Support on Patreon",
+  "courseTitle_en": "Tiers",
+  "previewTitle_en": "Members-only previews",
+  "note_en": "* Some tiers include adult (R18) content and are not available to anyone under 18.\n* The full exclusive content is published on Patreon. Images on this page are blurred previews."
  },
  "news": [
   {
    "date": "2026-09-25",
    "cat": "update",
    "text": "RyuSe1 STUDIO をオープンしました",
-   "link": ""
+   "link": "",
+   "text_en": "RyuSe1 STUDIO is now open"
   },
   {
    "date": "2026-09-22",
    "cat": "info",
    "text": "随時ページを準備しています",
-   "link": ""
+   "link": "",
+   "text_en": "More pages are on the way"
   },
   {
    "date": "2026-09-25",
    "cat": "new",
    "text": "キャラクターページを公開しました（8人）",
-   "link": "#/characters"
+   "link": "#/characters",
+   "text_en": "The character page is live (8 characters)"
   },
   {
    "date": "2026-09-20",
    "cat": "info",
    "text": "ギャラリーを順次追加していきます",
-   "link": "#/gallery"
+   "link": "#/gallery",
+   "text_en": "More works will be added to the gallery over time"
   }
  ],
  "sns": [
@@ -1336,7 +1540,8 @@
    "label": "Patreon",
    "handle": "支援はこちら",
    "url": "https://www.patreon.com/c/RyuSe1421",
-   "pin": true
+   "pin": true,
+   "handle_en": "Support me here"
   },
   {
    "icon": "x",
@@ -1350,10 +1555,11 @@
    "label": "X（サブ）",
    "handle": "@RyuSe1_Sub",
    "url": "https://x.com/RyuSe1_Sub",
-   "pin": true
+   "pin": true,
+   "label_en": "X (sub)"
   }
  ],
- "publishedAt": "2026-09-28T13:00:39.474Z",
+ "publishedAt": "2026-09-28T13:11:37.000Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
@@ -1374,40 +1580,61 @@
   "newsTitle": "What's new.",
   "newsSub": "お知らせ",
   "newsLink": "すべてのお知らせ",
-  "follow": "FOLLOW THE STUDIO"
+  "follow": "FOLLOW THE STUDIO",
+  "heroLink2_en": "See works",
+  "worksSub_en": "Latest illustrations",
+  "worksLink_en": "All works",
+  "exploreIntro_en": "Get to know the characters. Browse the works.\nA place to find your favorite.",
+  "newsSub_en": "News",
+  "newsLink_en": "All news"
  },
  "faq": {
   "items": [
    {
     "q": "Patreonって何ですか？",
-    "a": "クリエイターを月額で応援できる海外のサービスです。プランに参加すると、Patreonでしか見られない限定の作品を楽しめます。"
+    "a": "クリエイターを月額で応援できる海外のサービスです。プランに参加すると、Patreonでしか見られない限定の作品を楽しめます。",
+    "q_en": "What is Patreon?",
+    "a_en": "An international service where you can support creators with a monthly membership. Joining a plan gives you access to exclusive works you can only see on Patreon."
    },
    {
     "q": "どうやって参加するの？",
-    "a": "「会員限定」ページのボタンからPatreonを開き、好きなプランの「参加する」を押します。Patreonのアカウントを作って支払い方法を登録すれば完了です。"
+    "a": "「会員限定」ページのボタンからPatreonを開き、好きなプランの「参加する」を押します。Patreonのアカウントを作って支払い方法を登録すれば完了です。",
+    "q_en": "How do I join?",
+    "a_en": "Open Patreon from the button on the Patreon page here, then press “Join” on the plan you like. Create a Patreon account, add a payment method, and you're all set."
    },
    {
     "q": "コースと推しプランの違いは？",
-    "a": "コース（basic / Extra / ULTRA）は、いろいろなキャラの作品をまとめて楽しめるプランです。推しプランは、選んだ1人のキャラのコンテンツを楽しめるプランです。"
+    "a": "コース（basic / Extra / ULTRA）は、いろいろなキャラの作品をまとめて楽しめるプランです。推しプランは、選んだ1人のキャラのコンテンツを楽しめるプランです。",
+    "q_en": "What's the difference between tiers and oshi plans?",
+    "a_en": "Tiers (Basic / Extra / ULTRA) let you enjoy works featuring all the characters. Oshi plans let you enjoy the content of the one character you choose."
    },
    {
     "q": "無料で試せますか？",
-    "a": "「もっとみたいコース（basic）」は7日間の無料お試しがあります。"
+    "a": "「もっとみたいコース（basic）」は7日間の無料お試しがあります。",
+    "q_en": "Can I try it for free?",
+    "a_en": "The “Want to See More” (Basic) tier has a 7-day free trial."
    },
    {
     "q": "料金や支払い方法は？",
-    "a": "料金はドル（$）建ての月額です。日本円での金額は為替によって少し変わります。支払い方法はPatreonの画面で選べます。"
+    "a": "料金はドル（$）建ての月額です。日本円での金額は為替によって少し変わります。支払い方法はPatreonの画面で選べます。",
+    "q_en": "How much does it cost, and how do I pay?",
+    "a_en": "Prices are monthly, in US dollars. You can choose your payment method on Patreon."
    },
    {
     "q": "プランの変更や解約はできますか？",
-    "a": "Patreonのメンバーシップ設定から、いつでもプランの変更や解約ができます。"
+    "a": "Patreonのメンバーシップ設定から、いつでもプランの変更や解約ができます。",
+    "q_en": "Can I change or cancel my plan?",
+    "a_en": "Yes. You can change or cancel anytime from your membership settings on Patreon."
    },
    {
     "q": "18歳未満でも参加できますか？",
-    "a": "一部のプランには成人向けの内容が含まれるため、18歳未満の方はご利用いただけません。"
+    "a": "一部のプランには成人向けの内容が含まれるため、18歳未満の方はご利用いただけません。",
+    "q_en": "Can I join if I'm under 18?",
+    "a_en": "Some plans include adult content, so they are not available to anyone under 18."
    }
   ],
-  "note": "※ 料金・お試し・解約などの細かい条件は、Patreonの表示が最新です。"
+  "note": "※ 料金・お試し・解約などの細かい条件は、Patreonの表示が最新です。",
+  "note_en": "* For the latest details on pricing, trials and cancellation, please check Patreon."
  },
  "guide": {
   "okTitle": "OKなこと",
@@ -1417,18 +1644,28 @@
   "sections": [
    {
     "title": "AIを使った作品について",
-    "body": "当サイトの作品は、画像生成AIを使って制作しています。"
+    "body": "当サイトの作品は、画像生成AIを使って制作しています。",
+    "title_en": "About AI-assisted works",
+    "body_en": "The works on this site are created using image-generation AI."
    },
    {
     "title": "ファンアートについて",
-    "body": "ファンアート（二次創作）は大歓迎です(^▽^)/"
+    "body": "ファンアート（二次創作）は大歓迎です(^▽^)/",
+    "title_en": "About fan art",
+    "body_en": "Fan art is very welcome! (^▽^)/"
    },
    {
     "title": "お問い合わせ",
-    "body": "わからないことや、上記以外の使い方をしたい場合は、SNSのDMからご相談ください。"
+    "body": "わからないことや、上記以外の使い方をしたい場合は、SNSのDMからご相談ください。",
+    "title_en": "Contact",
+    "body_en": "If you have questions or would like to use the works in other ways, please DM me on social media."
    }
   ],
-  "updated": "2026-09-25"
+  "updated": "2026-09-25",
+  "okTitle_en": "You're welcome to",
+  "ok_en": "Share work page URLs and social posts (reposts and quotes)\nUse the distributed wallpapers and icons personally\nDraw and post fan art",
+  "ngTitle_en": "Please don't",
+  "ng_en": "Repost or redistribute images without permission (social media, aggregator sites, videos, etc.)\nClaim the works as your own or pretend to be the creator\nUse them commercially, make merchandise, or sell them\nShare or repost Patreon-exclusive content"
  },
  "downloads": {
   "items": [
@@ -1443,10 +1680,13 @@
     "chars": [],
     "bytes": 2346009,
     "fx": 47,
-    "fy": 0
+    "fy": 0,
+    "title_en": "1st Anniversary Kimono Wallpaper",
+    "note_en": "Made for the 1st anniversary"
    }
   ],
-  "note": "※ 配布画像は個人での利用に限ります。ご利用の前にガイドラインをご確認ください。"
+  "note": "※ 配布画像は個人での利用に限ります。ご利用の前にガイドラインをご確認ください。",
+  "note_en": "* Distributed images are for personal use only. Please read the guidelines before use."
  },
  "share": {
   "url": "",
@@ -1466,7 +1706,11 @@
   "title": "年齢確認",
   "text": "ここから先は、成人向け（R18）の内容を含むページです。\nあなたは18歳以上ですか？",
   "yes": "はい、18歳以上です",
-  "no": "いいえ"
+  "no": "いいえ",
+  "title_en": "Age verification",
+  "text_en": "The following page contains adult (R18) content.\nAre you 18 or older?",
+  "yes_en": "Yes, I'm 18 or older",
+  "no_en": "No"
  },
  "birthday": {
   "enabled": true,
@@ -1474,6 +1718,9 @@
   "text": "今日は{name}の誕生日です🎂\nみんなでお祝いしてね！",
   "button": "プロフィールを見る",
   "soonDays": 7,
-  "soonText": "もうすぐ{name}の誕生日（{date}・あと{days}日）"
+  "soonText": "もうすぐ{name}の誕生日（{date}・あと{days}日）",
+  "text_en": "It's {name}'s birthday today 🎂\nPlease celebrate with us!",
+  "button_en": "View profile",
+  "soonText_en": "{name}'s birthday is coming up ({date} — in {days} days)"
  }
 }
