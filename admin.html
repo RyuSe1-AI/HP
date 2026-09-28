@@ -631,7 +631,8 @@ const NEWS_CATS = {
   info:{label:'お知らせ', color:'#e0668f'},
   new:{label:'新作', color:'#8a6ee0'},
   patreon:{label:'Patreon', color:'#ef6c5a'},
-  event:{label:'イベント', color:'#2fae8c'}
+  event:{label:'イベント', color:'#2fae8c'},
+  birthday:{label:'誕生日', color:'#ec6f9a'}
 };
 const CHAR_SEED = [
   ['akane','あかね','AKANE','#ea6a80'],
@@ -1427,8 +1428,8 @@ function tabChars() {
       h('div', {class:'ed-grid2'}, fText('見出し', B, 'title', {ph:'HAPPY BIRTHDAY'}), fText('ボタンの文字', B, 'button', {hint:'空欄ならボタンなし'})),
       fArea('お祝いメッセージ（共通）', B, 'text', {rows:2, hint:'{name} はキャラの名前に置き換わります。キャラごとに変えたい時は、各キャラの「お誕生日のメッセージ」に書いてください。'}),
       h('div', {class:'ed-grid2'},
-        fText('「もうすぐ誕生日」を何日前から出すか', B, 'soonDays', {type:'number', hint:'0 にすると出しません'}),
-        fText('「もうすぐ誕生日」の文', B, 'soonText', {hint:'{name} 名前・{date} 日付・{days} 残り日数'}))),
+        fText('お知らせに「もうすぐ誕生日」を何日前から出すか', B, 'soonDays', {type:'number', hint:'0 にすると出しません。当日は「お祝いメッセージ」の1行目がお知らせに出ます。'}),
+        fText('お知らせに出す「もうすぐ誕生日」の文', B, 'soonText', {hint:'{name} 名前・{date} 日付・{days} 残り日数'}))),
     sec('キャラクター', 'users',
       h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, '縦長（3:4くらい）の画像がきれいに収まります。「顔の位置」で切り抜きの上下を調整できます。'),
       fList(cs, {
