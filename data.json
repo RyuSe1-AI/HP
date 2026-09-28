@@ -191,20 +191,20 @@
    "color": "#ea6a80",
    "image": "images/characters/akane1-5-qdy2s-nobg-rzog8.webp",
    "pos": 25,
-   "catch": "（ひとことセリフ）",
-   "desc": "ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。",
+   "catch": "私のこと、推さなきゃだめだゾ",
+   "desc": "【名前の由来】\n椎名　←　椎名林檎さん　←　林檎　←　赤\n茜　　←　あか（赤）ね",
    "profile": [
     {
-     "k": "誕生日",
-     "v": "--/--"
+     "k": "名前",
+     "v": "椎名 茜（しいな あかね）"
     },
     {
-     "k": "身長",
-     "v": "---cm"
+     "k": "性格",
+     "v": "明るい・人懐っこい"
     },
     {
-     "k": "好きなもの",
-     "v": "---"
+     "k": "好きな食べ物",
+     "v": "ナポリタン"
     }
    ],
    "tags": ""
@@ -216,20 +216,20 @@
    "color": "#5b9cf0",
    "image": "images/characters/aoi1-7-vgg30-nobg-5jjkz.webp",
    "pos": 25,
-   "catch": "（ひとことセリフ）",
-   "desc": "ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。",
+   "catch": "私のこと、好きになってほしいな",
+   "desc": "【名前の由来】\n露瀬　←　しとやかな雫と激流の瀬\n葵　　←　青い",
    "profile": [
     {
-     "k": "誕生日",
-     "v": "--/--"
+     "k": "名前",
+     "v": "露瀬 葵（つゆせ あおい）"
     },
     {
-     "k": "身長",
-     "v": "---cm"
+     "k": "性格",
+     "v": "積極的・照れ屋"
     },
     {
-     "k": "好きなもの",
-     "v": "---"
+     "k": "好きな食べ物",
+     "v": "白湯ラーメン"
     }
    ],
    "tags": ""
@@ -241,20 +241,24 @@
    "color": "#a4e4ea",
    "image": "images/characters/tamaki1-3-71uoi-nobg-tpc4s.webp",
    "pos": 25,
-   "catch": "（ひとことセリフ）",
-   "desc": "ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。",
+   "catch": "私と仲良くしてくれると嬉しいな",
+   "desc": "【名前の由来】\n真城　←　真珠・しろ（白）\n環　　←　苧環（おだまき・花の名前）",
    "profile": [
     {
+     "k": "名前",
+     "v": "真城 環（ましろ たまき）"
+    },
+    {
      "k": "誕生日",
-     "v": "--/--"
+     "v": "5月29日（オダマキの誕生花の日）"
     },
     {
-     "k": "身長",
-     "v": "---cm"
+     "k": "性格",
+     "v": "内弁慶・おしとやか"
     },
     {
-     "k": "好きなもの",
-     "v": "---"
+     "k": "好きな食べ物",
+     "v": "白米"
     }
    ],
    "tags": ""
@@ -266,20 +270,20 @@
    "color": "#9679e0",
    "image": "images/characters/sumire1-4-ht4a1-nobg-7wsf9.webp",
    "pos": 25,
-   "catch": "（ひとことセリフ）",
-   "desc": "ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。",
+   "catch": "私のこと好きなら好きって言いなさいよね",
+   "desc": "【名前の由来】\n紫藤　←　紫・藤（むらさき）\n菫　　←　すみれ（紫の花）",
    "profile": [
     {
-     "k": "誕生日",
-     "v": "--/--"
+     "k": "名前",
+     "v": "紫藤 菫（しどう すみれ）"
     },
     {
-     "k": "身長",
-     "v": "---cm"
+     "k": "性格",
+     "v": "クール・甘えたがり"
     },
     {
-     "k": "好きなもの",
-     "v": "---"
+     "k": "好きな食べ物",
+     "v": "和菓子（特に羊羹）"
     }
    ],
    "tags": ""
@@ -291,20 +295,20 @@
    "color": "#f4c10b",
    "image": "images/characters/kaede1-2-rjlc6-nobg-yil8b.webp",
    "pos": 25,
-   "catch": "（ひとことセリフ）",
-   "desc": "ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。",
+   "catch": "みんな、私のこと一番好きでしょ？",
+   "desc": "【名前の由来】\n星菜　←　星（きいろ）・菜（菜の花）\n楓　　←　カエデ（イチョウの類）",
    "profile": [
     {
-     "k": "誕生日",
-     "v": "--/--"
+     "k": "名前",
+     "v": "星菜 楓（ほしな かえで）"
     },
     {
-     "k": "身長",
-     "v": "---cm"
+     "k": "性格",
+     "v": "元気・ムードメーカー"
     },
     {
-     "k": "好きなもの",
-     "v": "---"
+     "k": "好きな食べ物",
+     "v": "唐揚げ"
     }
    ],
    "tags": ""
@@ -316,20 +320,24 @@
    "color": "#d65582",
    "image": "images/characters/tsubaki1-3-06tuk-nobg-lkpmt.webp",
    "pos": 25,
-   "catch": "（ひとことセリフ）",
-   "desc": "ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。",
+   "catch": "今から推してくれたら古参だぞ",
+   "desc": "【名前の由来】\n梅桃　→ゆすらうめ、もも\n椿　　→つばき（ピンクもあるよ）",
    "profile": [
     {
+     "k": "名前",
+     "v": "梅桃 椿（ゆすら つばき）"
+    },
+    {
      "k": "誕生日",
-     "v": "--/--"
+     "v": "12月10日"
     },
     {
-     "k": "身長",
-     "v": "---cm"
+     "k": "性格",
+     "v": "明るい・イタズラ好き"
     },
     {
-     "k": "好きなもの",
-     "v": "---"
+     "k": "好きな食べ物",
+     "v": "苺のショートケーキ"
     }
    ],
    "tags": ""
@@ -341,20 +349,12 @@
    "color": "#39b597",
    "image": "images/characters/hisui1-6-frh6z-nobg-tbq0b.webp",
    "pos": 25,
-   "catch": "（ひとことセリフ）",
-   "desc": "ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。",
+   "catch": "おねえさんは好きかな？♡",
+   "desc": "Xフォロワー1万人目前で生まれたキャラクターです。",
    "profile": [
     {
-     "k": "誕生日",
-     "v": "--/--"
-    },
-    {
-     "k": "身長",
-     "v": "---cm"
-    },
-    {
-     "k": "好きなもの",
-     "v": "---"
+     "k": "名前",
+     "v": "葉山 翠（はやま ひすい）"
     }
    ],
    "tags": ""
@@ -366,20 +366,24 @@
    "color": "#94a9d6",
    "image": "images/characters/kasumi1-4-ew1yc-nobg-xdlln.webp",
    "pos": 25,
-   "catch": "（ひとことセリフ）",
-   "desc": "ここにキャラクターの紹介文が入ります。\n編集モードから自由に書き換えられます。",
+   "catch": "1周年ありがとうね　これからよろしく",
+   "desc": "活動1周年企画で登場した新キャラクターです。\n\n【名前の由来】\n霧黒　→霧（灰色みたい）！黒！\n霞　　→かすみ花　霞もグレーな感じ",
    "profile": [
     {
+     "k": "名前",
+     "v": "霧黒 霞（むくろ かすみ）"
+    },
+    {
      "k": "誕生日",
-     "v": "--/--"
+     "v": "4月4日（霞花の誕生花の日）"
     },
     {
-     "k": "身長",
-     "v": "---cm"
+     "k": "性格",
+     "v": "ミステリアス"
     },
     {
-     "k": "好きなもの",
-     "v": "---"
+     "k": "好きな食べ物",
+     "v": "サンマ"
     }
    ],
    "tags": ""
@@ -391,7 +395,9 @@
    "image": "images/gallery/x-2056318628279038180-f7tji.webp",
    "title": "さすがに恥ずかしいかも//❤️",
    "date": "2026-05-18",
-   "chars": [],
+   "chars": [
+    "akane"
+   ],
    "tweetId": "2056318628279038180",
    "tweet": "https://x.com/RyuSe1_AI/status/2056318628279038180",
    "likes": 7479
@@ -401,7 +407,9 @@
    "image": "images/gallery/x-1965751054689321397-4jhoc.webp",
    "title": "💛",
    "date": "2025-09-10",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1965751054689321397",
    "tweet": "https://x.com/RyuSe1_AI/status/1965751054689321397",
    "likes": 4531
@@ -411,7 +419,9 @@
    "image": "images/gallery/x-1965329456849158208-fuyxj.webp",
    "title": "🤍",
    "date": "2025-09-09",
-   "chars": [],
+   "chars": [
+    "tamaki"
+   ],
    "tweetId": "1965329456849158208",
    "tweet": "https://x.com/RyuSe1_AI/status/1965329456849158208",
    "likes": 3590
@@ -421,7 +431,9 @@
    "image": "images/gallery/x-2085363966579278128-62vtt.webp",
    "title": "💛",
    "date": "2026-08-06",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "2085363966579278128",
    "tweet": "https://x.com/RyuSe1_AI/status/2085363966579278128",
    "likes": 3571
@@ -431,7 +443,9 @@
    "image": "images/gallery/x-2057367843679965206-f5lcw.webp",
    "title": "💛",
    "date": "2026-05-21",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "2057367843679965206",
    "tweet": "https://x.com/RyuSe1_AI/status/2057367843679965206",
    "likes": 3263
@@ -441,7 +455,9 @@
    "image": "images/gallery/x-1920138581827338706-1vif1.webp",
    "title": "明日も頑張りましょ💛",
    "date": "2025-05-08",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1920138581827338706",
    "tweet": "https://x.com/RyuSe1_AI/status/1920138581827338706",
    "likes": 3108
@@ -451,7 +467,9 @@
    "image": "images/gallery/x-1957289960488521816-mfvr4.webp",
    "title": "気になる？🩷",
    "date": "2025-08-18",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1957289960488521816",
    "tweet": "https://x.com/RyuSe1_AI/status/1957289960488521816",
    "likes": 2976
@@ -461,7 +479,9 @@
    "image": "images/gallery/x-1939535864344064031-h9026.webp",
    "title": "🩷",
    "date": "2025-06-30",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1939535864344064031",
    "tweet": "https://x.com/RyuSe1_AI/status/1939535864344064031",
    "likes": 2436
@@ -471,7 +491,9 @@
    "image": "images/gallery/x-1956855756718063876-q6lez.webp",
    "title": "おはよ☀️🩷",
    "date": "2025-08-17",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1956855756718063876",
    "tweet": "https://x.com/RyuSe1_AI/status/1956855756718063876",
    "likes": 2410
@@ -481,7 +503,9 @@
    "image": "images/gallery/x-1946113519205720509-gahfb.webp",
    "title": "かわいい？💙",
    "date": "2025-07-18",
-   "chars": [],
+   "chars": [
+    "aoi"
+   ],
    "tweetId": "1946113519205720509",
    "tweet": "https://x.com/RyuSe1_AI/status/1946113519205720509",
    "likes": 2400
@@ -491,7 +515,9 @@
    "image": "images/gallery/x-1953720938517975536-w2gj2.webp",
    "title": "🤍",
    "date": "2025-08-08",
-   "chars": [],
+   "chars": [
+    "tamaki"
+   ],
    "tweetId": "1953720938517975536",
    "tweet": "https://x.com/RyuSe1_AI/status/1953720938517975536",
    "likes": 2399
@@ -501,7 +527,9 @@
    "image": "images/gallery/x-1964137443646419282-60kpe.webp",
    "title": "❤️",
    "date": "2025-09-06",
-   "chars": [],
+   "chars": [
+    "akane"
+   ],
    "tweetId": "1964137443646419282",
    "tweet": "https://x.com/RyuSe1_AI/status/1964137443646419282",
    "likes": 2383
@@ -511,7 +539,9 @@
    "image": "images/gallery/x-1955025452986404886-5a565.webp",
    "title": "よくねた？💚",
    "date": "2025-08-12",
-   "chars": [],
+   "chars": [
+    "hisui"
+   ],
    "tweetId": "1955025452986404886",
    "tweet": "https://x.com/RyuSe1_AI/status/1955025452986404886",
    "likes": 2290
@@ -521,7 +551,9 @@
    "image": "images/gallery/x-1993944325844279803-4qtav.webp",
    "title": "💛",
    "date": "2025-11-27",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1993944325844279803",
    "tweet": "https://x.com/RyuSe1_AI/status/1993944325844279803",
    "likes": 2268
@@ -531,7 +563,9 @@
    "image": "images/gallery/x-1939368879173816750-6ddyt.webp",
    "title": "おやすみ💤一緒に寝る？❤️",
    "date": "2025-06-30",
-   "chars": [],
+   "chars": [
+    "akane"
+   ],
    "tweetId": "1939368879173816750",
    "tweet": "https://x.com/RyuSe1_AI/status/1939368879173816750",
    "likes": 2260
@@ -541,7 +575,9 @@
    "image": "images/gallery/x-1963804152896913481-xr01w.webp",
    "title": "🩷",
    "date": "2025-09-05",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1963804152896913481",
    "tweet": "https://x.com/RyuSe1_AI/status/1963804152896913481",
    "likes": 2238
@@ -551,7 +587,9 @@
    "image": "images/gallery/x-1942717324697760190-aamck.webp",
    "title": "おはよー💚泳ぎに行こ🌊",
    "date": "2025-07-09",
-   "chars": [],
+   "chars": [
+    "hisui"
+   ],
    "tweetId": "1942717324697760190",
    "tweet": "https://x.com/RyuSe1_AI/status/1942717324697760190",
    "likes": 2236
@@ -561,7 +599,9 @@
    "image": "images/gallery/x-1978796363036180760-izgw5.webp",
    "title": "🩷",
    "date": "2025-10-16",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1978796363036180760",
    "tweet": "https://x.com/RyuSe1_AI/status/1978796363036180760",
    "likes": 2198
@@ -571,7 +611,9 @@
    "image": "images/gallery/x-1938990433348317522-58aie.webp",
    "title": "復活🔥❤️🏁",
    "date": "2025-06-29",
-   "chars": [],
+   "chars": [
+    "akane"
+   ],
    "tweetId": "1938990433348317522",
    "tweet": "https://x.com/RyuSe1_AI/status/1938990433348317522",
    "likes": 2162
@@ -581,7 +623,9 @@
    "image": "images/gallery/x-1992420771029987701-7gp4h.webp",
    "title": "💜",
    "date": "2025-11-23",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "1992420771029987701",
    "tweet": "https://x.com/RyuSe1_AI/status/1992420771029987701",
    "likes": 2113,
@@ -593,7 +637,9 @@
    "image": "images/gallery/x-2057048940592410927-3qqk6.webp",
    "title": "💜",
    "date": "2026-05-20",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "2057048940592410927",
    "tweet": "https://x.com/RyuSe1_AI/status/2057048940592410927",
    "likes": 2100
@@ -603,7 +649,9 @@
    "image": "images/gallery/x-1969277040751714395-2tz7k.webp",
    "title": "どう？🤍かわいい？🤍",
    "date": "2025-09-20",
-   "chars": [],
+   "chars": [
+    "tamaki"
+   ],
    "tweetId": "1969277040751714395",
    "tweet": "https://x.com/RyuSe1_AI/status/1969277040751714395",
    "likes": 2075
@@ -613,7 +661,9 @@
    "image": "images/gallery/x-1950012704590041127-mdmfj.webp",
    "title": "おはよ💜",
    "date": "2025-07-29",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "1950012704590041127",
    "tweet": "https://x.com/RyuSe1_AI/status/1950012704590041127",
    "likes": 1997
@@ -623,7 +673,9 @@
    "image": "images/gallery/x-1963485634947158303-8rbmc.webp",
    "title": "💜",
    "date": "2025-09-04",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "1963485634947158303",
    "tweet": "https://x.com/RyuSe1_AI/status/1963485634947158303",
    "likes": 1973
@@ -633,7 +685,9 @@
    "image": "images/gallery/x-1949002655290065300-eaukc.webp",
    "title": "これ、どうしたい？//🩷",
    "date": "2025-07-26",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1949002655290065300",
    "tweet": "https://x.com/RyuSe1_AI/status/1949002655290065300",
    "likes": 1933,
@@ -645,7 +699,9 @@
    "image": "images/gallery/x-1947849059143979086-6vtga.webp",
    "title": "💜",
    "date": "2025-07-23",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "1947849059143979086",
    "tweet": "https://x.com/RyuSe1_AI/status/1947849059143979086",
    "likes": 1933
@@ -655,7 +711,9 @@
    "image": "images/gallery/x-1902875286519378025-z380s.webp",
    "title": "今日も頑張ろっ🤍",
    "date": "2025-03-21",
-   "chars": [],
+   "chars": [
+    "tamaki"
+   ],
    "tweetId": "1902875286519378025",
    "tweet": "https://x.com/RyuSe1_AI/status/1902875286519378025",
    "likes": 1927
@@ -665,7 +723,10 @@
    "image": "images/gallery/x-1939923433657159871-mmv5k.webp",
    "title": "❤️🩷❤️🩷",
    "date": "2025-07-01",
-   "chars": [],
+   "chars": [
+    "akane",
+    "tsubaki"
+   ],
    "tweetId": "1939923433657159871",
    "tweet": "https://x.com/RyuSe1_AI/status/1939923433657159871",
    "likes": 1920
@@ -675,7 +736,9 @@
    "image": "images/gallery/x-1946434334850007239-5k9v0.webp",
    "title": "💛",
    "date": "2025-07-19",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1946434334850007239",
    "tweet": "https://x.com/RyuSe1_AI/status/1946434334850007239",
    "likes": 1911
@@ -685,7 +748,9 @@
    "image": "images/gallery/x-1952893253570961412-9197p.webp",
    "title": "💛",
    "date": "2025-08-06",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1952893253570961412",
    "tweet": "https://x.com/RyuSe1_AI/status/1952893253570961412",
    "likes": 1891
@@ -695,7 +760,9 @@
    "image": "images/gallery/x-1965477419038708021-re83d.webp",
    "title": "あらあら、おやすみね💤💙",
    "date": "2025-09-10",
-   "chars": [],
+   "chars": [
+    "aoi"
+   ],
    "tweetId": "1965477419038708021",
    "tweet": "https://x.com/RyuSe1_AI/status/1965477419038708021",
    "likes": 1862
@@ -705,7 +772,9 @@
    "image": "images/gallery/x-1969982968782573659-4xmbl.webp",
    "title": "🩷",
    "date": "2025-09-22",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1969982968782573659",
    "tweet": "https://x.com/RyuSe1_AI/status/1969982968782573659",
    "likes": 1860
@@ -715,7 +784,9 @@
    "image": "images/gallery/x-2058452117887844501-6vczw.webp",
    "title": "💚",
    "date": "2026-05-24",
-   "chars": [],
+   "chars": [
+    "hisui"
+   ],
    "tweetId": "2058452117887844501",
    "tweet": "https://x.com/RyuSe1_AI/status/2058452117887844501",
    "likes": 1844,
@@ -727,7 +798,9 @@
    "image": "images/gallery/x-1965076301393645926-vrjnn.webp",
    "title": "似合う？🩷",
    "date": "2025-09-09",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1965076301393645926",
    "tweet": "https://x.com/RyuSe1_AI/status/1965076301393645926",
    "likes": 1837
@@ -737,7 +810,9 @@
    "image": "images/gallery/x-1952529819616546907-9r5xh.webp",
    "title": "おはよ☀️💜",
    "date": "2025-08-05",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "1952529819616546907",
    "tweet": "https://x.com/RyuSe1_AI/status/1952529819616546907",
    "likes": 1832
@@ -747,7 +822,9 @@
    "image": "images/gallery/x-1929899253997899999-wedwh.webp",
    "title": "お疲れ様❤️",
    "date": "2025-06-03",
-   "chars": [],
+   "chars": [
+    "akane"
+   ],
    "tweetId": "1929899253997899999",
    "tweet": "https://x.com/RyuSe1_AI/status/1929899253997899999",
    "likes": 1830
@@ -757,7 +834,9 @@
    "image": "images/gallery/x-1962722438518841778-o9hlj.webp",
    "title": "🩷",
    "date": "2025-09-02",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1962722438518841778",
    "tweet": "https://x.com/RyuSe1_AI/status/1962722438518841778",
    "likes": 1828
@@ -767,7 +846,9 @@
    "image": "images/gallery/x-1950950866372235572-yjf4o.webp",
    "title": "❤️",
    "date": "2025-08-01",
-   "chars": [],
+   "chars": [
+    "akane"
+   ],
    "tweetId": "1950950866372235572",
    "tweet": "https://x.com/RyuSe1_AI/status/1950950866372235572",
    "likes": 1776
@@ -777,7 +858,9 @@
    "image": "images/gallery/x-2022722503282692480-osb4i.webp",
    "title": "💛🍫Happy Valentines 🍫💛",
    "date": "2026-02-15",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "2022722503282692480",
    "tweet": "https://x.com/RyuSe1_AI/status/2022722503282692480",
    "likes": 1773
@@ -787,7 +870,9 @@
    "image": "images/gallery/x-1992726333244543337-hdf8q.webp",
    "title": "おはよ☀🩷",
    "date": "2025-11-24",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1992726333244543337",
    "tweet": "https://x.com/RyuSe1_AI/status/1992726333244543337",
    "likes": 1772
@@ -797,7 +882,9 @@
    "image": "images/gallery/x-1940175079700332898-svlly.webp",
    "title": "おはよ☀よく寝てたね💜",
    "date": "2025-07-02",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "1940175079700332898",
    "tweet": "https://x.com/RyuSe1_AI/status/1940175079700332898",
    "likes": 1770
@@ -807,7 +894,9 @@
    "image": "images/gallery/x-1940436479278543227-51xsa.webp",
    "title": "むぎゅする？💙",
    "date": "2025-07-03",
-   "chars": [],
+   "chars": [
+    "aoi"
+   ],
    "tweetId": "1940436479278543227",
    "tweet": "https://x.com/RyuSe1_AI/status/1940436479278543227",
    "likes": 1765
@@ -817,7 +906,9 @@
    "image": "images/gallery/x-1941977530644500497-mdo0j.webp",
    "title": "おはよ☀️🤍",
    "date": "2025-07-07",
-   "chars": [],
+   "chars": [
+    "tamaki"
+   ],
    "tweetId": "1941977530644500497",
    "tweet": "https://x.com/RyuSe1_AI/status/1941977530644500497",
    "likes": 1748,
@@ -829,7 +920,9 @@
    "image": "images/gallery/x-1969031045401198935-xcems.webp",
    "title": "💛",
    "date": "2025-09-19",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1969031045401198935",
    "tweet": "https://x.com/RyuSe1_AI/status/1969031045401198935",
    "likes": 1710
@@ -839,7 +932,9 @@
    "image": "images/gallery/x-1945747467825270883-ne5qd.webp",
    "title": "//💚",
    "date": "2025-07-17",
-   "chars": [],
+   "chars": [
+    "hisui"
+   ],
    "tweetId": "1945747467825270883",
    "tweet": "https://x.com/RyuSe1_AI/status/1945747467825270883",
    "likes": 1699
@@ -849,7 +944,9 @@
    "image": "images/gallery/x-1951094304488956057-ef3h7.webp",
    "title": "💜",
    "date": "2025-08-01",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "1951094304488956057",
    "tweet": "https://x.com/RyuSe1_AI/status/1951094304488956057",
    "likes": 1695
@@ -859,7 +956,9 @@
    "image": "images/gallery/x-1940672063746068681-kh6mq.webp",
    "title": "やっほー❤️",
    "date": "2025-07-03",
-   "chars": [],
+   "chars": [
+    "akane"
+   ],
    "tweetId": "1940672063746068681",
    "tweet": "https://x.com/RyuSe1_AI/status/1940672063746068681",
    "likes": 1685
@@ -869,7 +968,9 @@
    "image": "images/gallery/x-1917010791779471583-3su5d.webp",
    "title": "おはよ☀️🩷",
    "date": "2025-04-29",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1917010791779471583",
    "tweet": "https://x.com/RyuSe1_AI/status/1917010791779471583",
    "likes": 1685
@@ -879,7 +980,9 @@
    "image": "images/gallery/x-2019066975994134821-m6xdu.webp",
    "title": "おやすみ～💜",
    "date": "2026-02-05",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "2019066975994134821",
    "tweet": "https://x.com/RyuSe1_AI/status/2019066975994134821",
    "likes": 1680
@@ -889,7 +992,9 @@
    "image": "images/gallery/x-1969941644700172758-raw15.webp",
    "title": "おはよ☀️💛",
    "date": "2025-09-22",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1969941644700172758",
    "tweet": "https://x.com/RyuSe1_AI/status/1969941644700172758",
    "likes": 1680
@@ -899,7 +1004,9 @@
    "image": "images/gallery/x-2063441144013635833-9wnjd.webp",
    "title": "おはよ☀️💛",
    "date": "2026-06-07",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "2063441144013635833",
    "tweet": "https://x.com/RyuSe1_AI/status/2063441144013635833",
    "likes": 1679
@@ -909,7 +1016,9 @@
    "image": "images/gallery/x-1969723497661468857-mqn10.webp",
    "title": "💜",
    "date": "2025-09-21",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "1969723497661468857",
    "tweet": "https://x.com/RyuSe1_AI/status/1969723497661468857",
    "likes": 1666
@@ -919,7 +1028,9 @@
    "image": "images/gallery/x-1953451308993990973-dtnmc.webp",
    "title": "お疲れ様💜",
    "date": "2025-08-07",
-   "chars": [],
+   "chars": [
+    "sumire"
+   ],
    "tweetId": "1953451308993990973",
    "tweet": "https://x.com/RyuSe1_AI/status/1953451308993990973",
    "likes": 1662
@@ -929,7 +1040,9 @@
    "image": "images/gallery/x-1903481480975933700-lr8hz.webp",
    "title": "もうこんな時間、、、早くねよ？🤍",
    "date": "2025-03-23",
-   "chars": [],
+   "chars": [
+    "tamaki"
+   ],
    "tweetId": "1903481480975933700",
    "tweet": "https://x.com/RyuSe1_AI/status/1903481480975933700",
    "likes": 1662
@@ -939,7 +1052,9 @@
    "image": "images/gallery/x-1964902227086299201-pg2hs.webp",
    "title": "🩷",
    "date": "2025-09-08",
-   "chars": [],
+   "chars": [
+    "tsubaki"
+   ],
    "tweetId": "1964902227086299201",
    "tweet": "https://x.com/RyuSe1_AI/status/1964902227086299201",
    "likes": 1660
@@ -949,7 +1064,9 @@
    "image": "images/gallery/x-1916323055779123307-m34v2.webp",
    "title": "おはよ☀️💛",
    "date": "2025-04-27",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1916323055779123307",
    "tweet": "https://x.com/RyuSe1_AI/status/1916323055779123307",
    "likes": 1640
@@ -959,7 +1076,9 @@
    "image": "images/gallery/x-1959790244838129788-u51sl.webp",
    "title": "💛",
    "date": "2025-08-25",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1959790244838129788",
    "tweet": "https://x.com/RyuSe1_AI/status/1959790244838129788",
    "likes": 1639
@@ -969,7 +1088,9 @@
    "image": "images/gallery/x-1948409156580561324-6ks2e.webp",
    "title": "💛",
    "date": "2025-07-25",
-   "chars": [],
+   "chars": [
+    "kaede"
+   ],
    "tweetId": "1948409156580561324",
    "tweet": "https://x.com/RyuSe1_AI/status/1948409156580561324",
    "likes": 1627
@@ -1186,9 +1307,16 @@
    "handle": "@RyuSe1_AI",
    "url": "https://x.com/RyuSe1_AI",
    "pin": true
+  },
+  {
+   "icon": "x",
+   "label": "X（サブ）",
+   "handle": "@RyuSe1_Sub",
+   "url": "https://x.com/RyuSe1_Sub",
+   "pin": true
   }
  ],
- "publishedAt": "2026-09-27T17:37:27.174Z",
+ "publishedAt": "2026-09-27T17:56:15.000Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",

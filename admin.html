@@ -966,7 +966,7 @@ const FOCUS = {
   hero: s => ({label:'トップ画像の表示位置', ratio:'1.15', src:() => imgOr(s.image, phHero(Math.max(0, D().hero.slides.indexOf(s))))}),
   tile: (k, t) => ({label:`${t || ''}のサムネイル位置`, ratio:'12/13', def:() => tileSource(k).base || {x:50, y:50, z:1}, src:() => tileSource(k).src,
     hint:'画像が空欄のときは、元の画像（キャラ・作品など）の位置をそのまま使います。'}),
-  gallery: g => ({label:'サムネイルの表示位置', ratio:'1', src:() => galImg(g), hint:'トップの「新着作品」とキャラ紹介の作品サムネイルに使います（ギャラリー一覧と拡大表示は画像全体を表示）。'}),
+  gallery: g => ({label:'サムネイルの表示位置', ratio:'2/3', src:() => galImg(g), hint:'ギャラリー一覧（縦長 2:3）・トップの「新着作品」・キャラ紹介の作品サムネイルに使います（拡大表示は画像全体）。'}),
   preview: x => ({label:'プレビューの表示位置', ratio:'3/4', src:() => imgOr(x.image, phArt('pv', '', '#bdb4ff')), hint:'ぼかして表示するので、だいたいの位置でOKです。'}),
   download: x => ({label:'サムネイルの表示位置', ratio:x.type === 'sp' ? '9/14' : x.type === 'icon' ? '1' : '16/10', round:x.type === 'icon', src:() => imgOr(x.image || x.file, phArt('dl', '', '')),
     hint:'配布ページの小さいプレビューだけに使います（配布する画像そのものは変わりません）。'})
@@ -2575,10 +2575,13 @@ function xTitle(text) {
   const line = s.split(/\n+/).map(l => l.replace(/[#＃][^\s#＃]+/g, '').replace(/\s+/g, ' ').trim()).find(Boolean) || '';
   return line.length > 40 ? line.slice(0, 39) + '…' : line || 'Artwork';
 }
+/* キャラごとのハート絵文字（❤️あかね 💙あおい 🤍たまき 💜すみれ 💛かえで 🩷つばき 💚ひすい 🩶かすみ） */
+const X_HEART = Object.fromEntries(CHAR_SEED.map(([id], i) => [id, String(OSHI_HEARTS[i] || '').replace(/\uFE0F/g, '')]));
 function xChars(text) {
   const t = unEnt(text);
   return D().characters.filter(c => {
     const nm = String(c.name || '').trim(), ro = String(c.romaji || '').trim();
+    if (X_HEART[c.id] && t.includes(X_HEART[c.id])) return true;
     if (nm.length >= 2 && t.includes(nm)) return true;
     return ro.length >= 3 && new RegExp(`(^|[^a-z])${ro.replace(/[^a-z0-9]/gi, '')}([^a-z]|$)`, 'i').test(t);
   }).map(c => c.id);
@@ -2826,7 +2829,7 @@ function tabXArchive() {
         h('button', {class:'ed-btn primary', type:'button', style:'flex:none', html:icon('folder') + 'ZIPファイルを選ぶ', onclick:() => zipIn.click()}),
         h('button', {class:'ed-btn ghost', type:'button', html:icon('folder') + '展開したフォルダを選ぶ', onclick:() => dirIn.click()}),
         zipIn, dirIn),
-      h('p', {class:'ed-hint'}, 'ファイルはこのブラウザの中だけで読み込みます（どこにも送信されません）。リポスト・他の人への返信・画像のないポストは除外。キャラは本文の名前から自動で紐付けます。'),
+      h('p', {class:'ed-hint'}, 'ファイルはこのブラウザの中だけで読み込みます（どこにも送信されません）。リポスト・他の人への返信・画像のないポストは除外。キャラは本文の名前やハートの絵文字（❤️💙🤍💜💛🩷💚🩶）から自動で紐付けます。'),
       fCheck('サイトにいいね数を表示する', D().site, 'showLikes')),
     body
   ];
@@ -2958,7 +2961,7 @@ function imageSlots() {
     focus:{label:`${c.name}：カードの表示位置`, ratio:'3/4', keys:{y:'pos'}, def:{x:50, y:25, z:1}, keepOnChange:true, src:() => charImg(c), hint:'キャラクター一覧のカード・紹介画面・推しプラン（専用画像なし）に使います。'}}));
   ((d.patreon.oshi || {}).items || []).forEach(x => { const c = charById(x.char); out.push({group:'推しプラン', label:x.name || '(名前なし)', hint:x.image ? '専用の画像' : 'キャラの画像を使用中', obj:x, key:'image', max:1200, folder:'patreon', ph:c ? charImg(c) : phArt('oshi', '', ''), ratio:'4/3', color:c ? c.color : '',
     focus:{label:`${x.name}：サムネイルの表示位置`, ratio:'4/3', def:() => oshiFocusBase(x), src:() => { const cc = charById(x.char); return x.image ? imgSrc(x.image) : cc ? charImg(cc) : phArt('oshi', '', ''); }}}); });
-  d.gallery.forEach(g => { const c = charById((g.chars || [])[0]); out.push({group:'ギャラリー', label:g.title || '(無題)', titleKey:'title', hint:fmtDate(g.date), obj:g, key:'image', max:1600, folder:'gallery', ph:phArt(g.id || g.title, g.title, c && c.color), ratio:'1', focus:FOCUS.gallery(g)}); });
+  d.gallery.forEach(g => { const c = charById((g.chars || [])[0]); out.push({group:'ギャラリー', label:g.title || '(無題)', titleKey:'title', hint:fmtDate(g.date), obj:g, key:'image', max:1600, folder:'gallery', ph:phArt(g.id || g.title, g.title, c && c.color), ratio:'2/3', focus:FOCUS.gallery(g)}); });
   d.patreon.previews.forEach((x, i) => out.push({group:'Patreon プレビュー', label:x.title || '(無題)', titleKey:'title', hint:'ぼかして表示', obj:x, key:'image', max:420, folder:'patreon', ph:phArt('pv' + i, '', SOFT[i % SOFT.length]), ratio:'3/4', focus:FOCUS.preview(x)}));
   ((d.downloads || {}).items || []).forEach(x => out.push({group:'壁紙・アイコン', label:x.title || '(無題)', titleKey:'title', obj:x, key:'image', ph:phArt('dl', '', ''),
     get hint() { return (DL_TYPES[x.type] || '') + (x.size ? '・' + x.size : ''); },
