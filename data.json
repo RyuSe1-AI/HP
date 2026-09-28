@@ -12,7 +12,8 @@
   "contactText": "お仕事のご相談・ご連絡は、SNSのDMからお気軽にどうぞ。",
   "contactLabel": "Xで連絡する",
   "contactUrl": "https://x.com/RyuSe1_AI",
-  "showLikes": true
+  "showLikes": true,
+  "langToggle": true
  },
  "nav": [
   {
@@ -115,14 +116,14 @@
     "fz": 1
    },
    {
-    "image": "images/hero/download-s0czs.webp",
+    "image": "images/hero/download-yml98.webp",
     "badge": "MEMBERS",
     "title": "好きを、\nかたちに。",
     "sub": "ちょっとHなイラスト・差分イラストは会員限定で公開中",
     "link": "#/patreon",
     "linkLabel": "詳しく見る",
-    "fx": 47,
-    "fy": 15
+    "fx": 50,
+    "fy": 19
    }
   ]
  },
@@ -192,7 +193,7 @@
    "image": "images/characters/akane1-5-qdy2s-nobg-rzog8.webp",
    "pos": 25,
    "catch": "私のこと、推さなきゃだめだゾ",
-   "desc": "【名前の由来】\n椎名　←　椎名林檎さん　←　林檎　←　赤\n茜　　←　あか（赤）ね",
+   "desc": "【名前の由来】\n椎名　←　椎名林檎さん　←　林檎　←　赤\n茜　　←　あか（赤）ね 、 アカネの花",
    "profile": [
     {
      "k": "名前",
@@ -207,7 +208,8 @@
      "v": "ナポリタン"
     }
    ],
-   "tags": ""
+   "tags": "",
+   "bday": "09-16"
   },
   {
    "id": "aoi",
@@ -232,7 +234,8 @@
      "v": "白湯ラーメン"
     }
    ],
-   "tags": ""
+   "tags": "",
+   "bday": "08-29"
   },
   {
    "id": "tamaki",
@@ -261,7 +264,8 @@
      "v": "白米"
     }
    ],
-   "tags": ""
+   "tags": "",
+   "bday": "05-29"
   },
   {
    "id": "sumire",
@@ -286,7 +290,8 @@
      "v": "和菓子（特に羊羹）"
     }
    ],
-   "tags": ""
+   "tags": "",
+   "bday": "01-09"
   },
   {
    "id": "kaede",
@@ -311,7 +316,8 @@
      "v": "唐揚げ"
     }
    ],
-   "tags": ""
+   "tags": "",
+   "bday": "10-03"
   },
   {
    "id": "tsubaki",
@@ -340,7 +346,8 @@
      "v": "苺のショートケーキ"
     }
    ],
-   "tags": ""
+   "tags": "",
+   "bday": "12-10"
   },
   {
    "id": "hisui",
@@ -357,7 +364,8 @@
      "v": "葉山 翠（はやま ひすい）"
     }
    ],
-   "tags": ""
+   "tags": "",
+   "bday": "08-11"
   },
   {
    "id": "kasumi",
@@ -386,7 +394,8 @@
      "v": "サンマ"
     }
    ],
-   "tags": ""
+   "tags": "",
+   "bday": "04-04"
   }
  ],
  "gallery": [
@@ -1316,7 +1325,7 @@
    "pin": true
   }
  ],
- "publishedAt": "2026-09-27T17:56:15.000Z",
+ "publishedAt": "2026-09-28T12:52:23.595Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
@@ -1430,5 +1439,13 @@
   "text": "ここから先は、成人向け（R18）の内容を含むページです。\nあなたは18歳以上ですか？",
   "yes": "はい、18歳以上です",
   "no": "いいえ"
+ },
+ "birthday": {
+  "enabled": true,
+  "title": "HAPPY BIRTHDAY",
+  "text": "今日は{name}の誕生日です🎂\nみんなでお祝いしてね！",
+  "button": "プロフィールを見る",
+  "soonDays": 7,
+  "soonText": "もうすぐ{name}の誕生日（{date}・あと{days}日）"
  }
 }
