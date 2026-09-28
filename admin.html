@@ -404,6 +404,12 @@ body{overflow:hidden;font-size:14px}
 .wk-slot .ed-in{font-size:12px;padding:6px 8px}
 .wk-slot .ed-btn{justify-content:center;padding:6px 8px;font-size:12px}
 @media (max-width:560px){.wk-pick{grid-template-columns:1fr 1fr}}
+/* 英語モード */
+.ad-lang{margin-right:4px}
+.ad-lang button{font-size:12px}
+.ed-en{display:inline-block;margin-left:6px;padding:0 6px;border-radius:6px;font:700 10px/16px var(--ff-en,system-ui);letter-spacing:.06em;color:#fff;background:#7482ea;vertical-align:1px}
+.ed-in.tr,.im-title.tr{border-color:color-mix(in srgb,#7482ea 55%,var(--line));background:color-mix(in srgb,#7482ea 6%,var(--surface))}
+.ed-en-info{margin:0 0 14px;border-color:color-mix(in srgb,#7482ea 45%,var(--line))}
 
 </style>
 </head>
@@ -590,6 +596,13 @@ const fStyle = (o, k, d) => focusCSS({}, fBase(o, k, d));
 const charFocusBase = c => ({x:fnum(c && c.fx, 50), y:fnum(c && c.pos, 25), z:fnum(c && c.fz, 1)});
 const charFocus = c => focusCSS({}, charFocusBase(c));
 const oshiFocusBase = x => { const c = charById(x.char); return x.image ? {x:50, y:50, z:1} : charFocusBase(c); };
+/* 誕生日（MM-DD）。未設定ならプロフィール表の「誕生日」から読み取る */
+function bdayOf(c) {
+  let m = /^(\d{1,2})-(\d{1,2})$/.exec(String((c && c.bday) || '').trim());
+  if (!m) { const row = ((c && c.profile) || []).find(p => /誕生日|birthday/i.test((p && p.k) || '')); m = row && /(\d{1,2})\s*(?:月|\/|\.|-)\s*(\d{1,2})/.exec(row.v || ''); }
+  if (!m || +m[1] < 1 || +m[1] > 12 || +m[2] < 1 || +m[2] > 31) return '';
+  return String(+m[1]).padStart(2, '0') + '-' + String(+m[2]).padStart(2, '0');
+}
 /* Explore のサムネイル（空欄なら登録済みの画像を使う） */
 function tileSource(key) {
   const d = D(), x = d.tiles[key] || {};
@@ -642,7 +655,12 @@ const DEFAULT = {
     notice:'サイト内の画像の無断転載・再配布はご遠慮ください。',
     contactText:'お仕事のご相談・ご連絡は、SNSのDMからお気軽にどうぞ。',
     contactLabel:'Xで連絡する', contactUrl:'https://x.com/RyuSe1_AI',
-    showLikes:true
+    showLikes:true, langToggle:true
+  },
+  birthday: {
+    enabled:true, title:'HAPPY BIRTHDAY',
+    text:'今日は{name}の誕生日です🎂\nみんなでお祝いしてね！', button:'プロフィールを見る',
+    soonDays:7, soonText:'もうすぐ{name}の誕生日（{date}・あと{days}日）'
   },
   nav: [
     {id:'home', label:'ホーム', en:'Home', icon:'home', show:true},
@@ -770,7 +788,7 @@ function mergeData(d) {
   if (!d || typeof d !== 'object') return base;
   d = JSON.parse(JSON.stringify(d));
   for (const k of Object.keys(base)) if (!(k in d)) d[k] = base[k];
-  for (const k of ['site','home','hero','tiles','pages','patreon','faq','guide','downloads','gate','share']) d[k] = Object.assign({}, base[k], d[k] || {});
+  for (const k of ['site','home','hero','tiles','pages','patreon','faq','guide','downloads','gate','share','birthday']) d[k] = Object.assign({}, base[k], d[k] || {});
   if (Array.isArray(d.nav)) base.nav.forEach((n, i) => { if (!d.nav.some(x => x && x.id === n.id)) d.nav.splice(Math.min(i, d.nav.length), 0, n); });   // 新しいページをメニューに追加
   for (const k of Object.keys(base.tiles)) d.tiles[k] = Object.assign({}, base.tiles[k], d.tiles[k] || {});
   for (const k of Object.keys(base.pages)) d.pages[k] = Object.assign({}, base.pages[k], d.pages[k] || {});
@@ -808,7 +826,7 @@ const charImg = c => imgOr(c.image, phChar(c));
    開き方：URLの末尾に ?edit を付ける  または  Ctrl + Shift + E
    変更 → 「HTMLを書き出し」→ ダウンロードされた index.html で差し替え
    ========================================================= */
-const ED = {tab:'images', dirty:false, sizeT:null, busy:false, lastStatus:null};
+const ED = {tab:'images', dirty:false, sizeT:null, busy:false, lastStatus:null, lang:'ja'};
 const OPEN = new WeakSet();
 
 
@@ -919,15 +937,22 @@ function pendingAssets() {
 function wrapField(label, control, hint) {
   return h('div', {class:'ed-field'}, label ? h('label', {class:'ed-lab'}, label) : null, control, hint ? h('p', {class:'ed-hint'}, hint) : null);
 }
+/* 英語モード：文章の項目は「〇〇_en」に保存（URL・日付・数値などは共通） */
+const NO_TR = /^(id|url|link|contactUrl|date|color|icon|char|type|image|file|size|twitter|tweet|likes|remember|interval|pos|fx|fy|fz|src|updated|bday|soonDays|tier|romaji|en)$/;
+const trKey = (key, o = {}) => ED.lang === 'en' && !o.noTr && !['number', 'date', 'color'].includes(o.type) && !NO_TR.test(key) && !/(Url|_en)$/.test(key) ? key + '_en' : key;
+const trLabel = label => h('span', {}, label, h('span', {class:'ed-en'}, 'EN'));
+function setVal(obj, k, v, tr) { if (tr && (v === '' || v == null)) delete obj[k]; else obj[k] = v; }
 function fText(label, obj, key, o = {}) {
-  const inp = h('input', {class:'ed-in', type:o.type || 'text', placeholder:o.ph || '', value:obj[key] ?? ''});
-  inp.addEventListener('input', () => { obj[key] = o.type === 'number' ? (+inp.value || 0) : inp.value; changed(); o.after && o.after(); });
-  return wrapField(label, inp, o.hint);
+  const k = trKey(key, o), tr = k !== key;
+  const inp = h('input', {class:'ed-in' + (tr ? ' tr' : ''), type:o.type || 'text', placeholder:tr ? (obj[key] || o.ph || '') : (o.ph || ''), value:obj[k] ?? ''});
+  inp.addEventListener('input', () => { setVal(obj, k, o.type === 'number' ? (+inp.value || 0) : inp.value, tr); changed(); o.after && o.after(); });
+  return wrapField(tr ? trLabel(label) : label, inp, o.hint);
 }
 function fArea(label, obj, key, o = {}) {
-  const ta = h('textarea', {class:'ed-in', placeholder:o.ph || '', rows:o.rows || 3, value:obj[key] ?? ''});
-  ta.addEventListener('input', () => { obj[key] = ta.value; changed(); o.after && o.after(); });
-  return wrapField(label, ta, o.hint);
+  const k = trKey(key, o), tr = k !== key;
+  const ta = h('textarea', {class:'ed-in' + (tr ? ' tr' : ''), placeholder:tr ? (obj[key] || o.ph || '') : (o.ph || ''), rows:o.rows || 3, value:obj[k] ?? ''});
+  ta.addEventListener('input', () => { setVal(obj, k, ta.value, tr); changed(); o.after && o.after(); });
+  return wrapField(tr ? trLabel(label) : label, ta, o.hint);
 }
 function fColor(label, obj, key, o = {}) {
   const inp = h('input', {class:'ed-in', type:'color', value:obj[key] || '#9a86ee'});
@@ -1169,6 +1194,7 @@ function tabSite() {
       h('div', {class:'ed-grid2'}, fText('サイト名', s, 'name'), fText('サブ表記', s, 'suffix', {ph:'STUDIO'})),
       fText('キャッチコピー（英字推奨）', s, 'tagline'),
       fArea('プロフィール文', s, 'bio', {rows:3}),
+      fCheck('右上に英語の切り替えボタン（EN / JP）を出す', s, 'langToggle'),
       fImage('アイコン画像', s, 'avatar', {max:512, folder:'site', focus:FOCUS.avatar()}),
       fImage('プロフィールのカバー画像', s, 'cover', {max:1000, folder:'site', focus:FOCUS.cover(), hint:'スマホメニューのプロフィール上部に表示します。'})),
     sec('フッター', 'news',
@@ -1376,9 +1402,33 @@ function tabHero() {
       h('div', {class:'ed-grid2'}, fText('ラベル', H, 'widgetLabel'), fText('切替間隔（秒）', H, 'interval', {type:'number'})))
   ];
 }
+function bdayField(c, refresh) {
+  const cur = /^(\d{2})-(\d{2})$/.exec(c.bday || '') || [];
+  const opt = (n, unit) => h('option', {value:String(n).padStart(2, '0')}, n + unit);
+  const m = h('select', {class:'ed-in'}, h('option', {value:''}, '月'), Array.from({length:12}, (_, i) => opt(i + 1, '月')));
+  const d = h('select', {class:'ed-in'}, h('option', {value:''}, '日'), Array.from({length:31}, (_, i) => opt(i + 1, '日')));
+  m.value = cur[1] || ''; d.value = cur[2] || '';
+  const hint = h('p', {class:'ed-hint'});
+  const paint = () => {
+    const auto = !c.bday && bdayOf(c);
+    hint.textContent = c.bday ? 'この日にトップでお祝いを表示します。' : auto ? `プロフィール表の「誕生日」から自動で ${+auto.slice(0, 2)}月${+auto.slice(3)}日 になっています。` : '未設定（プロフィール表に「誕生日」を書いても自動で読み取ります）';
+  };
+  const upd = () => { c.bday = m.value && d.value ? `${m.value}-${d.value}` : ''; if (!c.bday) delete c.bday; paint(); changed(); refresh && refresh(); };
+  m.addEventListener('change', upd); d.addEventListener('change', upd);
+  paint();
+  return h('div', {class:'ed-field'}, h('label', {class:'ed-lab'}, '誕生日（お祝い表示）'), h('div', {class:'ed-grid2'}, m, d), hint);
+}
 function tabChars() {
   const cs = D().characters;
+  const B = D().birthday = Object.assign({enabled:true, title:'HAPPY BIRTHDAY', text:'', button:'', soonDays:7, soonText:''}, D().birthday || {});
   return [
+    sec('誕生日のお祝い表示', 'star',
+      fCheck('誕生日の日に、トップページでお祝いを表示する', B, 'enabled'),
+      h('div', {class:'ed-grid2'}, fText('見出し', B, 'title', {ph:'HAPPY BIRTHDAY'}), fText('ボタンの文字', B, 'button', {hint:'空欄ならボタンなし'})),
+      fArea('お祝いメッセージ（共通）', B, 'text', {rows:2, hint:'{name} はキャラの名前に置き換わります。キャラごとに変えたい時は、各キャラの「お誕生日のメッセージ」に書いてください。'}),
+      h('div', {class:'ed-grid2'},
+        fText('「もうすぐ誕生日」を何日前から出すか', B, 'soonDays', {type:'number', hint:'0 にすると出しません'}),
+        fText('「もうすぐ誕生日」の文', B, 'soonText', {hint:'{name} 名前・{date} 日付・{days} 残り日数'}))),
     sec('キャラクター', 'users',
       h('p', {class:'ed-hint', style:'margin:-4px 0 10px'}, '縦長（3:4くらい）の画像がきれいに収まります。「顔の位置」で切り抜きの上下を調整できます。'),
       fList(cs, {
@@ -1396,7 +1446,12 @@ function tabChars() {
           fText('ひとことセリフ', c, 'catch'),
           fArea('紹介文', c, 'desc', {rows:4}),
           profileEditor(c),
-          fText('タグ（カンマ区切り）', c, 'tags', {ph:'元気, 甘党, ギター'})
+          fText('タグ（カンマ区切り）', c, 'tags', {ph:'元気, 甘党, ギター'}),
+          bdayField(c),
+          fImage('お誕生日の画像（任意）', c, 'bdayImage', {max:1400, folder:'characters', color:c.color, hint:'誕生日の日だけトップに表示します。空欄ならキャラの画像を使います。',
+            focus:{label:'お誕生日の画像の表示位置', ratio:'1', round:true, keys:fKeys('bdayImage'), src:() => imgSrc(c.bdayImage) || charImg(c)}}),
+          fArea('お誕生日のメッセージ（任意）', c, 'bdayMsg', {rows:2, ph:(D().birthday || {}).text || '', hint:'空欄なら共通のメッセージを使います。'}),
+          typeof previewBday === 'function' ? h('div', {class:'ed-row'}, h('button', {class:'ed-btn ghost', type:'button', html:icon('star') + 'お祝い表示をプレビューで見る', onclick:() => previewBday(c.id)})) : null
         ]
       }))
   ];
@@ -1407,10 +1462,11 @@ function profileEditor(c) {
   const draw = () => {
     box.innerHTML = '';
     c.profile.forEach((p, i) => {
-      const k = h('input', {class:'ed-in', value:p.k, placeholder:'項目'});
-      const v = h('input', {class:'ed-in', value:p.v, placeholder:'内容'});
-      k.addEventListener('input', () => { p.k = k.value; changed(); });
-      v.addEventListener('input', () => { p.v = v.value; changed(); });
+      const kk = trKey('k'), vk = trKey('v'), tr = kk !== 'k';
+      const k = h('input', {class:'ed-in' + (tr ? ' tr' : ''), value:p[kk] ?? '', placeholder:tr ? (p.k || 'Item') : '項目'});
+      const v = h('input', {class:'ed-in' + (tr ? ' tr' : ''), value:p[vk] ?? '', placeholder:tr ? (p.v || 'Value') : '内容'});
+      k.addEventListener('input', () => { setVal(p, kk, k.value, tr); changed(); });
+      v.addEventListener('input', () => { setVal(p, vk, v.value, tr); changed(); });
       box.append(h('div', {class:'ed-kv'}, k, v, h('button', {class:'ed-mini', type:'button', title:'削除', html:icon('close'), onclick:() => { c.profile.splice(i, 1); draw(); changed(); }})));
     });
     box.append(h('button', {class:'ed-btn ghost', type:'button', html:icon('plus') + 'プロフィール項目を追加', onclick:() => { c.profile.push({k:'', v:''}); draw(); changed(); }}));
@@ -2111,11 +2167,11 @@ function tabShare() {
       busy,
       h('p', {class:'ed-hint'}, '自動作成は、トップ画像1枚目（なければキャラの画像）とサイト名・説明文で作ります。文字や画像を変えたら、もう一度押すと作り直せます。アップロードした画像は横長（1200×630）に自動で切り抜きます。「表示位置」で見える範囲を変えると、カードを作り直します。')),
     sec('表示する文字', 'book',
-      fText('タイトル', sh, 'title', {ph:auto.title, after:refresh, hint:'空欄ならサイト名'}),
-      fArea('説明文', sh, 'description', {rows:3, ph:auto.desc, after:refresh, hint:'空欄ならプロフィール文。60〜100文字くらいがおすすめです。'}),
+      fText('タイトル', sh, 'title', {noTr:true, ph:auto.title, after:refresh, hint:'空欄ならサイト名'}),
+      fArea('説明文', sh, 'description', {noTr:true, rows:3, ph:auto.desc, after:refresh, hint:'空欄ならプロフィール文。60〜100文字くらいがおすすめです。'}),
       h('div', {class:'ed-grid2'},
-        fText('XのユーザーID', sh, 'twitter', {ph:auto.twitter || '@your_id', after:refresh}),
-        fText('サイトのURL', sh, 'url', {ph:auto.base || 'https://ユーザー名.github.io/リポジトリ名/', after:refresh})),
+        fText('XのユーザーID', sh, 'twitter', {noTr:true, ph:auto.twitter || '@your_id', after:refresh}),
+        fText('サイトのURL', sh, 'url', {noTr:true, ph:auto.base || 'https://ユーザー名.github.io/リポジトリ名/', after:refresh})),
       h('p', {class:'ed-hint'}, 'サイトのURLは、独自ドメインを使う時だけ入力してください（空欄なら自動）。'))
   ];
 }
@@ -2922,7 +2978,21 @@ function sendPreview() {
   const add = {};
   for (const [p, d] of ASSETS) if (!PV.sent.has(p)) { add[p] = d; PV.sent.add(p); }
   if (Object.keys(add).length) w.postMessage({type:'rs-assets', assets:add}, '*');
-  w.postMessage({type:'rs-preview', data:S.data}, '*');
+  w.postMessage({type:'rs-preview', data:S.data, lang:ED.lang, bday:PV.bday || ''}, '*');
+}
+/* 誕生日のお祝い表示をプレビューで確認（別のタブを開くと元に戻る） */
+function previewBday(id) {
+  PV.bday = id;
+  previewRoute('#/home'); const sel = $('#pvRoute'); if (sel) sel.value = '#/home';
+  sendPreview(); showPreview(true);
+  toast('プレビューにお祝い表示を出しました（別のタブを開くと元に戻ります）');
+}
+/* 編集する言語（日本語 / English） */
+function setEditLang(l) {
+  ED.lang = l;
+  $$('.ad-lang button').forEach(b => b.classList.toggle('on', b.dataset.lang === l));
+  document.body.classList.toggle('ed-lang-en', l === 'en');
+  drawMain(); sendPreview();
 }
 function schedulePreview() { clearTimeout(PV.timer); PV.timer = setTimeout(sendPreview, 220); }
 function previewRoute(r) {
@@ -3018,8 +3088,9 @@ function imageCard(sl) {
   return card;
 }
 function titleInput(sl) {
-  const inp = h('input', {class:'im-title', value:sl.obj[sl.titleKey] || '', placeholder:'タイトルを入力', title:'クリックでタイトルを変更'});
-  inp.addEventListener('input', () => { sl.obj[sl.titleKey] = inp.value; changed(); });
+  const k = trKey(sl.titleKey), tr = k !== sl.titleKey;
+  const inp = h('input', {class:'im-title' + (tr ? ' tr' : ''), value:sl.obj[k] || '', placeholder:tr ? (sl.obj[sl.titleKey] || 'Title') : 'タイトルを入力', title:'クリックでタイトルを変更'});
+  inp.addEventListener('input', () => { setVal(sl.obj, k, inp.value, tr); changed(); });
   return inp;
 }
 function slotFocusCSS(sl) {
@@ -3143,6 +3214,9 @@ function initLayout() {
       h('span', {class:'ad-src', id:'adSrc'}, '未読み込み'),
       h('span', {class:'ed-dirty', id:'adDirty'}, '未公開の変更あり'),
       h('span', {class:'grow'}),
+      h('div', {class:'seg ad-lang', title:'編集する言語'},
+        h('button', {type:'button', class:'on', 'data-lang':'ja', onclick:() => setEditLang('ja')}, '日本語'),
+        h('button', {type:'button', 'data-lang':'en', onclick:() => setEditLang('en')}, 'English')),
       h('button', {class:'ed-btn ghost', type:'button', title:'最新の内容を読み込み直す', html:icon('download') + '<span class="hide-sp">読み込み直す</span>', onclick:reloadData}),
       h('button', {class:'ed-btn ghost', type:'button', title:'index.html と新しい画像をZIPで保存（手動アップ用）', html:icon('folder') + '<span class="hide-sp">ZIP</span>', onclick:() => S.data ? exportZip() : null}),
       h('button', {class:'ed-btn ghost', type:'button', title:'バックアップ（JSON）を保存', html:icon('book') + '<span class="hide-sp">バックアップ</span>', onclick:() => S.data ? exportJSON() : null}),
@@ -3176,6 +3250,7 @@ function drawMain() {
   const main = $('#adMain'); main.innerHTML = '';
   $('.ad-body').dataset.tab = ED.tab;
   main.append(h('div', {class:'ed-status', id:'edPubStatus'}));
+  if (ED.lang === 'en' && S.data) main.append(h('div', {class:'ed-info ed-en-info', html:'<b>English モード：</b>ここで入力した文章は、サイトを英語（EN）で表示した時に使われます。空欄の項目は日本語のまま表示されます。<br>URL・日付・画像・色などは日本語と共通です。'}));
   if (!S.data) {
     main.append(h('div', {class:'card ad-load'},
       h('span', {class:'logo-mark', html:LOGO_SVG}),
@@ -3195,6 +3270,7 @@ function drawMain() {
   main.scrollTop = 0;
 }
 function drawAll() {
+  if (PV.bday) { PV.bday = ''; sendPreview(); }
   drawSide(); drawMain(); updateDirty();
   const src = $('#adSrc'); if (src) src.textContent = S.data ? `読み込み元：${S.source}` : '未読み込み';
   if (TAB_ROUTE[ED.tab]) { previewRoute(TAB_ROUTE[ED.tab]); const sel = $('#pvRoute'); if (sel) sel.value = TAB_ROUTE[ED.tab]; }

@@ -171,6 +171,24 @@ button,a,input,textarea{touch-action:manipulation}button,a{ -webkit-tap-highligh
 .masonry{display:grid;grid-template-columns:repeat(auto-fill,minmax(max(260px,calc((100% - 48px) / 3)),1fr));column-gap:24px;align-items:start}.g-item{display:block;width:100%;position:relative;break-inside:avoid;text-align:left;margin-bottom:26px}
 .g-item img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;background:var(--holo-soft),var(--surface-2);border-radius:var(--r-lg);box-shadow:var(--shadow);transition:transform .35s,box-shadow .35s}.g-item:hover img{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
 .g-lk{font-style:normal;margin-left:8px;color:var(--accent)}.g-sort{display:inline-flex;margin-left:auto;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:3px}.g-sort button{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:5px 13px;border-radius:99px;color:var(--text-2)}.g-sort button .ic{width:13px;height:13px}.g-sort button.on{background:var(--text);color:var(--bg)}.lb-post{display:inline-flex;align-items:center;gap:7px;flex:none;font-size:12px;color:#fff;padding:7px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.35);transition:background .2s}.lb-post:hover{background:rgba(255,255,255,.14)}.lb-post .ic{width:13px;height:13px}
+.lang-btn{font:700 11px var(--ff-en);letter-spacing:.06em}
+.bday-wrap{display:grid;gap:14px}
+.bday{position:relative;overflow:hidden;display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;padding:24px 32px 24px 24px;border-radius:28px;background:linear-gradient(120deg,color-mix(in srgb,var(--c) 20%,var(--surface-solid)),color-mix(in srgb,#f2c3ea 26%,var(--surface-solid)) 58%,color-mix(in srgb,#9ed7ff 24%,var(--surface-solid)));border:1px solid color-mix(in srgb,var(--c) 34%,var(--line));box-shadow:var(--shadow)}
+.bday-fx{position:absolute;inset:-20px;pointer-events:none;opacity:.55;background:radial-gradient(circle,#fff 0 2px,transparent 3px) 8% 22%/120px 90px,radial-gradient(circle,color-mix(in srgb,var(--c) 70%,#fff) 0 3px,transparent 4px) 60% 70%/150px 110px,radial-gradient(circle,#f2c3ea 0 2.5px,transparent 3.5px) 30% 10%/170px 130px,radial-gradient(circle,#9ed7ff 0 2px,transparent 3px) 80% 40%/110px 140px;animation:bdayFx 9s linear infinite}
+@keyframes bdayFx{to{transform:translateY(40px)}}
+.bday-img{position:relative;width:140px;height:140px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 0 0 3px var(--ci,var(--c)),0 14px 30px rgba(40,40,90,.18);background:var(--holo-soft),var(--surface-2)}
+.bday-img img{width:100%;height:100%;object-fit:cover}
+.bday-body{position:relative;min-width:0}.bday-num{position:absolute;right:34px;top:50%;transform:translateY(-50%);font:700 clamp(64px,9vw,128px)/1 var(--ff-en);letter-spacing:-.03em;color:color-mix(in srgb,var(--c) 30%,transparent);pointer-events:none;white-space:nowrap}
+.bday-eyebrow{font:700 12px var(--ff-en);letter-spacing:.24em;color:var(--ci,var(--c))}
+.bday h2{font:700 32px/1.25 var(--ff-ja);margin:6px 0 8px}.bday h2 small{display:block;font:600 13px var(--ff-en);letter-spacing:.12em;color:var(--text-2);margin-bottom:2px}
+.bday p{font-size:13.5px;line-height:1.9;color:var(--text-2);margin:0 0 14px}
+.bday-soon{display:flex;flex-wrap:wrap;gap:8px}
+.bday-soon button{font-size:12.5px;padding:8px 15px;border-radius:99px;background:color-mix(in srgb,var(--c) 13%,var(--surface));border:1px solid color-mix(in srgb,var(--c) 40%,var(--line));color:var(--text)}
+.cc-bday{position:absolute;top:10px;right:10px;z-index:2;font-size:22px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25));animation:bdayPop 2.4s ease-in-out infinite}
+@keyframes bdayPop{50%{transform:scale(1.15) rotate(-6deg)}}
+.cm-bday{font-weight:700;font-size:13px;color:var(--ci,var(--c));margin:-6px 0 2px}
+@media(max-width:860px){.bday-num{display:none}}@media(max-width:640px){.bday{grid-template-columns:1fr;justify-items:center;text-align:center;gap:14px;padding:24px 20px}.bday-img{width:112px;height:112px}.bday h2{font-size:26px}}
+@media(prefers-reduced-motion:reduce){.bday-fx,.cc-bday{animation:none}}
 .g-cap{display:block;position:relative;padding:12px 2px;border-bottom:1px solid var(--line)}.g-cap b{font:500 15px var(--ff-en)}.g-cap small{font:10.5px var(--ff-en);color:var(--muted);float:right;padding-top:4px}
 .g-dots{position:absolute;top:12px;right:12px;display:flex;gap:4px;z-index:1}.g-dots i{width:10px;height:10px;border:2px solid #fff;border-radius:50%;background:var(--c)}
 .empty{padding:40px 20px;text-align:center;font-size:13px;color:var(--muted)}.panel{padding:28px}.panel .tl li:first-child{padding-top:15px}
@@ -501,6 +519,13 @@ const fStyle = (o, k, d) => focusCSS({}, fBase(o, k, d));
 const charFocusBase = c => ({x:fnum(c && c.fx, 50), y:fnum(c && c.pos, 25), z:fnum(c && c.fz, 1)});
 const charFocus = c => focusCSS({}, charFocusBase(c));
 const oshiFocusBase = x => { const c = charById(x.char); return x.image ? {x:50, y:50, z:1} : charFocusBase(c); };
+/* 誕生日（MM-DD）。未設定ならプロフィール表の「誕生日」から読み取る */
+function bdayOf(c) {
+  let m = /^(\d{1,2})-(\d{1,2})$/.exec(String((c && c.bday) || '').trim());
+  if (!m) { const row = ((c && c.profile) || []).find(p => /誕生日|birthday/i.test((p && p.k) || '')); m = row && /(\d{1,2})\s*(?:月|\/|\.|-)\s*(\d{1,2})/.exec(row.v || ''); }
+  if (!m || +m[1] < 1 || +m[1] > 12 || +m[2] < 1 || +m[2] > 31) return '';
+  return String(+m[1]).padStart(2, '0') + '-' + String(+m[2]).padStart(2, '0');
+}
 /* Explore のサムネイル（空欄なら登録済みの画像を使う） */
 function tileSource(key) {
   const d = D(), x = d.tiles[key] || {};
@@ -553,7 +578,12 @@ const DEFAULT = {
     notice:'サイト内の画像の無断転載・再配布はご遠慮ください。',
     contactText:'お仕事のご相談・ご連絡は、SNSのDMからお気軽にどうぞ。',
     contactLabel:'Xで連絡する', contactUrl:'https://x.com/RyuSe1_AI',
-    showLikes:true
+    showLikes:true, langToggle:true
+  },
+  birthday: {
+    enabled:true, title:'HAPPY BIRTHDAY',
+    text:'今日は{name}の誕生日です🎂\nみんなでお祝いしてね！', button:'プロフィールを見る',
+    soonDays:7, soonText:'もうすぐ{name}の誕生日（{date}・あと{days}日）'
   },
   nav: [
     {id:'home', label:'ホーム', en:'Home', icon:'home', show:true},
@@ -681,7 +711,7 @@ function mergeData(d) {
   if (!d || typeof d !== 'object') return base;
   d = JSON.parse(JSON.stringify(d));
   for (const k of Object.keys(base)) if (!(k in d)) d[k] = base[k];
-  for (const k of ['site','home','hero','tiles','pages','patreon','faq','guide','downloads','gate','share']) d[k] = Object.assign({}, base[k], d[k] || {});
+  for (const k of ['site','home','hero','tiles','pages','patreon','faq','guide','downloads','gate','share','birthday']) d[k] = Object.assign({}, base[k], d[k] || {});
   if (Array.isArray(d.nav)) base.nav.forEach((n, i) => { if (!d.nav.some(x => x && x.id === n.id)) d.nav.splice(Math.min(i, d.nav.length), 0, n); });   // 新しいページをメニューに追加
   for (const k of Object.keys(base.tiles)) d.tiles[k] = Object.assign({}, base.tiles[k], d.tiles[k] || {});
   for (const k of Object.keys(base.pages)) d.pages[k] = Object.assign({}, base.pages[k], d.pages[k] || {});
@@ -717,7 +747,62 @@ const S = {
   slide:0, heroTimer:null, clockTimer:null, heroPaused:false,
   lb:null
 };
-const D = () => S.data;
+/* ---------- 日本語 / English ---------- */
+S.lang = (() => {
+  if (window.RS_PREVIEW) return 'ja';
+  try { const q = new URLSearchParams(location.search).get('lang'); if (q === 'en' || q === 'ja') { localStorage.setItem('rs-lang', q); return q; } } catch (e) {}
+  try { const v = localStorage.getItem('rs-lang'); if (v === 'en' || v === 'ja') return v; } catch (e) {}
+  return /^ja/i.test(navigator.language || 'ja') ? 'ja' : 'en';
+})();
+const LANG = () => (S.data && S.data.site && S.data.site.langToggle === false) ? 'ja' : S.lang;
+const I18N = {
+  'すべて':'All', '新しい順':'Newest', '人気順':'Popular', '該当する作品がありません':'No works found',
+  'お知らせはまだありません':'No news yet', '詳しく見る':'Learn more', '本文へスキップ':'Skip to content',
+  'Patreonで支援する':'Support on Patreon', 'コース':'Tiers', 'おすすめ':'Recommended', 'このコースで参加':'Join this tier',
+  '推しプラン':'Oshi plans', '限定コンテンツのプレビュー':'Members-only previews', '連絡する':'Contact',
+  '質問はまだありません':'No questions yet', 'OKなこと':'You are welcome to', 'ご遠慮いただきたいこと':'Please do not',
+  'ダウンロード':'Download', '配布中の画像はまだありません':'No downloads yet', '年齢確認':'Age verification', 'はい':'Yes', 'いいえ':'No',
+  'このページを見るには年齢の確認が必要です。':'Age verification is required to view this page.', '確認する':'Verify',
+  'ポストを見る':'View post', '閉じる':'Close', '前へ':'Previous', '次へ':'Next', 'メニューを開く':'Open menu', 'メニュー':'Menu',
+  'ライト/ダーク切替':'Toggle light/dark', '絞り込み':'Filter', '並び順':'Sort', 'ホーム':'Home',
+  'PC壁紙':'PC wallpaper', 'スマホ壁紙':'Phone wallpaper', 'アイコン':'Icon', 'その他':'Other',
+  'アップデート':'Update', 'お知らせ':'News', '新作':'New', 'イベント':'Event', 'メンテナンス':'Maintenance',
+  '名前':'Name', '誕生日':'Birthday', '性格':'Personality', '好きな食べ物':'Favorite food', '身長':'Height', '好きなもの':'Likes', '趣味':'Hobbies', '特技':'Skills',
+  '今日はお誕生日！':'Today is my birthday!', 'プロフィールを見る':'View profile'
+};
+const t = s => (LANG() === 'en' && I18N[s]) || s;
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const fmtMD = md => { const [m, d] = String(md).split('-').map(Number); return LANG() === 'en' ? `${MONTHS[m - 1]} ${d}` : `${m}月${d}日`; };
+/* 英語表示では「〇〇_en」に入れた文章を使う（空欄なら日本語のまま） */
+function localize(d) {
+  const c = JSON.parse(JSON.stringify(d));
+  const walk = o => {
+    if (Array.isArray(o)) { o.forEach(walk); return; }
+    if (!o || typeof o !== 'object') return;
+    for (const k of Object.keys(o)) {
+      if (k.endsWith('_en')) { if (typeof o[k] === 'string' && o[k].trim()) o[k.slice(0, -3)] = o[k]; }
+      else walk(o[k]);
+    }
+  };
+  walk(c);
+  const cap = x => String(x || '').toLowerCase().replace(/(^|[\s\/-])([a-z])/g, (m, a, b) => a + b.toUpperCase());
+  (c.nav || []).forEach(n => { if (!(n.label_en || '').trim() && n.en) n.label = n.en; });
+  Object.values(c.pages || {}).forEach(p => { if (p && !(p.title_en || '').trim() && p.en) p.title = cap(p.en); });
+  (c.characters || []).forEach(ch => {
+    if (!(ch.name_en || '').trim() && ch.romaji) ch.name = cap(ch.romaji);
+    (ch.profile || []).forEach(p => { if (!(p.k_en || '').trim()) p.k = I18N[p.k] || p.k; });
+  });
+  return c;
+}
+const D = () => {
+  if (LANG() !== 'en') return S.data;
+  if (S.dataEnSrc !== S.data) { S.dataEnSrc = S.data; S.dataEn = localize(S.data); }
+  return S.dataEn;
+};
+function setLang(l) {
+  S.lang = l; try { localStorage.setItem('rs-lang', l); } catch (e) {}
+  const y = window.scrollY; closeModal(); render(); window.scrollTo(0, y);
+}
 const navItem = id => D().nav.find(n => n.id === id) || {id, label:id, en:id, icon:'star', show:true};
 const charById = id => D().characters.find(c => c.id === id);
 const fmtDate = s => String(s || '').replace(/-/g, '.');
@@ -735,12 +820,13 @@ function logoHTML() {
 }
 function headerHTML() {
   const nav = D().nav.filter(n => n.show && n.header !== false);
-  return `<a class="skip-link" href="#main" data-act="skip">本文へスキップ</a><header class="hdr"><div class="hdr-in">
+  return `<a class="skip-link" href="#main" data-act="skip">${t('本文へスキップ')}</a><header class="hdr"><div class="hdr-in">
     ${logoHTML()}
     <nav class="gnav" aria-label="メイン">${nav.map((n,i) => `<a href="#/${n.id}" data-nav="${n.id}"><span class="nav-num">${String(i+1).padStart(2,'0')}</span>${esc(n.en || n.label)}</a>`).join('')}</nav>
     <div class="hdr-tools">
-      <button class="ibtn theme-btn" data-act="theme" aria-label="ライト/ダーク切替">${icon('moon','i-moon')}${icon('sun','i-sun')}</button>
-      <button class="ibtn menu-btn" data-act="menu" aria-label="メニューを開く" aria-expanded="false" aria-controls="drawer">${icon('menu')}</button>
+      ${S.data.site.langToggle !== false ? `<button class="ibtn lang-btn" data-act="lang" lang="${LANG() === 'en' ? 'ja' : 'en'}" aria-label="${LANG() === 'en' ? '日本語で表示' : 'Show in English'}">${LANG() === 'en' ? 'JP' : 'EN'}</button>` : ''}
+      <button class="ibtn theme-btn" data-act="theme" aria-label="${t('ライト/ダーク切替')}">${icon('moon','i-moon')}${icon('sun','i-sun')}</button>
+      <button class="ibtn menu-btn" data-act="menu" aria-label="${t('メニューを開く')}" aria-expanded="false" aria-controls="drawer">${icon('menu')}</button>
     </div>
   </div></header>`;
 }
@@ -777,12 +863,12 @@ function pageHead(key, iconName) {
   return `<section class="card page-head"><span class="eyebrow">${icon(iconName)}${esc(p.en || '')}</span><h1>${esc(p.title || '')}</h1>${p.lead ? `<p>${esc(p.lead)}</p>` : ''}</section>`;
 }
 function newsList(items) {
-  if (!items.length) return `<div class="empty">お知らせはまだありません</div>`;
+  if (!items.length) return `<div class="empty">${t('お知らせはまだありません')}</div>`;
   return `<ul class="tl">${items.map(n => {
     const c = NEWS_CATS[n.cat] || NEWS_CATS.info;
-    const t = esc(n.text);
-    const txt = n.link ? `<a href="${esc(safeUrl(n.link))}"${extAttr(n.link)}>${t}</a>` : t;
-    return `<li style="--cc:${c.color}"><time datetime="${esc(n.date)}">${esc(fmtDate(n.date))}</time><span class="cat">${esc(c.label)}</span><p class="txt">${txt}</p></li>`;
+    const tx = esc(n.text);
+    const txt = n.link ? `<a href="${esc(safeUrl(n.link))}"${extAttr(n.link)}>${tx}</a>` : tx;
+    return `<li style="--cc:${c.color}"><time datetime="${esc(n.date)}">${esc(fmtDate(n.date))}</time><span class="cat">${esc(t(c.label))}</span><p class="txt">${txt}</p></li>`;
   }).join('')}</ul>`;
 }
 function quickCard(x) {
@@ -795,9 +881,41 @@ function quickCard(x) {
 /* =========================================================
    pages
    ========================================================= */
+/* ---------- 誕生日のお祝い ---------- */
+function bdayInfo() {
+  const B = D().birthday || {}, cs = D().characters;
+  if (B.enabled === false || !cs.length) return {today:[], soon:[]};
+  const raw = S.data.characters || [];
+  const list = cs.map(c => ({c, md:bdayOf(raw.find(r => r.id === c.id) || c)}));
+  if (S.bdayTest) { const x = list.find(x => x.c.id === S.bdayTest); return {today:x ? [{c:x.c, md:x.md || todayMD()}] : [], soon:[]}; }
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const until = md => { const [m, d] = md.split('-').map(Number); let tt = new Date(now.getFullYear(), m - 1, d); if (tt < now) tt = new Date(now.getFullYear() + 1, m - 1, d); return Math.round((tt - now) / 86400000); };
+  const withDays = list.filter(x => x.md).map(x => Object.assign(x, {days:until(x.md)}));
+  const n = Math.max(0, +B.soonDays || 0);
+  return {today:withDays.filter(x => x.days === 0), soon:withDays.filter(x => x.days > 0 && x.days <= n).sort((a, b) => a.days - b.days)};
+}
+const todayMD = () => { const d = new Date(); return String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+const isBday = c => bdayInfo().today.some(x => x.c.id === c.id);
+function birthdayHTML() {
+  const B = D().birthday || {}, {today, soon} = bdayInfo();
+  const fill = (s, x) => String(s || '').replace(/\{name\}/g, x.c.name).replace(/\{date\}/g, x.md ? fmtMD(x.md) : '').replace(/\{days\}/g, x.days ?? '');
+  if (today.length) return `<div class="bday-wrap">${today.map(x => { const c = x.c;
+    const img = c.bdayImage ? `<img src="${esc(imgSrc(c.bdayImage))}" alt="${esc(c.name)}" style="${fStyle(c, 'bdayImage')}">` : `<img src="${esc(charImg(c))}" alt="${esc(c.name)}" style="${charFocus(c)}">`;
+    return `<section class="bday" style="${cv(c.color)}" aria-label="${esc(B.title || 'HAPPY BIRTHDAY')}">
+      <span class="bday-fx" aria-hidden="true"></span>${x.md ? `<span class="bday-num" aria-hidden="true">${esc(x.md.replace('-', '.'))}</span>` : ''}
+      <div class="bday-img">${img}</div>
+      <div class="bday-body"><span class="bday-eyebrow">🎂 ${esc(B.title || 'HAPPY BIRTHDAY')}</span>
+        <h2>${x.md ? `<small>${esc(fmtMD(x.md))}</small>` : ''}${esc(c.name)}</h2>
+        <p>${esc(fill(c.bdayMsg || B.text, x)).replace(/\n/g, '<br>')}</p>
+        ${B.button ? `<button class="btn" data-char="${esc(c.id)}">${esc(B.button)}${icon('arrow')}</button>` : ''}</div>
+    </section>`; }).join('')}</div>`;
+  if (soon.length && B.soonText) return `<div class="bday-soon">${soon.map(x => `<button data-char="${esc(x.c.id)}" style="${cv(x.c.color)}">🎂 ${esc(fill(B.soonText, x))}</button>`).join('')}</div>`;
+  return '';
+}
 function museOfToday() {
   const cs = D().characters;
   if (!cs.length) return null;
+  const bd = bdayInfo().today[0]; if (bd) return bd.c;
   const day = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
   return cs[day % cs.length];
 }
@@ -826,7 +944,7 @@ function heroCapHTML(s) {
   const title = s && s.title ? s.title : `${D().site.name} ${D().site.suffix}`;
   return `<h1>${esc(title)}</h1>
     ${s && s.sub ? `<p>${esc(s.sub)}</p>` : ''}
-    <div class="hero-actions">${s && s.link ? `<a class="hero-link" href="${esc(safeUrl(s.link))}"${extAttr(s.link)}>${esc(s.linkLabel || '詳しく見る')}${icon('arrow')}</a>`:''}
+    <div class="hero-actions">${s && s.link ? `<a class="hero-link" href="${esc(safeUrl(s.link))}"${extAttr(s.link)}>${esc(s.linkLabel || t('詳しく見る'))}${icon('arrow')}</a>`:''}
     ${(!s || s.link !== '#/gallery') && D().home.heroLink2 ? `<a class="text-link" href="#/gallery">${esc(D().home.heroLink2)}${icon('arrow')}</a>`:''}</div>`;
 }
 function tilesHTML() {
@@ -844,7 +962,7 @@ function homeHTML() {
   const d=D(), s=d.site, hm=d.home;
   const pins=d.sns.filter(x=>x.pin&&x.url).slice(0,4);
   const news=sortedNews().slice(0,4), fresh=homeWorks(), m=museOfToday();
-  return `${heroHTML()}
+  return `${birthdayHTML()}${heroHTML()}
     <section class="studio-strip" aria-label="スタジオについて">
       <div class="strip-intro"><span class="si-av"><i><img src="${esc(imgOr(s.avatar,phAvatar()))}" alt="" style="${fStyle(s, 'avatar')}"></i></span><div><b>${esc(s.name)} ${esc(s.suffix)}</b><p>${esc(s.bio)}</p></div></div>
       ${snsRow()}
@@ -867,12 +985,12 @@ function charactersHTML() {
   <section class="char-grid">${cs.map((c, i) => `<button class="char-card" data-char="${esc(c.id)}" style="${cv(c.color)}">
       <span class="cc-bar"></span>
       <div class="cc-img"><img src="${esc(charImg(c))}" alt="${esc(c.name)}" loading="lazy" style="${charFocus(c)}"></div>
-      <div class="cc-plate"><span class="cc-no">${String(i+1).padStart(2,'0')}</span><b>${esc(c.name)}</b><small>${esc(c.romaji)}</small></div>
+      <div class="cc-plate"><span class="cc-no">${String(i+1).padStart(2,'0')}</span><b>${esc(c.name)}</b><small>${esc(c.romaji)}</small></div>${isBday(c) ? '<span class="cc-bday" title="HAPPY BIRTHDAY">🎂</span>' : ''}
     </button>`).join('')}</section>`;
 }
 const likesOf = g => Math.max(0, parseInt(g.likes, 10) || 0);
 const hasLikes = () => D().gallery.some(g => likesOf(g) > 0);
-const fmtLikes = n => n >= 10000 ? (n / 10000).toFixed(n >= 100000 ? 0 : 1).replace(/\.0$/, '') + '万' : n.toLocaleString();
+const fmtLikes = n => LANG() === 'en' ? (n >= 1000 ? (n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '') + 'K' : String(n)) : n >= 10000 ? (n / 10000).toFixed(n >= 100000 ? 0 : 1).replace(/\.0$/, '') + '万' : n.toLocaleString();
 function galleryFiltered() {
   const f = S.galFilter;
   const list = sortedGallery().filter(g => f === 'all' || (g.chars || []).includes(f));
@@ -883,10 +1001,10 @@ function galleryHTML() {
   const cs = D().characters.filter(c => D().gallery.some(g => (g.chars || []).includes(c.id)));
   const list = galleryFiltered();
   const head = `${pageHead('gallery', 'image')}
-  <div class="chips" role="group" aria-label="絞り込み">
-    <button class="chip${S.galFilter === 'all' ? ' on' : ''}" data-filter="all">すべて <span class="en">${D().gallery.length}</span></button>
+  <div class="chips" role="group" aria-label="${t('絞り込み')}">
+    <button class="chip${S.galFilter === 'all' ? ' on' : ''}" data-filter="all">${t('すべて')} <span class="en">${D().gallery.length}</span></button>
     ${cs.map(c => `<button class="chip${S.galFilter === c.id ? ' on' : ''}" data-filter="${esc(c.id)}" style="${cv(c.color)}"><i></i>${esc(c.name)}</button>`).join('')}
-    ${hasLikes() ? `<span class="g-sort" role="group" aria-label="並び順"><button class="${S.galSort !== 'likes' ? 'on' : ''}" data-gsort="new">新しい順</button><button class="${S.galSort === 'likes' ? 'on' : ''}" data-gsort="likes">${icon('heart')}人気順</button></span>` : ''}
+    ${hasLikes() ? `<span class="g-sort" role="group" aria-label="${t('並び順')}"><button class="${S.galSort !== 'likes' ? 'on' : ''}" data-gsort="new">${t('新しい順')}</button><button class="${S.galSort === 'likes' ? 'on' : ''}" data-gsort="likes">${icon('heart')}${t('人気順')}</button></span>` : ''}
   </div>`;
   const item = g => `<button class="g-item" data-gal="${esc(g.id)}">
       <img src="${esc(galImg(g))}" alt="${esc(g.title)}" loading="lazy" style="${fStyle(g)}">
@@ -895,7 +1013,7 @@ function galleryHTML() {
     </button>`;
   // 左→右、上から順に並べる（行ごとにそろえる）
   return `${head}
-  ${list.length ? `<section class="masonry">${list.map(item).join('')}</section>` : `<div class="card empty">該当する作品がありません</div>`}`;
+  ${list.length ? `<section class="masonry">${list.map(item).join('')}</section>` : `<div class="card empty">${t('該当する作品がありません')}</div>`}`;
 }
 function patreonHTML() {
   const p = D().patreon;
@@ -907,26 +1025,26 @@ function patreonHTML() {
   const oshi = (o.items || []).filter(x => x && (x.name || x.char));
   return `<section class="card pt-banner">
     <div><span class="eyebrow">${icon('crown')}PATREON MEMBERS</span><h1>${esc(p.title)}</h1><p>${esc(p.lead)}</p>
-    <div class="pt-actions">${url ? `<a class="btn btn-patreon" href="${esc(url)}"${extAttr(url)}>${icon('patreon')}${esc(p.cta || 'Patreonで支援する')}${icon('arrow')}</a>` : ''}
+    <div class="pt-actions">${url ? `<a class="btn btn-patreon" href="${esc(url)}"${extAttr(url)}>${icon('patreon')}${esc(p.cta || t('Patreonで支援する'))}${icon('arrow')}</a>` : ''}
     ${navItem('faq').show ? `<a class="text-link" href="#/faq">${esc(navItem('faq').label)}${icon('arrow')}</a>` : ''}</div></div>
     <div class="pt-art">${art}<div class="lockc">${icon('lock')}</div></div>
   </section>
-  ${(p.tiers || []).length ? `<h3 class="sec-t">${esc(p.courseTitle || 'コース')}</h3>
+  ${(p.tiers || []).length ? `<h3 class="sec-t">${esc(p.courseTitle || t('コース'))}</h3>
   <section class="tier-grid">${p.tiers.map(t => { const [jp, ...rest] = String(t.name || '').split('/'); const en = rest.join('/').trim(); return `<div class="card tier${t.best ? ' best' : ''}" style="--c:${esc(t.color || '#9a86ee')}">
-      ${t.best ? '<span class="best-tag">おすすめ</span>' : ''}
+      ${t.best ? `<span class="best-tag">${LANG() === 'en' ? 'Recommended' : 'おすすめ'}</span>` : ''}
       <span class="tier-ic">${icon(t.icon || 'star')}</span>
       <h4>${esc(jp.trim())}${en ? `<small>${esc(en)}</small>` : ''}</h4><div class="price">${esc(t.price)}</div>
       ${t.badge ? `<span class="tier-badge">${esc(t.badge)}</span>` : ''}
       <ul>${String(t.perks || '').split('\n').filter(Boolean).map(x => `<li>${icon('check')}<span>${esc(x)}</span></li>`).join('')}</ul>
-      <a class="tier-join" ${join(t.url)}>このコースで参加${icon('arrow')}</a>
+      <a class="tier-join" ${join(t.url)}>${LANG() === 'en' ? 'Join this tier' : 'このコースで参加'}${icon('arrow')}</a>
     </div>`; }).join('')}</section>` : ''}
-  ${oshi.length ? `<h3 class="sec-t">${esc(o.title || '推しプラン')}${o.price ? `<small>各 ${esc(o.price)}</small>` : ''}</h3>
+  ${oshi.length ? `<h3 class="sec-t">${esc(o.title || t('推しプラン'))}${o.price ? `<small>${LANG() === 'en' ? `${esc(o.price)} each` : `各 ${esc(o.price)}`}</small>` : ''}</h3>
   ${o.lead ? `<p class="oshi-lead">${esc(o.lead)}</p>` : ''}
   <section class="oshi-grid">${oshi.map(x => { const c = charById(x.char); return `<a class="oshi" ${join(x.url)} style="${cv(c ? c.color : '#9a86ee')}">
       <span class="oshi-img"><img src="${esc(x.image ? imgOr(x.image, phArt('oshi' + x.name, '', '')) : c ? charImg(c) : phArt('oshi' + x.name, '', ''))}" alt="${esc(c ? c.name : '')}" loading="lazy" style="${focusCSS(x, oshiFocusBase(x))}"></span>
       <span class="oshi-t"><b>${esc(x.name)}</b>${x.text ? `<small>${esc(x.text)}</small>` : ''}</span>
       <span class="oshi-go">${icon('arrow')}</span></a>`; }).join('')}</section>` : ''}
-  ${pv.length ? `<h3 class="sec-t">${esc(p.previewTitle || '限定コンテンツのプレビュー')}</h3>
+  ${pv.length ? `<h3 class="sec-t">${esc(p.previewTitle || t('限定コンテンツのプレビュー'))}</h3>
   <section class="lock-grid">${pv.map((x, i) => `<a class="lock-item" href="${esc(url || '#/patreon')}"${extAttr(url)}>
       <img src="${esc(imgOr(x.image, phArt('pv'+i, '', SOFT[i % SOFT.length])))}" alt="" loading="lazy" style="${fStyle(x)}">
       <span class="lock-in"><span class="lk">${icon('lock')}</span><b>${esc(x.title)}</b>${x.tier ? `<small>${esc(x.tier)}</small>` : ''}</span>
@@ -939,8 +1057,8 @@ function newsHTML() {
   const list = all.filter(n => S.newsFilter === 'all' || n.cat === S.newsFilter);
   return `${pageHead('news', 'bell')}
   <div class="chips">
-    <button class="chip${S.newsFilter === 'all' ? ' on' : ''}" data-newsfilter="all">すべて</button>
-    ${used.map(k => `<button class="chip${S.newsFilter === k ? ' on' : ''}" data-newsfilter="${k}" style="--c:${NEWS_CATS[k].color}"><i></i>${esc(NEWS_CATS[k].label)}</button>`).join('')}
+    <button class="chip${S.newsFilter === 'all' ? ' on' : ''}" data-newsfilter="all">${t('すべて')}</button>
+    ${used.map(k => `<button class="chip${S.newsFilter === k ? ' on' : ''}" data-newsfilter="${k}" style="--c:${NEWS_CATS[k].color}"><i></i>${esc(t(NEWS_CATS[k].label))}</button>`).join('')}
   </div>
   <section class="card panel">${newsList(list)}</section>`;
 }
@@ -950,7 +1068,7 @@ function linksHTML() {
   return `${pageHead('links', 'link')}
   <section class="link-grid">${list.map(quickCard).join('')}</section>
   ${s.contactText ? `<section class="card contact"><span class="q-ic">${icon('mail')}</span><p>${esc(s.contactText)}</p>
-    ${s.contactUrl ? `<a class="btn btn-main" href="${esc(safeUrl(s.contactUrl))}"${extAttr(s.contactUrl)}>${esc(s.contactLabel || '連絡する')}${icon('arrow')}</a>` : ''}</section>` : ''}`;
+    ${s.contactUrl ? `<a class="btn btn-main" href="${esc(safeUrl(s.contactUrl))}"${extAttr(s.contactUrl)}>${esc(s.contactLabel || t('連絡する'))}${icon('arrow')}</a>` : ''}</section>` : ''}`;
 }
 /* 文章中のURLをリンクにする */
 function richText(t) {
@@ -963,8 +1081,8 @@ function faqHTML() {
   ${items.length ? `<section class="faq">${items.map((x, i) => `<details class="card faq-item"${i === 0 ? ' open' : ''}>
       <summary><span class="faq-q">Q</span><b>${esc(x.q)}</b><span class="faq-tog">${icon('down')}</span></summary>
       <div class="faq-a"><span class="faq-q a">A</span><p>${richText(x.a)}</p></div>
-    </details>`).join('')}</section>` : `<div class="card empty">質問はまだありません</div>`}
-  ${pt.show ? `<section class="card contact"><span class="q-ic" style="--c:#f7695a">${icon('patreon')}</span><p>プランの内容や料金は「${esc(pt.label)}」ページで確認できます。</p><a class="btn btn-main" href="#/patreon">${esc(pt.label)}ページへ${icon('arrow')}</a></section>` : ''}
+    </details>`).join('')}</section>` : `<div class="card empty">${t('質問はまだありません')}</div>`}
+  ${pt.show ? `<section class="card contact"><span class="q-ic" style="--c:#f7695a">${icon('patreon')}</span><p>${LANG() === 'en' ? `See the “${esc(pt.label)}” page for plans and pricing.` : `プランの内容や料金は「${esc(pt.label)}」ページで確認できます。`}</p><a class="btn btn-main" href="#/patreon">${LANG() === 'en' ? `Go to ${esc(pt.label)}` : `${esc(pt.label)}ページへ`}${icon('arrow')}</a></section>` : ''}
   ${f.note ? `<p class="note">${esc(f.note)}</p>` : ''}`;
 }
 function guideHTML() {
@@ -973,11 +1091,11 @@ function guideHTML() {
   const ok = lines(g.ok), ng = lines(g.ng);
   return `${pageHead('guide', 'check')}
   ${ok.length || ng.length ? `<section class="guide-okng">
-    ${ok.length ? `<div class="card guide-box ok"><h3>${icon('check')}${esc(g.okTitle || 'OKなこと')}</h3><ul>${ok.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
-    ${ng.length ? `<div class="card guide-box ng"><h3>${icon('close')}${esc(g.ngTitle || 'ご遠慮いただきたいこと')}</h3><ul>${ng.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+    ${ok.length ? `<div class="card guide-box ok"><h3>${icon('check')}${esc(g.okTitle || t('OKなこと'))}</h3><ul>${ok.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+    ${ng.length ? `<div class="card guide-box ng"><h3>${icon('close')}${esc(g.ngTitle || t('ご遠慮いただきたいこと'))}</h3><ul>${ng.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
   </section>` : ''}
   ${(g.sections || []).filter(x => x && (x.title || x.body)).map(x => `<section class="card guide-sec">${x.title ? `<h3 class="sec-t">${esc(x.title)}</h3>` : ''}${x.body ? `<p>${richText(x.body)}</p>` : ''}</section>`).join('')}
-  ${g.updated ? `<p class="note">最終更新：${esc(fmtDate(g.updated))}</p>` : ''}`;
+  ${g.updated ? `<p class="note">${LANG() === 'en' ? 'Last updated: ' : '最終更新：'}${esc(fmtDate(g.updated))}</p>` : ''}`;
 }
 function downloadsHTML() {
   const dl = D().downloads || {}, items = (dl.items || []).filter(x => x && (x.file || x.image));
@@ -986,16 +1104,16 @@ function downloadsHTML() {
   const list = items.filter(x => S.dlFilter === 'all' || x.type === S.dlFilter);
   const gd = navItem('guide');
   return `${pageHead('downloads', 'download')}
-  ${used.length > 1 ? `<div class="chips"><button class="chip${S.dlFilter === 'all' ? ' on' : ''}" data-dlfilter="all">すべて <span class="en">${items.length}</span></button>
-    ${used.map(k => `<button class="chip${S.dlFilter === k ? ' on' : ''}" data-dlfilter="${k}">${esc(DL_TYPES[k])}</button>`).join('')}</div>` : ''}
+  ${used.length > 1 ? `<div class="chips"><button class="chip${S.dlFilter === 'all' ? ' on' : ''}" data-dlfilter="all">${t('すべて')} <span class="en">${items.length}</span></button>
+    ${used.map(k => `<button class="chip${S.dlFilter === k ? ' on' : ''}" data-dlfilter="${k}">${esc(t(DL_TYPES[k]))}</button>`).join('')}</div>` : ''}
   ${list.length ? `<section class="dl-grid">${list.map(x => {
       const file = imgSrc(x.file || x.image), name = String(x.file || x.image || '').split('/').pop() || 'image';
       return `<div class="card dl-item type-${esc(x.type || 'other')}">
         <div class="dl-img"><span class="dl-crop"><img src="${esc(imgOr(x.image || x.file, phArt('dl' + (x.title || ''), '', '')))}" alt="${esc(x.title || '')}" loading="lazy" style="${fStyle(x)}"></span></div>
-        <div class="dl-body"><span class="dl-type">${esc(DL_TYPES[x.type] || '')}</span><b>${esc(x.title || '')}</b>${x.size ? `<small>${esc(x.size)}</small>` : ''}${x.note ? `<p>${esc(x.note)}</p>` : ''}
-          <a class="btn dl-btn" href="${esc(file)}" download="${esc(name)}">${icon('download')}ダウンロード</a></div>
-      </div>`; }).join('')}</section>` : `<div class="card empty">配布中の画像はまだありません</div>`}
-  ${dl.note ? `<p class="note">${esc(dl.note)}${gd.show ? ` <a href="#/guide" style="text-decoration:underline">${esc(gd.label)}を見る</a>` : ''}</p>` : ''}`;
+        <div class="dl-body"><span class="dl-type">${esc(t(DL_TYPES[x.type] || ''))}</span><b>${esc(x.title || '')}</b>${x.size ? `<small>${esc(x.size)}</small>` : ''}${x.note ? `<p>${esc(x.note)}</p>` : ''}
+          <a class="btn dl-btn" href="${esc(file)}" download="${esc(name)}">${icon('download')}${t('ダウンロード')}</a></div>
+      </div>`; }).join('')}</section>` : `<div class="card empty">${t('配布中の画像はまだありません')}</div>`}
+  ${dl.note ? `<p class="note">${esc(dl.note)}${gd.show ? ` <a href="#/guide" style="text-decoration:underline">${LANG() === 'en' ? `See ${esc(gd.label)}` : `${esc(gd.label)}を見る`}</a>` : ''}</p>` : ''}`;
 }
 /* 年齢確認 */
 function ageOk() {
@@ -1010,8 +1128,8 @@ function showGate(onYes, onNo) {
   const g = D().gate || {};
   S.gateCb = {onYes, onNo};
   $('#modal-root').innerHTML = `<div class="modal-back"><div class="modal gate" role="dialog" aria-modal="true" aria-labelledby="gateT">
-    <span class="gate-ic">${icon('lock')}</span><h2 id="gateT">${esc(g.title || '年齢確認')}</h2><p>${esc(g.text || '').replace(/\n/g, '<br>')}</p>
-    <div class="gate-btns"><button class="btn" data-gate="yes">${esc(g.yes || 'はい')}</button><button class="btn btn-ghost" data-gate="no">${esc(g.no || 'いいえ')}</button></div>
+    <span class="gate-ic">${icon('lock')}</span><h2 id="gateT">${esc(g.title || t('年齢確認'))}</h2><p>${esc(g.text || '').replace(/\n/g, '<br>')}</p>
+    <div class="gate-btns"><button class="btn" data-gate="yes">${esc(g.yes || t('はい'))}</button><button class="btn btn-ghost" data-gate="no">${esc(g.no || t('いいえ'))}</button></div>
   </div></div>`;
   document.body.style.overflow = 'hidden';
   const y = $('[data-gate="yes"]'); if (y) y.focus({preventScroll:true});
@@ -1019,7 +1137,7 @@ function showGate(onYes, onNo) {
 function gatedHTML() {
   const pt = navItem('patreon');
   return `<section class="card page-head"><span class="eyebrow">${icon('lock')}MEMBERS ONLY</span><h1>${esc(pt.label)}</h1></section>
-  <section class="card gated"><span class="gate-ic">${icon('lock')}</span><p>このページを見るには年齢の確認が必要です。</p><button class="btn" data-act="gate-open">確認する</button></section>`;
+  <section class="card gated"><span class="gate-ic">${icon('lock')}</span><p>${t('このページを見るには年齢の確認が必要です。')}</p><button class="btn" data-act="gate-open">${t('確認する')}</button></section>`;
 }
 function pageBody(page) {
   if (page === 'patreon' && gateOn('page')) return gatedHTML();
@@ -1037,12 +1155,13 @@ const PAGES = {home:homeHTML, characters:charactersHTML, gallery:galleryHTML, pa
 function render() {
   const app = $('#app');
   const page = PAGES[S.route.page] ? S.route.page : 'home';
+  document.documentElement.lang = LANG() === 'en' ? 'en' : 'ja';
   app.innerHTML = `${headerHTML()}
   <div class="shell">
     <main class="main" id="main" tabindex="-1" data-page="${page}">${pageBody(page)}</main>
   </div>
   ${footerHTML()}
-  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="メニュー"><div class="drawer-back" data-act="drawer-close"></div><div class="drawer-panel"><button class="ibtn drawer-close" data-act="drawer-close" aria-label="メニューを閉じる">${icon('close')}</button>${sidebarHTML()}</div></div>`;
+  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="${t('メニュー')}"><div class="drawer-back" data-act="drawer-close"></div><div class="drawer-panel"><button class="ibtn drawer-close" data-act="drawer-close" aria-label="メニューを閉じる">${icon('close')}</button>${sidebarHTML()}</div></div>`;
   $$('[data-nav]').forEach(a => { const on=a.dataset.nav===page; a.classList.toggle('on',on); if(on) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
   const s = D().site, nv = navItem(page);
   document.title = page === 'home' ? `${s.name} ${s.suffix}`.trim() : `${nv.label} | ${s.name} ${s.suffix}`.trim();
@@ -1115,11 +1234,12 @@ function openChar(id) {
   const tags = String(c.tags || '').split(/[,、，]/).map(x => x.trim()).filter(Boolean);
   $('#modal-root').innerHTML = `<div class="modal-back" data-backdrop>
     <div class="modal char-modal" role="dialog" aria-modal="true" aria-label="${esc(c.name)}" style="${cv(c.color)}">
-      <button class="m-close" data-act="modal-close" aria-label="閉じる">${icon('close')}</button>
+      <button class="m-close" data-act="modal-close" aria-label="${t('閉じる')}">${icon('close')}</button>
       <div class="cm-img"><img src="${esc(charImg(c))}" alt="${esc(c.name)}" style="${charFocus(c)}"></div>
       <div class="cm-body">
         <span class="eyebrow">No.${String(i+1).padStart(2,'0')} · ${esc(c.romaji)}</span>
         <h2>${esc(c.name)}<i></i></h2>
+        ${isBday(c) ? `<p class="cm-bday">🎂 ${esc(t('今日はお誕生日！'))}</p>` : ''}
         ${c.catch ? `<p class="cm-catch">${esc(c.catch)}</p>` : ''}
         ${c.desc ? `<p class="cm-desc">${esc(c.desc)}</p>` : ''}
         ${(c.profile || []).length ? `<dl class="cm-prof">${c.profile.map(p => `<dt>${esc(p.k)}</dt><dd>${esc(p.v)}</dd>`).join('')}</dl>` : ''}
@@ -1152,12 +1272,12 @@ function drawLightbox() {
   const {list, i} = S.lb;
   const g = list[i];
   $('#modal-root').innerHTML = `<div class="lightbox" role="dialog" aria-modal="true" aria-label="${esc(g.title)}">
-    <button class="lb-x" data-act="modal-close" aria-label="閉じる">${icon('close')}</button>
+    <button class="lb-x" data-act="modal-close" aria-label="${t('閉じる')}">${icon('close')}</button>
     <div class="lb-stage" data-backdrop><img src="${esc(galImg(g))}" alt="${esc(g.title)}"></div>
-    ${list.length > 1 ? `<button class="lb-btn lb-prev" data-act="lb-prev" aria-label="前へ">${icon('chevL')}</button><button class="lb-btn lb-next" data-act="lb-next" aria-label="次へ">${icon('chev')}</button>` : ''}
+    ${list.length > 1 ? `<button class="lb-btn lb-prev" data-act="lb-prev" aria-label="${t('前へ')}">${icon('chevL')}</button><button class="lb-btn lb-next" data-act="lb-next" aria-label="${t('次へ')}">${icon('chev')}</button>` : ''}
     <div class="lb-bar"><div><b>${esc(g.title)}</b><br><small>${esc(fmtDate(g.date))}${D().site.showLikes !== false && likesOf(g) ? `　♡ ${fmtLikes(likesOf(g))}` : ''}</small></div>
       <div class="lb-chips">${(g.chars || []).map(id => { const c = charById(id); return c ? `<span style="${cv(c.color)}">${esc(c.name)}</span>` : ''; }).join('')}</div>
-      ${isExt(g.tweet) ? `<a class="lb-post" href="${esc(g.tweet)}" target="_blank" rel="noopener">${icon('x')}ポストを見る</a>` : ''}
+      ${isExt(g.tweet) ? `<a class="lb-post" href="${esc(g.tweet)}" target="_blank" rel="noopener">${icon('x')}${t('ポストを見る')}</a>` : ''}
       <span class="cnt">${i+1} / ${list.length}</span></div>
   </div>`;
 }
@@ -1226,6 +1346,7 @@ document.addEventListener('click', e => {
   if (a.dataset.act) {
     const act = a.dataset.act;
     if (act === 'theme') toggleTheme();
+    else if (act === 'lang') setLang(LANG() === 'en' ? 'ja' : 'en');
     else if (act === 'menu') openDrawer();
     else if (act === 'skip') { e.preventDefault(); $('#main')?.focus(); $('#main')?.scrollIntoView(); }
     else if (act === 'hero-pause') { S.heroPaused=!S.heroPaused; updateHeroPause(); startHeroTimerOnly(); }
@@ -1320,6 +1441,8 @@ if (window.RS_PREVIEW) {
       for (const [k, v] of Object.entries(m.assets || {})) if (typeof v === 'string' && v.startsWith('data:image/')) ASSETS.set(k, v);
     } else if (m.type === 'rs-preview') {
       S.data = mergeData(m.data);
+      if (m.lang) S.lang = m.lang;
+      S.bdayTest = m.bday || null;
       const y = window.scrollY, root = document.documentElement;
       root.style.scrollBehavior = 'auto'; render(); window.scrollTo(0, y); root.style.scrollBehavior = '';
     } else if (m.type === 'rs-route' && typeof m.route === 'string') {
