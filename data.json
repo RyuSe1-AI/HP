@@ -183,7 +183,7 @@
   "gallery": {
    "title": "ギャラリー",
    "en": "GALLERY",
-   "lead": "これまでにXに投稿したイラストの一覧です。いいね数の多かったものを掲載しています。",
+   "lead": "これまでにXに投稿したイラストの一覧です。いいね数の多かったものを掲載しています。\nここだけの画像もすこし上げていきます",
    "title_en": "Gallery",
    "lead_en": "Illustrations I've posted on X, featuring the most-liked ones."
   },
@@ -1572,7 +1572,7 @@
    "label_en": "X (sub)"
   }
  ],
- "publishedAt": "2026-10-03T13:19:06.511Z",
+ "publishedAt": "2026-10-03T13:23:40.701Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
