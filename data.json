@@ -427,7 +427,11 @@
    "bday": "10-03",
    "catch_en": "You all like me the best, right?",
    "desc_en": "[Name origin]\nHoshina ← hoshi (star, yellow) and na (canola blossoms)\nKaede ← kaede (maple, like golden autumn leaves)",
-   "name_en": "Kaede"
+   "name_en": "Kaede",
+   "bdayImage": "images/characters/20261003_2216_image-1-vrcru-nobg-atwel.webp",
+   "bdayImageFx": 54,
+   "bdayImageFy": 3,
+   "bdayImageFz": 1
   },
   {
    "id": "tsubaki",
@@ -1559,7 +1563,7 @@
    "label_en": "X (sub)"
   }
  ],
- "publishedAt": "2026-09-28T13:11:37.000Z",
+ "publishedAt": "2026-10-03T13:17:50.558Z",
  "home": {
   "kicker": "RyuSe1 STUDIO / Creative journal",
   "featured": "FEATURED VISUAL",
